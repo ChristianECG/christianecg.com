@@ -1,0 +1,320 @@
+---
+const talks = [
+  {
+    date_es: "21 Feb 2026",
+    date_en: "Feb 21, 2026",
+    type: "talk",
+    title_es: "Lo que la universidad no te enseña sobre el mundo real en Tecnologías de la Información",
+    title_en: "What University Doesn't Teach You About the Real World in Information Technology",
+    event_es: "ITSOEH",
+    event_en: "ITSOEH",
+    format: "presencial",
+    url: null,
+  },
+  {
+    date_es: "26 Ene 2026",
+    date_en: "Jan 26, 2026",
+    type: "talk",
+    title_es: "Inteligencia Artificial, uso e implicaciones éticas",
+    title_en: "Artificial Intelligence: Use and Ethical Implications",
+    event_es: "Parroquia de la Candelaria · Nicolás Flores, Hidalgo",
+    event_en: "Parroquia de la Candelaria · Nicolás Flores, Hidalgo",
+    format: "presencial",
+    url: null,
+  },
+  {
+    date_es: "17 Oct 2025",
+    date_en: "Oct 17, 2025",
+    type: "keynote",
+    title_es: "Hacia la próxima frontera tecnológica: Redefiniendo los límites de la innovación",
+    title_en: "Towards the Next Technological Frontier: Redefining the Limits of Innovation",
+    event_es: "Congreso Internacional de Ingeniería y Tecnologías para el Desarrollo Sustentable · ITSOEH",
+    event_en: "International Congress of Engineering and Technologies for Sustainable Development · ITSOEH",
+    format: "presencial",
+    url: null,
+  },
+  {
+    date_es: "19 Ago 2025",
+    date_en: "Aug 19, 2025",
+    type: "keynote",
+    title_es: "Nuevos retos en la Ingeniería de Software en un mundo orientado a la IA",
+    title_en: "New Challenges in Software Engineering in an AI-Oriented World",
+    event_es: "5º Congreso Internacional de Software · Escuela Superior de Tlahuelilpan, UAEH",
+    event_en: "5th International Software Congress · Escuela Superior de Tlahuelilpan, UAEH",
+    format: "presencial",
+    url: null,
+  },
+  {
+    date_es: "20 Feb 2025",
+    date_en: "Feb 20, 2025",
+    type: "talk",
+    title_es: "Estado actual de la Inteligencia Artificial y su Impacto en el futuro de la tecnología",
+    title_en: "Current State of Artificial Intelligence and Its Impact on the Future of Technology",
+    event_es: "Teatro Cuauhtémoc · Mixquiahuala, Hidalgo",
+    event_en: "Teatro Cuauhtémoc · Mixquiahuala, Hidalgo",
+    format: "presencial",
+    url: null,
+  },
+  {
+    date_es: "2 Mar 2023",
+    date_en: "Mar 2, 2023",
+    type: "media",
+    title_es: "Aparición en Ya es Hora",
+    title_en: "Appearance on Ya es Hora",
+    event_es: "Radio y Televisión de Hidalgo",
+    event_en: "Radio y Televisión de Hidalgo",
+    format: "presencial",
+    url: null,
+  },
+  {
+    date_es: "5 Oct 2021",
+    date_en: "Oct 5, 2021",
+    type: "keynote",
+    title_es: "Security Issues of a Decentralized Blockchain-Based Messaging System",
+    title_en: "Security Issues of a Decentralized Blockchain-Based Messaging System",
+    event_es: "VII CONIITI · Universidad Católica de Colombia",
+    event_en: "VII CONIITI · Universidad Católica de Colombia",
+    format: "online",
+    url: "https://ieeexplore.ieee.org/document/9619732",
+  },
+  {
+    date_es: "13 Sep 2021",
+    date_en: "Sep 13, 2021",
+    type: "mentor",
+    title_es: "Mentor · Programación para Todos",
+    title_en: "Mentor · Programming for Everyone",
+    event_es: "Google Developer Latam",
+    event_en: "Google Developer Latam",
+    format: "online",
+    url: null,
+  },
+  {
+    date_es: "23 Abr 2021",
+    date_en: "Apr 23, 2021",
+    type: "talk",
+    title_es: "Primeros pasos en React.js",
+    title_en: "First Steps in React.js",
+    event_es: "Google Developer Student Club ITSOEH",
+    event_en: "Google Developer Student Club ITSOEH",
+    format: "online",
+    url: null,
+  },
+  {
+    date_es: "17 Abr 2021",
+    date_en: "Apr 17, 2021",
+    type: "media",
+    title_es: "Aparición en Con Ciencia",
+    title_en: "Appearance on Con Ciencia",
+    event_es: "Radio y Televisión de Hidalgo",
+    event_en: "Radio y Televisión de Hidalgo",
+    format: "presencial",
+    url: null,
+  },
+  {
+    date_es: "1 Abr 2021",
+    date_en: "Apr 1, 2021",
+    type: "talk",
+    title_es: "Conferencia a estudiantes de bachillerato",
+    title_en: "Talk for High School Students",
+    event_es: "CBTis 199",
+    event_en: "CBTis 199",
+    format: "presencial",
+    url: null,
+  },
+  {
+    date_es: "24 Feb 2021",
+    date_en: "Feb 24, 2021",
+    type: "talk",
+    title_es: "Importancia del diseño en el desarrollo web",
+    title_en: "The Importance of Design in Web Development",
+    event_es: "Women Who Code Colima",
+    event_en: "Women Who Code Colima",
+    format: "online",
+    url: null,
+  },
+];
+
+const typeLabel: Record<string, { es: string; en: string }> = {
+  keynote:  { es: "Keynote",   en: "Keynote"    },
+  talk:     { es: "Charla",    en: "Talk"        },
+  mentor:   { es: "Mentoría",  en: "Mentorship"  },
+  media:    { es: "Medios",    en: "Media"       },
+};
+---
+
+<section id="talks">
+  <div class="container">
+    <div class="talks-header reveal">
+      <span class="section-eyebrow">
+        <span class="lang-es">Apariciones públicas</span>
+        <span class="lang-en">Public appearances</span>
+      </span>
+      <h2 class="section-title">
+        <span class="lang-es">Charlas &amp; eventos</span>
+        <span class="lang-en">Talks &amp; events</span>
+      </h2>
+    </div>
+
+    <div class="talks-list">
+      {talks.map((t, i) => (
+        <div class="talk reveal" style={`--delay: ${i * 0.04}s`}>
+          <span class="talk-date">
+            <span class="lang-es">{t.date_es}</span>
+            <span class="lang-en">{t.date_en}</span>
+          </span>
+          <div class="talk-body">
+            <div class="talk-title-row">
+              <span class={`talk-badge talk-badge--${t.type}`}>
+                <span class="lang-es">{typeLabel[t.type].es}</span>
+                <span class="lang-en">{typeLabel[t.type].en}</span>
+              </span>
+              {t.url ? (
+                <a href={t.url} target="_blank" rel="noopener" class="talk-title talk-title--link">
+                  <span class="lang-es">{t.title_es}</span>
+                  <span class="lang-en">{t.title_en}</span>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </a>
+              ) : (
+                <span class="talk-title">
+                  <span class="lang-es">{t.title_es}</span>
+                  <span class="lang-en">{t.title_en}</span>
+                </span>
+              )}
+            </div>
+            <span class="talk-event">
+              <span class="lang-es">{t.event_es}</span>
+              <span class="lang-en">{t.event_en}</span>
+              <span class="talk-format">
+                · <span class="lang-es">{t.format === "online" ? "Online" : "Presencial"}</span>
+                  <span class="lang-en">{t.format === "online" ? "Online" : "In person"}</span>
+              </span>
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .talks-header { margin-bottom: 0; }
+
+  .talks-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .talk {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 2.5rem;
+    padding: 1.4rem 0;
+    border-top: 1px solid var(--border);
+    align-items: start;
+    --delay: 0s;
+    transition-delay: var(--delay);
+  }
+  .talk:last-child { border-bottom: 1px solid var(--border); }
+
+  .talk-date {
+    font-size: 0.76rem;
+    color: var(--text-3);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    padding-top: 0.15rem;
+    white-space: nowrap;
+  }
+
+  .talk-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .talk-title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+  }
+
+  .talk-badge {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .talk-badge--keynote {
+    background: var(--accent-dim);
+    color: var(--accent);
+    border: 1px solid var(--accent-dim);
+  }
+  .talk-badge--talk {
+    background: transparent;
+    color: var(--text-3);
+    border: 1px solid var(--border);
+  }
+  .talk-badge--mentor {
+    background: transparent;
+    color: var(--text-2);
+    border: 1px solid var(--border);
+  }
+  .talk-badge--media {
+    background: transparent;
+    color: var(--text-3);
+    border: 1px solid var(--border);
+    font-style: italic;
+  }
+
+  .talk-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .talk-title--link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.3rem;
+    transition: color 0.2s;
+    text-decoration: none;
+  }
+  .talk-title--link:hover { color: var(--accent); }
+  .talk-title--link svg {
+    flex-shrink: 0;
+    position: relative;
+    top: 0.05em;
+    transition: transform 0.2s;
+  }
+  .talk-title--link:hover svg { transform: translateX(3px); }
+
+  .talk-event {
+    font-size: 0.8rem;
+    color: var(--text-3);
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .talk-format {
+    color: var(--text-3);
+  }
+
+  @media (max-width: 700px) {
+    .talk {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+      padding: 1.25rem 0;
+    }
+    .talk-date {
+      font-size: 0.72rem;
+    }
+  }
+</style>

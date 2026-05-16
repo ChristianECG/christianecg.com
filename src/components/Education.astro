@@ -1,0 +1,244 @@
+---
+const degrees = [
+  {
+    type: "degree",
+    degree_es: "Ingeniería en Tecnologías de la Información y Comunicaciones",
+    degree_en: "B.Eng. in Information and Communication Technologies",
+    institution: "Instituto Tecnológico Superior del Occidente del Estado de Hidalgo",
+    institution_short: "ITSOEH",
+    period: "2018 — 2022",
+    location_es: "Hidalgo, México",
+    location_en: "Hidalgo, Mexico",
+    selective_note_es: null,
+    selective_note_en: null,
+    highlight_es: "Publicación en IEEE Xplore sobre seguridad en sistemas blockchain descentralizados.",
+    highlight_en: "Published research in IEEE Xplore on security in decentralized blockchain systems.",
+    bullets_es: null,
+    bullets_en: null,
+    links: null,
+  },
+  {
+    type: "program",
+    degree_es: "Platzi Master Program · Cohorte 8",
+    degree_en: "Platzi Master Program · Cohort 8",
+    institution: "Platzi",
+    institution_short: "Platzi",
+    period: "Oct 2021 — Mar 2022",
+    location_es: null,
+    location_en: null,
+    selective_note_es: "Admisión por proceso de selección",
+    selective_note_en: "Admission by selection process",
+    highlight_es: null,
+    highlight_en: null,
+    bullets_es: [
+      "Retos técnicos semanales de JavaScript y React con pair programming y feedback estructurado.",
+      "Comunidad GetHired: colaboración con desarrolladores de toda Latinoamérica en preparación para procesos de selección en la industria.",
+    ],
+    bullets_en: [
+      "Weekly JavaScript and React challenges with pair programming and structured feedback.",
+      "GetHired community: collaborated with developers across Latin America on industry hiring preparation.",
+    ],
+    links: [
+      { label: "GetHired — GitHub", url: "https://github.com/Platzi-Master-C8/gethired-community" },
+    ],
+  },
+];
+---
+
+<section id="education">
+  <div class="container">
+    <div class="edu-header reveal">
+      <span class="section-eyebrow">
+        <span class="lang-es">Educación</span>
+        <span class="lang-en">Education</span>
+      </span>
+      <h2 class="section-title">
+        <span class="lang-es">Formación académica</span>
+        <span class="lang-en">Academic background</span>
+      </h2>
+    </div>
+
+    <div class="degrees">
+      {degrees.map((d, i) => (
+        <div class="degree reveal" style={`--delay: ${i * 0.07}s`}>
+          <div class="degree-left">
+            <span class="degree-period">{d.period}</span>
+            <span class="degree-institution" title={d.institution}>{d.institution_short}</span>
+            {(d.location_es || d.location_en) && (
+              <span class="degree-location">
+                <span class="lang-es">{d.location_es}</span>
+                <span class="lang-en">{d.location_en}</span>
+              </span>
+            )}
+          </div>
+          <div class="degree-right">
+            <h3 class="degree-title">
+              <span class="lang-es">{d.degree_es}</span>
+              <span class="lang-en">{d.degree_en}</span>
+            </h3>
+            {(d.selective_note_es || d.selective_note_en) && (
+              <p class="degree-selective-note">
+                <span class="lang-es">{d.selective_note_es}</span>
+                <span class="lang-en">{d.selective_note_en}</span>
+              </p>
+            )}
+            {(d.highlight_es || d.highlight_en) && (
+              <p class="degree-highlight">
+                <span class="lang-es">{d.highlight_es}</span>
+                <span class="lang-en">{d.highlight_en}</span>
+              </p>
+            )}
+            {d.bullets_es && (
+              <ul class="degree-bullets">
+                {d.bullets_es.map((b) => <li class="lang-es">{b}</li>)}
+                {d.bullets_en!.map((b) => <li class="lang-en">{b}</li>)}
+              </ul>
+            )}
+            {d.links && (
+              <div class="degree-links">
+                {d.links.map((l) => (
+                  <a href={l.url} target="_blank" rel="noopener" class="degree-link">
+                    {l.label}
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .edu-header { margin-bottom: 0; }
+
+  .degrees {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .degree {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--border);
+    --delay: 0s;
+    transition-delay: var(--delay);
+  }
+  .degree:last-child { border-bottom: 1px solid var(--border); }
+
+  .degree-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-top: 0.2rem;
+  }
+
+  .degree-period {
+    font-size: 0.78rem;
+    color: var(--text-2);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .degree-institution {
+    font-size: 0.82rem;
+    color: var(--text-3);
+    font-weight: 500;
+    cursor: default;
+  }
+
+  .degree-location {
+    font-size: 0.78rem;
+    color: var(--text-3);
+    font-weight: 400;
+  }
+
+  .degree-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .degree-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+
+  .degree-selective-note {
+    font-size: 0.8rem;
+    color: var(--text-3);
+    font-style: italic;
+    font-weight: 400;
+    margin-top: -0.25rem;
+  }
+
+  .degree-highlight {
+    font-size: 0.88rem;
+    color: var(--text-2);
+    line-height: 1.6;
+  }
+
+  .degree-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .degree-bullets li {
+    font-size: 0.88rem;
+    color: var(--text-2);
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .degree-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--text-3);
+    font-size: 0.78rem;
+  }
+
+  .degree-links {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .degree-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-2);
+    transition: color 0.2s;
+  }
+  .degree-link:hover { color: var(--accent); }
+  .degree-link svg { transition: transform 0.2s; }
+  .degree-link:hover svg { transform: translateX(3px); }
+
+  @media (max-width: 700px) {
+    .degree {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      padding: 2rem 0;
+    }
+    .degree-left {
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+  }
+</style>

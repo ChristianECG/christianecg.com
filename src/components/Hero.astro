@@ -13,6 +13,7 @@
         </span>
       </div>
       <div class="hero-links">
+        <a href="https://github.com/ChristianECG" target="_blank" rel="noopener">GitHub ↗</a>
         <a href="https://www.linkedin.com/in/christianeliascg/" target="_blank" rel="noopener">LinkedIn ↗</a>
         <a href="mailto:contacto@christianecg.com">Email</a>
       </div>
@@ -46,35 +47,25 @@
 
   </div>
 
-  <div class="hero-stats">
-    <div class="container hero-stats-inner">
-      <div class="hstat">
-        <span class="hstat-n">150K<span class="accent">+</span></span>
-        <span class="hstat-l">
-          <span class="lang-es">Usuarios en producción</span>
-          <span class="lang-en">Users in production</span>
-        </span>
+  <div class="hero-creds">
+    <div class="container hero-creds-inner">
+      <div class="cred">
+        <span class="cred-label">IEEE Xplore</span>
+        <span class="cred-detail lang-es">1 paper publicado</span>
+        <span class="cred-detail lang-en">1 published paper</span>
       </div>
-      <div class="hstat">
-        <span class="hstat-n">5<span class="accent">+</span></span>
-        <span class="hstat-l">
-          <span class="lang-es">Años de experiencia</span>
-          <span class="lang-en">Years of experience</span>
-        </span>
+      <span class="cred-sep" aria-hidden="true">·</span>
+      <div class="cred">
+        <span class="cred-label">Keynote</span>
+        <span class="cred-detail lang-es">3 congresos internacionales</span>
+        <span class="cred-detail lang-en">3 international conferences</span>
       </div>
-      <div class="hstat">
-        <span class="hstat-n">20<span class="accent">+</span></span>
-        <span class="hstat-l">
-          <span class="lang-es">Devs en mi equipo</span>
-          <span class="lang-en">Devs in my team</span>
-        </span>
-      </div>
-      <div class="hstat">
-        <span class="hstat-n">1</span>
-        <span class="hstat-l">
-          <span class="lang-es">Paper en IEEE Xplore</span>
-          <span class="lang-en">IEEE Xplore paper</span>
-        </span>
+      <span class="cred-sep" aria-hidden="true">·</span>
+      <div class="cred">
+        <span class="cred-label lang-es">Televisión</span>
+        <span class="cred-label lang-en">Television</span>
+        <span class="cred-detail lang-es">2 apariciones nacionales</span>
+        <span class="cred-detail lang-en">2 national appearances</span>
       </div>
     </div>
   </div>
@@ -183,46 +174,63 @@
   }
   .cta-ghost:hover { color: var(--text); }
 
-  /* Stats */
-  .hero-stats {
+  /* Credentials strip */
+  .hero-creds {
     border-top: 1px solid var(--border);
   }
 
-  .hero-stats-inner {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    padding-top: 0 !important;
-  }
-
-  .hstat {
-    padding: 1.75rem 0;
+  .hero-creds-inner {
     display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    border-right: 1px solid var(--border);
-  }
-  .hstat:last-child { border-right: none; }
-
-  .hstat-n {
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: var(--text);
-    letter-spacing: -0.03em;
-    line-height: 1;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    padding-top: 0 !important;
+    padding-bottom: 0;
   }
 
-  .hstat-l {
-    font-size: 0.76rem;
+  .cred {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 1.4rem 0;
+  }
+
+  .cred-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .cred-detail {
+    font-size: 0.82rem;
     color: var(--text-2);
     font-weight: 500;
+  }
+
+  .cred-sep {
+    color: var(--text-3);
+    font-size: 0.75rem;
+    user-select: none;
+    flex-shrink: 0;
   }
 
   @media (max-width: 800px) {
     .hero-bottom-row { flex-direction: column; align-items: flex-start; }
     .hero-name { font-size: clamp(2.5rem, 10vw, 4rem); margin-bottom: 2rem; }
-    .hero-stats-inner { grid-template-columns: repeat(2, 1fr); }
-    .hstat:nth-child(2) { border-right: none; }
-    .hstat:nth-child(3) { border-right: 1px solid var(--border); }
+  }
+
+  @media (max-width: 640px) {
+    .cred-sep { display: none; }
+    .hero-creds-inner { flex-direction: column; align-items: flex-start; gap: 0; }
+    .cred {
+      padding: 0.9rem 0;
+      border-top: 1px solid var(--border);
+      width: 100%;
+    }
+    .cred:last-of-type { border-bottom: 1px solid var(--border); }
   }
 
   @media (max-width: 500px) {
