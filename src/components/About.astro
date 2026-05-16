@@ -1,0 +1,145 @@
+---
+---
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left reveal">
+        <span class="section-eyebrow">
+          <span class="lang-es">Sobre mí</span>
+          <span class="lang-en">About me</span>
+        </span>
+        <h2 class="about-heading">
+          <span class="lang-es">Construyo con propósito y precisión.</span>
+          <span class="lang-en">I build with purpose and precision.</span>
+        </h2>
+      </div>
+
+      <div class="about-body reveal" style="--delay: 0.12s">
+        <div class="about-bio">
+          <p class="lang-es">
+            Soy Frontend Engineer con más de 5 años construyendo aplicaciones que escalan sin perder el detalle.
+            Actualmente lidero la arquitectura frontend en <strong>Ubidots</strong>, una plataforma IoT usada por equipos
+            de ingeniería en todo el mundo.
+          </p>
+          <p class="lang-es">
+            Me apasiona el rendimiento: optimizar dashboards, reducir tiempos de carga y mejorar la experiencia de usuario
+            en condiciones reales de producción. Fuera del código, soy speaker, mentor
+            y autor publicado en <strong>IEEE Xplore</strong>.
+          </p>
+          <p class="lang-en">
+            I'm a Frontend Engineer with 5+ years building applications that scale without losing the details.
+            Currently leading frontend architecture at <strong>Ubidots</strong>, an IoT platform used by engineering teams worldwide.
+          </p>
+          <p class="lang-en">
+            I care deeply about performance — optimizing dashboards, reducing load times, and improving user experience
+            under real production conditions. Outside of code, I'm a speaker, mentor, and published author at <strong>IEEE Xplore</strong>.
+          </p>
+        </div>
+
+        <div class="about-facts">
+          <div class="fact">
+            <span class="fact-label">
+              <span class="lang-es">Rol actual</span>
+              <span class="lang-en">Current role</span>
+            </span>
+            <span class="fact-value">Senior Frontend Engineer, Ubidots</span>
+          </div>
+          <div class="fact">
+            <span class="fact-label">
+              <span class="lang-es">Especialidad</span>
+              <span class="lang-en">Specialty</span>
+            </span>
+            <span class="fact-value lang-es">Rendimiento, visualización de datos IoT</span>
+            <span class="fact-value lang-en">Performance, IoT data visualization</span>
+          </div>
+          <div class="fact">
+            <span class="fact-label">
+              <span class="lang-es">Comunidad</span>
+              <span class="lang-en">Community</span>
+            </span>
+            <span class="fact-value lang-es">Speaker · Mentor · Google DSC Lead '20–'21</span>
+            <span class="fact-value lang-en">Speaker · Mentor · Google DSC Lead '20–'21</span>
+          </div>
+          <div class="fact">
+            <span class="fact-label">
+              <span class="lang-es">Publicación</span>
+              <span class="lang-en">Publication</span>
+            </span>
+            <span class="fact-value">IEEE Xplore — Blockchain security</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-heading {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.2;
+    margin-top: 0.5rem;
+  }
+
+  .about-body { --delay: 0s; transition-delay: var(--delay); }
+
+  .about-bio {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: var(--text-2);
+    line-height: 1.8;
+    font-size: 0.95rem;
+    margin-bottom: 3rem;
+  }
+  .about-bio strong { color: var(--text); font-weight: 600; }
+
+  .about-facts {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--border);
+  }
+
+  .fact {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: baseline;
+  }
+
+  .fact-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+
+  .fact-value {
+    font-size: 0.875rem;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+
+  @media (max-width: 900px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .fact { grid-template-columns: 1fr; gap: 0.3rem; }
+  }
+</style>

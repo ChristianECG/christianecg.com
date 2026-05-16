@@ -1,0 +1,221 @@
+---
+---
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">cecg</a>
+
+    <ul class="nav-links">
+      <li><a href="#about"><span class="lang-es">Sobre mí</span><span class="lang-en">About</span></a></li>
+      <li><a href="#experience"><span class="lang-es">Experiencia</span><span class="lang-en">Experience</span></a></li>
+      <li><a href="#skills"><span class="lang-es">Habilidades</span><span class="lang-en">Skills</span></a></li>
+      <li><a href="#projects"><span class="lang-es">Proyectos</span><span class="lang-en">Projects</span></a></li>
+      <li><a href="#contact"><span class="lang-es">Contacto</span><span class="lang-en">Contact</span></a></li>
+    </ul>
+
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button
+          class="lang-btn active"
+          data-lang-btn="es"
+          onclick="window.setLang('es')"
+          aria-label="Español"
+        >ES</button>
+        <span class="lang-sep">/</span>
+        <button
+          class="lang-btn"
+          data-lang-btn="en"
+          onclick="window.setLang('en')"
+          aria-label="English"
+        >EN</button>
+      </div>
+
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="nav-mobile-menu" id="nav-mobile-menu">
+  <ul>
+    <li><a href="#about" onclick="closeMobileMenu()"><span class="lang-es">Sobre mí</span><span class="lang-en">About</span></a></li>
+    <li><a href="#experience" onclick="closeMobileMenu()"><span class="lang-es">Experiencia</span><span class="lang-en">Experience</span></a></li>
+    <li><a href="#skills" onclick="closeMobileMenu()"><span class="lang-es">Habilidades</span><span class="lang-en">Skills</span></a></li>
+    <li><a href="#projects" onclick="closeMobileMenu()"><span class="lang-es">Proyectos</span><span class="lang-en">Projects</span></a></li>
+    <li><a href="#contact" onclick="closeMobileMenu()"><span class="lang-es">Contacto</span><span class="lang-en">Contact</span></a></li>
+  </ul>
+</div>
+
+<script>
+  const hamburger = document.getElementById('nav-hamburger');
+  const mobileMenu = document.getElementById('nav-mobile-menu');
+
+  hamburger?.addEventListener('click', () => {
+    const open = mobileMenu?.classList.toggle('open');
+    hamburger.classList.toggle('open', !!open);
+  });
+
+  (window as any).closeMobileMenu = function () {
+    mobileMenu?.classList.remove('open');
+    hamburger?.classList.remove('open');
+  };
+</script>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: rgba(12, 12, 10, 0.88);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    text-transform: lowercase;
+    transition: opacity 0.2s;
+  }
+  .nav-logo:hover { opacity: 0.75; }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+  }
+
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-2);
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2px;
+  }
+
+  .lang-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--text-2);
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  .lang-btn.active {
+    background: var(--accent);
+    color: #fff;
+  }
+  .lang-btn:not(.active):hover { color: var(--text); }
+
+  .lang-sep { color: var(--text-3); font-size: 0.7rem; display: none; }
+
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all 0.25s;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  .nav-mobile-menu {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: rgba(12, 12, 10, 0.98);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 2rem 2rem;
+    z-index: 99;
+    backdrop-filter: blur(16px);
+    transform: translateY(-8px);
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .nav-mobile-menu.open {
+    opacity: 1;
+    transform: none;
+  }
+  .nav-mobile-menu ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .nav-mobile-menu a {
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    color: var(--text-2);
+    transition: color 0.2s;
+  }
+  .nav-mobile-menu a:hover { color: var(--accent); }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    .nav-mobile-menu { display: block; }
+  }
+</style>

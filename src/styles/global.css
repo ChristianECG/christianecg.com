@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #0C0C0A;
+  --surface: #131311;
+  --surface-2: #1C1C19;
+  --border: rgba(230, 222, 208, 0.08);
+  --border-hover: rgba(230, 222, 208, 0.16);
+  --text: #E6DED0;
+  --text-2: #8A8378;
+  --text-3: #4A4740;
+  --accent: #D4854A;
+  --accent-light: #E8A87C;
+  --accent-dim: rgba(212, 133, 74, 0.12);
+
+  --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  --max-w: 1080px;
+  --section-pad: 112px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+
+section {
+  padding: var(--section-pad) 0;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* i18n visibility */
+html:not([lang="en"]) .lang-en,
+html[lang="en"] .lang-es {
+  display: none !important;
+}
+
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Section intro */
+.section-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.section-title {
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 3rem;
+}
+
+.rule {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+.accent { color: var(--accent); }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--surface-2); }
+
+@media (max-width: 768px) {
+  :root { --section-pad: 72px; }
+  .container { padding: 0 1.25rem; }
+}

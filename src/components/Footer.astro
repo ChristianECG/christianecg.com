@@ -1,0 +1,60 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <p class="footer-logo">cecg</p>
+    <p class="footer-copy">
+      <span class="lang-es">© {year} Christian Elías Cruz González. Diseñado y construido con cuidado.</span>
+      <span class="lang-en">© {year} Christian Elías Cruz González. Designed and built with care.</span>
+    </p>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/christianeliascg/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:contacto@christianecg.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 0;
+  }
+
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+
+  .footer-copy {
+    font-size: 0.8rem;
+    color: var(--text-3);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.25rem;
+  }
+  .footer-links a {
+    font-size: 0.8rem;
+    color: var(--text-2);
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .footer-inner { flex-direction: column; text-align: center; }
+  }
+</style>

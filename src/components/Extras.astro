@@ -1,0 +1,186 @@
+---
+---
+
+<section id="extras">
+  <div class="container">
+    <div class="extras-grid">
+
+      <div class="extras-col">
+        <span class="section-eyebrow reveal">
+          <span class="lang-es">Comunidad</span>
+          <span class="lang-en">Community</span>
+        </span>
+        <h2 class="section-title extras-title reveal">
+          <span class="lang-es">Más allá del código</span>
+          <span class="lang-en">Beyond the code</span>
+        </h2>
+
+        <div class="community-list">
+          <div class="cl-item reveal">
+            <span class="cl-role">Speaker</span>
+            <p class="cl-desc">
+              <span class="lang-es">Charlas en eventos de Frontend, IA y Open Source.</span>
+              <span class="lang-en">Talks at Frontend, AI and Open Source events.</span>
+            </p>
+          </div>
+          <div class="cl-item reveal" style="--delay: 0.07s">
+            <span class="cl-role">
+              <span class="lang-es">Mentor</span>
+              <span class="lang-en">Mentor</span>
+            </span>
+            <p class="cl-desc">
+              <span class="lang-es">Acompaño el crecimiento de nuevos desarrolladores en comunidades tech.</span>
+              <span class="lang-en">I support new developers' growth in tech communities.</span>
+            </p>
+          </div>
+          <div class="cl-item reveal" style="--delay: 0.14s">
+            <span class="cl-role">Google DSC Lead <span class="cl-year">'20–'21</span></span>
+            <p class="cl-desc">
+              <span class="lang-es">+60 miembros, ~20 eventos técnicos organizados.</span>
+              <span class="lang-en">60+ members, ~20 technical events organized.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="extras-col">
+        <span class="section-eyebrow reveal">
+          <span class="lang-es">Publicación</span>
+          <span class="lang-en">Publication</span>
+        </span>
+        <h2 class="section-title extras-title reveal">
+          <span class="lang-es">Investigación</span>
+          <span class="lang-en">Research</span>
+        </h2>
+
+        <div class="pub reveal">
+          <span class="pub-source">IEEE Xplore</span>
+          <h3 class="pub-title">
+            Security Issues of a Decentralized Blockchain-Based Messaging System
+          </h3>
+          <p class="pub-desc">
+            <span class="lang-es">
+              Investigación sobre vulnerabilidades en arquitecturas descentralizadas con enfoque en
+              sistemas de mensajería basados en blockchain. Presentado en congreso internacional.
+            </span>
+            <span class="lang-en">
+              Research on vulnerabilities in decentralized architectures focused on blockchain-based
+              messaging systems. Presented at an international conference.
+            </span>
+          </p>
+          <a href="https://ieeexplore.ieee.org/document/9619732" target="_blank" rel="noopener" class="pub-link">
+            <span class="lang-es">Leer en IEEE Xplore</span>
+            <span class="lang-en">Read on IEEE Xplore</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .extras-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+  }
+
+  .extras-title {
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem) !important;
+    margin-bottom: 2rem !important;
+  }
+
+  /* Community list */
+  .community-list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--border);
+  }
+
+  .cl-item {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    --delay: 0s;
+    transition-delay: var(--delay);
+  }
+
+  .cl-role {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text);
+    font-family: var(--font-heading);
+    letter-spacing: -0.01em;
+  }
+
+  .cl-year {
+    font-weight: 400;
+    color: var(--text-3);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+  }
+
+  .cl-desc {
+    font-size: 0.85rem;
+    color: var(--text-2);
+    line-height: 1.6;
+  }
+
+  /* Publication */
+  .pub {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+
+  .pub-source {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .pub-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.4;
+    font-family: var(--font-body);
+    letter-spacing: 0;
+  }
+
+  .pub-desc {
+    font-size: 0.85rem;
+    color: var(--text-2);
+    line-height: 1.7;
+  }
+
+  .pub-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent);
+    transition: opacity 0.2s;
+    width: fit-content;
+    margin-top: 0.25rem;
+  }
+  .pub-link:hover { opacity: 0.7; }
+  .pub-link svg { transition: transform 0.2s; }
+  .pub-link:hover svg { transform: translateX(3px); }
+
+  @media (max-width: 900px) {
+    .extras-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+  }
+</style>

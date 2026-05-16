@@ -1,0 +1,121 @@
+---
+---
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="contact-left reveal">
+        <span class="section-eyebrow">
+          <span class="lang-es">Contacto</span>
+          <span class="lang-en">Contact</span>
+        </span>
+        <h2 class="contact-heading">
+          <span class="lang-es">¿Trabajamos juntos?</span>
+          <span class="lang-en">Let's work together.</span>
+        </h2>
+        <p class="contact-sub">
+          <span class="lang-es">
+            Abierto a oportunidades, colaboraciones y charlas técnicas.
+          </span>
+          <span class="lang-en">
+            Open to opportunities, collaborations, and technical talks.
+          </span>
+        </p>
+      </div>
+
+      <div class="contact-links reveal" style="--delay: 0.12s">
+        <a href="mailto:contacto@christianecg.com" class="contact-link">
+          <span class="cl-label">Email</span>
+          <span class="cl-value">contacto@christianecg.com</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/christianeliascg/" target="_blank" rel="noopener" class="contact-link">
+          <span class="cl-label">LinkedIn</span>
+          <span class="cl-value">christianeliascg</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #contact {
+    border-top: 1px solid var(--border);
+  }
+
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: end;
+  }
+
+  .contact-heading {
+    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.03em;
+    margin: 0.75rem 0 1rem;
+    line-height: 1.05;
+  }
+
+  .contact-sub {
+    font-size: 0.95rem;
+    color: var(--text-2);
+    line-height: 1.7;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    --delay: 0s;
+    transition-delay: var(--delay);
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border);
+    transition: color 0.2s;
+    color: var(--text);
+  }
+  .contact-link:last-child { border-bottom: 1px solid var(--border); }
+  .contact-link:hover { color: var(--accent); }
+
+  .contact-link svg {
+    margin-left: auto;
+    flex-shrink: 0;
+    color: var(--text-3);
+    transition: transform 0.2s, color 0.2s;
+  }
+  .contact-link:hover svg {
+    transform: translateX(4px);
+    color: var(--accent);
+  }
+
+  .cl-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    width: 70px;
+    flex-shrink: 0;
+  }
+
+  .cl-value {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  @media (max-width: 900px) {
+    .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+</style>

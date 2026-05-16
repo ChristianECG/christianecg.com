@@ -1,0 +1,209 @@
+---
+import projectsData from '../data/projects.json';
+
+const { projects } = projectsData;
+---
+
+<section id="projects">
+  <div class="container">
+    <p class="section-label reveal">
+      <span class="lang-es">Proyectos</span>
+      <span class="lang-en">Projects</span>
+    </p>
+    <h2 class="section-title reveal">
+      <span class="lang-es">Lo que he construido</span>
+      <span class="lang-en">Things I've built</span>
+    </h2>
+
+    {projects.length === 0 ? (
+      <div class="projects-empty reveal">
+        <div class="empty-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/>
+            <path d="M12 3v18M3 7l9 4 9-4"/>
+          </svg>
+        </div>
+        <p class="empty-title">
+          <span class="lang-es">Proyectos en camino</span>
+          <span class="lang-en">Projects on the way</span>
+        </p>
+        <p class="empty-sub">
+          <span class="lang-es">Estoy preparando esta sección. Vuelve pronto.</span>
+          <span class="lang-en">Working on this section. Check back soon.</span>
+        </p>
+      </div>
+    ) : (
+      <div class="projects-grid">
+        {projects.map((project: any, i: number) => (
+          <article class="project-card reveal" style={`--delay: ${i * 0.08}s`}>
+            {project.image && (
+              <div class="project-img">
+                <img src={project.image} alt={project.title} loading="lazy" />
+              </div>
+            )}
+            <div class="project-body">
+              <div class="project-meta">
+                {project.tags?.map((tag: string) => (
+                  <span class="project-tag">{tag}</span>
+                ))}
+              </div>
+              <h3 class="project-title">{project.title}</h3>
+              <p class="project-desc lang-es">{project.description_es || project.description}</p>
+              <p class="project-desc lang-en">{project.description_en || project.description}</p>
+              <div class="project-links">
+                {project.url && (
+                  <a href={project.url} target="_blank" rel="noopener" class="project-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                      <polyline points="15,3 21,3 21,9"/>
+                      <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                    <span class="lang-es">Ver proyecto</span>
+                    <span class="lang-en">View project</span>
+                  </a>
+                )}
+                {project.github && (
+                  <a href={project.github} target="_blank" rel="noopener" class="project-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                    GitHub
+                  </a>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .projects-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--surface);
+    border: 1px dashed var(--border-hover);
+    border-radius: var(--radius);
+    gap: 0.75rem;
+  }
+
+  .empty-icon {
+    color: var(--text-3);
+    margin-bottom: 0.5rem;
+  }
+
+  .empty-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-2);
+  }
+
+  .empty-sub {
+    font-size: 0.875rem;
+    color: var(--text-3);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    --delay: 0s;
+    transition-delay: var(--delay);
+    display: flex;
+    flex-direction: column;
+  }
+  .project-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-3px);
+  }
+
+  .project-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: var(--surface-2);
+  }
+  .project-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+  }
+  .project-card:hover .project-img img { transform: scale(1.04); }
+
+  .project-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    flex: 1;
+  }
+
+  .project-meta {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .project-tag {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    background: var(--accent-dim);
+    color: var(--accent-light);
+    border-radius: 100px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .project-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  .project-desc {
+    font-size: 0.85rem;
+    color: var(--text-2);
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .project-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.25rem;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-2);
+    transition: color 0.2s;
+  }
+  .project-link:hover { color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 550px) {
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+</style>

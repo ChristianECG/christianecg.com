@@ -1,0 +1,232 @@
+---
+---
+
+<section class="hero">
+  <div class="container">
+
+    <div class="hero-top">
+      <div class="hero-label">
+        <img src="/avatar.jpg" alt="Christian Elías" class="hero-avatar" loading="eager" />
+        <span class="hero-role">
+          <span class="lang-es">Ingeniero Frontend Senior</span>
+          <span class="lang-en">Senior Frontend Engineer</span>
+        </span>
+      </div>
+      <div class="hero-links">
+        <a href="https://www.linkedin.com/in/christianeliascg/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="mailto:contacto@christianecg.com">Email</a>
+      </div>
+    </div>
+
+    <h1 class="hero-name">Christian Elías<br />Cruz González</h1>
+
+    <div class="hero-bottom-row">
+      <p class="hero-tagline">
+        <span class="lang-es">
+          Mi trabajo está entre el código y la gente.<br />
+          Nadie lo ve. Todo el mundo lo siente.
+        </span>
+        <span class="lang-en">
+          My work lives between the code and the people.<br />
+          Nobody sees it. Everybody feels it.
+        </span>
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#experience" class="cta-primary">
+          <span class="lang-es">Ver experiencia</span>
+          <span class="lang-en">See my work</span>
+        </a>
+        <a href="#contact" class="cta-ghost">
+          <span class="lang-es">Contacto</span>
+          <span class="lang-en">Contact</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="hero-stats">
+    <div class="container hero-stats-inner">
+      <div class="hstat">
+        <span class="hstat-n">150K<span class="accent">+</span></span>
+        <span class="hstat-l">
+          <span class="lang-es">Usuarios en producción</span>
+          <span class="lang-en">Users in production</span>
+        </span>
+      </div>
+      <div class="hstat">
+        <span class="hstat-n">5<span class="accent">+</span></span>
+        <span class="hstat-l">
+          <span class="lang-es">Años de experiencia</span>
+          <span class="lang-en">Years of experience</span>
+        </span>
+      </div>
+      <div class="hstat">
+        <span class="hstat-n">20<span class="accent">+</span></span>
+        <span class="hstat-l">
+          <span class="lang-es">Devs en mi equipo</span>
+          <span class="lang-en">Devs in my team</span>
+        </span>
+      </div>
+      <div class="hstat">
+        <span class="hstat-n">1</span>
+        <span class="hstat-l">
+          <span class="lang-es">Paper en IEEE Xplore</span>
+          <span class="lang-en">IEEE Xplore paper</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 64px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .container { padding-top: 3rem; }
+
+  .hero-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border-hover);
+  }
+
+  .hero-role {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-2);
+    letter-spacing: 0.02em;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+  .hero-links a {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-2);
+    transition: color 0.2s;
+  }
+  .hero-links a:hover { color: var(--text); }
+
+  .hero-name {
+    font-size: clamp(3rem, 7.5vw, 7rem);
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.03em;
+    line-height: 1.0;
+    margin-bottom: 3rem;
+  }
+
+  .hero-bottom-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .hero-tagline {
+    font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+    color: var(--text-2);
+    line-height: 1.75;
+    max-width: 440px;
+  }
+
+  .hero-ctas {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .cta-primary {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--bg);
+    background: var(--text);
+    padding: 0.65rem 1.4rem;
+    border-radius: 3px;
+    transition: opacity 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .cta-primary:hover { opacity: 0.85; }
+
+  .cta-ghost {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-2);
+    transition: color 0.2s;
+  }
+  .cta-ghost:hover { color: var(--text); }
+
+  /* Stats */
+  .hero-stats {
+    border-top: 1px solid var(--border);
+  }
+
+  .hero-stats-inner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding-top: 0 !important;
+  }
+
+  .hstat {
+    padding: 1.75rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    border-right: 1px solid var(--border);
+  }
+  .hstat:last-child { border-right: none; }
+
+  .hstat-n {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .hstat-l {
+    font-size: 0.76rem;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+
+  @media (max-width: 800px) {
+    .hero-bottom-row { flex-direction: column; align-items: flex-start; }
+    .hero-name { font-size: clamp(2.5rem, 10vw, 4rem); margin-bottom: 2rem; }
+    .hero-stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .hstat:nth-child(2) { border-right: none; }
+    .hstat:nth-child(3) { border-right: 1px solid var(--border); }
+  }
+
+  @media (max-width: 500px) {
+    .hero-top { flex-wrap: wrap; gap: 1rem; }
+    .hero-links { display: none; }
+  }
+</style>

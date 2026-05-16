@@ -1,0 +1,103 @@
+---
+const groups = [
+  {
+    label_es: "Frontend & Mobile",
+    label_en: "Frontend & Mobile",
+    skills: ["React", "React Native", "TypeScript", "JavaScript (ES6+)", "HTML5", "CSS3"],
+  },
+  {
+    label_es: "Visualización de datos",
+    label_en: "Data Visualization",
+    skills: ["ECharts", "D3.js", "Rendering optimization", "Large dataset handling"],
+  },
+  {
+    label_es: "Estado & fetching",
+    label_en: "State & Fetching",
+    skills: ["TanStack Query", "React state patterns", "WebSockets", "REST APIs"],
+  },
+  {
+    label_es: "Arquitectura",
+    label_en: "Architecture",
+    skills: ["Frontend Architecture", "Component Design", "Design Systems", "Scalable UI"],
+  },
+  {
+    label_es: "Calidad & tooling",
+    label_en: "Quality & Tooling",
+    skills: ["ESLint (custom rules)", "Jest", "React Testing Library", "Git", "CI/CD"],
+  },
+  {
+    label_es: "UX & colaboración",
+    label_en: "UX & Collaboration",
+    skills: ["Responsive Design", "Accessibility (a11y)", "Agile / Scrum"],
+  },
+];
+---
+
+<section id="skills">
+  <div class="container">
+    <div class="skills-header reveal">
+      <span class="section-eyebrow">
+        <span class="lang-es">Habilidades</span>
+        <span class="lang-en">Skills</span>
+      </span>
+      <h2 class="section-title">
+        <span class="lang-es">Con qué trabajo</span>
+        <span class="lang-en">What I work with</span>
+      </h2>
+    </div>
+
+    <div class="skills-list">
+      {groups.map((g, i) => (
+        <div class="skill-row reveal" style={`--delay: ${i * 0.06}s`}>
+          <span class="skill-label">
+            <span class="lang-es">{g.label_es}</span>
+            <span class="lang-en">{g.label_en}</span>
+          </span>
+          <span class="skill-items">{g.skills.join(" · ")}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .skill-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border);
+    align-items: baseline;
+    --delay: 0s;
+    transition-delay: var(--delay);
+  }
+  .skill-row:last-child { border-bottom: 1px solid var(--border); }
+
+  .skill-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-2);
+  }
+
+  .skill-items {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  @media (max-width: 700px) {
+    .skill-row {
+      grid-template-columns: 1fr;
+      gap: 0.4rem;
+      padding: 1.25rem 0;
+    }
+  }
+</style>
