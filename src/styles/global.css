@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap');
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -7,20 +7,20 @@
 }
 
 :root {
-  --bg: #0C0C0A;
-  --surface: #131311;
-  --surface-2: #1C1C19;
-  --border: rgba(230, 222, 208, 0.08);
-  --border-hover: rgba(230, 222, 208, 0.16);
-  --text: #E6DED0;
-  --text-2: #8A8378;
-  --text-3: #4A4740;
-  --accent: #D4854A;
-  --accent-light: #E8A87C;
-  --accent-dim: rgba(212, 133, 74, 0.12);
+  --bg: #0B0D12;
+  --surface: #111520;
+  --surface-2: #191E2D;
+  --border: rgba(100, 140, 220, 0.09);
+  --border-hover: rgba(100, 140, 220, 0.18);
+  --text: #E8EDF5;
+  --text-2: #7E8EAB;
+  --text-3: #3E4A60;
+  --accent: #5B8CF5;
+  --accent-light: #82AAFF;
+  --accent-dim: rgba(91, 140, 245, 0.12);
 
-  --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-heading: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
 
   --max-w: 1080px;
   --section-pad: 112px;
@@ -53,7 +53,7 @@ section {
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 a {

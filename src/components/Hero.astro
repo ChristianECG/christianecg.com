@@ -2,9 +2,9 @@
 ---
 
 <section class="hero">
-  <div class="container">
 
-    <div class="hero-top">
+  <div class="hero-topbar">
+    <div class="container hero-topbar-inner">
       <div class="hero-label">
         <img src="/avatar.jpg" alt="Christian Elías" class="hero-avatar" loading="eager" />
         <span class="hero-role">
@@ -16,27 +16,51 @@
         <a href="https://github.com/ChristianECG" target="_blank" rel="noopener">GitHub ↗</a>
         <a href="https://www.linkedin.com/in/christianeliascg/" target="_blank" rel="noopener">LinkedIn ↗</a>
         <a href="mailto:contacto@christianecg.com">Email</a>
-        <a href="/cv.pdf" download class="hero-link-cv">
-          <span class="lang-es">CV ↓</span>
-          <span class="lang-en">CV ↓</span>
-        </a>
+        <a href="/cv.pdf" download class="hero-link-cv">CV ↓</a>
       </div>
     </div>
+  </div>
 
-    <h1 class="hero-name">Christian Elías<br />Cruz González</h1>
+  <div class="hero-center">
+    <div class="container">
+      <h1 class="hero-name">Christian Elías<br />Cruz González</h1>
+    </div>
+  </div>
 
-    <div class="hero-bottom-row">
-      <p class="hero-tagline">
-        <span class="lang-es">
-          150K usuarios usan mi código todos los días.<br />
-          Ninguno sabe que existe. Ese es el punto.
-        </span>
-        <span class="lang-en">
-          150K users run my code every day.<br />
-          None of them know it exists. That's the point.
-        </span>
-      </p>
-
+  <div class="hero-strip">
+    <div class="container hero-strip-inner">
+      <div class="hero-strip-left">
+        <p class="hero-tagline">
+          <span class="lang-es">
+            150K usuarios usan mi código todos los días.<br />
+            Ninguno sabe que existe. Ese es el punto.
+          </span>
+          <span class="lang-en">
+            150K users run my code every day.<br />
+            None of them know it exists. That's the point.
+          </span>
+        </p>
+        <div class="hero-creds">
+          <div class="cred">
+            <span class="cred-label">IEEE Xplore</span>
+            <span class="cred-detail lang-es">1 paper publicado</span>
+            <span class="cred-detail lang-en">1 published paper</span>
+          </div>
+          <span class="cred-sep" aria-hidden="true">·</span>
+          <div class="cred">
+            <span class="cred-label">Keynote</span>
+            <span class="cred-detail lang-es">3 congresos internacionales</span>
+            <span class="cred-detail lang-en">3 international conferences</span>
+          </div>
+          <span class="cred-sep" aria-hidden="true">·</span>
+          <div class="cred">
+            <span class="cred-label lang-es">Televisión</span>
+            <span class="cred-label lang-en">Television</span>
+            <span class="cred-detail lang-es">2 apariciones nacionales</span>
+            <span class="cred-detail lang-en">2 national appearances</span>
+          </div>
+        </div>
+      </div>
       <div class="hero-ctas">
         <a href="#experience" class="cta-primary">
           <span class="lang-es">Ver experiencia</span>
@@ -48,50 +72,30 @@
         </a>
       </div>
     </div>
-
   </div>
 
-  <div class="hero-creds">
-    <div class="container hero-creds-inner">
-      <div class="cred">
-        <span class="cred-label">IEEE Xplore</span>
-        <span class="cred-detail lang-es">1 paper publicado</span>
-        <span class="cred-detail lang-en">1 published paper</span>
-      </div>
-      <span class="cred-sep" aria-hidden="true">·</span>
-      <div class="cred">
-        <span class="cred-label">Keynote</span>
-        <span class="cred-detail lang-es">3 congresos internacionales</span>
-        <span class="cred-detail lang-en">3 international conferences</span>
-      </div>
-      <span class="cred-sep" aria-hidden="true">·</span>
-      <div class="cred">
-        <span class="cred-label lang-es">Televisión</span>
-        <span class="cred-label lang-en">Television</span>
-        <span class="cred-detail lang-es">2 apariciones nacionales</span>
-        <span class="cred-detail lang-en">2 national appearances</span>
-      </div>
-    </div>
-  </div>
 </section>
 
 <style>
   .hero {
     min-height: 100svh;
+    padding-top: 64px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding-top: 64px;
     border-bottom: 1px solid var(--border);
   }
 
-  .container { padding-top: 3rem; }
+  /* Top bar */
+  .hero-topbar {
+    border-bottom: 1px solid var(--border);
+  }
 
-  .hero-top {
+  .hero-topbar-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 2.5rem;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
   }
 
   .hero-label {
@@ -101,8 +105,8 @@
   }
 
   .hero-avatar {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     object-fit: cover;
     border: 1px solid var(--border-hover);
@@ -126,41 +130,90 @@
     transition: color 0.2s;
   }
   .hero-links a:hover { color: var(--text); }
-
   .hero-link-cv {
     color: var(--accent) !important;
     font-weight: 600 !important;
   }
   .hero-link-cv:hover { opacity: 0.75; }
 
-  .hero-name {
-    font-size: clamp(3rem, 7.5vw, 7rem);
-    font-weight: 800;
-    color: var(--text);
-    letter-spacing: -0.03em;
-    line-height: 1.0;
-    margin-bottom: 3rem;
+  /* Centered name */
+  .hero-center {
+    flex: 1;
+    display: flex;
+    align-items: center;
   }
 
-  .hero-bottom-row {
+  .hero-name {
+    font-size: clamp(3rem, 7.5vw, 7rem);
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    line-height: 1.0;
+  }
+
+  /* Bottom strip */
+  .hero-strip {
+    border-top: 1px solid var(--border);
+  }
+
+  .hero-strip-inner {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
-    gap: 2rem;
-    padding-bottom: 3.5rem;
+    gap: 3rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .hero-strip-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .hero-tagline {
-    font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+    font-size: clamp(0.82rem, 1.3vw, 0.95rem);
     color: var(--text-2);
     line-height: 1.75;
-    max-width: 440px;
+  }
+
+  .hero-creds {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.75rem;
+  }
+
+  .cred {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .cred-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .cred-detail {
+    font-size: 0.78rem;
+    color: var(--text-3);
+    font-weight: 500;
+  }
+
+  .cred-sep {
+    color: var(--text-3);
+    font-size: 0.7rem;
+    user-select: none;
   }
 
   .hero-ctas {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 0.75rem;
     flex-shrink: 0;
   }
 
@@ -180,71 +233,22 @@
     font-size: 0.85rem;
     font-weight: 600;
     color: var(--text-2);
-    transition: color 0.2s;
+    padding: 0.65rem 1.4rem;
+    border-radius: 3px;
+    border: 1px solid var(--border-hover);
+    transition: color 0.2s, border-color 0.2s;
   }
-  .cta-ghost:hover { color: var(--text); }
-
-  /* Credentials strip */
-  .hero-creds {
-    border-top: 1px solid var(--border);
-  }
-
-  .hero-creds-inner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.75rem 1.25rem;
-    padding-top: 0 !important;
-    padding-bottom: 0;
-  }
-
-  .cred {
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-    padding: 1.4rem 0;
-  }
-
-  .cred-label {
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-
-  .cred-detail {
-    font-size: 0.82rem;
-    color: var(--text-2);
-    font-weight: 500;
-  }
-
-  .cred-sep {
-    color: var(--text-3);
-    font-size: 0.75rem;
-    user-select: none;
-    flex-shrink: 0;
+  .cta-ghost:hover {
+    color: var(--text);
+    border-color: var(--text-3);
   }
 
   @media (max-width: 800px) {
-    .hero-bottom-row { flex-direction: column; align-items: flex-start; }
-    .hero-name { font-size: clamp(2.5rem, 10vw, 4rem); margin-bottom: 2rem; }
-  }
-
-  @media (max-width: 640px) {
-    .cred-sep { display: none; }
-    .hero-creds-inner { flex-direction: column; align-items: flex-start; gap: 0; }
-    .cred {
-      padding: 0.9rem 0;
-      border-top: 1px solid var(--border);
-      width: 100%;
-    }
-    .cred:last-of-type { border-bottom: 1px solid var(--border); }
+    .hero-name { font-size: clamp(2.5rem, 10vw, 4rem); }
+    .hero-strip-inner { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
   }
 
   @media (max-width: 500px) {
-    .hero-top { flex-wrap: wrap; gap: 1rem; }
     .hero-links { display: none; }
   }
 </style>

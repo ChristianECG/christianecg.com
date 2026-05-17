@@ -3,94 +3,85 @@
 
 <section id="about">
   <div class="container">
-    <div class="about-grid">
-      <div class="about-left reveal">
-        <span class="section-eyebrow">
-          <span class="lang-es">Sobre mí</span>
-          <span class="lang-en">About me</span>
-        </span>
-        <h2 class="about-heading">
-          <span class="lang-es">Construyo con propósito y precisión.</span>
-          <span class="lang-en">I build with purpose and precision.</span>
-        </h2>
-      </div>
 
-      <div class="about-body reveal" style="--delay: 0.12s">
-        <div class="about-bio">
-          <p class="lang-es">
-            Soy Frontend Engineer con más de 5 años construyendo aplicaciones que escalan sin perder el detalle.
-            Actualmente trabajo como Senior Engineer en <strong>Ubidots</strong>, una plataforma IoT usada por equipos
-            de ingeniería en todo el mundo.
-          </p>
-          <p class="lang-es">
-            Me apasiona el rendimiento: optimizar dashboards, reducir tiempos de carga y mejorar la experiencia de usuario
-            en condiciones reales de producción. Fuera del código, soy speaker, mentor
-            y autor publicado en <strong>IEEE Xplore</strong>.
-          </p>
-          <p class="lang-en">
-            I'm a Frontend Engineer with 5+ years building applications that scale without losing the details.
-            Currently working as a Senior Engineer at <strong>Ubidots</strong>, an IoT platform used by engineering teams worldwide.
-          </p>
-          <p class="lang-en">
-            I care deeply about performance — optimizing dashboards, reducing load times, and improving user experience
-            under real production conditions. Outside of code, I'm a speaker, mentor, and published author at <strong>IEEE Xplore</strong>.
-          </p>
-        </div>
+    <div class="about-header reveal">
+      <span class="section-eyebrow">
+        <span class="lang-es">Sobre mí</span>
+        <span class="lang-en">About me</span>
+      </span>
+      <h2 class="about-heading">
+        <span class="lang-es">El mejor código es el que nadie nota que existe.</span>
+        <span class="lang-en">The best code is the kind nobody notices exists.</span>
+      </h2>
+    </div>
 
-        <div class="about-facts">
-          <div class="fact">
-            <span class="fact-label">
-              <span class="lang-es">Rol actual</span>
-              <span class="lang-en">Current role</span>
-            </span>
-            <span class="fact-value">Senior Frontend Engineer, Ubidots</span>
-          </div>
-          <div class="fact">
-            <span class="fact-label">
-              <span class="lang-es">Especialidad</span>
-              <span class="lang-en">Specialty</span>
-            </span>
-            <span class="fact-value lang-es">Rendimiento, visualización de datos IoT</span>
-            <span class="fact-value lang-en">Performance, IoT data visualization</span>
-          </div>
-          <div class="fact">
-            <span class="fact-label">
-              <span class="lang-es">Comunidad</span>
-              <span class="lang-en">Community</span>
-            </span>
-            <span class="fact-value lang-es">Speaker · Mentor · Google DSC Lead '20–'21</span>
-            <span class="fact-value lang-en">Speaker · Mentor · Google DSC Lead '20–'21</span>
-          </div>
-          <div class="fact">
-            <span class="fact-label">
-              <span class="lang-es">Publicación</span>
-              <span class="lang-en">Publication</span>
-            </span>
-            <span class="fact-value">IEEE Xplore — Blockchain security</span>
-          </div>
-        </div>
+    <div class="about-body reveal" style="--delay: 0.1s">
+      <div class="about-bio">
+        <p class="lang-es">
+          Un dashboard que tarda 8 segundos en cargar es un bug que nadie llama bug.
+          Llevo años cazando exactamente esos.
+        </p>
+        <p class="lang-es">
+          Trabajo como Senior Engineer en <strong>Ubidots</strong>, una plataforma IoT con más de 150K usuarios
+          y millones de eventos en tiempo real. Fuera del código, soy speaker, mentor
+          y autor publicado en <strong>IEEE Xplore</strong>.
+        </p>
+        <p class="lang-en">
+          A dashboard that takes 8 seconds to load is a bug nobody calls a bug.
+          I've spent years hunting exactly those.
+        </p>
+        <p class="lang-en">
+          I work as a Senior Engineer at <strong>Ubidots</strong>, an IoT platform with 150K+ users
+          and millions of real-time events. Outside of code, I'm a speaker, mentor,
+          and published author at <strong>IEEE Xplore</strong>.
+        </p>
       </div>
     </div>
+
+    <div class="about-facts reveal" style="--delay: 0.2s">
+      <div class="fact">
+        <span class="fact-num">150K+</span>
+        <span class="fact-label">
+          <span class="lang-es">usuarios activos diarios · código en producción</span>
+          <span class="lang-en">daily active users · production code</span>
+        </span>
+      </div>
+      <div class="fact">
+        <span class="fact-num lang-es">Comunidad</span>
+        <span class="fact-num lang-en">Community</span>
+        <span class="fact-label">Speaker · Mentor · Google DSC Lead '20–'21</span>
+      </div>
+      <div class="fact">
+        <span class="fact-num">IEEE Xplore</span>
+        <span class="fact-label">
+          <span class="lang-es">1 paper publicado</span>
+          <span class="lang-en">1 published paper</span>
+        </span>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <style>
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 5rem;
-    align-items: start;
+  .about-header {
+    margin-bottom: 3rem;
   }
 
   .about-heading {
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
-    font-weight: 800;
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 700;
     color: var(--text);
-    line-height: 1.2;
-    margin-top: 0.5rem;
+    line-height: 1.15;
+    margin-top: 0.75rem;
+    max-width: 760px;
   }
 
-  .about-body { --delay: 0s; transition-delay: var(--delay); }
+  .about-body {
+    --delay: 0s;
+    transition-delay: var(--delay);
+    margin-bottom: 3.5rem;
+  }
 
   .about-bio {
     display: flex;
@@ -99,47 +90,52 @@
     color: var(--text-2);
     line-height: 1.8;
     font-size: 0.95rem;
-    margin-bottom: 3rem;
+    max-width: 620px;
   }
   .about-bio strong { color: var(--text); font-weight: 600; }
 
   .about-facts {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     border-top: 1px solid var(--border);
+    --delay: 0s;
+    transition-delay: var(--delay);
   }
 
   .fact {
-    display: grid;
-    grid-template-columns: 130px 1fr;
-    gap: 1.5rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--border);
-    align-items: baseline;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.75rem 2rem 1.75rem 0;
+    border-right: 1px solid var(--border);
+  }
+  .fact:last-child { border-right: none; }
+  .fact:not(:first-child) { padding-left: 2rem; }
+
+  .fact-num {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
   }
 
   .fact-label {
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-size: 0.8rem;
     color: var(--text-3);
-  }
-
-  .fact-value {
-    font-size: 0.875rem;
-    color: var(--text-2);
     font-weight: 500;
+    line-height: 1.5;
   }
 
-  @media (max-width: 900px) {
-    .about-grid {
+  @media (max-width: 700px) {
+    .about-facts {
       grid-template-columns: 1fr;
-      gap: 2.5rem;
     }
-  }
-
-  @media (max-width: 600px) {
-    .fact { grid-template-columns: 1fr; gap: 0.3rem; }
+    .fact {
+      border-right: none;
+      border-top: 1px solid var(--border);
+      padding: 1.25rem 0;
+    }
+    .fact:first-child { border-top: none; }
   }
 </style>

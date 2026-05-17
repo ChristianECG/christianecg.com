@@ -1,3 +1,20 @@
 {
-  "projects": []
+  "projects": [
+    {
+      "title": "DocPipeline",
+      "description_es": "Dashboard de monitoreo en tiempo real para rastrear documentos a través de etapas de procesamiento (pendiente → extrayendo → validando → indexando → listo/fallido). Incluye acciones en lote, notificaciones en vivo y streaming SSE.",
+      "description_en": "Real-time document pipeline monitoring dashboard to track documents through multi-step processing stages (pending → extracting → validating → indexing → done/failed). Includes batch actions, live notifications, and SSE streaming.",
+      "tags": ["TypeScript", "Next.js", "WebSocket", "SSE"],
+      "url": "https://docpipeline.sbs/",
+      "github": "https://github.com/ChrisECG/docpipeline"
+    },
+    {
+      "title": "CatolicMixquia",
+      "description_es": "App móvil para la Parroquia de Mixquiahuala que acerca el Evangelio y las enseñanzas de Jesús a la comunidad, disponible en iOS y Android.",
+      "description_en": "Mobile app for the Parish of Mixquiahuala that brings the Gospel and teachings of Jesus closer to the community, available on iOS and Android.",
+      "tags": ["React Native", "Mobile", "iOS", "Android"],
+      "appStore": "https://apps.apple.com/us/app/catolicmixquia/id6469672864",
+      "playStore": "https://play.google.com/store/apps/details?id=mx.parroquiamixquiahuala.catolicmixquia&hl=es"
+    }
+  ]
 }
