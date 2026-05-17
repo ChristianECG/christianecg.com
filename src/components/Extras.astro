@@ -45,36 +45,62 @@
 
       <div class="extras-col">
         <span class="section-eyebrow reveal">
-          <span class="lang-es">Publicación</span>
-          <span class="lang-en">Publication</span>
+          <span class="lang-es">Publicaciones</span>
+          <span class="lang-en">Publications</span>
         </span>
         <h2 class="section-title extras-title reveal">
           <span class="lang-es">Investigación</span>
           <span class="lang-en">Research</span>
         </h2>
 
-        <div class="pub reveal">
-          <span class="pub-source">IEEE Xplore</span>
-          <h3 class="pub-title">
-            Security Issues of a Decentralized Blockchain-Based Messaging System
-          </h3>
-          <p class="pub-desc">
-            <span class="lang-es">
-              Investigación sobre vulnerabilidades en arquitecturas descentralizadas con enfoque en
-              sistemas de mensajería basados en blockchain. Presentado en congreso internacional.
-            </span>
-            <span class="lang-en">
-              Research on vulnerabilities in decentralized architectures focused on blockchain-based
-              messaging systems. Presented at an international conference.
-            </span>
-          </p>
-          <a href="https://ieeexplore.ieee.org/document/9619732" target="_blank" rel="noopener" class="pub-link">
-            <span class="lang-es">Leer en IEEE Xplore</span>
-            <span class="lang-en">Read on IEEE Xplore</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </a>
+        <div class="pub-list">
+          <div class="pub reveal">
+            <div class="pub-meta">
+              <span class="pub-source">IEEE Xplore</span>
+              <span class="pub-year">2021</span>
+            </div>
+            <h3 class="pub-title">
+              Security Issues of a Decentralized Blockchain-Based Messaging System
+            </h3>
+            <p class="pub-desc">
+              <span class="lang-es">
+                Vulnerabilidades en arquitecturas descentralizadas con enfoque en sistemas de
+                mensajería basados en blockchain. Presentado en congreso internacional.
+              </span>
+              <span class="lang-en">
+                Vulnerabilities in decentralized architectures focused on blockchain-based
+                messaging systems. Presented at an international conference.
+              </span>
+            </p>
+            <a href="https://ieeexplore.ieee.org/document/9619732" target="_blank" rel="noopener" class="pub-link">
+              <span class="lang-es">Leer en IEEE Xplore</span>
+              <span class="lang-en">Read on IEEE Xplore</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+
+          <div class="pub reveal" style="--delay: 0.08s">
+            <div class="pub-meta">
+              <span class="pub-source">REINGTEC <span class="pub-issn">ISSN 2448-7198</span></span>
+              <span class="pub-year">2020</span>
+            </div>
+            <h3 class="pub-title">
+              Statistical Analysis of the Spread of the COVID-19 Pandemic in Mexico Applying Machine Learning Models
+            </h3>
+            <p class="pub-desc">
+              <span class="lang-es">
+                Modelo de Densidad de Kernel para predecir la tendencia de contagios de COVID-19 en México,
+                usando datos del CSSE de Johns Hopkins y Python. El modelo estima casos para 150 días
+                a partir de los primeros 50 días del brote.
+              </span>
+              <span class="lang-en">
+                Kernel Density model to predict COVID-19 contagion trends in Mexico using Johns Hopkins
+                CSSE data and Python. The model estimates cases for 150 days from the first 50 days of the outbreak.
+              </span>
+            </p>
+          </div>
         </div>
       </div>
 
@@ -133,21 +159,47 @@
   }
 
   /* Publication */
-  .pub {
+  .pub-list {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding: 2rem;
+  }
+
+  .pub {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 1.5rem;
     border: 1px solid var(--border);
     border-radius: 4px;
+    --delay: 0s;
+    transition-delay: var(--delay);
+  }
+
+  .pub-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .pub-source {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--accent);
+  }
+
+  .pub-year {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--text-3);
+  }
+
+  .pub-issn {
+    font-weight: 400;
+    color: var(--text-3);
+    letter-spacing: 0.04em;
   }
 
   .pub-title {
