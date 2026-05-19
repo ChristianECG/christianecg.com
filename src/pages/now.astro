@@ -1,0 +1,224 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+const updated = '2026-05-19';
+---
+
+<Layout
+  title="Ahora — Christian Elías Cruz González"
+  description="Qué estoy haciendo, aprendiendo y explorando en este momento."
+>
+  <Nav />
+  <main class="now-main">
+    <div class="container">
+
+      <header class="now-header reveal">
+        <p class="section-eyebrow">
+          <span class="lang-es">En este momento</span>
+          <span class="lang-en">Right now</span>
+        </p>
+        <h1 class="now-title">
+          <span class="lang-es">Ahora</span>
+          <span class="lang-en">Now</span>
+        </h1>
+        <p class="now-updated">
+          <span class="lang-es">Última actualización: {updated}</span>
+          <span class="lang-en">Last updated: {updated}</span>
+        </p>
+        <p class="now-intro">
+          <span class="lang-es">
+            Una página <a href="https://nownownow.com/about" target="_blank" rel="noopener">/now</a> es un snapshot de lo que estoy haciendo en este momento de mi vida.
+          </span>
+          <span class="lang-en">
+            A <a href="https://nownownow.com/about" target="_blank" rel="noopener">/now</a> page is a snapshot of what I'm focused on at this point in my life.
+          </span>
+        </p>
+      </header>
+
+      <div class="now-body">
+
+        <div class="now-section reveal">
+          <h2>
+            <span class="lang-es">Trabajando en</span>
+            <span class="lang-en">Working on</span>
+          </h2>
+          <div class="now-content">
+            <p>
+              <span class="lang-es">
+                Construyendo interfaces de tiempo real para plataformas IoT industriales usando React y TypeScript. Me enfoco en rendimiento, visualización de datos complejos y arquitectura de componentes escalable.
+              </span>
+              <span class="lang-en">
+                Building real-time interfaces for industrial IoT platforms with React and TypeScript. My focus is on performance, complex data visualization, and scalable component architecture.
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div class="now-section reveal">
+          <h2>
+            <span class="lang-es">Explorando</span>
+            <span class="lang-en">Exploring</span>
+          </h2>
+          <div class="now-content">
+            <p>
+              <span class="lang-es">
+                Integrando herramientas de IA en flujos de trabajo de desarrollo frontend. Experimentando con agentes, Claude Code y la API de OpenAI para automatizar tareas repetitivas y mejorar la calidad del código.
+              </span>
+              <span class="lang-en">
+                Integrating AI tooling into frontend development workflows. Experimenting with agents, Claude Code, and the OpenAI API to automate repetitive tasks and improve code quality.
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div class="now-section reveal">
+          <h2>
+            <span class="lang-es">Aprendiendo</span>
+            <span class="lang-en">Learning</span>
+          </h2>
+          <div class="now-content">
+            <ul>
+              <li>
+                <span class="lang-es">Arquitectura de software: patrones, principios de diseño y cómo tomar mejores decisiones estructurales en proyectos grandes</span>
+                <span class="lang-en">Software architecture: patterns, design principles, and making better structural decisions in large projects</span>
+              </li>
+              <li>
+                <span class="lang-es">Arquitecturas de agentes de IA y su integración con aplicaciones web</span>
+                <span class="lang-en">AI agent architectures and their integration with web applications</span>
+              </li>
+              <li>
+                <span class="lang-es">Nuevas características de CSS: container queries, @layer, anchor positioning</span>
+                <span class="lang-en">New CSS features: container queries, @layer, anchor positioning</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="now-section reveal">
+          <h2>
+            <span class="lang-es">Escribiendo</span>
+            <span class="lang-en">Writing</span>
+          </h2>
+          <div class="now-content">
+            <p>
+              <span class="lang-es">
+                Documentando reflexiones sobre el oficio del frontend, herramientas de IA y lo que aprendo día a día en el blog.
+              </span>
+              <span class="lang-en">
+                Documenting thoughts on the frontend craft, AI tooling, and daily learnings on the blog.
+              </span>
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .now-main {
+    padding-top: 64px;
+    min-height: 100svh;
+  }
+
+  .now-header {
+    padding: 4rem 0 3rem;
+    border-bottom: 1px solid var(--border);
+    max-width: 680px;
+  }
+
+  .now-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .now-updated {
+    font-size: 0.78rem;
+    color: var(--text-3);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    margin-bottom: 1rem;
+  }
+
+  .now-intro {
+    font-size: 0.92rem;
+    color: var(--text-2);
+    line-height: 1.7;
+  }
+
+  .now-intro a {
+    color: var(--accent-light);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(130, 170, 255, 0.3);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .now-intro a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .now-body {
+    max-width: 680px;
+    padding: 3rem 0 6rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .now-section {
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .now-section:first-child {
+    border-top: none;
+  }
+
+  .now-section h2 {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    margin-bottom: 1rem;
+  }
+
+  .now-content p {
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.8;
+  }
+
+  .now-content ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .now-content ul li {
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.7;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .now-content ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+</style>

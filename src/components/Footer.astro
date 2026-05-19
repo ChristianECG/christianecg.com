@@ -4,14 +4,66 @@ const year = new Date().getFullYear();
 
 <footer class="footer">
   <div class="container footer-inner">
-    <p class="footer-logo">cecg</p>
-    <p class="footer-copy">
-      <span class="lang-es">© {year} Christian Elías Cruz González. Diseñado y construido con cuidado.</span>
-      <span class="lang-en">© {year} Christian Elías Cruz González. Designed and built with care.</span>
-    </p>
-    <div class="footer-links">
-      <a href="https://www.linkedin.com/in/christianeliascg/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="mailto:contacto@christianecg.com">Email</a>
+
+    <div class="footer-brand">
+      <p class="footer-logo">cecg</p>
+      <p class="footer-tagline">
+        <span class="lang-es">Senior Frontend Engineer</span>
+        <span class="lang-en">Senior Frontend Engineer</span>
+      </p>
+    </div>
+
+    <nav class="footer-cols">
+
+      <div class="footer-col">
+        <p class="footer-col-label">
+          <span class="lang-es">Navegación</span>
+          <span class="lang-en">Navigation</span>
+        </p>
+        <ul>
+          <li><a href="/#about"><span class="lang-es">Sobre mí</span><span class="lang-en">About</span></a></li>
+          <li><a href="/#experience"><span class="lang-es">Experiencia</span><span class="lang-en">Experience</span></a></li>
+          <li><a href="/#education"><span class="lang-es">Educación</span><span class="lang-en">Education</span></a></li>
+          <li><a href="/#skills"><span class="lang-es">Habilidades</span><span class="lang-en">Skills</span></a></li>
+          <li><a href="/#projects"><span class="lang-es">Proyectos</span><span class="lang-en">Projects</span></a></li>
+          <li><a href="/#talks"><span class="lang-es">Charlas</span><span class="lang-en">Talks</span></a></li>
+          <li><a href="/#contact"><span class="lang-es">Contacto</span><span class="lang-en">Contact</span></a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col-label">
+          <span class="lang-es">Páginas</span>
+          <span class="lang-en">Pages</span>
+        </p>
+        <ul>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/now">Now</a></li>
+          <li><a href="/rss.xml">RSS</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col-label">
+          <span class="lang-es">Contacto</span>
+          <span class="lang-en">Contact</span>
+        </p>
+        <ul>
+          <li><a href="https://www.linkedin.com/in/christianeliascg/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="mailto:contacto@christianecg.com">Email</a></li>
+        </ul>
+      </div>
+
+    </nav>
+
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <p>
+        <span class="lang-es">© {year} Christian Elías Cruz González. Diseñado y construido con cuidado.</span>
+        <span class="lang-en">© {year} Christian Elías Cruz González. Designed and built with care.</span>
+      </p>
     </div>
   </div>
 </footer>
@@ -19,42 +71,88 @@ const year = new Date().getFullYear();
 <style>
   .footer {
     border-top: 1px solid var(--border);
-    padding: 2rem 0;
+    padding-top: 3.5rem;
   }
 
   .footer-inner {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
+    gap: 3rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .footer-logo {
     font-family: var(--font-heading);
-    font-size: 1rem;
+    font-size: 1.25rem;
     font-weight: 800;
     color: var(--accent);
     letter-spacing: 0.04em;
   }
 
-  .footer-copy {
+  .footer-tagline {
     font-size: 0.8rem;
+    color: var(--text-3);
+    font-weight: 500;
+  }
+
+  .footer-cols {
+    display: flex;
+    gap: 4rem;
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .footer-col-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--text-3);
   }
 
-  .footer-links {
+  .footer-col ul {
+    list-style: none;
     display: flex;
-    gap: 1.25rem;
+    flex-direction: column;
+    gap: 0.6rem;
   }
-  .footer-links a {
-    font-size: 0.8rem;
+
+  .footer-col a {
+    font-size: 0.85rem;
     color: var(--text-2);
+    text-decoration: none;
     transition: color 0.2s;
   }
-  .footer-links a:hover { color: var(--accent); }
+  .footer-col a:hover { color: var(--text); }
 
-  @media (max-width: 600px) {
-    .footer-inner { flex-direction: column; text-align: center; }
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding: 1.25rem 0;
+  }
+
+  .footer-bottom p {
+    font-size: 0.78rem;
+    color: var(--text-3);
+  }
+
+  @media (max-width: 768px) {
+    .footer-inner {
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+    .footer-cols {
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
   }
 </style>

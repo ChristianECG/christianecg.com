@@ -4,6 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import '../../styles/global.css';
+import { readingTime } from '../../utils/readingTime';
 
 export async function getStaticPaths() {
   const entries = await getCollection('blog');
@@ -15,6 +16,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+const mins = readingTime(entry.body ?? '');
 
 function formatDateFull(dateStr: string) {
   const [year, month, day] = dateStr.split('-');
@@ -30,6 +32,7 @@ function formatDateFull(dateStr: string) {
   title={`${entry.data.title} — Christian Elías Cruz González`}
   description={entry.data.excerpt}
   ogType="article"
+  ogImage={`https://christianecg.com/og/${entry.id}.png`}
 >
   <Nav />
   <main class="article-main">
@@ -47,6 +50,7 @@ function formatDateFull(dateStr: string) {
             <time class="article-date" datetime={entry.data.date}>
               {formatDateFull(entry.data.date)}
             </time>
+            <span class="article-reading-time">{mins} min de lectura</span>
           </div>
 
           <h1 class="article-title">{entry.data.title}</h1>
@@ -116,6 +120,18 @@ function formatDateFull(dateStr: string) {
     color: var(--text-3);
     font-weight: 500;
     letter-spacing: 0.03em;
+  }
+
+  .article-reading-time {
+    font-size: 0.78rem;
+    color: var(--text-3);
+    font-weight: 500;
+  }
+
+  .article-reading-time::before {
+    content: '·';
+    margin-right: 0.5rem;
+    color: var(--text-3);
   }
 
   .article-source {
