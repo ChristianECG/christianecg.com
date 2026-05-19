@@ -113,6 +113,16 @@ html[lang="en"] .lang-es {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--surface-2); }
 
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
 @media (max-width: 768px) {
   :root { --section-pad: 72px; }
   .container { padding: 0 1.25rem; }

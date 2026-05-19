@@ -47,9 +47,15 @@ const canonicalURL = new URL(Astro.url.pathname, "https://christianecg.com").hre
       href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <slot name="head" />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">
+      <span class="lang-es">Saltar al contenido</span>
+      <span class="lang-en">Skip to content</span>
+    </a>
     <slot />
+    <button class="back-to-top" id="back-to-top" aria-label="Volver arriba">↑</button>
     <script>
       // Apply lang before paint to avoid flash
       const savedLang = localStorage.getItem('lang') || 'es';
@@ -65,7 +71,7 @@ const canonicalURL = new URL(Astro.url.pathname, "https://christianecg.com").hre
         });
       };
 
-      // Scroll reveal — Astro module scripts run after DOM is parsed
+      // Scroll reveal
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -77,9 +83,65 @@ const canonicalURL = new URL(Astro.url.pathname, "https://christianecg.com").hre
         },
         { threshold: 0.08, rootMargin: '0px 0px -48px 0px' }
       );
-
       document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
       (window as any).setLang(savedLang);
+
+      // Back to top
+      const btt = document.getElementById('back-to-top') as HTMLButtonElement;
+      window.addEventListener('scroll', () => {
+        btt?.classList.toggle('btt-visible', window.scrollY > 400);
+      }, { passive: true });
+      btt?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     </script>
   </body>
 </html>
+
+<style>
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    z-index: 9999;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 0 0 6px 6px;
+    text-decoration: none;
+    transition: top 0.15s;
+  }
+  .skip-link:focus {
+    top: 0;
+    outline: none;
+  }
+
+  .back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 38px;
+    height: 38px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-2);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, border-color 0.2s, color 0.2s;
+    z-index: 90;
+  }
+  .back-to-top.btt-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .back-to-top:hover {
+    border-color: var(--border-hover);
+    color: var(--text);
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<Layout
+  title="Buscar — Christian Elías Cruz González"
+  description="Busca artículos en el blog de Christian Elías Cruz González."
+>
+  <link slot="head" href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <Nav />
+  <main id="main-content" class="search-main">
+    <div class="container">
+      <header class="search-header reveal">
+        <p class="section-eyebrow">
+          <span class="lang-es">Búsqueda</span>
+          <span class="lang-en">Search</span>
+        </p>
+        <h1 class="search-title">
+          <span class="lang-es">Buscar</span>
+          <span class="lang-en">Search</span>
+        </h1>
+      </header>
+      <div id="search" class="search-ui"></div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  const script = document.createElement('script');
+  script.src = '/pagefind/pagefind-ui.js';
+  script.onload = () => {
+    new window.PagefindUI({
+      element: '#search',
+      showSubResults: true,
+      resetStyles: false,
+      translations: {
+        placeholder: 'Buscar artículos…',
+        zero_results: 'Sin resultados para "[QUERY]"',
+      },
+    });
+  };
+  script.onerror = () => {
+    const el = document.getElementById('search');
+    if (el) el.innerHTML = '<p class="search-unavailable">La búsqueda no está disponible en modo desarrollo. Ejecuta <code>yarn build</code> primero.</p>';
+  };
+  document.head.appendChild(script);
+</script>
+
+<style>
+  .search-main {
+    padding-top: 64px;
+    min-height: 100svh;
+  }
+
+  .search-header {
+    padding: 4rem 0 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .search-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-top: 0.5rem;
+  }
+
+  .search-ui {
+    padding: 2.5rem 0 6rem;
+    max-width: 720px;
+  }
+
+  .search-unavailable {
+    color: var(--text-2);
+    font-size: 0.9rem;
+    margin-top: 2rem;
+  }
+  .search-unavailable code {
+    font-family: monospace;
+    background: var(--surface-2);
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+  }
+
+  /* Pagefind UI theme — CSS variables */
+  #search {
+    --pagefind-ui-scale: 0.9;
+    --pagefind-ui-primary: #5B8CF5;
+    --pagefind-ui-text: #E8EDF5;
+    --pagefind-ui-background: #111520;
+    --pagefind-ui-border: rgba(100, 140, 220, 0.18);
+    --pagefind-ui-tag: #191E2D;
+    --pagefind-ui-border-radius: 6px;
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-font: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Direct overrides — pagefind elements are injected by JS and need :global */
+  :global(.pagefind-ui__search-input) {
+    background-color: #111520 !important;
+    color: #E8EDF5 !important;
+    border-color: rgba(100, 140, 220, 0.18) !important;
+    caret-color: #5B8CF5;
+  }
+  :global(.pagefind-ui__search-input::placeholder) {
+    color: #3E4A60 !important;
+    opacity: 1 !important;
+  }
+  :global(.pagefind-ui__search-clear) {
+    background-color: transparent !important;
+    color: #3E4A60 !important;
+    border-radius: 4px !important;
+    transition: color 0.15s, background-color 0.15s !important;
+  }
+  :global(.pagefind-ui__search-clear:hover) {
+    background-color: rgba(100, 140, 220, 0.08) !important;
+    color: #7E8EAB !important;
+  }
+  :global(.pagefind-ui__button) {
+    background-color: #111520 !important;
+    color: #5B8CF5 !important;
+    border-color: rgba(100, 140, 220, 0.18) !important;
+  }
+  :global(.pagefind-ui__button:hover) {
+    background-color: #191E2D !important;
+  }
+  :global(.pagefind-ui__result-link) {
+    color: #E8EDF5 !important;
+  }
+  :global(.pagefind-ui__result-excerpt) {
+    color: #7E8EAB !important;
+  }
+  :global(.pagefind-ui__message) {
+    color: #7E8EAB !important;
+  }
+  :global(mark) {
+    background: rgba(91, 140, 245, 0.25) !important;
+    color: #82AAFF !important;
+    border-radius: 2px;
+  }
+</style>
