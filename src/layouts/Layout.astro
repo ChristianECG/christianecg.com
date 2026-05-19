@@ -39,7 +39,7 @@ const canonicalURL = new URL(Astro.url.pathname, "https://christianecg.com").hre
     <link rel="alternate" type="application/feed+json" title="Christian Elías — Blog (JSON)" href="/feed.json" />
     <link rel="search" type="application/opensearchdescription+xml" title="christianecg.com" href="/opensearch.xml" />
     {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/<\/script>/gi, '<\\/script>')} />}
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="c62287bb-7978-4a54-8bed-fc1e336cb8b9"></script>
+    <script is:inline defer src="https://cloud.umami.is/script.js" data-website-id="c62287bb-7978-4a54-8bed-fc1e336cb8b9"></script>
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
