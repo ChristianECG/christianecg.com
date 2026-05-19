@@ -4,6 +4,7 @@ interface Props {
   description?: string;
   ogType?: "website" | "article";
   ogImage?: string;
+  jsonLd?: Record<string, unknown>;
 }
 
 const {
@@ -11,6 +12,7 @@ const {
   description = "Senior Frontend Engineer specializing in high-performance React interfaces for real-time IoT platforms.",
   ogType = "website",
   ogImage = "https://christianecg.com/avatar.jpg",
+  jsonLd,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, "https://christianecg.com").href;
@@ -34,6 +36,9 @@ const canonicalURL = new URL(Astro.url.pathname, "https://christianecg.com").hre
     <meta name="twitter:description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <link rel="alternate" type="application/rss+xml" title="Christian Elías — Blog" href="/rss.xml" />
+    <link rel="alternate" type="application/feed+json" title="Christian Elías — Blog (JSON)" href="/feed.json" />
+    <link rel="search" type="application/opensearchdescription+xml" title="christianecg.com" href="/opensearch.xml" />
+    {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/<\/script>/gi, '<\\/script>')} />}
     <script defer src="https://cloud.umami.is/script.js" data-website-id="c62287bb-7978-4a54-8bed-fc1e336cb8b9"></script>
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />

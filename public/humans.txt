@@ -1,0 +1,13 @@
+/* TEAM */
+Developer & Designer: Christian Elías Cruz González
+Contact: contacto [at] christianecg [dot] com
+LinkedIn: https://www.linkedin.com/in/christianeliascg/
+
+/* TECHNOLOGY */
+Language: HTML, CSS, TypeScript
+Framework: Astro
+Analytics: Umami (self-hosted)
+
+/* SITE */
+Last update: 2026-05-19
+Standards: HTML5, CSS3, Schema.org

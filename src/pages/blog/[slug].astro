@@ -18,6 +18,26 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 const mins = readingTime(entry.body ?? '');
 
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: entry.data.title,
+  description: entry.data.excerpt,
+  datePublished: entry.data.date,
+  url: `https://christianecg.com/blog/${entry.id}`,
+  image: `https://christianecg.com/og/${entry.id}.png`,
+  author: {
+    '@type': 'Person',
+    name: 'Christian Elías Cruz González',
+    url: 'https://christianecg.com',
+  },
+  publisher: {
+    '@type': 'Person',
+    name: 'Christian Elías Cruz González',
+    url: 'https://christianecg.com',
+  },
+};
+
 function formatDateFull(dateStr: string) {
   const [year, month, day] = dateStr.split('-');
   const months = [
@@ -33,7 +53,9 @@ function formatDateFull(dateStr: string) {
   description={entry.data.excerpt}
   ogType="article"
   ogImage={`https://christianecg.com/og/${entry.id}.png`}
+  jsonLd={articleSchema}
 >
+  <div class="progress-bar" id="reading-progress" aria-hidden="true"></div>
   <Nav />
   <main class="article-main">
     <div class="container">
@@ -299,4 +321,27 @@ function formatDateFull(dateStr: string) {
       font-size: 1.6rem;
     }
   }
+
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background: var(--accent);
+    z-index: 200;
+    transition: width 0.08s linear;
+    pointer-events: none;
+  }
 </style>
+
+<script>
+  const bar = document.getElementById('reading-progress') as HTMLElement;
+  function update() {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = total > 0 ? `${(scrolled / total) * 100}%` : '0%';
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+</script>

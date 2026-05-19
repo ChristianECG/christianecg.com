@@ -12,9 +12,19 @@ import Extras from '../components/Extras.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Christian Elías Cruz González',
+  url: 'https://christianecg.com',
+  jobTitle: 'Senior Frontend Engineer',
+  email: 'contacto@christianecg.com',
+  sameAs: ['https://www.linkedin.com/in/christianeliascg/'],
+};
 ---
 
-<Layout>
+<Layout jsonLd={personSchema}>
   <Nav />
   <main>
     <Hero />

@@ -5,17 +5,22 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
+const BATCH = 50;
+
 const allEntries = await getCollection('blog');
 const articles = allEntries
   .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
-  .map((entry) => ({
+  .map((entry, idx) => ({
     id: entry.id,
     title: entry.data.title,
     date: entry.data.date,
     excerpt: entry.data.excerpt,
     source: entry.data.source,
     url: `/blog/${entry.id}`,
+    idx,
   }));
+
+const hasMore = articles.length > BATCH;
 
 // Group by year
 const byYear = articles.reduce((acc: Record<string, typeof articles>, article) => {
@@ -72,15 +77,16 @@ function formatDate(dateStr: string) {
         </p>
       </header>
 
-      <div class="blog-body">
+      <div class="blog-body" id="blog-body">
         {years.map((year) => (
-          <div class="year-group">
+          <div class="year-group" data-year={year}>
             <div class="year-label">{year}</div>
             <div class="year-articles">
               {byYear[year].map((article, i) => (
                 <a
                   href={article.url}
                   class="article-row"
+                  data-idx={article.idx}
                   style={`--i: ${i}`}
                 >
                   <span class="article-date">{formatDate(article.date)}</span>
@@ -97,6 +103,15 @@ function formatDate(dateStr: string) {
           </div>
         ))}
       </div>
+
+      {hasMore && (
+        <div class="load-more-wrap">
+          <button id="load-more" class="load-more-btn">
+            <span class="lang-es">Ver más</span>
+            <span class="lang-en">Load more</span>
+          </button>
+        </div>
+      )}
 
     </div>
   </main>
@@ -319,4 +334,58 @@ function formatDate(dateStr: string) {
     .blog-header-top { align-items: flex-start; flex-direction: column; gap: 1rem; }
     .blog-meta { text-align: left; }
   }
+
+  .article-row.js-hidden { display: none; }
+  .year-group.js-hidden { display: none; }
+
+  .load-more-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0 5rem;
+  }
+
+  .load-more-btn {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-2);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.625rem 1.75rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .load-more-btn:hover {
+    border-color: var(--border-hover);
+    color: var(--text);
+    background: var(--surface);
+  }
 </style>
+
+<script>
+  const BATCH = 50;
+  let shown = BATCH;
+
+  function update() {
+    const rows = [...document.querySelectorAll<HTMLElement>('.article-row')];
+    rows.forEach((r, i) => r.classList.toggle('js-hidden', i >= shown));
+
+    document.querySelectorAll<HTMLElement>('.year-group').forEach((group) => {
+      const hasVisible = [...group.querySelectorAll('.article-row')].some(
+        (r) => !r.classList.contains('js-hidden')
+      );
+      group.classList.toggle('js-hidden', !hasVisible);
+    });
+
+    const btn = document.getElementById('load-more') as HTMLElement | null;
+    if (btn) btn.style.display = shown >= rows.length ? 'none' : '';
+  }
+
+  document.getElementById('load-more')?.addEventListener('click', () => {
+    shown += BATCH;
+    update();
+  });
+
+  update();
+</script>
