@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<Layout
+  title="404 — Página no encontrada · Christian Elías"
+  description="La página que buscas no existe."
+>
+  <Nav />
+  <main class="not-found">
+    <div class="container">
+      <span class="code">404</span>
+      <h1>Página no encontrada</h1>
+      <p>La URL que ingresaste no existe o fue movida.</p>
+      <a href="/" class="btn">Volver al inicio</a>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .not-found {
+    min-height: calc(100vh - 120px);
+    display: flex;
+    align-items: center;
+  }
+
+  .not-found .container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .code {
+    font-family: var(--font-heading);
+    font-size: clamp(5rem, 15vw, 10rem);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--accent-dim);
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.04em;
+  }
+
+  h1 {
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    color: var(--text);
+  }
+
+  p {
+    color: var(--text-2);
+    font-size: 1.0625rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.375rem;
+    background: var(--accent-dim);
+    border: 1px solid var(--border-hover);
+    border-radius: 8px;
+    color: var(--accent-light);
+    font-weight: 500;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+    margin-top: 0.5rem;
+  }
+
+  .btn:hover {
+    background: rgba(91, 140, 245, 0.2);
+    border-color: var(--accent);
+  }
+</style>
