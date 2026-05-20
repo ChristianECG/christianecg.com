@@ -17,6 +17,14 @@
       "github": "https://github.com/ChrisECG/docpipeline"
     },
     {
+      "title": "Octa.page",
+      "description_es": "Cuaderno técnico público construido con Astro donde publico investigación de sistemas, decisiones de arquitectura, análisis de runtimes y notas de rendimiento de frontend.",
+      "description_en": "Public technical notebook built with Astro where I publish systems research, architecture decisions, runtime analysis, and frontend performance notes.",
+      "tags": ["Astro", "TypeScript", "Tailwind CSS"],
+      "url": "https://octa.page",
+      "github": "https://github.com/ChristianECG/octa.page"
+    },
+    {
       "title": "CatolicMixquia",
       "description_es": "App móvil para la Parroquia de Mixquiahuala que acerca el Evangelio y las enseñanzas de Jesús a la comunidad, disponible en iOS y Android.",
       "description_en": "Mobile app for the Parish of Mixquiahuala that brings the Gospel and teachings of Jesus closer to the community, available on iOS and Android.",
