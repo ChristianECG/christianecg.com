@@ -160,24 +160,17 @@
   .hero-name {
     font-size: clamp(2.75rem, 6vw, 6rem);
     font-weight: 700;
+    color: var(--text);
     letter-spacing: -0.02em;
     line-height: 1.0;
-    background: linear-gradient(
-      105deg,
-      var(--text) 0%, var(--text) 38%,
-      rgba(255, 255, 255, 0.96) 50%,
-      var(--text) 62%, var(--text) 100%
-    );
-    background-size: 260% 100%;
-    background-position: 160% center;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    transition: background-position 0.9s ease;
     cursor: default;
+    transition: text-shadow 0.45s ease;
   }
   .hero-name:hover {
-    background-position: -20% center;
+    text-shadow:
+      0 0 18px rgba(91, 140, 245, 0.55),
+      0 0 55px rgba(91, 140, 245, 0.28),
+      0 0 110px rgba(91, 140, 245, 0.13);
   }
 
   /* Entrance animations */
