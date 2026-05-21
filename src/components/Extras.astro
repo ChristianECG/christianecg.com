@@ -6,11 +6,11 @@
     <div class="extras-grid">
 
       <div class="extras-col">
-        <span class="section-eyebrow reveal">
+        <span class="section-eyebrow reveal" style="--reveal-x: -18px; --reveal-y: 0px">
           <span class="lang-es">Comunidad</span>
           <span class="lang-en">Community</span>
         </span>
-        <h2 class="section-title extras-title reveal">
+        <h2 class="section-title extras-title reveal" style="--reveal-x: -18px; --reveal-y: 0px; --delay: 0.06s">
           <span class="lang-es">Más allá del código</span>
           <span class="lang-en">Beyond the code</span>
         </h2>
@@ -44,11 +44,11 @@
       </div>
 
       <div class="extras-col">
-        <span class="section-eyebrow reveal">
+        <span class="section-eyebrow reveal" style="--reveal-x: 18px; --reveal-y: 0px">
           <span class="lang-es">Publicaciones</span>
           <span class="lang-en">Publications</span>
         </span>
-        <h2 class="section-title extras-title reveal">
+        <h2 class="section-title extras-title reveal" style="--reveal-x: 18px; --reveal-y: 0px; --delay: 0.06s">
           <span class="lang-es">Investigación</span>
           <span class="lang-en">Research</span>
         </h2>
@@ -128,13 +128,19 @@
   }
 
   .cl-item {
-    padding: 1.5rem 0;
+    padding: 1.5rem 0 1.5rem 0.6rem;
     border-bottom: 1px solid var(--border);
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
     --delay: 0s;
     transition-delay: var(--delay);
+    transition: background 0.25s, box-shadow 0.25s;
+    border-radius: 4px;
+  }
+  .cl-item:hover {
+    background: rgba(91, 140, 245, 0.025);
+    box-shadow: inset 3px 0 0 var(--accent);
   }
 
   .cl-role {
@@ -174,6 +180,17 @@
     border-radius: 4px;
     --delay: 0s;
     transition-delay: var(--delay);
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.08s linear;
+    will-change: transform;
+    transform-style: preserve-3d;
+    cursor: default;
+  }
+  .pub.is-leaving {
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .pub:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(91, 140, 245, 0.08);
   }
 
   .pub-meta {
@@ -236,3 +253,23 @@
     .extras-grid { grid-template-columns: 1fr; gap: 3.5rem; }
   }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.pub').forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = (e.clientX - cx) / (rect.width / 2);
+      const dy = (e.clientY - cy) / (rect.height / 2);
+      card.style.transform =
+        `perspective(700px) rotateX(${-dy * 5}deg) rotateY(${dx * 5}deg) scale(1.015)`;
+    }, { passive: true });
+
+    card.addEventListener('mouseleave', () => {
+      card.classList.add('is-leaving');
+      card.style.transform = '';
+      setTimeout(() => card.classList.remove('is-leaving'), 500);
+    });
+  });
+</script>

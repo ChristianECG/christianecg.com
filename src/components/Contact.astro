@@ -4,7 +4,7 @@
 <section id="contact">
   <div class="container">
     <div class="contact-inner">
-      <div class="contact-left reveal">
+      <div class="contact-left reveal" style="--reveal-x: -24px; --reveal-y: 0px">
         <span class="section-eyebrow">
           <span class="lang-es">Contacto</span>
           <span class="lang-en">Contact</span>
@@ -23,7 +23,7 @@
         </p>
       </div>
 
-      <div class="contact-links reveal" style="--delay: 0.12s">
+      <div class="contact-links reveal" style="--reveal-x: 24px; --reveal-y: 0px; --delay: 0.12s">
         <a href="mailto:contacto@christianecg.com" class="contact-link">
           <span class="cl-label">Email</span>
           <span class="cl-value">contacto@christianecg.com</span>
@@ -88,13 +88,18 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 1.5rem 0;
+    padding: 1.5rem 0 1.5rem 0.75rem;
     border-top: 1px solid var(--border);
-    transition: color 0.2s;
+    transition: color 0.2s, background 0.25s, box-shadow 0.25s;
     color: var(--text);
+    border-radius: 4px;
   }
   .contact-link:last-child { border-bottom: 1px solid var(--border); }
-  .contact-link:hover { color: var(--accent); }
+  .contact-link:hover {
+    color: var(--accent);
+    background: rgba(91, 140, 245, 0.03);
+    box-shadow: inset 3px 0 0 var(--accent);
+  }
 
   .contact-link svg {
     margin-left: auto;

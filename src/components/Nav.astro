@@ -2,6 +2,7 @@
 ---
 
 <nav class="nav">
+  <div class="nav-progress" id="nav-progress" aria-hidden="true"></div>
   <div class="container nav-inner">
     <a href="/" class="nav-logo">cecg</a>
 
@@ -66,6 +67,18 @@
     mobileMenu?.classList.remove('open');
     hamburger?.classList.remove('open');
   };
+
+  // Active section highlight
+  const navAnchors = document.querySelectorAll<HTMLAnchorElement>('.nav-links a');
+  const secObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      navAnchors.forEach((a) => {
+        a.classList.toggle('nav-active', a.getAttribute('href') === `/#${entry.target.id}`);
+      });
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  document.querySelectorAll('section[id]').forEach((s) => secObserver.observe(s));
 </script>
 
 <style>
@@ -79,6 +92,17 @@
     -webkit-backdrop-filter: blur(16px);
     background: rgba(11, 13, 18, 0.88);
     border-bottom: 1px solid var(--border);
+  }
+
+  .nav-progress {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    height: 1px;
+    width: 0%;
+    background: var(--accent);
+    opacity: 0.55;
+    z-index: 101;
   }
 
   .nav-inner {
@@ -126,6 +150,8 @@
   }
   .nav-links a:hover { color: var(--text); }
   .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-links a.nav-active { color: var(--text); }
+  .nav-links a.nav-active::after { transform: scaleX(1); }
 
   .nav-right {
     display: flex;

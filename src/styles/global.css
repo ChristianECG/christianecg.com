@@ -72,15 +72,103 @@ html[lang="en"] .lang-es {
   display: none !important;
 }
 
-/* Reveal on scroll */
+/* Reveal on scroll — supports --reveal-x, --reveal-y, --delay custom props */
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(var(--reveal-y, 20px)) translateX(var(--reveal-x, 0px));
   transition: opacity 0.7s ease, transform 0.7s ease;
+  transition-delay: var(--delay, 0s);
 }
 .reveal.visible {
   opacity: 1;
   transform: none;
+}
+
+/* Typewriter cursor */
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Cred stagger slide */
+@keyframes credIn {
+  from { opacity: 0; transform: translateX(-14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Scroll hint */
+@keyframes scrollHintIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+
+/* Noise overlay */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.75%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* Hero entrance */
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes heroScale {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Badge pulse */
+@keyframes badgePulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.55; }
+}
+
+/* Skill chip pop-in */
+@keyframes chipIn {
+  from { transform: scale(0.85) translateY(5px); opacity: 0; }
+  to   { transform: scale(1) translateY(0);       opacity: 1; }
+}
+
+/* Cursor glow */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(91, 140, 245, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+  translate: -50% -50%;
+  z-index: 1;
+  will-change: transform;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.cursor-glow.visible { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .cursor-glow { display: none; }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Section intro */

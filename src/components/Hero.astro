@@ -5,14 +5,14 @@
 
   <div class="hero-center">
     <div class="container hero-center-inner">
-      <div class="hero-name-block">
+      <div class="hero-name-block hero-enter-name">
         <h1 class="hero-name">Christian Elías<br />Cruz González</h1>
         <span class="hero-role">
           <span class="lang-es">Ingeniero Frontend Senior</span>
           <span class="lang-en">Senior Frontend Engineer</span>
         </span>
       </div>
-      <img src="/avatar.jpg" alt="Christian Elías" class="hero-avatar" loading="eager" />
+      <img src="/avatar.jpg" alt="Christian Elías" class="hero-avatar hero-enter-avatar" loading="eager" />
     </div>
   </div>
 
@@ -69,6 +69,12 @@
     </div>
   </div>
 
+  <div class="scroll-hint" id="scroll-hint" aria-hidden="true">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+      <path d="M6 9l6 6 6-6"/>
+    </svg>
+  </div>
+
 </section>
 
 <style>
@@ -78,6 +84,19 @@
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    translate: -50% 0;
+    color: var(--text-3);
+    opacity: 0;
+    animation: scrollHintIn 0.5s ease 1.9s both, scrollBounce 2s ease-in-out 2.5s infinite;
+    pointer-events: none;
+    transition: opacity 0.4s;
   }
 
   .hero-avatar {
@@ -87,6 +106,11 @@
     object-fit: cover;
     border: 1px solid var(--border-hover);
     flex-shrink: 0;
+    transition: box-shadow 0.35s ease, filter 0.35s ease;
+  }
+  .hero-avatar:hover {
+    box-shadow: 0 0 0 3px rgba(91, 140, 245, 0.3), 0 0 0 5px rgba(91, 140, 245, 0.08), 0 14px 40px rgba(0, 0, 0, 0.45);
+    filter: brightness(1.07);
   }
 
   .hero-role {
@@ -136,9 +160,35 @@
   .hero-name {
     font-size: clamp(2.75rem, 6vw, 6rem);
     font-weight: 700;
-    color: var(--text);
     letter-spacing: -0.02em;
     line-height: 1.0;
+    background: linear-gradient(
+      105deg,
+      var(--text) 0%, var(--text) 38%,
+      rgba(255, 255, 255, 0.96) 50%,
+      var(--text) 62%, var(--text) 100%
+    );
+    background-size: 260% 100%;
+    background-position: 160% center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: background-position 0.9s ease;
+    cursor: default;
+  }
+  .hero-name:hover {
+    background-position: -20% center;
+  }
+
+  /* Entrance animations */
+  .hero-enter-name {
+    animation: heroIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+  }
+  .hero-enter-avatar {
+    animation: heroScale 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+  }
+  .hero-strip {
+    animation: heroIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
   }
 
   /* Bottom strip */
@@ -214,8 +264,10 @@
     background: var(--text);
     padding: 0.65rem 1.4rem;
     border-radius: 3px;
-    transition: opacity 0.2s;
+    transition: opacity 0.2s, transform 0.1s linear;
     letter-spacing: 0.01em;
+    will-change: transform;
+    display: inline-block;
   }
   .cta-primary:hover { opacity: 0.85; }
 
@@ -226,12 +278,19 @@
     padding: 0.65rem 1.4rem;
     border-radius: 3px;
     border: 1px solid var(--border-hover);
-    transition: color 0.2s, border-color 0.2s;
+    transition: color 0.2s, border-color 0.2s, transform 0.1s linear;
+    will-change: transform;
+    display: inline-block;
   }
   .cta-ghost:hover {
     color: var(--text);
     border-color: var(--text-3);
   }
+
+  /* Cred stagger — fire after strip entrance (~1.05s) */
+  .hero-creds .cred:nth-child(1) { animation: credIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) 1.05s both; }
+  .hero-creds .cred:nth-child(2) { animation: credIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) 1.18s both; }
+  .hero-creds .cred:nth-child(3) { animation: credIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) 1.31s both; }
 
   @media (max-width: 800px) {
     .hero-name { font-size: clamp(2.5rem, 10vw, 4rem); }
@@ -240,4 +299,56 @@
     .hero-strip-inner { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
     .hero-strip-right { align-items: flex-start; }
   }
+
+  .type-cursor {
+    display: inline-block;
+    margin-left: 2px;
+    color: var(--accent);
+    font-weight: 300;
+    animation: cursorBlink 0.75s step-end infinite;
+    transition: opacity 0.5s;
+  }
 </style>
+
+<script>
+  // Magnetic CTAs
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll<HTMLElement>('.cta-primary, .cta-ghost').forEach((btn) => {
+      btn.addEventListener('mousemove', (e) => {
+        btn.style.transition = 'opacity 0.2s, transform 0.1s linear';
+        const r = btn.getBoundingClientRect();
+        const dx = (e.clientX - (r.left + r.width / 2)) * 0.3;
+        const dy = (e.clientY - (r.top + r.height / 2)) * 0.3;
+        btn.style.transform = `translate(${dx}px, ${dy}px)`;
+      }, { passive: true });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transition = 'opacity 0.2s, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)';
+        btn.style.transform = '';
+      });
+    });
+  }
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const roleEl = document.querySelector<HTMLElement>('.hero-role');
+    const lang = document.documentElement.lang || 'es';
+    const span = roleEl?.querySelector<HTMLElement>(`.lang-${lang}`);
+    if (span) {
+      const full = span.textContent?.trim() ?? '';
+      span.textContent = '';
+      const cursor = document.createElement('span');
+      cursor.className = 'type-cursor';
+      cursor.textContent = '|';
+      roleEl!.appendChild(cursor);
+      let i = 0;
+      const type = () => {
+        if (i < full.length) {
+          span.textContent += full[i++];
+          setTimeout(type, 42);
+        } else {
+          setTimeout(() => { cursor.style.opacity = '0'; }, 1500);
+        }
+      };
+      setTimeout(type, 950);
+    }
+  }
+</script>

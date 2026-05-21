@@ -59,8 +59,8 @@ const groups = [
             <span class="lang-en">{g.label_en}</span>
           </span>
           <div class="skill-chips">
-              {g.skills.map((s: string) => (
-                <span class="skill-chip">{s}</span>
+              {g.skills.map((s: string, ci: number) => (
+                <span class="skill-chip" style={`--i: ${ci}`}>{s}</span>
               ))}
             </div>
         </div>
@@ -84,8 +84,11 @@ const groups = [
     align-items: baseline;
     --delay: 0s;
     transition-delay: var(--delay);
+    transition: background 0.25s;
+    border-radius: 4px;
   }
   .skill-row:last-child { border-bottom: 1px solid var(--border); }
+  .skill-row:hover { background: rgba(91, 140, 245, 0.02); }
 
   .skill-label {
     font-size: 0.78rem;
@@ -110,11 +113,20 @@ const groups = [
     padding: 4px 10px;
     border-radius: 4px;
     letter-spacing: 0.01em;
-    transition: border-color 0.2s, color 0.2s;
+    transition: border-color 0.18s, color 0.18s, background 0.18s, transform 0.18s;
+    cursor: default;
   }
   .skill-chip:hover {
-    border-color: var(--border-hover);
-    color: var(--text);
+    border-color: rgba(91, 140, 245, 0.35);
+    color: var(--accent-light);
+    background: var(--accent-dim);
+    transform: translateY(-2px);
+  }
+
+  /* Pop-in when row enters view */
+  .skill-row.visible .skill-chip {
+    animation: chipIn 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--i, 0) * 0.04s);
   }
 
   @media (max-width: 700px) {

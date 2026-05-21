@@ -50,6 +50,8 @@ const canonicalURL = new URL(Astro.url.pathname, "https://christianecg.com").hre
     <slot name="head" />
   </head>
   <body>
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
     <a href="#main-content" class="skip-link">
       <span class="lang-es">Saltar al contenido</span>
       <span class="lang-en">Skip to content</span>
@@ -86,12 +88,33 @@ const canonicalURL = new URL(Astro.url.pathname, "https://christianecg.com").hre
       document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
       (window as any).setLang(savedLang);
 
-      // Back to top
+      // Back to top + scroll hint hide
       const btt = document.getElementById('back-to-top') as HTMLButtonElement;
+      const scrollHint = document.getElementById('scroll-hint') as HTMLElement | null;
       window.addEventListener('scroll', () => {
         btt?.classList.toggle('btt-visible', window.scrollY > 400);
+        if (scrollHint && window.scrollY > 60) scrollHint.style.opacity = '0';
       }, { passive: true });
       btt?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // Cursor glow
+      const glow = document.getElementById('cursor-glow') as HTMLElement;
+      if (glow && window.matchMedia('(pointer: fine)').matches) {
+        document.addEventListener('mousemove', (e) => {
+          glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+          glow.classList.add('visible');
+        }, { passive: true });
+        document.addEventListener('mouseleave', () => glow.classList.remove('visible'));
+      }
+
+      // Scroll progress
+      const navProgress = document.getElementById('nav-progress') as HTMLElement;
+      if (navProgress) {
+        window.addEventListener('scroll', () => {
+          const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+          navProgress.style.width = (pct * 100) + '%';
+        }, { passive: true });
+      }
     </script>
   </body>
 </html>

@@ -40,7 +40,7 @@
 
     <div class="about-facts reveal" style="--delay: 0.2s">
       <div class="fact">
-        <span class="fact-num">150K+</span>
+        <span class="fact-num" id="fact-count" data-target="150">0K+</span>
         <span class="fact-label">
           <span class="lang-es">usuarios activos diarios · código en producción</span>
           <span class="lang-en">daily active users · production code</span>
@@ -127,6 +127,13 @@
     line-height: 1.5;
   }
 
+  .fact {
+    transition: background 0.25s;
+  }
+  .fact:hover {
+    background: rgba(91, 140, 245, 0.025);
+  }
+
   @media (max-width: 700px) {
     .about-facts {
       grid-template-columns: 1fr;
@@ -139,3 +146,32 @@
     .fact:first-child { border-top: none; }
   }
 </style>
+
+<script>
+  const el = document.getElementById('fact-count');
+  if (el) {
+    const target = parseInt(el.dataset.target ?? '150', 10);
+    let started = false;
+
+    const run = () => {
+      if (started) return;
+      started = true;
+      const duration = 1400;
+      const start = performance.now();
+      const step = (now: number) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const value = Math.round(eased * target);
+        el.textContent = value + 'K+';
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+
+    const obs = new IntersectionObserver(
+      (entries) => { if (entries[0].isIntersecting) { run(); obs.disconnect(); } },
+      { threshold: 0.5 }
+    );
+    obs.observe(el);
+  }
+</script>

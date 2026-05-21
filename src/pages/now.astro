@@ -40,7 +40,7 @@ const updated = '2026-05-19';
 
       <div class="now-body">
 
-        <div class="now-section reveal">
+        <div class="now-section reveal" style="--delay: 0.1s">
           <h2>
             <span class="lang-es">Trabajando en</span>
             <span class="lang-en">Working on</span>
@@ -57,7 +57,7 @@ const updated = '2026-05-19';
           </div>
         </div>
 
-        <div class="now-section reveal">
+        <div class="now-section reveal" style="--delay: 0.2s">
           <h2>
             <span class="lang-es">Explorando</span>
             <span class="lang-en">Exploring</span>
@@ -74,7 +74,7 @@ const updated = '2026-05-19';
           </div>
         </div>
 
-        <div class="now-section reveal">
+        <div class="now-section reveal" style="--delay: 0.3s">
           <h2>
             <span class="lang-es">Aprendiendo</span>
             <span class="lang-en">Learning</span>
@@ -97,7 +97,7 @@ const updated = '2026-05-19';
           </div>
         </div>
 
-        <div class="now-section reveal">
+        <div class="now-section reveal" style="--delay: 0.4s">
           <h2>
             <span class="lang-es">Escribiendo</span>
             <span class="lang-en">Writing</span>
@@ -178,6 +178,7 @@ const updated = '2026-05-19';
   .now-section {
     padding: 2rem 0;
     border-bottom: 1px solid var(--border);
+    transition-delay: var(--delay, 0s);
   }
 
   .now-section:first-child {

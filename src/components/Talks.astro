@@ -210,13 +210,19 @@ const typeLabel: Record<string, { es: string; en: string }> = {
     display: grid;
     grid-template-columns: 130px 1fr;
     gap: 2.5rem;
-    padding: 1.4rem 0;
+    padding: 1.4rem 0 1.4rem 0.6rem;
     border-top: 1px solid var(--border);
     align-items: start;
     --delay: 0s;
     transition-delay: var(--delay);
+    transition: background 0.25s, box-shadow 0.25s;
+    border-radius: 4px;
   }
   .talk:last-child { border-bottom: 1px solid var(--border); }
+  .talk:hover {
+    background: rgba(91, 140, 245, 0.025);
+    box-shadow: inset 3px 0 0 var(--accent);
+  }
 
   .talk-date {
     font-size: 0.76rem;
