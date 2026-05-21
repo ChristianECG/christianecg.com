@@ -6,7 +6,7 @@ LinkedIn: https://www.linkedin.com/in/christianeliascg/
 /* TECHNOLOGY */
 Language: HTML, CSS, TypeScript
 Framework: Astro
-Analytics: Umami (self-hosted)
+Analytics: Avelor
 
 /* SITE */
 Last update: 2026-05-19
