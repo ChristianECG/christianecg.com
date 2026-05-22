@@ -25,6 +25,13 @@
       "github": "https://github.com/ChristianECG/octa.page"
     },
     {
+      "title": "Avelor",
+      "description_en": "Production back-office platform I designed and built from scratch to manage freelance and side-project operations. Covers custom web analytics with event tracking and dashboards, a URL vault with one-time secret sharing, client brief management, and automated deployment hooks with live output streaming. Built on Astro, PHP, Node.js, and MySQL — self-hosted on a VPS with Tailscale-protected admin access.",
+      "description_es": "Plataforma back-office de producción diseñada y construida desde cero para gestionar operaciones freelance y proyectos propios. Cubre analytics web con seguimiento de eventos y dashboards, un vault de URLs con compartición de secretos de un solo uso, gestión de briefs de clientes y hooks de despliegue automatizado con streaming de salida en vivo. Construida sobre Astro, PHP, Node.js y MySQL — autoalojada en un VPS con acceso admin protegido por Tailscale.",
+      "tags": ["Astro", "Node.js", "PHP", "MySQL", "Tailscale"],
+      "url": "https://avelor.es"
+    },
+    {
       "title": "CatolicMixquia",
       "description_es": "App móvil para la Parroquia de Mixquiahuala que acerca el Evangelio y las enseñanzas de Jesús a la comunidad, disponible en iOS y Android.",
       "description_en": "Mobile app for the Parish of Mixquiahuala that brings the Gospel and teachings of Jesus closer to the community, available on iOS and Android.",
