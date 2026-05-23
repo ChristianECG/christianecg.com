@@ -305,6 +305,10 @@
 
 <script>
   // Magnetic CTAs
+  document.querySelector<HTMLAnchorElement>('.hero-link-cv')?.addEventListener('click', () => {
+    window.avelor?.track('cv_download', { url: '/cv.pdf' });
+  });
+
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.querySelectorAll<HTMLElement>('.cta-primary, .cta-ghost').forEach((btn) => {
       btn.addEventListener('mousemove', (e) => {
