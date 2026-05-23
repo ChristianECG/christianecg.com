@@ -2,7 +2,7 @@
 title: "Por qué tu sitio web debería funcionar sin Javascript"
 date: "2021-03-19"
 excerpt: "El 1% de las visitas donde JS falla no es solo un número: es una oportunidad para construir sitios más rápidos, accesibles y confiables. Una mirada al efecto de las rampas en la acera."
-source: "Octa"
+source: "Blog"
 ---
 
 ¿Por qué en 2021 te molestarías en hacer un sitio web sin JS? La respuesta obvia a por qué deberías crear un sitio web que no necesite JS es, en esencia, porque algunas personas no usan JS.

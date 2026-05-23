@@ -2,7 +2,7 @@
 title: "Tú necesitas una página web"
 date: "2021-10-08"
 excerpt: "En la era digital, tu presencia en internet dice más sobre ti que un currículum. Por qué necesitas un sitio web propio, y qué pasa cuando no tienes uno."
-source: "Octa"
+source: "Blog"
 ---
 
 Hace unos días me encontraba navegando por internet, cuando pasó por mi mente buscar mi nombre en Google.

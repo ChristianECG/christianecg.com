@@ -2,7 +2,7 @@
 title: "Por qué Linux se está volviendo tan popular"
 date: "2021-11-06"
 excerpt: "Desarrolladores y usuarios comunes están migrando a Linux. Un análisis de por qué un sistema operativo open source, personalizable y gratuito está ganando terreno."
-source: "Octa"
+source: "Blog"
 ---
 
 Tanto si miras a los desarrolladores, como si ves cada vez a más usuarios comunes, verás que Linux se está volviendo un sistema operativo muy famoso.

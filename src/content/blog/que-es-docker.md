@@ -2,7 +2,7 @@
 title: "Qué es Docker y por qué es tan popular"
 date: "2021-10-27"
 excerpt: "Docker elimina los problemas de configuración y dependencias al empaquetar todo lo que una aplicación necesita. Un recorrido por sus ventajas principales."
-source: "Octa"
+source: "Blog"
 ---
 
 Docker se ha convertido en una herramienta realmente famosa por su versatilidad, porque permite ejecutar aplicaciones aún en servidores realmente antiguos, y porque hace muy fácil transportar aplicaciones.

@@ -2,7 +2,7 @@
 title: "El desarrollo de software es una de las profesiones más peligrosas del mundo"
 date: "2022-11-06"
 excerpt: "Sin duda alguna, el desarrollo de software es una profesión muy peligrosa. Muchas veces no nos detenemos a pensar en los riesgos que corremos al estar trabajando con código, pero estamos expuestos a muchos peligros."
-source: "Octa"
+source: "Blog"
 ---
 
 Sin duda alguna, el desarrollo de software es una profesión muy peligrosa. Muchas veces no nos detenemos a pensar en los riesgos que corremos al estar trabajando con código, pero estamos expuestos a muchos peligros. Desde errores en el código que pueden causar fallos catastróficos, hasta ataques cibernéticos que pueden comprometer la seguridad de los datos.

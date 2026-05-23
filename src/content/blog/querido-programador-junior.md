@@ -2,7 +2,7 @@
 title: "Querido programador junior"
 date: "2020-09-26"
 excerpt: "Una carta para todos los que están comenzando en el mundo del desarrollo: tienes el superpoder de crear lo que quieras, y no estás solo en este camino."
-source: "Octa"
+source: "Blog"
 ---
 
 Si es que estás leyendo esto, tengo que felicitarte, porque llegar hasta donde estás ahora, no ha sido un camino sencillo.

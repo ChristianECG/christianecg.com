@@ -2,7 +2,7 @@
 title: "Por qué reconstruí mi blog"
 date: "2022-06-04"
 excerpt: "Reflexión sobre el proceso de reconstruir Octa desde cero: qué no funcionaba, qué aprendí en el camino y por qué a veces tirar todo y empezar es la decisión correcta."
-source: "Octa"
+source: "Blog"
 ---
 
 Hay momentos en el desarrollo en que te das cuenta de que el proyecto que tienes enfrente ya no es sostenible. No porque esté roto, sino porque creció de una manera que no planeaste, y arreglarlo se volvió más costoso que empezar desde cero.

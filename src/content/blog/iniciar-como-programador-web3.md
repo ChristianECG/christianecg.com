@@ -2,7 +2,7 @@
 title: "Cómo iniciar como programador en la Web 3"
 date: "2022-01-14"
 excerpt: "Guía práctica para desarrolladores que quieren dar sus primeros pasos en el ecosistema descentralizado: qué aprender, por dónde empezar y qué herramientas usar."
-source: "Octa"
+source: "Blog"
 ---
 
 Si formas parte de este ecosistema tecnológico, seguro habrás notado que nos encontramos en un proceso de revolución tecnológica. En los últimos años, hemos visto el crecimiento de tecnologías como blockchain, a través de contratos inteligentes, NFTs, pagos con criptomonedas, y el candente tema del metaverso de Facebook, por mencionar algunos.

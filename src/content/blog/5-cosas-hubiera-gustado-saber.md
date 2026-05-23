@@ -2,7 +2,7 @@
 title: "5 cosas que me hubiera gustado saber cuando empecé a programar"
 date: "2020-07-04"
 excerpt: "Las lecciones más importantes que nadie te cuenta cuando empiezas a programar: desde leer código ajeno hasta la importancia de colaborar desde el primer día."
-source: "Octa"
+source: "Blog"
 ---
 
 He decidido iniciar con este espacio para contar al mundo mi experiencia en el campo de las Tecnologías de la Información, y no hay mejor manera de iniciar que platicando realmente acerca de las cosas que me hubiera gustado saber cuando me inicié en este gran universo tecnológico como programador.

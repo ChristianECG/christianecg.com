@@ -26,19 +26,31 @@ const canonicalURL = new URL(Astro.url.pathname, "https://christianecg.com").hre
     <meta name="description" content={description} />
     <meta name="author" content="Christian Elías Cruz González" />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="es" href={canonicalURL} />
+    <link rel="alternate" hreflang="en" href={canonicalURL} />
+    <link rel="alternate" hreflang="x-default" href={canonicalURL} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:locale:alternate" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <link rel="alternate" type="application/rss+xml" title="Christian Elías — Blog" href="/rss.xml" />
     <link rel="alternate" type="application/feed+json" title="Christian Elías — Blog (JSON)" href="/feed.json" />
     <link rel="search" type="application/opensearchdescription+xml" title="christianecg.com" href="/opensearch.xml" />
     {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/<\/script>/gi, '<\\/script>')} />}
+    <script is:inline>
+      (function () {
+        var lang = localStorage.getItem('lang') || 'es';
+        document.documentElement.lang = lang;
+      })();
+    </script>
     <script is:inline defer src="https://analytics.avelor.es/av.js" data-project="christianecg"></script>
     <title>{title}</title>
     <slot name="head" />
@@ -53,9 +65,7 @@ const canonicalURL = new URL(Astro.url.pathname, "https://christianecg.com").hre
     <slot />
     <button class="back-to-top" id="back-to-top" aria-label="Volver arriba">↑</button>
     <script>
-      // Apply lang before paint to avoid flash
       const savedLang = localStorage.getItem('lang') || 'es';
-      document.documentElement.lang = savedLang;
 
       (window as any).setLang = function (lang: string) {
         localStorage.setItem('lang', lang);
@@ -65,6 +75,8 @@ const canonicalURL = new URL(Astro.url.pathname, "https://christianecg.com").hre
             ? btn.classList.add('active')
             : btn.classList.remove('active');
         });
+        const bttEl = document.getElementById('back-to-top');
+        if (bttEl) bttEl.setAttribute('aria-label', lang === 'es' ? 'Volver arriba' : 'Back to top');
       };
 
       // Scroll reveal

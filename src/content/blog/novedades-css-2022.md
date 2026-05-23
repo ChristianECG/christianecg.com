@@ -2,7 +2,7 @@
 title: "Estas son las novedades que podríamos esperar en CSS el próximo año"
 date: "2021-11-25"
 excerpt: "Dos nuevas reglas condicionales propuestas al CSSWG podrían cambiar cómo escribimos CSS: @when y @else prometen simplificar las combinaciones de media queries y feature detection."
-source: "Octa"
+source: "Blog"
 ---
 
 _Al momento de la redacción de este artículo, las reglas que aquí se mencionan, han sido enviadas al CSSWG para su revisión, y es altamente probable que sean consideradas para su adición al estándar._

@@ -2,7 +2,7 @@
 title: "Por este motivo un NFT es tan valioso en la Web 3"
 date: "2022-01-27"
 excerpt: "Exploración del valor detrás de los NFTs en el ecosistema de la Web 3: qué los hace únicos, por qué generan tanto debate y qué implican para el futuro de la propiedad digital."
-source: "Octa"
+source: "Blog"
 ---
 
 Una de las consecuencias indirectas de la pandemia COVID-19, sin duda alguna ha sido el incremento de NFT (Non-Fungible Tokens, Tókenes no fungibles), sobre todo de creadores de contenido y de artistas en internet. Pero, ¿Qué demonios es un NFT?

@@ -2,7 +2,7 @@
 title: "7 cosas que no te enseñarán en clases de programación"
 date: "2020-07-11"
 excerpt: "Las cosas que aprendí por cuenta propia y que me hubiera gustado que me enseñaran desde mis primeras clases de programación."
-source: "Octa"
+source: "Blog"
 ---
 
 Quiero seguir contando un poco mi experiencia en mis inicios de clases de programación. En este espacio, quiero enfocarme a contarte algunas cosas que a mí nunca me enseñaron cuando tomé clases de programación, cosas que aprendí por cuenta propia, y cosas que me hubiera gustado que me enseñaran desde mis primeras clases. Estoy seguro que si algún principiante en el área lee este espacio en algún momento, podrá aprovechar e investigar por cuenta propia estos puntos que definitivamente serán muy útiles y servirán de mucho provecho para todos.

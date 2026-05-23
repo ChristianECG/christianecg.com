@@ -2,7 +2,7 @@
 title: "En ocasiones vale la pena reinventar la rueda"
 date: "2022-08-08"
 excerpt: "Como desarrolladores de software, constantemente buscamos retos y oportunidades. Muchas veces al aprender algo nuevo nos recuerdan que no vale la pena reinventar la rueda. Pero, ¿siempre es así?"
-source: "Octa"
+source: "Blog"
 ---
 
 Como desarrolladores de software, constantemente buscamos retos y oportunidades sobre los cuales trabajar. Muchas veces, aprendiendo alguna nueva tecnología, o una nueva herramienta, suelen recordarnos que *no vale la pena reinventar la rueda*.

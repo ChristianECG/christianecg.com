@@ -2,7 +2,7 @@
 title: "Qué es la Web 3 y por qué todos están hablando sobre eso"
 date: "2022-01-06"
 excerpt: "Un análisis de qué es la Web 3, sus fundamentos tecnológicos y por qué el mundo tech no puede dejar de hablar de ello."
-source: "Octa"
+source: "Blog"
 ---
 
 Si has estado atento a internet en los últimos meses, seguro habrás notado la existencia de este nuevo tema: la Web 3. Todos hablan sobre esto, y sin duda alguna, la tendencia continuará. Pero, para entender lo que es la Web 3, miremos primero un poco acerca de la Web 2.

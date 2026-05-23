@@ -2,7 +2,7 @@
 title: "5 cosas que te harán un mejor desarrollador"
 date: "2021-04-09"
 excerpt: "Cinco hábitos concretos que marcan la diferencia entre un desarrollador que avanza y uno que se estanca: aprendizaje continuo, experiencia consciente y lectura de código ajeno."
-source: "Octa"
+source: "Blog"
 ---
 
 ## Siempre sigue aprendiendo

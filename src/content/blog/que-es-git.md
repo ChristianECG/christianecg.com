@@ -2,7 +2,7 @@
 title: "Qué es Git y por qué deberías aprenderlo"
 date: "2021-09-08"
 excerpt: "Git no es solo para devs: es la herramienta más importante para colaborar en proyectos digitales. Qué es, cómo funciona, y tres razones concretas para aprenderlo."
-source: "Octa"
+source: "Blog"
 ---
 
 Sin duda alguna, una de las tecnologías actuales más importantes que deberías aprender (y no solo para devs) es el control de versiones Git. El control de versiones es la única forma razonable de realizar un seguimiento de los cambios en el código, escritos, presentaciones y proyectos de análisis de datos.

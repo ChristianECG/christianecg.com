@@ -2,7 +2,7 @@
 title: "Por qué aprender Node JS: tres buenas razones para empezar"
 date: "2021-09-24"
 excerpt: "JavaScript en el servidor, una curva de aprendizaje accesible y una alta demanda laboral: las tres razones más sólidas para apostar por Node.js en 2021."
-source: "Octa"
+source: "Blog"
 ---
 
 El mundo del desarrollo web cambia constantemente y las nuevas soluciones pueden volverse obsoletas tan rápido como se han convertido en tendencias.

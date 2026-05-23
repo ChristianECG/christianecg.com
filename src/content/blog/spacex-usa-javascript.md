@@ -2,7 +2,7 @@
 title: "La nave lanzada por Space X usa JavaScript"
 date: "2021-09-15"
 excerpt: "La misión Inspiration4 de SpaceX, la primera tripulada solo por civiles, usa HTML, CSS y JavaScript en la interfaz de la Crew Dragon. Qué significa eso para nosotros como desarrolladores."
-source: "Octa"
+source: "Blog"
 ---
 
 El 15 de septiembre del 2021 a las 20:02 hora EDT (19:02 hora de Ciudad de México), se lanzó una de las misiones espaciales más ambiciosas del momento: Cuatro civiles viajan en una Crew Dragon Resilience alrededor de la Tierra en un viaje de tres días.

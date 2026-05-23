@@ -2,7 +2,7 @@
 title: "Por qué PHP no está muerto"
 date: "2021-08-23"
 excerpt: "Cada lenguaje tiene su funcionalidad, sus ventajas y sus desventajas. Un análisis de por qué PHP sigue siendo relevante y por qué las críticas no cuentan toda la historia."
-source: "Octa"
+source: "Blog"
 ---
 
 En tiempos recientes se han escrito muchas críticas de algunos lenguajes de programación, mientras se han alabado otros más, pero si algo debe quedar claro es que cada lenguaje tiene su funcionalidad, sus ventajas y sus desventajas. No hay ningún lenguaje que reúna todo lo mejor de los demás, porque simplemente no existe.

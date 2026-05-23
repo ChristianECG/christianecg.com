@@ -2,7 +2,7 @@
 title: "Necesitas aprender a hacer pruebas unitarias, y te explico por qué"
 date: "2021-11-02"
 excerpt: "Las pruebas unitarias no son un lujo: son una obligación si quieres desarrollar más rápido, con más confianza y sin vivir apagando incendios antes de cada deadline."
-source: "Octa"
+source: "Blog"
 ---
 
 Las pruebas unitarias no son solo una buena práctica en las metodologías ágiles, sino que son incluso una obligación si quieres desarrollar a una mayor velocidad y con una mayor confianza.

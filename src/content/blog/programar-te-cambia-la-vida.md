@@ -2,7 +2,7 @@
 title: "Programar te cambia la vida"
 date: "2020-08-16"
 excerpt: "La programación es el arte de convertir una taza de café en magia. Una reflexión sobre por qué aprender a programar es una de las mejores decisiones que puedes tomar."
-source: "Octa"
+source: "Blog"
 ---
 
 Sin lugar a dudas, una de las cosas más interesantes que he aprendido en mis años como programador, es que la programación es un área apasionante, increíble, incansable, con muchísimo talento, y con un futuro innegable.

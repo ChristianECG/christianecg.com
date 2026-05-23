@@ -2,7 +2,7 @@
 title: "En estas tecnologías se desarrollará el Metaverso de Facebook"
 date: "2021-11-10"
 excerpt: "Facebook se convierte en Meta y apuesta todo al Metaverso. Cuáles son los lenguajes y herramientas que ya están apareciendo en las ofertas de trabajo para construir el futuro de internet."
-source: "Octa"
+source: "Blog"
 ---
 
 Hace unos días llegaba la noticia: Facebook cambia oficialmente su nombre por Meta, con el objetivo de incursionar en el futuro: El Metaverso.

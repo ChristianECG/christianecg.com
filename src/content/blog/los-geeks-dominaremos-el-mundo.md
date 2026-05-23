@@ -2,7 +2,7 @@
 title: "¡Los geeks dominaremos el mundo!"
 date: "2021-08-31"
 excerpt: "La cultura geek ya no es solo una subcultura: es la cultura dominante de nuestra era. Los que trabajan con tecnología están redefiniendo cómo funciona el mundo."
-source: "Octa"
+source: "Blog"
 ---
 
 La cultura geek es hoy en día una tendencia social, una moda, un estilo de vida, una filosofía de vida, una forma de entender la vida, de vivir la vida. Es una forma de ser, una forma de comprender y de sentir, una forma de ver y de comprender el mundo. Es la cultura de los cibernautas, es la cultura del uso de la tecnología para la comunicación, de la creación, de la documentación y de la educación. Los geeks son los que trabajan en la tecnología y los que dominan la tecnología. Es la cultura de la formación, es la cultura de la creatividad, es la cultura del desarrollo, la cultura del trabajo en equipo.

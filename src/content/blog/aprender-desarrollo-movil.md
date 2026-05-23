@@ -2,7 +2,7 @@
 title: "Deberías aprender a desarrollar aplicaciones móviles"
 date: "2021-11-06"
 excerpt: "El 15% de la industria tech son desarrolladores móviles, los salarios son altos y el impacto en el usuario es inmediato. Tres razones para dar el salto al desarrollo móvil."
-source: "Octa"
+source: "Blog"
 ---
 
 Sin duda alguna, en las últimas décadas, los teléfonos móviles se han vuelto una parte fundamental en nuestras vidas. Es casi imposible hoy en día el no tener un teléfono que llevamos a todos lados, y que nos permite comunicarnos con quienes nos rodean.
