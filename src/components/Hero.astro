@@ -1,7 +1,14 @@
 ---
+import HeroCanvas from './HeroCanvas.astro';
 ---
 
 <section class="hero">
+  <div class="hero-blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <HeroCanvas />
 
   <div class="hero-center">
     <div class="container hero-center-inner">
@@ -97,6 +104,7 @@
     animation: scrollHintIn 0.5s ease 1.9s both, scrollBounce 2s ease-in-out 2.5s infinite;
     pointer-events: none;
     transition: opacity 0.4s;
+    z-index: 1;
   }
 
   .hero-avatar {
@@ -142,6 +150,8 @@
     flex: 1;
     display: flex;
     align-items: center;
+    position: relative;
+    z-index: 1;
   }
 
   .hero-center-inner {
@@ -186,7 +196,8 @@
 
   /* Bottom strip */
   .hero-strip {
-    border-top: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
   }
 
   .hero-strip-inner {
@@ -300,6 +311,82 @@
     font-weight: 300;
     animation: cursorBlink 0.75s step-end infinite;
     transition: opacity 0.5s;
+  }
+
+  /* Aurora blobs */
+  .hero-blobs {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    will-change: transform;
+  }
+
+  .blob-1 {
+    width: 640px;
+    height: 640px;
+    background: #5B8CF5;
+    filter: blur(120px);
+    opacity: 0.13;
+    top: -160px;
+    left: -180px;
+    animation: blobFloat1 16s ease-in-out infinite;
+  }
+
+  .blob-2 {
+    width: 520px;
+    height: 520px;
+    background: #7C5CF5;
+    filter: blur(110px);
+    opacity: 0.10;
+    top: 20%;
+    right: -120px;
+    animation: blobFloat2 19s ease-in-out infinite;
+  }
+
+  .blob-3 {
+    width: 480px;
+    height: 480px;
+    background: #3A8EF5;
+    filter: blur(130px);
+    opacity: 0.09;
+    bottom: -100px;
+    left: 35%;
+    animation: blobFloat3 22s ease-in-out infinite;
+  }
+
+  @keyframes blobFloat1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%       { transform: translate(55px, 45px) scale(1.06); }
+    66%       { transform: translate(-25px, 65px) scale(0.96); }
+  }
+
+  @keyframes blobFloat2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    40%       { transform: translate(-55px, -65px) scale(1.09); }
+    70%       { transform: translate(45px, 35px) scale(0.94); }
+  }
+
+  @keyframes blobFloat3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    30%       { transform: translate(-45px, -55px) scale(1.04); }
+    65%       { transform: translate(75px, -35px) scale(0.97); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .blob { animation: none; }
+  }
+
+  @media (max-width: 768px) {
+    .blob-1 { width: 380px; height: 380px; }
+    .blob-2 { width: 300px; height: 300px; }
+    .blob-3 { width: 280px; height: 280px; }
   }
 </style>
 

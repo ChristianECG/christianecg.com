@@ -41,12 +41,6 @@ const canonicalURL = new URL(Astro.url.pathname, "https://christianecg.com").hre
     {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/<\/script>/gi, '<\\/script>')} />}
     <script is:inline defer src="https://analytics.avelor.es/av.js" data-project="christianecg"></script>
     <title>{title}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
     <slot name="head" />
   </head>
   <body>

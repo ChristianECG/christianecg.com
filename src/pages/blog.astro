@@ -53,9 +53,12 @@ const articles: Article[] = [...localArticles, ...octaArticles]
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   .map((a, idx) => ({ ...a, idx }));
 
-const hasMore = articles.length > BATCH;
+const featured = articles[0] ?? null;
+const restArticles = articles.slice(1);
 
-const byYear = articles.reduce((acc: Record<string, typeof articles>, article) => {
+const hasMore = restArticles.length > BATCH;
+
+const byYear = restArticles.reduce((acc: Record<string, typeof restArticles>, article) => {
   const year = article.date.split('-')[0];
   if (!acc[year]) acc[year] = [];
   acc[year].push(article);
@@ -68,6 +71,12 @@ function formatDate(dateStr: string) {
   const [, month, day] = dateStr.split('-');
   const months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
   return `${day} ${months[Number(month) - 1]}`;
+}
+
+function formatFullDate(dateStr: string) {
+  const [year, month, day] = dateStr.split('-');
+  const months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  return `${Number(day)} ${months[Number(month) - 1]} ${year}`;
 }
 ---
 
@@ -125,6 +134,33 @@ function formatDate(dateStr: string) {
         </div>
       </div>
 
+      {featured && (
+        <a
+          href={featured.url}
+          class="blog-featured"
+          target={featured.external ? '_blank' : undefined}
+          rel={featured.external ? 'noopener' : undefined}
+        >
+          <div class="blog-featured-top">
+            <span class="section-eyebrow" style="margin-bottom:0">
+              <span class="lang-es">Último artículo</span>
+              <span class="lang-en">Latest</span>
+            </span>
+            <span class="blog-featured-date">{formatFullDate(featured.date)}</span>
+          </div>
+          <h2 class="blog-featured-title">{featured.title}</h2>
+          {featured.excerpt && <p class="blog-featured-excerpt">{featured.excerpt}</p>}
+          <div class="blog-featured-footer">
+            <div class="article-tags">
+              {featured.tags.slice(0, 3).map(tag => (
+                <span class="article-tag">{tag}</span>
+              ))}
+            </div>
+            <span class="blog-featured-arrow">{featured.external ? '↗' : '→'}</span>
+          </div>
+        </a>
+      )}
+
       <div class="blog-body" id="blog-body">
         {years.map((year, yi) => (
           <div class="year-group reveal" data-year={year} style={`--delay: ${yi * 0.08}s`}>
@@ -135,7 +171,7 @@ function formatDate(dateStr: string) {
                   href={article.url}
                   class="article-row"
                   data-idx={article.idx}
-                  style={`--i: ${i}`}
+style={`--i: ${i}`}
                   target={article.external ? '_blank' : undefined}
                   rel={article.external ? 'noopener' : undefined}
                 >
@@ -143,8 +179,8 @@ function formatDate(dateStr: string) {
                   <div class="article-body">
                     <div class="article-title-row">
                       <h2 class="article-title">{article.title}</h2>
-                      {article.external && (
-                        <span class="article-source source-octa">Octa</span>
+                      {!article.external && (
+                        <span class="article-archive">archivo</span>
                       )}
                     </div>
                     {article.excerpt && <p class="article-excerpt">{article.excerpt}</p>}
@@ -335,26 +371,13 @@ function formatDate(dateStr: string) {
     transition: color 0.15s;
   }
 
-  .article-source {
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    padding: 2px 7px;
-    border-radius: 3px;
+  .article-archive {
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--text-3);
     flex-shrink: 0;
-  }
-
-  .source-blog {
-    color: var(--accent);
-    background: var(--accent-dim);
-    border: 1px solid rgba(212, 133, 74, 0.2);
-  }
-
-  .source-octa {
-    color: var(--text-2);
-    background: var(--surface-2);
-    border: 1px solid var(--border);
+    align-self: center;
   }
 
   .article-tags {
@@ -454,6 +477,96 @@ function formatDate(dateStr: string) {
     border-color: var(--accent);
   }
 
+  /* Featured card */
+  .blog-featured {
+    display: block;
+    margin-top: 2rem;
+    padding: 2rem 2.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, background 0.25s, box-shadow 0.25s, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+    transform-style: preserve-3d;
+  }
+
+  .blog-featured::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .blog-featured:hover {
+    border-color: var(--border-hover);
+    background: var(--surface-2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  }
+
+  .blog-featured:hover::before { transform: scaleY(1); }
+  .blog-featured:hover .blog-featured-title { color: var(--accent-light); }
+  .blog-featured:hover .blog-featured-arrow { transform: translate(3px, -3px); color: var(--accent); }
+
+  .blog-featured-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .blog-featured-date {
+    font-size: 0.75rem;
+    color: var(--text-3);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .blog-featured-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+    transition: color 0.2s;
+  }
+
+  .blog-featured-excerpt {
+    font-size: 0.9rem;
+    color: var(--text-2);
+    line-height: 1.75;
+    max-width: 640px;
+  }
+
+  .blog-featured-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+  }
+
+  .blog-featured-arrow {
+    font-size: 1rem;
+    color: var(--text-3);
+    transition: transform 0.2s, color 0.2s;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 700px) {
+    .blog-featured { padding: 1.5rem; }
+    .blog-featured-top { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+  }
+
   .article-row.js-hidden { display: none; }
   .year-group { transition-delay: var(--delay, 0s); }
   .year-group.js-hidden { display: none; }
@@ -506,6 +619,25 @@ function formatDate(dateStr: string) {
     shown += BATCH;
     update();
   });
+
+  // Featured card tilt
+  const featured = document.querySelector<HTMLElement>('.blog-featured');
+  if (featured && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const MAX = 4;
+
+    featured.addEventListener('mousemove', (e) => {
+      featured.style.transition = 'border-color 0.25s, background 0.25s, box-shadow 0.25s';
+      const r = featured.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width  / 2)) / (r.width  / 2);
+      const dy = (e.clientY - (r.top  + r.height / 2)) / (r.height / 2);
+      featured.style.transform = `perspective(800px) rotateX(${-dy * MAX}deg) rotateY(${dx * MAX}deg)`;
+    }, { passive: true });
+
+    featured.addEventListener('mouseleave', () => {
+      featured.style.transition = 'border-color 0.25s, background 0.25s, box-shadow 0.25s, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)';
+      featured.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg)';
+    });
+  }
 
   update();
 </script>
