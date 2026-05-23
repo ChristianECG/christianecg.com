@@ -130,3 +130,11 @@ import '../styles/global.css';
     }
   }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>('a[href="/cv.pdf"][download]').forEach((link) => {
+    link.addEventListener('click', () => {
+      window.avelor?.track('cv_download', { url: '/cv.pdf' });
+    });
+  });
+</script>
