@@ -60,7 +60,7 @@ import HeroCanvas from './HeroCanvas.astro';
           <a href="https://github.com/ChristianECG" target="_blank" rel="noopener">GitHub ↗</a>
           <a href="https://www.linkedin.com/in/christianeliascg/" target="_blank" rel="noopener">LinkedIn ↗</a>
           <a href="mailto:contacto@christianecg.com">Email</a>
-          <a href="/cv.pdf" download class="hero-link-cv">CV ↓</a>
+          <a href="/Christian_Elias_Cruz_Gonzalez_esp.pdf" download class="hero-link-cv" data-cv-download>CV ↓</a>
         </div>
         <div class="hero-ctas">
           <a href="#experience" class="cta-primary">
@@ -391,10 +391,23 @@ import HeroCanvas from './HeroCanvas.astro';
 </style>
 
 <script>
-  // Magnetic CTAs
-  document.querySelector<HTMLAnchorElement>('.hero-link-cv')?.addEventListener('click', () => {
-    window.avelor?.track('cv_download', { url: '/cv.pdf' });
-  });
+  // CV link: swap URL on lang change
+  const CV_URLS: Record<string, string> = {
+    es: '/Christian_Elias_Cruz_Gonzalez_esp.pdf',
+    en: '/Christian_Elias_Cruz_Gonzalez_eng.pdf',
+  };
+  const cvLink = document.querySelector<HTMLAnchorElement>('.hero-link-cv');
+  if (cvLink) {
+    const syncCvLang = () => {
+      const lang = document.documentElement.lang || 'es';
+      cvLink.href = CV_URLS[lang] ?? CV_URLS.es;
+    };
+    syncCvLang();
+    new MutationObserver(syncCvLang).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+    cvLink.addEventListener('click', () => {
+      window.avelor?.track('cv_download', { url: cvLink.href });
+    });
+  }
 
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.querySelectorAll<HTMLElement>('.cta-primary, .cta-ghost').forEach((btn) => {

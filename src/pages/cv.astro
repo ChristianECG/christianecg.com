@@ -21,7 +21,7 @@ import '../styles/global.css';
           </p>
           <h1 class="cv-title">CV</h1>
         </div>
-        <a href="/cv.pdf" download class="cv-download">
+        <a href="/Christian_Elias_Cruz_Gonzalez_esp.pdf" download data-cv-download class="cv-download">
           <span class="lang-es">↓ Descargar PDF</span>
           <span class="lang-en">↓ Download PDF</span>
         </a>
@@ -29,18 +29,19 @@ import '../styles/global.css';
 
       <div class="cv-embed reveal">
         <iframe
-          src="/cv.pdf"
+          src="/Christian_Elias_Cruz_Gonzalez_esp.pdf"
           class="cv-frame"
+          data-cv-frame
           title="CV de Christian Elías Cruz González"
         ></iframe>
         <p class="cv-fallback">
           <span class="lang-es">
             Tu navegador no puede mostrar el PDF directamente.
-            <a href="/cv.pdf" download>Descárgalo aquí</a>.
+            <a href="/Christian_Elias_Cruz_Gonzalez_esp.pdf" download data-cv-download>Descárgalo aquí</a>.
           </span>
           <span class="lang-en">
             Your browser can't display the PDF inline.
-            <a href="/cv.pdf" download>Download it here</a>.
+            <a href="/Christian_Elias_Cruz_Gonzalez_eng.pdf" download>Download it here</a>.
           </span>
         </p>
       </div>
@@ -132,9 +133,29 @@ import '../styles/global.css';
 </style>
 
 <script>
-  document.querySelectorAll<HTMLAnchorElement>('a[href="/cv.pdf"][download]').forEach((link) => {
+  const CV_URLS: Record<string, string> = {
+    es: '/Christian_Elias_Cruz_Gonzalez_esp.pdf',
+    en: '/Christian_Elias_Cruz_Gonzalez_eng.pdf',
+  };
+
+  function applyLang(lang: string) {
+    const url = CV_URLS[lang] ?? CV_URLS.es;
+    document.querySelectorAll<HTMLAnchorElement>('[data-cv-download]').forEach((a) => {
+      a.href = url;
+    });
+    const frame = document.querySelector<HTMLIFrameElement>('[data-cv-frame]');
+    if (frame) frame.src = url;
+  }
+
+  applyLang(document.documentElement.lang || 'es');
+
+  new MutationObserver(() => {
+    applyLang(document.documentElement.lang || 'es');
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+
+  document.querySelectorAll<HTMLAnchorElement>('[data-cv-download]').forEach((link) => {
     link.addEventListener('click', () => {
-      window.avelor?.track('cv_download', { url: '/cv.pdf' });
+      window.avelor?.track('cv_download', { url: link.href });
     });
   });
 </script>
