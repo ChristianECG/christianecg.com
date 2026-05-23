@@ -1,15 +1,17 @@
 ---
 const jobs = [
   {
-    company: "Ubidots S.A.S.",
+    company: "Ubidots",
     url: "https://ubidots.com",
     role_es: "Ingeniero Frontend Senior",
     role_en: "Senior Frontend Engineer",
     period: "Feb 2024 — Present",
     period_es: "Feb 2024 — Actualidad",
     current: true,
+    caseStudy: "/projects/ubidots",
     bullets_es: [
       "Contribuí a la arquitectura frontend de una plataforma IoT con +150K usuarios y millones de eventos en tiempo real.",
+      "Diseñé el sistema de anotaciones para widgets de line chart — permite contextualizar gaps y anomalías en datos IoT directamente sobre la serie.",
       "Reduje tiempos de carga de dashboards de 8s → 5s (~37%) y optimicé widgets ECharts de 30s → <15s (~50%).",
       "Disminuí tiempos de despliegue de 50 min → 20 min (~60%) con mejoras en el pipeline de CI/CD.",
       "Implementé estándares de calidad con ESLint (plugin interno) para un equipo de +20 desarrolladores.",
@@ -17,6 +19,7 @@ const jobs = [
     ],
     bullets_en: [
       "Contributed to the frontend architecture of an IoT platform serving 150K+ users and millions of real-time events.",
+      "Designed the annotation system for line chart widgets — allows contextualizing gaps and anomalies in IoT data directly on the series.",
       "Reduced dashboard load times from 8s → 5s (~37%) and optimized ECharts widgets from 30s → <15s (~50%).",
       "Cut deployment times from 50 min → 20 min (~60%) through CI/CD pipeline improvements.",
       "Implemented quality standards using ESLint (custom internal plugin) for a 20+ developer team.",
@@ -24,7 +27,7 @@ const jobs = [
     ],
   },
   {
-    company: "Ubidots S.A.S.",
+    company: "Ubidots",
     url: "https://ubidots.com",
     role_es: "Ingeniero Frontend Mid-Level",
     role_en: "Mid-level Frontend Engineer",
@@ -45,39 +48,26 @@ const jobs = [
     ],
   },
   {
-    company: "CleverCloud.mx",
+    company: "Clever Cloud",
     url: "https://clevercloud.mx/",
-    role_es: "Junior Frontend Developer",
-    role_en: "Junior Frontend Developer",
-    period: "Ene 2022 — Jun 2022",
-    period_es: "Ene 2022 — Jun 2022",
+    role_es: "Frontend Developer",
+    role_en: "Frontend Developer",
+    period: "Jul 2021 — Jun 2022",
+    period_es: "Jul 2021 — Jun 2022",
     current: false,
     bullets_es: [
       "Desarrollé interfaces para +20 proyectos de clientes usando React, Vue y PHP.",
+      "Gestioné de forma directa clientes propios, incluyendo Hola Buzz — desde el desarrollo inicial hasta soporte continuo.",
       "Implementé pipelines de CI/CD para mejorar los ciclos de despliegue.",
     ],
     bullets_en: [
       "Built interfaces for 20+ client projects using React, Vue, and PHP.",
+      "Directly managed my own client accounts, including Hola Buzz — from initial development through ongoing support.",
       "Implemented CI/CD pipelines to improve deployment cycles.",
     ],
   },
   {
-    company: "CleverCloud.mx",
-    url: "https://clevercloud.mx/",
-    role_es: "Frontend Developer Intern",
-    role_en: "Frontend Developer Intern",
-    period: "Jul 2021 — Dic 2021",
-    period_es: "Jul 2021 — Dic 2021",
-    current: false,
-    bullets_es: [
-      "Apoyo en desarrollo frontend y backend de proyectos web para clientes.",
-    ],
-    bullets_en: [
-      "Assisted in frontend and backend development of web projects for clients.",
-    ],
-  },
-  {
-    company: "Google",
+    company: "Google Developers",
     url: "https://developers.google.com/community/gdsc",
     role_es: "Developer Student Club Lead",
     role_en: "Developer Student Club Lead",
@@ -144,6 +134,12 @@ const jobs = [
                 <li class="lang-en">{b}</li>
               ))}
             </ul>
+            {job.caseStudy && (
+              <a href={job.caseStudy} class="job-case-study">
+                Case study
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            )}
           </div>
         </div>
       ))}
@@ -197,6 +193,20 @@ const jobs = [
     font-weight: 500;
   }
   .job-company:hover { color: var(--accent); }
+
+  .job-case-study {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent);
+    transition: opacity 0.2s;
+    margin-top: 0.25rem;
+  }
+  .job-case-study svg { transition: transform 0.2s; }
+  .job-case-study:hover { opacity: 0.7; }
+  .job-case-study:hover svg { transform: translateX(2px); }
 
   .job-right { display: flex; flex-direction: column; gap: 1rem; }
 

@@ -29,12 +29,13 @@
       "description_en": "Production back-office platform I designed and built from scratch to manage freelance and side-project operations. Covers custom web analytics with event tracking and dashboards, a URL vault with one-time secret sharing, client brief management, and automated deployment hooks with live output streaming. Built on Astro, PHP, Node.js, and MySQL — self-hosted on a VPS with Tailscale-protected admin access.",
       "description_es": "Plataforma back-office de producción diseñada y construida desde cero para gestionar operaciones freelance y proyectos propios. Cubre analytics web con seguimiento de eventos y dashboards, un vault de URLs con compartición de secretos de un solo uso, gestión de briefs de clientes y hooks de despliegue automatizado con streaming de salida en vivo. Construida sobre Astro, PHP, Node.js y MySQL — autoalojada en un VPS con acceso admin protegido por Tailscale.",
       "tags": ["Astro", "Node.js", "PHP", "MySQL", "Tailscale"],
-      "url": "https://avelor.es"
+      "url": "https://avelor.es",
+      "caseStudy": "/projects/avelor"
     },
     {
       "title": "CatolicMixquia",
-      "description_es": "App móvil para la Parroquia de Mixquiahuala que acerca el Evangelio y las enseñanzas de Jesús a la comunidad, disponible en iOS y Android.",
-      "description_en": "Mobile app for the Parish of Mixquiahuala that brings the Gospel and teachings of Jesus closer to the community, available on iOS and Android.",
+      "description_es": "App React Native en producción desde octubre 2023, disponible en iOS y Android. +500 usuarios en Android, 170 en iOS. Desarrollada para la Parroquia de Mixquiahuala para acercar el Evangelio y las enseñanzas a la comunidad.",
+      "description_en": "React Native app in production since October 2023, available on iOS and Android. 500+ Android users, 170 iOS users. Built for the Parish of Mixquiahuala to bring the Gospel and teachings closer to the community.",
       "tags": ["React Native", "Mobile", "iOS", "Android"],
       "appStore": "https://apps.apple.com/us/app/catolicmixquia/id6469672864",
       "playStore": "https://play.google.com/store/apps/details?id=mx.parroquiamixquiahuala.catolicmixquia&hl=es"

@@ -1,0 +1,611 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+---
+
+<Layout
+  title="Avelor — Case Study · Christian Elías"
+  description="Back-office platform built from scratch: custom web analytics, URL vault with one-time secrets, client brief management, and automated deployment hooks."
+>
+  <Nav />
+  <main id="main-content" class="cs-main">
+    <div class="container">
+
+      <header class="cs-header reveal">
+        <a href="/#projects" class="back-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          <span class="lang-es">Proyectos</span>
+          <span class="lang-en">Projects</span>
+        </a>
+
+        <div class="cs-title-row">
+          <h1 class="cs-title">Avelor</h1>
+          <a href="https://avelor.es" target="_blank" rel="noopener" class="cs-external">
+            avelor.es
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+
+        <p class="cs-tagline lang-es">
+          Back-office de producción diseñado y construido desde cero para gestionar operaciones freelance y proyectos propios.
+        </p>
+        <p class="cs-tagline lang-en">
+          Production back-office designed and built from scratch to manage freelance and side-project operations.
+        </p>
+
+        <div class="cs-tags">
+          {["Astro", "PHP", "Node.js", "MySQL", "Tailscale"].map(tag => (
+            <span class="cs-tag">{tag}</span>
+          ))}
+        </div>
+      </header>
+
+      <div class="cs-divider"></div>
+
+      <!-- Context -->
+      <section class="cs-section reveal">
+        <div class="cs-section-label">
+          <span class="lang-es">Contexto</span>
+          <span class="lang-en">Context</span>
+        </div>
+        <div class="cs-prose">
+          <p class="lang-es">
+            Avelor no es una empresa. Es una capa — un nombre, un dominio y un correo que se ponen delante de cualquier proyecto o cliente sin revelar quién está detrás ni en qué etapa está el trabajo. Detrás de esa capa hay un panel de control privado que centraliza las herramientas que necesito para operar: analytics propio, gestión de recursos y clientes, y control de despliegues.
+          </p>
+          <p class="lang-en">
+            Avelor isn't a company. It's a layer — a name, a domain, and an email address that go in front of any project or client without revealing who's behind it or how far along the work is. Behind that layer sits a private control panel that centralizes the tools I need to operate: custom analytics, resource and client management, and deployment control.
+          </p>
+          <p class="lang-es">
+            El objetivo era construir la herramienta mínima que realmente usaría — sin depender de terceros para datos que son míos, sin pagar por features que no necesito, y sin exponer información de clientes a plataformas externas.
+          </p>
+          <p class="lang-en">
+            The goal was to build the minimum tool I'd actually use — without relying on third parties for data that's mine, without paying for features I don't need, and without exposing client information to external platforms.
+          </p>
+        </div>
+      </section>
+
+      <div class="cs-divider"></div>
+
+      <!-- Module 1: Analytics -->
+      <section class="cs-section reveal">
+        <div class="cs-section-label">
+          <span class="lang-es">Módulo 01</span>
+          <span class="lang-en">Module 01</span>
+        </div>
+        <div class="cs-module">
+          <div class="cs-module-text">
+            <h2 class="cs-module-title">
+              <span class="lang-es">Analytics web</span>
+              <span class="lang-en">Web analytics</span>
+            </h2>
+            <div class="cs-prose">
+              <p class="lang-es">
+                Sistema de analytics completo con seguimiento de eventos personalizado. Un snippet de JS (<code>av.js</code>) se embebe en cualquier sitio y reporta visitas, páginas vistas, tiempo de sesión y eventos custom al API. El dashboard muestra en tiempo real visits, loads, páginas más vistas, referrers, países, ciudades, navegadores y dispositivos.
+              </p>
+              <p class="lang-en">
+                A full analytics system with custom event tracking. A JS snippet (<code>av.js</code>) embeds into any site and reports visits, page views, session duration, and custom events to the API. The dashboard shows visits, loads, top pages, referrers, countries, cities, browsers, and devices in real time.
+              </p>
+              <p class="lang-es">
+                Cada proyecto tiene su propio <code>data-project</code>, con un selector de rango de fechas (hoy / semana / mes / total) y una sección de código de seguimiento lista para copiar e integrar en nuevos sitios.
+              </p>
+              <p class="lang-en">
+                Each project has its own <code>data-project</code>, with a date range selector (today / week / month / total) and a tracking code snippet ready to copy and embed into new sites.
+              </p>
+            </div>
+          </div>
+          <figure class="cs-screenshot">
+            <img src="/avelor/analytics.png" alt="Dashboard de analytics mostrando métricas de visitas, páginas, referrers y ubicaciones geográficas" loading="lazy" />
+            <figcaption class="lang-es">Dashboard de analytics — visitas, eventos y desglose geográfico</figcaption>
+            <figcaption class="lang-en">Analytics dashboard — visits, events, and geographic breakdown</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <div class="cs-divider"></div>
+
+      <!-- Module 2: Vault -->
+      <section class="cs-section reveal">
+        <div class="cs-section-label">
+          <span class="lang-es">Módulo 02</span>
+          <span class="lang-en">Module 02</span>
+        </div>
+        <div class="cs-module cs-module--reverse">
+          <div class="cs-module-text">
+            <h2 class="cs-module-title">
+              <span class="lang-es">Vault de URLs y secretos</span>
+              <span class="lang-en">URL vault & secrets</span>
+            </h2>
+            <div class="cs-prose">
+              <p class="lang-es">
+                Dos herramientas en una pantalla: un acortador de URLs propio bajo el dominio <code>vault.avelor.es</code>, y un generador de secretos de un solo uso. Cualquier recurso externo (Drive, Notion, un contrato) puede presentarse bajo el dominio Avelor en lugar de exponer URLs de terceros directamente al cliente.
+              </p>
+              <p class="lang-en">
+                Two tools in one screen: a custom URL shortener under the <code>vault.avelor.es</code> domain, and a one-time secret generator. Any external resource (Drive, Notion, a contract) can be presented under the Avelor domain instead of exposing third-party URLs directly to the client.
+              </p>
+              <p class="lang-es">
+                Los secretos tienen expiración configurable (1h, 1d, etc.) y se autodestruyen al primer acceso. El enlace generado incluye la clave de descifrado — una vez cerrado, no hay forma de recuperarlo.
+              </p>
+              <p class="lang-en">
+                Secrets have configurable expiry (1h, 1d, etc.) and self-destruct on first access. The generated link contains the decryption key — once closed, there's no way to recover it.
+              </p>
+            </div>
+          </div>
+          <figure class="cs-screenshot">
+            <img src="/avelor/vault.png" alt="Vault mostrando tabla de URLs acortadas y formulario de creación de secretos de un solo uso" loading="lazy" />
+            <figcaption class="lang-es">Vault — acortador de URLs y secretos autodestruibles</figcaption>
+            <figcaption class="lang-en">Vault — URL shortener and self-destructing secrets</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <div class="cs-divider"></div>
+
+      <!-- Module 3: Brief -->
+      <section class="cs-section reveal">
+        <div class="cs-section-label">
+          <span class="lang-es">Módulo 03</span>
+          <span class="lang-en">Module 03</span>
+        </div>
+        <div class="cs-module">
+          <div class="cs-module-text">
+            <h2 class="cs-module-title">
+              <span class="lang-es">Gestión de briefs</span>
+              <span class="lang-en">Brief management</span>
+            </h2>
+            <div class="cs-prose">
+              <p class="lang-es">
+                Sistema de briefing para proyectos de cliente. Cada brief tiene estado (entregado / pendiente / en revisión), un indicador de turno (quién tiene el balón), el siguiente paso explícito, recursos vinculados y fecha de validez.
+              </p>
+              <p class="lang-en">
+                A briefing system for client projects. Each brief has a status (delivered / pending / in review), a turn indicator (who has the ball), an explicit next step, linked resources, and a validity date.
+              </p>
+              <p class="lang-es">
+                El brief se comparte como un enlace público de solo lectura, sin requerir cuenta ni login por parte del cliente. El diseño en monospace lo hace deliberadamente diferente a cualquier plantilla de gestión de proyectos estándar.
+              </p>
+              <p class="lang-en">
+                The brief is shared as a read-only public link, requiring no account or login from the client. The monospace design makes it deliberately different from any standard project management template.
+              </p>
+            </div>
+          </div>
+          <figure class="cs-screenshot">
+            <img src="/avelor/briefing.png" alt="Vista de brief de cliente mostrando estado, turno, próximo paso y recursos vinculados" loading="lazy" />
+            <figcaption class="lang-es">Brief de cliente — estado, turno y próximos pasos</figcaption>
+            <figcaption class="lang-en">Client brief — status, turn, and next steps</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <div class="cs-divider"></div>
+
+      <!-- Architecture -->
+      <section class="cs-section reveal">
+        <div class="cs-section-label">
+          <span class="lang-es">Arquitectura</span>
+          <span class="lang-en">Architecture</span>
+        </div>
+        <div class="cs-arch">
+          <div class="cs-prose cs-arch-desc">
+            <p class="lang-es">
+              Autoalojado en un VPS. El panel de administración solo es accesible a través de Tailscale — no hay login expuesto a internet. El deploy de cada módulo se hace mediante hooks con streaming de salida en vivo.
+            </p>
+            <p class="lang-en">
+              Self-hosted on a VPS. The admin panel is only accessible through Tailscale — no login exposed to the internet. Each module deploys via hooks with live output streaming.
+            </p>
+          </div>
+
+          <div class="arch-diagram" aria-label="Diagrama de arquitectura de Avelor">
+            <svg viewBox="0 0 760 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+
+              <!-- VPS container -->
+              <rect x="1" y="1" width="758" height="358" rx="10" stroke="#1e2a42" stroke-width="1.5" stroke-dasharray="6 4"/>
+              <text x="20" y="22" font-family="'SF Mono',monospace" font-size="10" fill="#3E4A60" letter-spacing="0.08em">VPS · SELF-HOSTED</text>
+
+              <!-- Tailscale badge -->
+              <rect x="638" y="9" width="110" height="22" rx="4" fill="rgba(91,140,245,0.08)" stroke="rgba(91,140,245,0.2)" stroke-width="1"/>
+              <text x="651" y="24" font-family="'SF Mono',monospace" font-size="9.5" fill="#5B8CF5" letter-spacing="0.06em">TAILSCALE</text>
+              <circle cx="644" cy="20" r="3" fill="#5B8CF5" opacity="0.7"/>
+
+              <!-- ── COLUMN 1: Entry points ── -->
+              <text x="60" y="62" font-family="'SF Mono',monospace" font-size="9" fill="#3E4A60" letter-spacing="0.1em">ENTRADA</text>
+
+              <!-- External sites box -->
+              <rect x="20" y="72" width="140" height="52" rx="6" fill="#111520" stroke="#1e2a42" stroke-width="1.5"/>
+              <text x="90" y="92" font-family="'SF Mono',monospace" font-size="9.5" fill="#7E8EAB" text-anchor="middle">Sitios externos</text>
+              <text x="90" y="108" font-family="'SF Mono',monospace" font-size="9" fill="#3E4A60" text-anchor="middle">av.js snippet</text>
+
+              <!-- Admin (Tailscale) box -->
+              <rect x="20" y="144" width="140" height="52" rx="6" fill="#111520" stroke="rgba(91,140,245,0.25)" stroke-width="1.5"/>
+              <text x="90" y="164" font-family="'SF Mono',monospace" font-size="9.5" fill="#7E8EAB" text-anchor="middle">Admin</text>
+              <text x="90" y="180" font-family="'SF Mono',monospace" font-size="9" fill="#5B8CF5" text-anchor="middle">via Tailscale</text>
+
+              <!-- Deploy trigger box -->
+              <rect x="20" y="216" width="140" height="52" rx="6" fill="#111520" stroke="#1e2a42" stroke-width="1.5"/>
+              <text x="90" y="236" font-family="'SF Mono',monospace" font-size="9.5" fill="#7E8EAB" text-anchor="middle">Deploy hook</text>
+              <text x="90" y="252" font-family="'SF Mono',monospace" font-size="9" fill="#3E4A60" text-anchor="middle">webhook trigger</text>
+
+              <!-- ── COLUMN 2: Services ── -->
+              <text x="308" y="62" font-family="'SF Mono',monospace" font-size="9" fill="#3E4A60" letter-spacing="0.1em">SERVICIOS</text>
+
+              <!-- Astro Panel -->
+              <rect x="240" y="72" width="140" height="52" rx="6" fill="#111520" stroke="#1e2a42" stroke-width="1.5"/>
+              <text x="310" y="92" font-family="'SF Mono',monospace" font-size="9.5" fill="#7E8EAB" text-anchor="middle">Astro Panel</text>
+              <text x="310" y="108" font-family="'SF Mono',monospace" font-size="9" fill="#3E4A60" text-anchor="middle">panel.avelor.es</text>
+
+              <!-- PHP API -->
+              <rect x="240" y="144" width="140" height="80" rx="6" fill="#111520" stroke="rgba(91,140,245,0.3)" stroke-width="1.5"/>
+              <text x="310" y="165" font-family="'SF Mono',monospace" font-size="9.5" fill="#82AAFF" text-anchor="middle">PHP REST API</text>
+              <text x="310" y="182" font-family="'SF Mono',monospace" font-size="8.5" fill="#3E4A60" text-anchor="middle">/analytics  /vault</text>
+              <text x="310" y="197" font-family="'SF Mono',monospace" font-size="8.5" fill="#3E4A60" text-anchor="middle">/brief  /deploy</text>
+              <text x="310" y="212" font-family="'SF Mono',monospace" font-size="8.5" fill="#3E4A60" text-anchor="middle">analytics.avelor.es</text>
+
+              <!-- Node.js deploy -->
+              <rect x="240" y="244" width="140" height="52" rx="6" fill="#111520" stroke="#1e2a42" stroke-width="1.5"/>
+              <text x="310" y="264" font-family="'SF Mono',monospace" font-size="9.5" fill="#7E8EAB" text-anchor="middle">Node.js</text>
+              <text x="310" y="280" font-family="'SF Mono',monospace" font-size="9" fill="#3E4A60" text-anchor="middle">deploy + live stream</text>
+
+              <!-- ── COLUMN 3: Data ── -->
+              <text x="560" y="62" font-family="'SF Mono',monospace" font-size="9" fill="#3E4A60" letter-spacing="0.1em">DATOS</text>
+
+              <!-- MySQL -->
+              <rect x="500" y="72" width="140" height="120" rx="6" fill="#111520" stroke="#1e2a42" stroke-width="1.5"/>
+              <text x="570" y="95" font-family="'SF Mono',monospace" font-size="9.5" fill="#7E8EAB" text-anchor="middle">MySQL</text>
+              <line x1="510" y1="106" x2="630" y2="106" stroke="#1e2a42" stroke-width="1"/>
+              <text x="570" y="122" font-family="'SF Mono',monospace" font-size="8.5" fill="#3E4A60" text-anchor="middle">events</text>
+              <text x="570" y="138" font-family="'SF Mono',monospace" font-size="8.5" fill="#3E4A60" text-anchor="middle">urls / secrets</text>
+              <text x="570" y="154" font-family="'SF Mono',monospace" font-size="8.5" fill="#3E4A60" text-anchor="middle">briefs</text>
+              <text x="570" y="170" font-family="'SF Mono',monospace" font-size="8.5" fill="#3E4A60" text-anchor="middle">projects</text>
+
+              <!-- Live output -->
+              <rect x="500" y="212" width="140" height="52" rx="6" fill="#111520" stroke="#1e2a42" stroke-width="1.5"/>
+              <text x="570" y="232" font-family="'SF Mono',monospace" font-size="9.5" fill="#7E8EAB" text-anchor="middle">Live output</text>
+              <text x="570" y="248" font-family="'SF Mono',monospace" font-size="9" fill="#3E4A60" text-anchor="middle">SSE streaming</text>
+
+              <!-- ── ARROWS ── -->
+              <!-- External sites → PHP API -->
+              <path d="M160 98 Q200 98 240 184" stroke="#2a3650" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+              <!-- Admin → Astro Panel -->
+              <path d="M160 170 H240" stroke="rgba(91,140,245,0.35)" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+
+              <!-- Deploy trigger → Node.js -->
+              <path d="M160 242 Q200 242 240 262" stroke="#2a3650" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+              <!-- Astro Panel → PHP API -->
+              <path d="M310 124 V144" stroke="#2a3650" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+              <!-- PHP API → MySQL -->
+              <path d="M380 184 H500" stroke="#2a3650" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+              <!-- Node.js → Live output -->
+              <path d="M380 270 H500" stroke="#2a3650" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+              <!-- Defs -->
+              <defs>
+                <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0 0 L6 3 L0 6" fill="none" stroke="#2a3650" stroke-width="1.2"/>
+                </marker>
+                <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0 0 L6 3 L0 6" fill="none" stroke="rgba(91,140,245,0.5)" stroke-width="1.2"/>
+                </marker>
+              </defs>
+            </svg>
+          </div>
+
+          <div class="arch-stack">
+            {[
+              { label: "Frontend", value: "Astro" },
+              { label: "API", value: "PHP" },
+              { label: "Deploy", value: "Node.js + SSE" },
+              { label: "DB", value: "MySQL" },
+              { label: "Hosting", value: "VPS propio" },
+              { label: "Red privada", value: "Tailscale" },
+            ].map(item => (
+              <div class="arch-item">
+                <span class="arch-key lang-es">{item.label}</span>
+                <span class="arch-key lang-en">{item.label === "Red privada" ? "Private network" : item.label === "Hosting" ? "Hosting" : item.label}</span>
+                <span class="arch-val">{item.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div class="cs-divider"></div>
+
+      <!-- Footer CTA -->
+      <div class="cs-footer reveal">
+        <a href="https://avelor.es" target="_blank" rel="noopener" class="cs-cta">
+          <span class="lang-es">Ver sitio</span>
+          <span class="lang-en">View site</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="/#projects" class="cs-back">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          <span class="lang-es">Todos los proyectos</span>
+          <span class="lang-en">All projects</span>
+        </a>
+      </div>
+
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .cs-main {
+    padding-top: 64px;
+    min-height: 100svh;
+  }
+
+  .cs-header {
+    padding: 4rem 0 2.5rem;
+    max-width: 720px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-2);
+    margin-bottom: 2.5rem;
+    transition: color 0.15s;
+  }
+  .back-link:hover { color: var(--text); }
+
+  .cs-title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .cs-title {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .cs-external {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-3);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 100px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .cs-external:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .cs-tagline {
+    font-size: 1rem;
+    color: var(--text-2);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+
+  .cs-tags {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+  }
+
+  .cs-tag {
+    font-size: 0.68rem;
+    padding: 2px 10px;
+    background: var(--accent-dim);
+    color: var(--accent-light);
+    border-radius: 100px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .cs-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0;
+  }
+
+  .cs-section {
+    padding: 3.5rem 0;
+  }
+
+  .cs-section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.75rem;
+  }
+
+  .cs-module {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+    align-items: start;
+  }
+
+  .cs-module--reverse {
+    direction: rtl;
+  }
+  .cs-module--reverse > * {
+    direction: ltr;
+  }
+
+  .cs-module-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .cs-prose {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .cs-prose p {
+    font-size: 0.9rem;
+    color: var(--text-2);
+    line-height: 1.75;
+  }
+
+  .cs-prose code {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.82em;
+    background: var(--surface-2);
+    color: var(--accent-light);
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+  }
+
+  .cs-screenshot {
+    margin: 0;
+  }
+
+  .cs-screenshot img {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .cs-screenshot figcaption {
+    font-size: 0.75rem;
+    color: var(--text-3);
+    margin-top: 0.6rem;
+    text-align: center;
+    letter-spacing: 0.01em;
+  }
+
+  /* Architecture section */
+  .cs-arch {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .cs-arch-desc p {
+    max-width: 600px;
+  }
+
+  .arch-diagram {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    overflow-x: auto;
+  }
+
+  .arch-diagram svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .arch-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+  }
+
+  .arch-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .arch-key {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+
+  .arch-val {
+    font-size: 0.82rem;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+
+  /* Footer CTA */
+  .cs-footer {
+    padding: 3.5rem 0 5rem;
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .cs-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 0.55rem 1.25rem;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .cs-cta:hover {
+    background: var(--accent);
+    color: #fff;
+  }
+  .cs-cta svg { transition: transform 0.2s; }
+  .cs-cta:hover svg { transform: translateX(2px); }
+
+  .cs-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-2);
+    transition: color 0.15s;
+  }
+  .cs-back:hover { color: var(--text); }
+
+  @media (max-width: 860px) {
+    .cs-module {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .cs-module--reverse {
+      direction: ltr;
+    }
+    .cs-screenshot {
+      order: -1;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .cs-title-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    .cs-footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  }
+</style>
