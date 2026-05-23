@@ -7,22 +7,54 @@ import '../styles/global.css';
 
 const BATCH = 50;
 
+type Article = {
+  id: string;
+  title: string;
+  date: string;
+  excerpt: string;
+  tags: string[];
+  source: string;
+  url: string;
+  external: boolean;
+  idx: number;
+};
+
 const allEntries = await getCollection('blog');
-const articles = allEntries
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
-  .map((entry, idx) => ({
-    id: entry.id,
-    title: entry.data.title,
-    date: entry.data.date,
-    excerpt: entry.data.excerpt,
-    source: entry.data.source,
-    url: `/blog/${entry.id}`,
-    idx,
-  }));
+const localArticles: Article[] = allEntries.map((entry) => ({
+  id: entry.id,
+  title: entry.data.title,
+  date: entry.data.date,
+  excerpt: entry.data.excerpt,
+  tags: [],
+  source: entry.data.source,
+  url: `/blog/${entry.id}`,
+  external: false,
+  idx: 0,
+}));
+
+let octaArticles: Article[] = [];
+try {
+  const res = await fetch('https://octa.page/rss.xml');
+  const xml = await res.text();
+  octaArticles = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].flatMap(([, item], i) => {
+    const title = item.match(/<title>(.*?)<\/title>/)?.[1]?.trim() ?? '';
+    const link  = item.match(/<link>(.*?)<\/link>/)?.[1]?.trim() ?? '';
+    const pub   = item.match(/<pubDate>(.*?)<\/pubDate>/)?.[1]?.trim() ?? '';
+    const tags  = [...item.matchAll(/<category>(.*?)<\/category>/g)].map(m => m[1]);
+    const date  = pub ? new Date(pub).toISOString().split('T')[0] : '';
+    if (!title || !date) return [];
+    return [{ id: `octa-${i}`, title, date, excerpt: '', tags, source: 'Octa', url: link, external: true, idx: 0 }];
+  });
+} catch {
+  // RSS fetch failed — show only local articles
+}
+
+const articles: Article[] = [...localArticles, ...octaArticles]
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  .map((a, idx) => ({ ...a, idx }));
 
 const hasMore = articles.length > BATCH;
 
-// Group by year
 const byYear = articles.reduce((acc: Record<string, typeof articles>, article) => {
   const year = article.date.split('-')[0];
   if (!acc[year]) acc[year] = [];
@@ -77,6 +109,22 @@ function formatDate(dateStr: string) {
         </p>
       </header>
 
+      <div class="blog-notice reveal">
+        <div class="blog-notice-inner">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/>
+          </svg>
+          <p>
+            <span class="lang-es">
+              Los artículos de <a href="https://octa.page" target="_blank" rel="noopener">octa.page</a> aparecen aquí automáticamente — los marcados con <strong>Octa</strong>. Los demás son artículos anteriores de este blog, conservados por razones históricas.
+            </span>
+            <span class="lang-en">
+              Articles from <a href="https://octa.page" target="_blank" rel="noopener">octa.page</a> appear here automatically — those marked <strong>Octa</strong>. The rest are older posts from this blog, kept for historical purposes.
+            </span>
+          </p>
+        </div>
+      </div>
+
       <div class="blog-body" id="blog-body">
         {years.map((year, yi) => (
           <div class="year-group reveal" data-year={year} style={`--delay: ${yi * 0.08}s`}>
@@ -88,15 +136,27 @@ function formatDate(dateStr: string) {
                   class="article-row"
                   data-idx={article.idx}
                   style={`--i: ${i}`}
+                  target={article.external ? '_blank' : undefined}
+                  rel={article.external ? 'noopener' : undefined}
                 >
                   <span class="article-date">{formatDate(article.date)}</span>
                   <div class="article-body">
                     <div class="article-title-row">
                       <h2 class="article-title">{article.title}</h2>
+                      {article.external && (
+                        <span class="article-source source-octa">Octa</span>
+                      )}
                     </div>
-                    <p class="article-excerpt">{article.excerpt}</p>
+                    {article.excerpt && <p class="article-excerpt">{article.excerpt}</p>}
+                    {article.tags.length > 0 && (
+                      <div class="article-tags">
+                        {article.tags.slice(0, 4).map(tag => (
+                          <span class="article-tag">{tag}</span>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                  <span class="article-arrow">→</span>
+                  <span class="article-arrow">{article.external ? '↗' : '→'}</span>
                 </a>
               ))}
             </div>
@@ -297,6 +357,24 @@ function formatDate(dateStr: string) {
     border: 1px solid var(--border);
   }
 
+  .article-tags {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    margin-top: 0.2rem;
+  }
+
+  .article-tag {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 2px 7px;
+    border-radius: 100px;
+    background: var(--surface-2);
+    color: var(--text-3);
+    border: 1px solid var(--border);
+  }
+
   .article-excerpt {
     font-size: 0.82rem;
     color: var(--text-2);
@@ -336,6 +414,44 @@ function formatDate(dateStr: string) {
     .article-date { padding-top: 0; }
     .blog-header-top { align-items: flex-start; flex-direction: column; gap: 1rem; }
     .blog-meta { text-align: left; }
+  }
+
+  /* Notice */
+  .blog-notice {
+    padding: 1.25rem 0 0;
+  }
+
+  .blog-notice-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.85rem 1.1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    max-width: 600px;
+  }
+
+  .blog-notice-inner svg {
+    color: var(--text-3);
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .blog-notice-inner p {
+    font-size: 0.85rem;
+    color: var(--text-2);
+    line-height: 1.6;
+  }
+
+  .blog-notice-inner a {
+    color: var(--accent-light);
+    border-bottom: 1px solid rgba(130, 170, 255, 0.3);
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .blog-notice-inner a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
   }
 
   .article-row.js-hidden { display: none; }
