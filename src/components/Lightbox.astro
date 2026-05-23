@@ -1,0 +1,111 @@
+---
+---
+
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image preview" hidden>
+  <button class="lightbox-close" id="lightbox-close" aria-label="Close">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M18 6L6 18M6 6l12 12"/>
+    </svg>
+  </button>
+  <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+</div>
+
+<style>
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+  .lightbox[hidden] { display: none; }
+
+  .lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(7, 9, 14, 0.92);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    cursor: zoom-out;
+    animation: lbFadeIn 0.2s ease both;
+  }
+
+  .lightbox-img {
+    position: relative;
+    z-index: 1;
+    max-width: min(92vw, 1200px);
+    max-height: 88vh;
+    width: auto;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid rgba(100, 140, 220, 0.15);
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.7);
+    cursor: zoom-out;
+    animation: lbScaleIn 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    transition: background 0.2s;
+  }
+  .lightbox-close:hover { background: rgba(255, 255, 255, 0.14); }
+
+  @keyframes lbFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes lbScaleIn {
+    from { opacity: 0; transform: scale(0.93); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+</style>
+
+<script>
+  const lightbox   = document.getElementById('lightbox')!;
+  const img        = document.getElementById('lightbox-img') as HTMLImageElement;
+  const closeBtn   = document.getElementById('lightbox-close')!;
+  const backdrop   = document.getElementById('lightbox-backdrop')!;
+
+  const open = (src: string, alt: string) => {
+    img.src = src;
+    img.alt = alt;
+    lightbox.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  };
+
+  const close = () => {
+    lightbox.setAttribute('hidden', '');
+    document.body.style.overflow = '';
+    img.src = '';
+  };
+
+  document.querySelectorAll<HTMLImageElement>('.cs-screenshot img').forEach((el) => {
+    el.style.cursor = 'zoom-in';
+    el.addEventListener('click', () => open(el.src, el.alt));
+  });
+
+  closeBtn.addEventListener('click', close);
+  backdrop.addEventListener('click', close);
+  img.addEventListener('click', close);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !lightbox.hasAttribute('hidden')) close();
+  });
+</script>

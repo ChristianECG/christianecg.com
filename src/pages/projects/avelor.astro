@@ -1,8 +1,13 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import Lightbox from '../../components/Lightbox.astro';
 import '../../styles/global.css';
+import analyticsImg from '../../assets/avelor/analytics.png';
+import vaultImg from '../../assets/avelor/vault.png';
+import briefingImg from '../../assets/avelor/briefing.png';
 ---
 
 <Layout
@@ -96,7 +101,7 @@ import '../../styles/global.css';
             </div>
           </div>
           <figure class="cs-screenshot">
-            <img src="/avelor/analytics.png" alt="Dashboard de analytics mostrando métricas de visitas, páginas, referrers y ubicaciones geográficas" loading="lazy" />
+            <Image src={analyticsImg} alt="Dashboard de analytics mostrando métricas de visitas, páginas, referrers y ubicaciones geográficas" loading="lazy" />
             <figcaption class="lang-es">Dashboard de analytics — visitas, eventos y desglose geográfico</figcaption>
             <figcaption class="lang-en">Analytics dashboard — visits, events, and geographic breakdown</figcaption>
           </figure>
@@ -133,7 +138,7 @@ import '../../styles/global.css';
             </div>
           </div>
           <figure class="cs-screenshot">
-            <img src="/avelor/vault.png" alt="Vault mostrando tabla de URLs acortadas y formulario de creación de secretos de un solo uso" loading="lazy" />
+            <Image src={vaultImg} alt="Vault mostrando tabla de URLs acortadas y formulario de creación de secretos de un solo uso" loading="lazy" />
             <figcaption class="lang-es">Vault — acortador de URLs y secretos autodestruibles</figcaption>
             <figcaption class="lang-en">Vault — URL shortener and self-destructing secrets</figcaption>
           </figure>
@@ -170,7 +175,7 @@ import '../../styles/global.css';
             </div>
           </div>
           <figure class="cs-screenshot">
-            <img src="/avelor/briefing.png" alt="Vista de brief de cliente mostrando estado, turno, próximo paso y recursos vinculados" loading="lazy" />
+            <Image src={briefingImg} alt="Vista de brief de cliente mostrando estado, turno, próximo paso y recursos vinculados" loading="lazy" />
             <figcaption class="lang-es">Brief de cliente — estado, turno y próximos pasos</figcaption>
             <figcaption class="lang-en">Client brief — status, turn, and next steps</figcaption>
           </figure>
@@ -330,6 +335,7 @@ import '../../styles/global.css';
 
     </div>
   </main>
+  <Lightbox />
   <Footer />
 </Layout>
 
@@ -480,6 +486,7 @@ import '../../styles/global.css';
 
   .cs-screenshot img {
     width: 100%;
+    height: auto;
     border-radius: 8px;
     border: 1px solid var(--border);
     background: var(--surface);

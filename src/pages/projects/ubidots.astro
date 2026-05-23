@@ -1,8 +1,13 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import Lightbox from '../../components/Lightbox.astro';
 import '../../styles/global.css';
+import stripe1 from '../../assets/ubidots/stripe1.png';
+import stripe2 from '../../assets/ubidots/stripe2.png';
+import linechartAnnotations from '../../assets/ubidots/linechart_anotations.png';
 ---
 
 <Layout
@@ -112,10 +117,10 @@ import '../../styles/global.css';
           </div>
           <div class="cs-screenshots-pair">
             <figure class="cs-screenshot">
-              <img src="/ubidots/stripe1.png" alt="Pantalla de onboarding de Stripe — conectar cuenta para monetizar apps con billing basado en uso" loading="lazy" />
+              <Image src={stripe1} alt="Pantalla de onboarding de Stripe — conectar cuenta para monetizar apps con billing basado en uso" loading="lazy" />
             </figure>
             <figure class="cs-screenshot">
-              <img src="/ubidots/stripe2.png" alt="Editor de plan de billing mostrando configuración de precio por uso, ciclo de facturación y moneda" loading="lazy" />
+              <Image src={stripe2} alt="Editor de plan de billing mostrando configuración de precio por uso, ciclo de facturación y moneda" loading="lazy" />
               <figcaption class="lang-es">Gestión de planes — pricing usage-based por sensor</figcaption>
               <figcaption class="lang-en">Plan management — usage-based pricing per sensor</figcaption>
             </figure>
@@ -158,7 +163,7 @@ import '../../styles/global.css';
             </div>
           </div>
           <figure class="cs-screenshot">
-            <img src="/ubidots/linechart_anotations.png" alt="Widget de line chart mostrando series de temperatura y velocidad de viento con sistema de anotaciones" loading="lazy" />
+            <Image src={linechartAnnotations} alt="Widget de line chart mostrando series de temperatura y velocidad de viento con sistema de anotaciones" loading="lazy" />
             <figcaption class="lang-es">Line chart widget — múltiples series y anotaciones en tiempo real</figcaption>
             <figcaption class="lang-en">Line chart widget — multiple series and real-time annotations</figcaption>
           </figure>
@@ -183,6 +188,7 @@ import '../../styles/global.css';
 
     </div>
   </main>
+  <Lightbox />
   <Footer />
 </Layout>
 
@@ -383,6 +389,7 @@ import '../../styles/global.css';
 
   .cs-screenshot img {
     width: 100%;
+    height: auto;
     border-radius: 8px;
     border: 1px solid var(--border);
     background: var(--surface);

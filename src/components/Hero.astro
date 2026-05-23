@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import HeroCanvas from './HeroCanvas.astro';
+import avatarSrc from '../assets/avatar.png';
 ---
 
 <section class="hero">
@@ -19,7 +21,7 @@ import HeroCanvas from './HeroCanvas.astro';
           <span class="lang-en">Senior Software Engineer</span>
         </span>
       </div>
-      <img src="/avatar.jpg" alt="Christian Elías" class="hero-avatar hero-enter-avatar" loading="eager" />
+      <Image src={avatarSrc} alt="Christian Elías" class="hero-avatar hero-enter-avatar" loading="eager" width={200} height={200} />
     </div>
   </div>
 
