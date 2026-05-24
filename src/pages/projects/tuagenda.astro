@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
@@ -10,11 +11,15 @@ import calendarImg from '../../assets/tuagenda/calendar.png';
 import portalImg from '../../assets/tuagenda/portal.png';
 import availabilityImg from '../../assets/tuagenda/availability.png';
 import billingImg from '../../assets/tuagenda/billing.png';
+
+const project = await getEntry('projects', 'tuagenda');
+const { title, description, tags } = project.data;
 ---
 
 <Layout
-  title="TuAgenda.digital — Case Study · Christian Elías"
-  description="Appointment automation SaaS: white-label booking pages, zero-login client portal, automated email/SMS reminders, and an AI WhatsApp scheduling agent."
+  title={`${title} — Case Study · Christian Elías`}
+  description={description}
+  ogImage="https://christianecg.com/og/project/tuagenda.png"
 >
   <Nav />
   <main id="main-content" class="cs-main">
@@ -43,7 +48,7 @@ import billingImg from '../../assets/tuagenda/billing.png';
         </p>
 
         <div class="cs-tags">
-          {["Next.js 15", "Supabase", "Stripe", "Twilio", "OpenAI", "Vercel"].map(tag => (
+          {tags.map(tag => (
             <span class="cs-tag">{tag}</span>
           ))}
         </div>

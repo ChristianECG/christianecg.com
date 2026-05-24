@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
@@ -8,11 +9,15 @@ import '../../styles/global.css';
 import stripe1 from '../../assets/ubidots/stripe1.png';
 import stripe2 from '../../assets/ubidots/stripe2.png';
 import linechartAnnotations from '../../assets/ubidots/linechart_anotations.png';
+
+const project = await getEntry('projects', 'ubidots');
+const { title, description, tags } = project.data;
 ---
 
 <Layout
-  title="Ubidots — Case Study · Christian Elías"
-  description="Frontend work at Ubidots: billing & monetization module with Stripe, ECharts widget performance optimization, and CI/CD improvements on an IoT platform with 150K+ users."
+  title={`${title} — Case Study · Christian Elías`}
+  description={description}
+  ogImage="https://christianecg.com/og/project/ubidots.png"
 >
   <Nav />
   <main id="main-content" class="cs-main">
@@ -41,7 +46,7 @@ import linechartAnnotations from '../../assets/ubidots/linechart_anotations.png'
         </p>
 
         <div class="cs-tags">
-          {["React", "TypeScript", "ECharts", "TanStack Query", "Stripe"].map(tag => (
+          {tags.map(tag => (
             <span class="cs-tag">{tag}</span>
           ))}
         </div>
