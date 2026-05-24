@@ -1,12 +1,12 @@
 {
   "projects": [
     {
-      "title": "christianecg.com",
-      "description_es": "Este mismo sitio: portfolio personal y blog construido con Astro. Generación estática, búsqueda client-side con Pagefind, OG images automáticas por post con Satori, feeds RSS y JSON, y deploy automático a GitHub Pages.",
-      "description_en": "This very site: personal portfolio and blog built with Astro. Static generation, client-side search with Pagefind, automatic per-post OG images with Satori, RSS and JSON feeds, and automatic deployment to GitHub Pages.",
-      "tags": ["Astro", "TypeScript", "Pagefind", "GitHub Pages"],
-      "url": "https://christianecg.com",
-      "github": "https://github.com/ChristianECG/christianecg.com"
+      "title": "TuAgenda.digital",
+      "description_es": "SaaS de automatización de citas para negocios pequeños: página de booking white-label, portal de cliente sin login para reprogramar o cancelar, recordatorios automáticos por email y SMS, y agente de IA para WhatsApp. Stack: Next.js 15, Supabase, Vercel Edge, Stripe, Twilio y OpenAI.",
+      "description_en": "Appointment automation SaaS for small businesses: white-label booking pages, zero-login client portal for rescheduling and cancellation, automated email and SMS reminders, and an AI scheduling agent for WhatsApp. Stack: Next.js 15, Supabase, Vercel Edge, Stripe, Twilio, and OpenAI.",
+      "tags": ["Next.js", "Supabase", "Stripe", "Twilio", "OpenAI"],
+      "url": "https://tuagenda.digital",
+      "caseStudy": "/projects/tuagenda"
     },
     {
       "title": "DocPipeline",

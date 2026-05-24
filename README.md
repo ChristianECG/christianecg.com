@@ -1,6 +1,6 @@
 # christianecg.com
 
-Personal portfolio and blog of Christian Elías Cruz González, Senior Frontend Engineer.
+Personal portfolio and blog of Christian Elías Cruz González, Senior Software Engineer.
 
 Built with [Astro](https://astro.build) and deployed to GitHub Pages.
 
