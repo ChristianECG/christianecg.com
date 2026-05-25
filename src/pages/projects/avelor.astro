@@ -12,12 +12,28 @@ import briefingImg from '../../assets/avelor/briefing.png';
 
 const project = await getEntry('projects', 'avelor');
 const { title, description, tags } = project.data;
+
+const projectSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: title,
+  description,
+  url: 'https://christianecg.com/projects/avelor',
+  image: 'https://christianecg.com/og/project/avelor.png',
+  keywords: tags.join(', '),
+  author: {
+    '@type': 'Person',
+    name: 'Christian Elías Cruz González',
+    url: 'https://christianecg.com',
+  },
+};
 ---
 
 <Layout
   title={`${title} — Case Study · Christian Elías`}
   description={description}
   ogImage="https://christianecg.com/og/project/avelor.png"
+  jsonLd={projectSchema}
 >
   <Nav />
   <main id="main-content" class="cs-main">
