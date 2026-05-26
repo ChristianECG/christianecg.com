@@ -32,12 +32,22 @@ const localArticles: Article[] = allEntries.map((entry) => ({
   idx: 0,
 }));
 
+function decodeEntities(str: string) {
+  return str
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)));
+}
+
 let octaArticles: Article[] = [];
 try {
   const res = await fetch('https://octa.page/rss.xml');
   const xml = await res.text();
   octaArticles = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].flatMap(([, item], i) => {
-    const title = item.match(/<title>(.*?)<\/title>/)?.[1]?.trim() ?? '';
+    const title = decodeEntities(item.match(/<title>(.*?)<\/title>/)?.[1]?.trim() ?? '');
     const link  = item.match(/<link>(.*?)<\/link>/)?.[1]?.trim() ?? '';
     const pub   = item.match(/<pubDate>(.*?)<\/pubDate>/)?.[1]?.trim() ?? '';
     const tags  = [...item.matchAll(/<category>(.*?)<\/category>/g)].map(m => m[1]);
