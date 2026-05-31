@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /bio/
 
 Sitemap: https://christianecg.com/sitemap-index.xml

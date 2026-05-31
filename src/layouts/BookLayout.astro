@@ -1,0 +1,299 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  chapter: number;
+  prev?: { slug: string; title: string; chapter: number } | null;
+  next?: { slug: string; title: string; chapter: number } | null;
+}
+
+const { title, description, chapter, prev, next } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    {description && <meta name="description" content={description} />}
+    <title>{title} — Biografía</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preload" href="/fonts/lora-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <script is:inline src="https://analytics.avelor.es/av.js" data-project="christianecg" defer></script>
+    <slot name="head" />
+  </head>
+  <body>
+    <div class="book-shell">
+
+      <header class="book-header">
+        <a href="/bio" class="book-index-link">← Índice</a>
+        <span class="book-chapter-label">Capítulo {String(chapter).padStart(2, '0')}</span>
+      </header>
+
+      <main class="book-main">
+        <article>
+          <header class="chapter-header">
+            <p class="chapter-eyebrow">Capítulo {String(chapter).padStart(2, '0')}</p>
+            <h1 class="chapter-title">{title}</h1>
+            {description && <p class="chapter-description">{description}</p>}
+          </header>
+
+          <div class="prose">
+            <slot />
+          </div>
+        </article>
+      </main>
+
+      <nav class="book-nav">
+        {prev ? (
+          <a href={`/bio/${prev.slug}`} class="nav-link nav-prev">
+            <span class="nav-dir">← Capítulo {String(prev.chapter).padStart(2, '0')}</span>
+            <span class="nav-title">{prev.title}</span>
+          </a>
+        ) : <span />}
+        {next ? (
+          <a href={`/bio/${next.slug}`} class="nav-link nav-next">
+            <span class="nav-dir">Capítulo {String(next.chapter).padStart(2, '0')} →</span>
+            <span class="nav-title">{next.title}</span>
+          </a>
+        ) : <span />}
+      </nav>
+
+    </div>
+  </body>
+</html>
+
+<style>
+  @import '@fontsource/lora/400.css';
+  @import '@fontsource/lora/400-italic.css';
+  @import '@fontsource/lora/700.css';
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --book-bg:      #F7F3EC;
+    --book-surface: #EDE8DF;
+    --book-ink:     #1C1713;
+    --book-ink-2:   #4A4238;
+    --book-ink-3:   #8A7D72;
+    --book-accent:  #7A3B1E;
+    --book-border:  rgba(28, 23, 19, 0.12);
+    --book-serif:   'Lora', Georgia, 'Times New Roman', serif;
+    --book-sans:    'Bricolage Grotesque', system-ui, sans-serif;
+  }
+
+  html, body {
+    background: var(--book-bg);
+    color: var(--book-ink);
+    font-family: var(--book-serif);
+    font-size: 17px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100svh;
+  }
+
+  .book-shell {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+  }
+
+  /* ── Header ─────────────────────────────────────────────── */
+  .book-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 0 1.5rem;
+    border-bottom: 1px solid var(--book-border);
+    margin-bottom: 3.5rem;
+  }
+
+  .book-index-link {
+    font-family: var(--book-sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--book-ink-3);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .book-index-link:hover { color: var(--book-accent); }
+
+  .book-chapter-label {
+    font-family: var(--book-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--book-ink-3);
+  }
+
+  /* ── Chapter header ─────────────────────────────────────── */
+  .chapter-header {
+    margin-bottom: 2.75rem;
+    padding-bottom: 2.75rem;
+    border-bottom: 1px solid var(--book-border);
+  }
+
+  .chapter-eyebrow {
+    font-family: var(--book-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--book-accent);
+    margin-bottom: 1rem;
+  }
+
+  .chapter-title {
+    font-family: var(--book-serif);
+    font-size: clamp(1.8rem, 4vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--book-ink);
+    margin-bottom: 1rem;
+  }
+
+  .chapter-description {
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--book-ink-2);
+    line-height: 1.7;
+  }
+
+  /* ── Prose ──────────────────────────────────────────────── */
+  .prose {
+    flex: 1;
+  }
+
+  .prose :global(p) {
+    margin-bottom: 1.4rem;
+    color: var(--book-ink);
+    font-size: 1rem;
+    line-height: 1.85;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .prose :global(p:first-of-type::first-letter) {
+    float: left;
+    font-family: var(--book-serif);
+    font-size: 3.6em;
+    font-weight: 700;
+    line-height: 0.82;
+    margin: 0.06em 0.12em 0 0;
+    color: var(--book-accent);
+  }
+
+  .prose :global(h2) {
+    font-family: var(--book-serif);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--book-ink);
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .prose :global(h3) {
+    font-family: var(--book-sans);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--book-ink-2);
+    margin: 2rem 0 0.75rem;
+  }
+
+  .prose :global(em) {
+    font-style: italic;
+    color: var(--book-ink-2);
+  }
+
+  .prose :global(strong) {
+    font-weight: 700;
+    color: var(--book-ink);
+  }
+
+  .prose :global(blockquote) {
+    border-left: 2px solid var(--book-accent);
+    margin: 2rem 0 2rem 0;
+    padding: 0.25rem 0 0.25rem 1.5rem;
+    color: var(--book-ink-2);
+    font-style: italic;
+  }
+
+  .prose :global(blockquote p) {
+    text-align: left;
+    hyphens: none;
+  }
+
+  .prose :global(hr) {
+    border: none;
+    text-align: center;
+    margin: 2.5rem 0;
+    color: var(--book-ink-3);
+    font-size: 1.1rem;
+    letter-spacing: 0.4em;
+  }
+  .prose :global(hr)::after { content: '✦  ✦  ✦'; }
+
+  .prose :global(a) {
+    color: var(--book-accent);
+    text-underline-offset: 3px;
+    transition: opacity 0.15s;
+  }
+  .prose :global(a:hover) { opacity: 0.75; }
+
+  /* ── Bottom nav ─────────────────────────────────────────── */
+  .book-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 2.5rem 0 3rem;
+    margin-top: 4rem;
+    border-top: 1px solid var(--book-border);
+  }
+
+  .nav-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    text-decoration: none;
+    max-width: 45%;
+  }
+
+  .nav-next { text-align: right; margin-left: auto; }
+
+  .nav-dir {
+    font-family: var(--book-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--book-ink-3);
+    transition: color 0.15s;
+  }
+
+  .nav-title {
+    font-family: var(--book-serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--book-ink-2);
+    transition: color 0.15s;
+  }
+
+  .nav-link:hover .nav-dir,
+  .nav-link:hover .nav-title { color: var(--book-accent); }
+
+  @media (max-width: 520px) {
+    html { font-size: 16px; }
+    .book-nav { flex-direction: column; gap: 1.5rem; }
+    .nav-next { text-align: left; margin-left: 0; }
+    .nav-link { max-width: 100%; }
+  }
+</style>

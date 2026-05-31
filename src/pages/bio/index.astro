@@ -1,0 +1,174 @@
+---
+import { getCollection } from 'astro:content';
+
+const chapters = (await getCollection('bio')).sort((a, b) => a.data.chapter - b.data.chapter);
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Biografía — Christian Elías</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <script is:inline src="https://analytics.avelor.es/av.js" data-project="christianecg" defer></script>
+  </head>
+  <body>
+    <div class="book-shell">
+
+      <header class="book-header">
+        <p class="book-eyebrow">Christian Elías Cruz González</p>
+        <h1 class="book-title">Biografía</h1>
+        <p class="book-subtitle">Un registro personal, sin orden estricto, sin moraleja.</p>
+      </header>
+
+      <nav class="toc">
+        <ol class="toc-list">
+          {chapters.map((ch) => (
+            <li class="toc-item">
+              <a href={`/bio/${ch.id}`} class="toc-link">
+                <span class="toc-num">{String(ch.data.chapter).padStart(2, '0')}</span>
+                <span class="toc-body">
+                  <span class="toc-title">{ch.data.title}</span>
+                  {ch.data.description && (
+                    <span class="toc-desc">{ch.data.description}</span>
+                  )}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+
+    </div>
+  </body>
+</html>
+
+<style>
+  @import '@fontsource/lora/400.css';
+  @import '@fontsource/lora/400-italic.css';
+  @import '@fontsource/lora/700.css';
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --book-bg:      #F7F3EC;
+    --book-surface: #EDE8DF;
+    --book-ink:     #1C1713;
+    --book-ink-2:   #4A4238;
+    --book-ink-3:   #8A7D72;
+    --book-accent:  #7A3B1E;
+    --book-border:  rgba(28, 23, 19, 0.12);
+    --book-serif:   'Lora', Georgia, 'Times New Roman', serif;
+    --book-sans:    'Bricolage Grotesque', system-ui, sans-serif;
+  }
+
+  html, body {
+    background: var(--book-bg);
+    color: var(--book-ink);
+    font-family: var(--book-serif);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100svh;
+  }
+
+  .book-shell {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 6rem;
+  }
+
+  .book-header {
+    margin-bottom: 3.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--book-border);
+  }
+
+  .book-eyebrow {
+    font-family: var(--book-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--book-accent);
+    margin-bottom: 1.25rem;
+  }
+
+  .book-title {
+    font-family: var(--book-serif);
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--book-ink);
+    margin-bottom: 0.75rem;
+  }
+
+  .book-subtitle {
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--book-ink-3);
+    line-height: 1.6;
+  }
+
+  /* ── Table of contents ──────────────────────────────────── */
+  .toc-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .toc-item {
+    border-bottom: 1px solid var(--book-border);
+  }
+  .toc-list .toc-item:first-child {
+    border-top: 1px solid var(--book-border);
+  }
+
+  .toc-link {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .toc-num {
+    font-family: var(--book-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--book-ink-3);
+    flex-shrink: 0;
+    width: 2.2rem;
+    transition: color 0.15s;
+  }
+
+  .toc-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .toc-title {
+    font-family: var(--book-serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--book-ink);
+    transition: color 0.15s;
+  }
+
+  .toc-desc {
+    font-family: var(--book-serif);
+    font-size: 0.875rem;
+    font-style: italic;
+    color: var(--book-ink-3);
+    line-height: 1.5;
+    transition: color 0.15s;
+  }
+
+  .toc-link:hover .toc-num,
+  .toc-link:hover .toc-title { color: var(--book-accent); }
+  .toc-link:hover .toc-desc  { color: var(--book-ink-2); }
+</style>
