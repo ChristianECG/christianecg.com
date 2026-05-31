@@ -1,0 +1,259 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+
+export async function getStaticPaths() {
+  const papers = await getCollection('papers');
+  return papers.map((paper) => ({
+    params: { slug: paper.id },
+    props: { paper },
+  }));
+}
+
+const { paper } = Astro.props;
+const { title, titleEs, source, sourceLabel, issn, year, externalUrl, pdf, descriptionEs, descriptionEn } = paper.data;
+
+const metaTitle = `${title} — Christian Elías Cruz González`;
+const metaDescription = descriptionEn;
+---
+
+<Layout title={metaTitle} description={metaDescription}>
+  <Nav />
+  <main id="main-content" class="paper-main">
+    <div class="container">
+
+      <header class="paper-header reveal">
+        <div class="paper-header-meta">
+          <p class="section-eyebrow">
+            <a href="/#extras" class="back-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+              </svg>
+              <span class="lang-es">Investigación</span>
+              <span class="lang-en">Research</span>
+            </a>
+          </p>
+          <div class="paper-source-row">
+            <span class="paper-source-badge">
+              {sourceLabel}{issn && <span class="paper-issn"> · ISSN {issn}</span>}
+            </span>
+            <span class="paper-year">{year}</span>
+          </div>
+          <h1 class="paper-title">
+            <span class="lang-es">{titleEs ?? title}</span>
+            <span class="lang-en">{title}</span>
+          </h1>
+          <p class="paper-desc">
+            <span class="lang-es">{descriptionEs}</span>
+            <span class="lang-en">{descriptionEn}</span>
+          </p>
+        </div>
+
+        <div class="paper-header-actions">
+          {pdf && (
+            <a href={pdf} download class="paper-btn paper-btn-primary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M12 3v13M5 16l7 7 7-7M3 21h18"/>
+              </svg>
+              <span class="lang-es">Descargar PDF</span>
+              <span class="lang-en">Download PDF</span>
+            </a>
+          )}
+          <a href={externalUrl} target="_blank" rel="noopener" class="paper-btn paper-btn-ghost">
+            <span class="lang-es">Ver en {sourceLabel}</span>
+            <span class="lang-en">View on {sourceLabel}</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+            </svg>
+          </a>
+        </div>
+      </header>
+
+      {pdf && (
+        <div class="paper-embed reveal">
+          <iframe
+            src={pdf}
+            class="paper-frame"
+            title={title}
+          ></iframe>
+          <p class="paper-fallback">
+            <span class="lang-es">
+              Tu navegador no puede mostrar el PDF directamente.
+              <a href={pdf} download>Descárgalo aquí</a>.
+            </span>
+            <span class="lang-en">
+              Your browser can't display the PDF inline.
+              <a href={pdf} download>Download it here</a>.
+            </span>
+          </p>
+        </div>
+      )}
+
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .paper-main {
+    padding-top: 64px;
+    min-height: 100svh;
+  }
+
+  .paper-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 3rem;
+    padding: 4rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .paper-header-meta {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--text-3);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--text-2); }
+
+  .paper-source-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .paper-source-badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .paper-issn {
+    font-weight: 400;
+    color: var(--text-3);
+    letter-spacing: 0.04em;
+  }
+
+  .paper-year {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--text-3);
+  }
+
+  .paper-title {
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    max-width: 680px;
+  }
+
+  .paper-desc {
+    font-size: 0.9rem;
+    color: var(--text-2);
+    line-height: 1.7;
+    max-width: 600px;
+  }
+
+  .paper-header-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.75rem;
+    flex-shrink: 0;
+    padding-top: 2rem;
+  }
+
+  .paper-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.375rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+  }
+
+  .paper-btn-primary {
+    background: var(--accent-dim);
+    border: 1px solid var(--border-hover);
+    color: var(--accent-light);
+  }
+  .paper-btn-primary:hover {
+    background: rgba(91, 140, 245, 0.2);
+    border-color: var(--accent);
+  }
+
+  .paper-btn-ghost {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-2);
+  }
+  .paper-btn-ghost:hover {
+    border-color: var(--border-hover);
+    color: var(--text);
+  }
+
+  .paper-embed {
+    padding: 2.5rem 0 5rem;
+  }
+
+  .paper-frame {
+    width: 100%;
+    height: 85vh;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+  }
+
+  .paper-fallback {
+    display: none;
+    font-size: 0.875rem;
+    color: var(--text-2);
+    margin-top: 1rem;
+    text-align: center;
+  }
+  .paper-fallback a { color: var(--accent-light); }
+
+  @media (max-width: 768px) {
+    .paper-header {
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .paper-header-actions {
+      flex-direction: row;
+      align-items: center;
+      padding-top: 0;
+      flex-wrap: wrap;
+    }
+    .paper-frame {
+      height: 65vh;
+    }
+    .paper-fallback {
+      display: block;
+    }
+  }
+</style>

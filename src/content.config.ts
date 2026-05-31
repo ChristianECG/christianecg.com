@@ -29,4 +29,21 @@ const bio = defineCollection({
   }),
 });
 
-export const collections = { blog, projects, bio };
+const papers = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/papers' }),
+  schema: z.object({
+    title: z.string(),
+    titleEs: z.string().optional(),
+    source: z.string(),
+    sourceLabel: z.string(),
+    issn: z.string().optional(),
+    year: z.number(),
+    order: z.number(),
+    externalUrl: z.string(),
+    pdf: z.string().optional(),
+    descriptionEs: z.string(),
+    descriptionEn: z.string(),
+  }),
+});
+
+export const collections = { blog, projects, bio, papers };

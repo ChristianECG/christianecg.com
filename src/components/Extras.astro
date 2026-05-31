@@ -1,4 +1,7 @@
 ---
+import { getCollection } from 'astro:content';
+
+const papers = (await getCollection('papers')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <section id="extras">
@@ -54,60 +57,43 @@
         </h2>
 
         <div class="pub-list">
-          <div class="pub reveal">
-            <div class="pub-meta">
-              <span class="pub-source">IEEE Xplore</span>
-              <span class="pub-year">2021</span>
+          {papers.map((paper, i) => (
+            <div class="pub reveal" style={i > 0 ? `--delay: ${i * 0.08}s` : ''}>
+              <div class="pub-meta">
+                <span class="pub-source">
+                  {paper.data.sourceLabel}
+                  {paper.data.issn && <span class="pub-issn">ISSN {paper.data.issn}</span>}
+                </span>
+                <span class="pub-year">{paper.data.year}</span>
+              </div>
+              <h3 class="pub-title">
+                <span class="lang-es">{paper.data.titleEs ?? paper.data.title}</span>
+                <span class="lang-en">{paper.data.title}</span>
+              </h3>
+              <p class="pub-desc">
+                <span class="lang-es">{paper.data.descriptionEs}</span>
+                <span class="lang-en">{paper.data.descriptionEn}</span>
+              </p>
+              <div class="pub-actions">
+                <a href={paper.data.externalUrl} target="_blank" rel="noopener" class="pub-link">
+                  <span class="lang-es">Leer en {paper.data.sourceLabel}</span>
+                  <span class="lang-en">Read on {paper.data.sourceLabel}</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </a>
+                {paper.data.pdf && (
+                  <a href={`/papers/${paper.id}`} class="pub-download">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/>
+                    </svg>
+                    <span class="lang-es">Ver PDF</span>
+                    <span class="lang-en">View PDF</span>
+                  </a>
+                )}
+              </div>
             </div>
-            <h3 class="pub-title">
-              Security Issues of a Decentralized Blockchain-Based Messaging System
-            </h3>
-            <p class="pub-desc">
-              <span class="lang-es">
-                Vulnerabilidades en arquitecturas descentralizadas con enfoque en sistemas de
-                mensajería basados en blockchain. Presentado en congreso internacional.
-              </span>
-              <span class="lang-en">
-                Vulnerabilities in decentralized architectures focused on blockchain-based
-                messaging systems. Presented at an international conference.
-              </span>
-            </p>
-            <a href="https://ieeexplore.ieee.org/document/9619732" target="_blank" rel="noopener" class="pub-link">
-              <span class="lang-es">Leer en IEEE Xplore</span>
-              <span class="lang-en">Read on IEEE Xplore</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </a>
-          </div>
-
-          <div class="pub reveal" style="--delay: 0.08s">
-            <div class="pub-meta">
-              <span class="pub-source">REINGTEC <span class="pub-issn">ISSN 2448-7198</span></span>
-              <span class="pub-year">2020</span>
-            </div>
-            <h3 class="pub-title">
-              Statistical Analysis of the Spread of the COVID-19 Pandemic in Mexico Applying Machine Learning Models
-            </h3>
-            <p class="pub-desc">
-              <span class="lang-es">
-                Modelo de Densidad de Kernel para predecir la tendencia de contagios de COVID-19 en México,
-                usando datos del CSSE de Johns Hopkins y Python. El modelo estima casos para 150 días
-                a partir de los primeros 50 días del brote.
-              </span>
-              <span class="lang-en">
-                Kernel Density model to predict COVID-19 contagion trends in Mexico using Johns Hopkins
-                CSSE data and Python. The model estimates cases for 150 days from the first 50 days of the outbreak.
-              </span>
-            </p>
-            <a href="https://reingtec.itsoeh.edu.mx/reingtec/docs/vol8_2020reingtec/51-53%20ITICS%20Cruz%20Gonza%CC%81lez%202020.pdf" target="_blank" rel="noopener" class="pub-link">
-              <span class="lang-es">Leer en REINGTEC</span>
-              <span class="lang-en">Read on REINGTEC</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </a>
-          </div>
+          ))}
         </div>
       </div>
 
@@ -241,6 +227,14 @@
     line-height: 1.7;
   }
 
+  .pub-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    margin-top: 0.25rem;
+  }
+
   .pub-link {
     display: inline-flex;
     align-items: center;
@@ -250,11 +244,24 @@
     color: var(--accent);
     transition: opacity 0.2s;
     width: fit-content;
-    margin-top: 0.25rem;
   }
   .pub-link:hover { opacity: 0.7; }
   .pub-link svg { transition: transform 0.2s; }
   .pub-link:hover svg { transform: translateX(3px); }
+
+  .pub-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-3);
+    transition: color 0.2s;
+    width: fit-content;
+  }
+  .pub-download:hover { color: var(--text); }
+  .pub-download svg { transition: transform 0.2s; }
+  .pub-download:hover svg { transform: translateY(2px); }
 
   @media (max-width: 900px) {
     .extras-grid { grid-template-columns: 1fr; gap: 3.5rem; }
