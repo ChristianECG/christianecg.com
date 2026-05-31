@@ -1,0 +1,167 @@
+export interface Talk {
+  slug?: string;
+  date_es: string;
+  date_en: string;
+  type: 'keynote' | 'talk' | 'mentor' | 'media';
+  title_es: string;
+  title_en: string;
+  event_es: string;
+  event_en: string;
+  format: 'presencial' | 'online';
+  url: string | null;
+  slides?: string;
+  paper?: string;
+}
+
+export const talks: Talk[] = [
+  {
+    slug: 'universidad-mundo-real-ti',
+    date_es: '21 Feb 2026',
+    date_en: 'Feb 21, 2026',
+    type: 'talk',
+    title_es: 'Lo que la universidad no te enseña sobre el mundo real en Tecnologías de la Información',
+    title_en: "What University Doesn't Teach You About the Real World in Information Technology",
+    event_es: 'ITSOEH',
+    event_en: 'ITSOEH',
+    format: 'presencial',
+    url: null,
+    slides: '/talks/universidad-mundo-real-ti.pdf',
+  },
+  {
+    slug: 'historia-ia-implicaciones-eticas',
+    date_es: '26 Ene 2026',
+    date_en: 'Jan 26, 2026',
+    type: 'talk',
+    title_es: 'Inteligencia Artificial, uso e implicaciones éticas',
+    title_en: 'Artificial Intelligence: Use and Ethical Implications',
+    event_es: 'Parroquia de la Candelaria · Nicolás Flores, Hidalgo',
+    event_en: 'Parroquia de la Candelaria · Nicolás Flores, Hidalgo',
+    format: 'presencial',
+    url: null,
+    slides: '/talks/historia-ia-implicaciones-eticas.pdf',
+  },
+  {
+    slug: 'proxima-frontera-tecnologica',
+    date_es: '17 Oct 2025',
+    date_en: 'Oct 17, 2025',
+    type: 'keynote',
+    title_es: 'Hacia la próxima frontera tecnológica: Redefiniendo los límites de la innovación',
+    title_en: 'Towards the Next Technological Frontier: Redefining the Limits of Innovation',
+    event_es: 'Congreso Internacional de Ingeniería y Tecnologías para el Desarrollo Sustentable · ITSOEH',
+    event_en: 'International Congress of Engineering and Technologies for Sustainable Development · ITSOEH',
+    format: 'presencial',
+    url: null,
+    slides: '/talks/proxima-frontera-tecnologica.pdf',
+  },
+  {
+    slug: 'retos-ingenieria-software-ia',
+    date_es: '19 Ago 2025',
+    date_en: 'Aug 19, 2025',
+    type: 'keynote',
+    title_es: 'Nuevos retos en la Ingeniería de Software en un mundo orientado a la IA',
+    title_en: 'New Challenges in Software Engineering in an AI-Oriented World',
+    event_es: '5º Congreso Internacional de Software · Escuela Superior de Tlahuelilpan, UAEH',
+    event_en: '5th International Software Congress · Escuela Superior de Tlahuelilpan, UAEH',
+    format: 'presencial',
+    url: null,
+    slides: '/talks/retos-ingenieria-software-ia.pdf',
+  },
+  {
+    slug: 'estado-actual-ia',
+    date_es: '20 Feb 2025',
+    date_en: 'Feb 20, 2025',
+    type: 'talk',
+    title_es: 'Estado actual de la Inteligencia Artificial y su Impacto en el futuro de la tecnología',
+    title_en: 'Current State of Artificial Intelligence and Its Impact on the Future of Technology',
+    event_es: 'Teatro Cuauhtémoc · Mixquiahuala, Hidalgo',
+    event_en: 'Teatro Cuauhtémoc · Mixquiahuala, Hidalgo',
+    format: 'presencial',
+    url: null,
+    slides: '/talks/estado-actual-ia.pdf',
+  },
+  {
+    date_es: '2 Mar 2023',
+    date_en: 'Mar 2, 2023',
+    type: 'media',
+    title_es: 'Aparición en Ya es Hora',
+    title_en: 'Appearance on Ya es Hora',
+    event_es: 'Radio y Televisión de Hidalgo',
+    event_en: 'Radio y Televisión de Hidalgo',
+    format: 'presencial',
+    url: null,
+  },
+  {
+    date_es: '5 Oct 2021',
+    date_en: 'Oct 5, 2021',
+    type: 'talk',
+    title_es: 'Security Issues of a Decentralized Blockchain-Based Messaging System',
+    title_en: 'Security Issues of a Decentralized Blockchain-Based Messaging System',
+    event_es: 'VII CONIITI · Universidad Católica de Colombia',
+    event_en: 'VII CONIITI · Universidad Católica de Colombia',
+    format: 'online',
+    url: 'https://ieeexplore.ieee.org/document/9619732',
+    paper: '/papers/blockchain-messaging-security',
+  },
+  {
+    date_es: '13 Sep 2021',
+    date_en: 'Sep 13, 2021',
+    type: 'mentor',
+    title_es: 'Mentor · Programación para Todos',
+    title_en: 'Mentor · Programming for Everyone',
+    event_es: 'Google Developer Latam',
+    event_en: 'Google Developer Latam',
+    format: 'online',
+    url: null,
+  },
+  {
+    date_es: '23 Abr 2021',
+    date_en: 'Apr 23, 2021',
+    type: 'talk',
+    title_es: 'Primeros pasos en React.js',
+    title_en: 'First Steps in React.js',
+    event_es: 'Google Developer Student Club ITSOEH',
+    event_en: 'Google Developer Student Club ITSOEH',
+    format: 'online',
+    url: null,
+  },
+  {
+    date_es: '17 Abr 2021',
+    date_en: 'Apr 17, 2021',
+    type: 'media',
+    title_es: 'Aparición en Con Ciencia',
+    title_en: 'Appearance on Con Ciencia',
+    event_es: 'Radio y Televisión de Hidalgo',
+    event_en: 'Radio y Televisión de Hidalgo',
+    format: 'presencial',
+    url: null,
+  },
+  {
+    date_es: '1 Abr 2021',
+    date_en: 'Apr 1, 2021',
+    type: 'talk',
+    title_es: 'Conferencia a estudiantes de bachillerato',
+    title_en: 'Talk for High School Students',
+    event_es: 'CBTis 199',
+    event_en: 'CBTis 199',
+    format: 'presencial',
+    url: null,
+  },
+  {
+    date_es: '24 Feb 2021',
+    date_en: 'Feb 24, 2021',
+    type: 'talk',
+    title_es: 'Importancia del diseño en el desarrollo web',
+    title_en: 'The Importance of Design in Web Development',
+    event_es: 'Women Who Code Colima',
+    event_en: 'Women Who Code Colima',
+    format: 'online',
+    url: null,
+  },
+];
+
+export const typeLabel: Record<string, { es: string; en: string }> = {
+  keynote: { es: 'Keynote', en: 'Keynote' },
+  talk:    { es: 'Charla',  en: 'Talk' },
+  mentor:  { es: 'Mentoría', en: 'Mentorship' },
+  media:   { es: 'Medios',  en: 'Media' },
+};

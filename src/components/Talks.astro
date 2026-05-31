@@ -1,145 +1,5 @@
 ---
-const talks = [
-  {
-    date_es: "21 Feb 2026",
-    date_en: "Feb 21, 2026",
-    type: "talk",
-    title_es: "Lo que la universidad no te enseña sobre el mundo real en Tecnologías de la Información",
-    title_en: "What University Doesn't Teach You About the Real World in Information Technology",
-    event_es: "ITSOEH",
-    event_en: "ITSOEH",
-    format: "presencial",
-    url: null,
-  },
-  {
-    date_es: "26 Ene 2026",
-    date_en: "Jan 26, 2026",
-    type: "talk",
-    title_es: "Inteligencia Artificial, uso e implicaciones éticas",
-    title_en: "Artificial Intelligence: Use and Ethical Implications",
-    event_es: "Parroquia de la Candelaria · Nicolás Flores, Hidalgo",
-    event_en: "Parroquia de la Candelaria · Nicolás Flores, Hidalgo",
-    format: "presencial",
-    url: null,
-  },
-  {
-    date_es: "17 Oct 2025",
-    date_en: "Oct 17, 2025",
-    type: "keynote",
-    title_es: "Hacia la próxima frontera tecnológica: Redefiniendo los límites de la innovación",
-    title_en: "Towards the Next Technological Frontier: Redefining the Limits of Innovation",
-    event_es: "Congreso Internacional de Ingeniería y Tecnologías para el Desarrollo Sustentable · ITSOEH",
-    event_en: "International Congress of Engineering and Technologies for Sustainable Development · ITSOEH",
-    format: "presencial",
-    url: null,
-  },
-  {
-    date_es: "19 Ago 2025",
-    date_en: "Aug 19, 2025",
-    type: "keynote",
-    title_es: "Nuevos retos en la Ingeniería de Software en un mundo orientado a la IA",
-    title_en: "New Challenges in Software Engineering in an AI-Oriented World",
-    event_es: "5º Congreso Internacional de Software · Escuela Superior de Tlahuelilpan, UAEH",
-    event_en: "5th International Software Congress · Escuela Superior de Tlahuelilpan, UAEH",
-    format: "presencial",
-    url: null,
-  },
-  {
-    date_es: "20 Feb 2025",
-    date_en: "Feb 20, 2025",
-    type: "talk",
-    title_es: "Estado actual de la Inteligencia Artificial y su Impacto en el futuro de la tecnología",
-    title_en: "Current State of Artificial Intelligence and Its Impact on the Future of Technology",
-    event_es: "Teatro Cuauhtémoc · Mixquiahuala, Hidalgo",
-    event_en: "Teatro Cuauhtémoc · Mixquiahuala, Hidalgo",
-    format: "presencial",
-    url: null,
-  },
-  {
-    date_es: "2 Mar 2023",
-    date_en: "Mar 2, 2023",
-    type: "media",
-    title_es: "Aparición en Ya es Hora",
-    title_en: "Appearance on Ya es Hora",
-    event_es: "Radio y Televisión de Hidalgo",
-    event_en: "Radio y Televisión de Hidalgo",
-    format: "presencial",
-    url: null,
-  },
-  {
-    date_es: "5 Oct 2021",
-    date_en: "Oct 5, 2021",
-    type: "keynote",
-    title_es: "Security Issues of a Decentralized Blockchain-Based Messaging System",
-    title_en: "Security Issues of a Decentralized Blockchain-Based Messaging System",
-    event_es: "VII CONIITI · Universidad Católica de Colombia",
-    event_en: "VII CONIITI · Universidad Católica de Colombia",
-    format: "online",
-    url: "https://ieeexplore.ieee.org/document/9619732",
-  },
-  {
-    date_es: "13 Sep 2021",
-    date_en: "Sep 13, 2021",
-    type: "mentor",
-    title_es: "Mentor · Programación para Todos",
-    title_en: "Mentor · Programming for Everyone",
-    event_es: "Google Developer Latam",
-    event_en: "Google Developer Latam",
-    format: "online",
-    url: null,
-  },
-  {
-    date_es: "23 Abr 2021",
-    date_en: "Apr 23, 2021",
-    type: "talk",
-    title_es: "Primeros pasos en React.js",
-    title_en: "First Steps in React.js",
-    event_es: "Google Developer Student Club ITSOEH",
-    event_en: "Google Developer Student Club ITSOEH",
-    format: "online",
-    url: null,
-  },
-  {
-    date_es: "17 Abr 2021",
-    date_en: "Apr 17, 2021",
-    type: "media",
-    title_es: "Aparición en Con Ciencia",
-    title_en: "Appearance on Con Ciencia",
-    event_es: "Radio y Televisión de Hidalgo",
-    event_en: "Radio y Televisión de Hidalgo",
-    format: "presencial",
-    url: null,
-  },
-  {
-    date_es: "1 Abr 2021",
-    date_en: "Apr 1, 2021",
-    type: "talk",
-    title_es: "Conferencia a estudiantes de bachillerato",
-    title_en: "Talk for High School Students",
-    event_es: "CBTis 199",
-    event_en: "CBTis 199",
-    format: "presencial",
-    url: null,
-  },
-  {
-    date_es: "24 Feb 2021",
-    date_en: "Feb 24, 2021",
-    type: "talk",
-    title_es: "Importancia del diseño en el desarrollo web",
-    title_en: "The Importance of Design in Web Development",
-    event_es: "Women Who Code Colima",
-    event_en: "Women Who Code Colima",
-    format: "online",
-    url: null,
-  },
-];
-
-const typeLabel: Record<string, { es: string; en: string }> = {
-  keynote:  { es: "Keynote",   en: "Keynote"    },
-  talk:     { es: "Charla",    en: "Talk"        },
-  mentor:   { es: "Mentoría",  en: "Mentorship"  },
-  media:    { es: "Medios",    en: "Media"       },
-};
+import { talks, typeLabel } from '../data/talks';
 ---
 
 <section id="talks">
@@ -183,14 +43,34 @@ const typeLabel: Record<string, { es: string; en: string }> = {
                 </span>
               )}
             </div>
-            <span class="talk-event">
-              <span class="lang-es">{t.event_es}</span>
-              <span class="lang-en">{t.event_en}</span>
-              <span class="talk-format">
-                · <span class="lang-es">{t.format === "online" ? "Online" : "Presencial"}</span>
-                  <span class="lang-en">{t.format === "online" ? "Online" : "In person"}</span>
+            <div class="talk-footer">
+              {t.slug && t.slides && (
+                <a href={`/talks/${t.slug}`} class="talk-slides-link">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/>
+                  </svg>
+                  <span class="lang-es">Ver slides</span>
+                  <span class="lang-en">View slides</span>
+                </a>
+              )}
+              {t.paper && (
+                <a href={t.paper} class="talk-slides-link">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+                  </svg>
+                  <span class="lang-es">Ver paper</span>
+                  <span class="lang-en">View paper</span>
+                </a>
+              )}
+              <span class="talk-event">
+                <span class="lang-es">{t.event_es}</span>
+                <span class="lang-en">{t.event_en}</span>
+                <span class="talk-format">
+                  · <span class="lang-es">{t.format === "online" ? "Online" : "Presencial"}</span>
+                    <span class="lang-en">{t.format === "online" ? "Online" : "In person"}</span>
+                </span>
               </span>
-            </span>
+            </div>
           </div>
         </div>
       ))}
@@ -302,6 +182,13 @@ const typeLabel: Record<string, { es: string; en: string }> = {
   }
   .talk-title--link:hover svg { transform: translateX(3px); }
 
+  .talk-footer {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
   .talk-event {
     font-size: 0.8rem;
     color: var(--text-3);
@@ -312,6 +199,20 @@ const typeLabel: Record<string, { es: string; en: string }> = {
   .talk-format {
     color: var(--text-3);
   }
+
+  .talk-slides-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+  }
+  .talk-slides-link:hover { opacity: 0.7; }
 
   @media (max-width: 700px) {
     .talk {
