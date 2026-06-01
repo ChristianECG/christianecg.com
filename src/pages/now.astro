@@ -4,7 +4,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
-const updated = '2026-05-19';
+const updated = '2026-05-31';
 ---
 
 <Layout
@@ -40,6 +40,23 @@ const updated = '2026-05-19';
 
       <div class="now-body">
 
+        <div class="now-section now-section--available reveal" style="--delay: 0s">
+          <h2>
+            <span class="lang-es">Disponibilidad</span>
+            <span class="lang-en">Availability</span>
+          </h2>
+          <div class="now-content">
+            <p>
+              <span class="lang-es">
+                Estoy abierto a nuevas oportunidades como <strong>Ingeniero de Software Senior</strong>. Mi foco está en productos con complejidad técnica real: dashboards de datos, plataformas SaaS, sistemas de tiempo real. Si estás construyendo algo así, <a href="mailto:contacto@christianecg.com">escríbeme</a>.
+              </span>
+              <span class="lang-en">
+                I'm open to new opportunities as a <strong>Senior Software Engineer</strong>. My focus is on products with real technical complexity: data dashboards, SaaS platforms, real-time systems. If you're building something like that, <a href="mailto:contacto@christianecg.com">reach out</a>.
+              </span>
+            </p>
+          </div>
+        </div>
+
         <div class="now-section reveal" style="--delay: 0.1s">
           <h2>
             <span class="lang-es">Trabajando en</span>
@@ -48,10 +65,10 @@ const updated = '2026-05-19';
           <div class="now-content">
             <p>
               <span class="lang-es">
-                Construyendo interfaces de tiempo real para plataformas IoT industriales usando React y TypeScript. Me enfoco en rendimiento, visualización de datos complejos y arquitectura de componentes escalable.
+                Proyectos propios y explorando el siguiente paso. Después de tres años construyendo en Ubidots, estoy enfocando energía en mis proyectos y en encontrar el contexto adecuado para el siguiente reto.
               </span>
               <span class="lang-en">
-                Building real-time interfaces for industrial IoT platforms with React and TypeScript. My focus is on performance, complex data visualization, and scalable component architecture.
+                Personal projects and exploring next steps. After three years building at Ubidots, I'm channeling energy into my own projects and finding the right context for the next challenge.
               </span>
             </p>
           </div>
@@ -221,5 +238,24 @@ const updated = '2026-05-19';
     left: 0;
     color: var(--accent);
     font-weight: 700;
+  }
+
+  .now-section--available {
+    border-left: 2px solid var(--accent);
+    padding-left: 1.25rem;
+  }
+
+  .now-section--available h2 {
+    color: var(--accent);
+  }
+
+  .now-content a {
+    color: var(--accent-light);
+    border-bottom: 1px solid rgba(130, 170, 255, 0.3);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .now-content a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
   }
 </style>
