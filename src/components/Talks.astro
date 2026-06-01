@@ -1,5 +1,8 @@
 ---
 import { talks, typeLabel } from '../data/talks';
+
+const CURRENT_THRESHOLD = 2025;
+const olderCount = talks.filter(t => parseInt(t.date_es.split(' ').pop() ?? '0') < CURRENT_THRESHOLD).length;
 ---
 
 <section id="talks">
@@ -15,9 +18,12 @@ import { talks, typeLabel } from '../data/talks';
       </h2>
     </div>
 
-    <div class="talks-list">
-      {talks.map((t, i) => (
-        <div class="talk reveal" style={`--delay: ${i * 0.04}s`}>
+    <div class="talks-list" id="talks-list">
+      {talks.map((t, i) => {
+        const year = parseInt(t.date_es.split(' ').pop() ?? '0');
+        const isOlder = year < CURRENT_THRESHOLD;
+        return (
+        <div class={`talk reveal${isOlder ? ' talk--older' : ''}`} style={`--delay: ${i * 0.04}s`} aria-hidden={isOlder ? 'true' : undefined}>
           <span class="talk-date">
             <span class="lang-es">{t.date_es}</span>
             <span class="lang-en">{t.date_en}</span>
@@ -73,8 +79,28 @@ import { talks, typeLabel } from '../data/talks';
             </div>
           </div>
         </div>
-      ))}
+        );
+      })}
     </div>
+
+    {olderCount > 0 && (
+      <div class="talks-more">
+        <button id="talks-toggle" class="talks-toggle-btn" aria-expanded="false">
+          <span class="toggle-show">
+            <span class="lang-es">Ver {olderCount} anteriores</span>
+            <span class="lang-en">Show {olderCount} older</span>
+          </span>
+          <span class="toggle-hide">
+            <span class="lang-es">Ver menos</span>
+            <span class="lang-en">Show less</span>
+          </span>
+          <svg class="toggle-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </button>
+      </div>
+    )}
+
   </div>
 </section>
 
@@ -214,6 +240,51 @@ import { talks, typeLabel } from '../data/talks';
   }
   .talk-slides-link:hover { opacity: 0.7; }
 
+  .talk--older {
+    display: none;
+  }
+  .talks-list.talks-expanded .talk--older {
+    display: grid;
+  }
+
+  .talks-more {
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem 0 0.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .talks-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-2);
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 500;
+    padding: 0.5rem 1.1rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .talks-toggle-btn:hover {
+    border-color: var(--border-hover);
+    color: var(--text);
+  }
+
+  .toggle-hide { display: none; }
+  .talks-toggle-btn[aria-expanded="true"] .toggle-show { display: none; }
+  .talks-toggle-btn[aria-expanded="true"] .toggle-hide { display: inline; }
+
+  .toggle-icon {
+    transition: transform 0.25s ease;
+  }
+  .talks-toggle-btn[aria-expanded="true"] .toggle-icon {
+    transform: rotate(180deg);
+  }
+
   @media (max-width: 700px) {
     .talk {
       grid-template-columns: 1fr;
@@ -225,3 +296,17 @@ import { talks, typeLabel } from '../data/talks';
     }
   }
 </style>
+
+<script>
+  const btn = document.getElementById('talks-toggle') as HTMLButtonElement | null;
+  const list = document.getElementById('talks-list');
+
+  btn?.addEventListener('click', () => {
+    const expanded = list?.classList.toggle('talks-expanded');
+    btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+
+    if (!expanded) {
+      document.getElementById('talks')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+</script>
