@@ -4,7 +4,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
-const updated = '2026-05-31';
+const updated = '2026-06-01';
 ---
 
 <Layout
@@ -65,12 +65,30 @@ const updated = '2026-05-31';
           <div class="now-content">
             <p>
               <span class="lang-es">
-                Proyectos propios y explorando el siguiente paso. Después de cuatro años construyendo en Ubidots, estoy enfocando energía en mis proyectos y en encontrar el contexto adecuado para el siguiente reto.
+                Construyendo <a href="https://avelor.es" target="_blank" rel="noopener">Avelor</a>, una suite de herramientas CLI para el desarrollo local. Cuatro utilidades en progreso:
               </span>
               <span class="lang-en">
-                Personal projects and exploring next steps. After four years building at Ubidots, I'm channeling energy into my own projects and finding the right context for the next challenge.
+                Building <a href="https://avelor.es" target="_blank" rel="noopener">Avelor</a>, a suite of CLI tools for local development. Four utilities in progress:
               </span>
             </p>
+            <ul>
+              <li>
+                <span class="lang-es"><strong>mesh</strong> — proxy local con nombres de servicio en lugar de puertos, e inyección de fallos sin mocks</span>
+                <span class="lang-en"><strong>mesh</strong> — local dev proxy with named services instead of ports, and failure injection without mocks</span>
+              </li>
+              <li>
+                <span class="lang-es"><strong>mock</strong> — intercepta cualquier URL (fetch, XHR, Node.js) sin tocar el código</span>
+                <span class="lang-en"><strong>mock</strong> — intercept any URL (fetch, XHR, Node.js) without touching your code</span>
+              </li>
+              <li>
+                <span class="lang-es"><strong>stale</strong> — detecta TODOs y FIXMEs viejos usando <code>git blame</code>, rompe CI cuando la deuda técnica se acumula</span>
+                <span class="lang-en"><strong>stale</strong> — finds aged TODO/FIXME markers via <code>git blame</code>, breaks CI when technical debt sits too long</span>
+              </li>
+              <li>
+                <span class="lang-es"><strong>whos</strong> — qué proceso está ocupando ese puerto</span>
+                <span class="lang-en"><strong>whos</strong> — what process is holding that port</span>
+              </li>
+            </ul>
           </div>
         </div>
 
@@ -257,5 +275,14 @@ const updated = '2026-05-31';
   .now-content a:hover {
     color: var(--accent);
     border-color: var(--accent);
+  }
+
+  .now-content code {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.82em;
+    background: rgba(130, 170, 255, 0.08);
+    color: var(--accent-light);
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
   }
 </style>
