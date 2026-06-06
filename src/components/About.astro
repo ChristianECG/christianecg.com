@@ -1,39 +1,33 @@
 ---
+import { useTranslations } from '../i18n';
+import type { Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
 ---
 
 <section id="about">
   <div class="container">
 
     <div class="about-header reveal">
-      <span class="section-eyebrow">
-        <span class="lang-es">Sobre mí</span>
-        <span class="lang-en">About me</span>
-      </span>
-      <h2 class="about-heading">
-        <span class="lang-es">El mejor código es el que nadie nota que existe.</span>
-        <span class="lang-en">The best code is the kind nobody notices exists.</span>
-      </h2>
+      <span class="section-eyebrow">{t('about.eyebrow')}</span>
+      <h2 class="about-heading">{t('about.heading')}</h2>
     </div>
 
     <div class="about-body reveal" style="--delay: 0.1s">
       <div class="about-bio">
-        <p class="lang-es">
-          Un dashboard que tarda 8 segundos en cargar es un bug que nadie llama bug.
-          Llevo años cazando exactamente esos.
-        </p>
-        <p class="lang-es">
-          Trabajé como Senior Engineer en <strong>Ubidots</strong>, una plataforma IoT con más de 150K usuarios
-          y millones de eventos en tiempo real. Fuera del código, soy speaker, mentor
-          y autor publicado en <strong>IEEE Xplore</strong>.
-        </p>
-        <p class="lang-en">
-          A dashboard that takes 8 seconds to load is a bug nobody calls a bug.
-          I've spent years hunting exactly those.
-        </p>
-        <p class="lang-en">
-          I worked as a Senior Engineer at <strong>Ubidots</strong>, an IoT platform with 150K+ users
-          and millions of real-time events. Outside of code, I'm a speaker, mentor,
-          and published author at <strong>IEEE Xplore</strong>.
+        <p>{t('about.bio_1')}</p>
+        <p>
+          {locale === 'en' ? (
+            <>I worked as a Senior Engineer at <strong>Ubidots</strong>, an IoT platform with 150K+ users and millions of real-time events. Outside of code, I'm a speaker, mentor, and published author at <strong>IEEE Xplore</strong>.</>
+          ) : locale === 'lat' ? (
+            <>Laboravi ut Faber Senior apud <strong>Ubidots</strong>, suggestum IoT cum CL milibus utentium et decies centenis milibus eventuum in tempore reali. Extra codicem, orator, monitor et auctor editus in <strong>IEEE Xplore</strong> sum.</>
+          ) : (
+            <>Trabajé como Senior Engineer en <strong>Ubidots</strong>, una plataforma IoT con más de 150K usuarios y millones de eventos en tiempo real. Fuera del código, soy speaker, mentor y autor publicado en <strong>IEEE Xplore</strong>.</>
+          )}
         </p>
       </div>
     </div>
@@ -41,22 +35,15 @@
     <div class="about-facts reveal" style="--delay: 0.2s">
       <div class="fact">
         <span class="fact-num" id="fact-count" data-target="150">150K+</span>
-        <span class="fact-label">
-          <span class="lang-es">usuarios activos diarios · código en producción</span>
-          <span class="lang-en">daily active users · production code</span>
-        </span>
+        <span class="fact-label">{t('about.fact_label_users')}</span>
       </div>
       <div class="fact">
-        <span class="fact-num lang-es">Comunidad</span>
-        <span class="fact-num lang-en">Community</span>
+        <span class="fact-num">{t('about.fact_label_community')}</span>
         <span class="fact-label">Speaker · Mentor · Google DSC Lead '20–'21</span>
       </div>
       <div class="fact">
         <span class="fact-num">IEEE Xplore</span>
-        <span class="fact-label">
-          <span class="lang-es">1 paper publicado</span>
-          <span class="lang-en">1 published paper</span>
-        </span>
+        <span class="fact-label">{t('about.fact_label_ieee')}</span>
       </div>
     </div>
 
@@ -108,9 +95,11 @@
     gap: 0.35rem;
     padding: 1.75rem 2rem 1.75rem 0;
     border-right: 1px solid var(--border);
+    transition: background 0.25s;
   }
   .fact:last-child { border-right: none; }
   .fact:not(:first-child) { padding-left: 2rem; }
+  .fact:hover { background: rgba(91, 140, 245, 0.025); }
 
   .fact-num {
     font-family: var(--font-heading);
@@ -127,17 +116,8 @@
     line-height: 1.5;
   }
 
-  .fact {
-    transition: background 0.25s;
-  }
-  .fact:hover {
-    background: rgba(91, 140, 245, 0.025);
-  }
-
   @media (max-width: 700px) {
-    .about-facts {
-      grid-template-columns: 1fr;
-    }
+    .about-facts { grid-template-columns: 1fr; }
     .fact {
       border-right: none;
       border-top: 1px solid var(--border);

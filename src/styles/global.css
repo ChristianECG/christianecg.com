@@ -72,7 +72,8 @@ img {
   max-width: 100%;
 }
 
-/* i18n visibility */
+
+/* Legacy i18n visibility — used by /projects, /talks, /papers pages not yet on locale routing */
 html:not([lang="en"]) .lang-en,
 html[lang="en"] .lang-es {
   display: none !important;

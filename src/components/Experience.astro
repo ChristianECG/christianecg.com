@@ -1,4 +1,14 @@
 ---
+import { useTranslations, dataLang } from '../i18n';
+import type { Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const lang = dataLang(locale);
+
 const jobs = [
   {
     company: "Ubidots",
@@ -6,7 +16,6 @@ const jobs = [
     role_es: "Ingeniero de Software Senior — Frontend & Mobile",
     role_en: "Senior Software Engineer — Frontend & Mobile",
     period: "Feb 2024 — May 2026",
-    period_es: "Feb 2024 — May 2026",
     current: false,
     caseStudy: "/projects/ubidots",
     bullets_es: [
@@ -28,7 +37,6 @@ const jobs = [
     role_es: "Ingeniero Frontend Mid-Level",
     role_en: "Mid-level Frontend Engineer",
     period: "Jun 2022 — Feb 2024",
-    period_es: "Jun 2022 — Feb 2024",
     current: false,
     bullets_es: [
       "Implementé módulo de pagos con Stripe y migré el sistema de fetching a TanStack Query, eliminando estados duplicados y habilitando la conversión directa de freemium a pago.",
@@ -47,7 +55,6 @@ const jobs = [
     role_es: "Frontend Developer",
     role_en: "Frontend Developer",
     period: "Jul 2021 — Jun 2022",
-    period_es: "Jul 2021 — Jun 2022",
     current: false,
     bullets_es: [
       "Desarrollé interfaces para +20 proyectos de clientes usando React, Vue y PHP.",
@@ -66,7 +73,6 @@ const jobs = [
     role_es: "Developer Student Club Lead",
     role_en: "Developer Student Club Lead",
     period: "Ago 2020 — Jul 2021",
-    period_es: "Ago 2020 — Jul 2021",
     current: false,
     bullets_es: [
       "Lideré una comunidad tecnológica estudiantil de +60 miembros.",
@@ -87,50 +93,34 @@ const jobs = [
 <section id="experience">
   <div class="container">
     <div class="exp-header reveal">
-      <span class="section-eyebrow">
-        <span class="lang-es">Experiencia</span>
-        <span class="lang-en">Experience</span>
-      </span>
-      <h2 class="section-title">
-        <span class="lang-es">Dónde he trabajado</span>
-        <span class="lang-en">Where I've worked</span>
-      </h2>
+      <span class="section-eyebrow">{t('experience.eyebrow')}</span>
+      <h2 class="section-title">{t('experience.heading')}</h2>
     </div>
 
     <div class="jobs">
       {jobs.map((job, i) => (
         <div class="job reveal" style={`--delay: ${i * 0.07}s`}>
           <div class="job-left">
-            <span class="job-period lang-es">{job.period_es}</span>
-            <span class="job-period lang-en">{job.period}</span>
+            <span class="job-period">{job.period}</span>
             <a href={job.url} target="_blank" rel="noopener" class="job-company">
               {job.company}
             </a>
           </div>
           <div class="job-right">
             <div class="job-title-row">
-              <h3 class="job-role">
-                <span class="lang-es">{job.role_es}</span>
-                <span class="lang-en">{job.role_en}</span>
-              </h3>
+              <h3 class="job-role">{lang === 'en' ? job.role_en : job.role_es}</h3>
               {job.current && (
-                <span class="job-current">
-                  <span class="lang-es">Actual</span>
-                  <span class="lang-en">Current</span>
-                </span>
+                <span class="job-current">{t('experience.current')}</span>
               )}
             </div>
             <ul class="job-bullets">
-              {job.bullets_es.map((b) => (
-                <li class="lang-es">{b}</li>
-              ))}
-              {job.bullets_en.map((b) => (
-                <li class="lang-en">{b}</li>
+              {(lang === 'en' ? job.bullets_en : job.bullets_es).map((b) => (
+                <li>{b}</li>
               ))}
             </ul>
             {job.caseStudy && (
               <a href={job.caseStudy} class="job-case-study">
-                Case study
+                {t('experience.case_study')}
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
             )}

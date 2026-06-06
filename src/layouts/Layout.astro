@@ -1,41 +1,56 @@
 ---
+import { useTranslations, getLocaleFromUrl } from '../i18n';
+import type { Locale } from '../i18n';
+
 interface Props {
   title?: string;
   description?: string;
-  ogType?: "website" | "article";
+  ogType?: 'website' | 'article';
   ogImage?: string;
   jsonLd?: Record<string, unknown>;
+  locale?: Locale;
 }
 
 const {
-  title = "Christian Elías Cruz González — Senior Software Engineer",
-  description = "Senior Software Engineer specializing in high-performance React interfaces, mobile apps, and real-time IoT platforms.",
-  ogType = "website",
-  ogImage = "https://christianecg.com/og/default.png",
+  title = 'Christian Elías Cruz González — Senior Software Engineer',
+  description = 'Senior Software Engineer specializing in high-performance React interfaces, mobile apps, and real-time IoT platforms.',
+  ogType = 'website',
+  ogImage = 'https://christianecg.com/og/default.png',
   jsonLd,
+  locale: localeProp,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, "https://christianecg.com").href;
+const locale: Locale = localeProp ?? getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+const base = 'https://christianecg.com';
+const slug = Astro.url.pathname.replace(/^\/(es|en|lat)/, '');
+const canonicalURL = new URL(Astro.url.pathname, base).href;
+const hrefEs  = new URL(`/es${slug}`,  base).href;
+const hrefEn  = new URL(`/en${slug}`,  base).href;
+
+const ogLocale = locale === 'en' ? 'en_US' : 'es_MX';
+const ogLocaleAlt = locale === 'en' ? 'es_MX' : 'en_US';
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="author" content="Christian Elías Cruz González" />
     <link rel="canonical" href={canonicalURL} />
-    <link rel="alternate" hreflang="es" href={canonicalURL} />
-    <link rel="alternate" hreflang="en" href={canonicalURL} />
-    <link rel="alternate" hreflang="x-default" href={canonicalURL} />
+    <link rel="alternate" hreflang="es" href={hrefEs} />
+    <link rel="alternate" hreflang="en" href={hrefEn} />
+    <link rel="alternate" hreflang="x-default" href={hrefEs} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:type" content={ogType} />
-    <meta property="og:locale" content="es_MX" />
-    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocaleAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -45,12 +60,6 @@ const canonicalURL = new URL(Astro.url.pathname, "https://christianecg.com").hre
     <link rel="alternate" type="application/feed+json" title="Christian Elías — Blog (JSON)" href="/feed.json" />
     <link rel="search" type="application/opensearchdescription+xml" title="christianecg.com" href="/opensearch.xml" />
     {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/<\/script>/gi, '<\\/script>')} />}
-    <script is:inline>
-      (function () {
-        var lang = localStorage.getItem('lang') || 'es';
-        document.documentElement.lang = lang;
-      })();
-    </script>
     <script is:inline defer src="https://analytics.avelor.es/av.js" data-project="christianecg"></script>
     <title>{title}</title>
     <slot name="head" />
@@ -58,27 +67,10 @@ const canonicalURL = new URL(Astro.url.pathname, "https://christianecg.com").hre
   <body>
     <div class="noise-overlay" aria-hidden="true"></div>
     <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
-    <a href="#main-content" class="skip-link">
-      <span class="lang-es">Saltar al contenido</span>
-      <span class="lang-en">Skip to content</span>
-    </a>
+    <a href="#main-content" class="skip-link">{t('layout.skip_to_content')}</a>
     <slot />
-    <button class="back-to-top" id="back-to-top" aria-label="Volver arriba">↑</button>
+    <button class="back-to-top" id="back-to-top" aria-label={t('layout.back_to_top')}>↑</button>
     <script>
-      const savedLang = localStorage.getItem('lang') || 'es';
-
-      (window as any).setLang = function (lang: string) {
-        localStorage.setItem('lang', lang);
-        document.documentElement.lang = lang;
-        document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
-          (btn as HTMLElement).dataset.langBtn === lang
-            ? btn.classList.add('active')
-            : btn.classList.remove('active');
-        });
-        const bttEl = document.getElementById('back-to-top');
-        if (bttEl) bttEl.setAttribute('aria-label', lang === 'es' ? 'Volver arriba' : 'Back to top');
-      };
-
       // Scroll reveal
       const observer = new IntersectionObserver(
         (entries) => {
@@ -92,7 +84,6 @@ const canonicalURL = new URL(Astro.url.pathname, "https://christianecg.com").hre
         { threshold: 0.08, rootMargin: '0px 0px -48px 0px' }
       );
       document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-      (window as any).setLang(savedLang);
 
       // Back to top + scroll hint hide
       const btt = document.getElementById('back-to-top') as HTMLButtonElement;

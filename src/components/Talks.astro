@@ -1,79 +1,70 @@
 ---
-import { talks, typeLabel } from '../data/talks';
+import { useTranslations, dataLang } from '../i18n';
+import type { Locale } from '../i18n';
+import { talks } from '../data/talks';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const lang = dataLang(locale);
 
 const CURRENT_THRESHOLD = 2025;
-const olderCount = talks.filter(t => parseInt(t.date_es.split(' ').pop() ?? '0') < CURRENT_THRESHOLD).length;
+const olderCount = talks.filter(tk => parseInt(tk.date_es.split(' ').pop() ?? '0') < CURRENT_THRESHOLD).length;
 ---
 
 <section id="talks">
   <div class="container">
     <div class="talks-header reveal">
-      <span class="section-eyebrow">
-        <span class="lang-es">Apariciones públicas</span>
-        <span class="lang-en">Public appearances</span>
-      </span>
-      <h2 class="section-title">
-        <span class="lang-es">Charlas &amp; eventos</span>
-        <span class="lang-en">Talks &amp; events</span>
-      </h2>
+      <span class="section-eyebrow">{t('talks.eyebrow')}</span>
+      <h2 class="section-title" set:html={t('talks.heading')}></h2>
     </div>
 
     <div class="talks-list" id="talks-list">
-      {talks.map((t, i) => {
-        const year = parseInt(t.date_es.split(' ').pop() ?? '0');
+      {talks.map((tk, i) => {
+        const year = parseInt(tk.date_es.split(' ').pop() ?? '0');
         const isOlder = year < CURRENT_THRESHOLD;
         return (
         <div class={`talk reveal${isOlder ? ' talk--older' : ''}`} style={`--delay: ${i * 0.04}s`} aria-hidden={isOlder ? 'true' : undefined}>
-          <span class="talk-date">
-            <span class="lang-es">{t.date_es}</span>
-            <span class="lang-en">{t.date_en}</span>
-          </span>
+          <span class="talk-date">{lang === 'en' ? tk.date_en : tk.date_es}</span>
           <div class="talk-body">
             <div class="talk-title-row">
-              <span class={`talk-badge talk-badge--${t.type}`}>
-                <span class="lang-es">{typeLabel[t.type].es}</span>
-                <span class="lang-en">{typeLabel[t.type].en}</span>
+              <span class={`talk-badge talk-badge--${tk.type}`}>
+                {t(`talks.type.${tk.type}`)}
               </span>
-              {t.url ? (
-                <a href={t.url} target="_blank" rel="noopener" class="talk-title talk-title--link">
-                  <span class="lang-es">{t.title_es}</span>
-                  <span class="lang-en">{t.title_en}</span>
+              {tk.url ? (
+                <a href={tk.url} target="_blank" rel="noopener" class="talk-title talk-title--link">
+                  {lang === 'en' ? tk.title_en : tk.title_es}
                   <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                   </svg>
                 </a>
               ) : (
-                <span class="talk-title">
-                  <span class="lang-es">{t.title_es}</span>
-                  <span class="lang-en">{t.title_en}</span>
-                </span>
+                <span class="talk-title">{lang === 'en' ? tk.title_en : tk.title_es}</span>
               )}
             </div>
             <div class="talk-footer">
-              {t.slug && t.slides && (
-                <a href={`/talks/${t.slug}`} class="talk-slides-link">
+              {tk.slug && tk.slides && (
+                <a href={`/talks/${tk.slug}`} class="talk-slides-link">
                   <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
                     <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/>
                   </svg>
-                  <span class="lang-es">Ver slides</span>
-                  <span class="lang-en">View slides</span>
+                  {t('talks.view_slides')}
                 </a>
               )}
-              {t.paper && (
-                <a href={t.paper} class="talk-slides-link">
+              {tk.paper && (
+                <a href={tk.paper} class="talk-slides-link">
                   <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
                   </svg>
-                  <span class="lang-es">Ver paper</span>
-                  <span class="lang-en">View paper</span>
+                  {t('talks.view_paper')}
                 </a>
               )}
               <span class="talk-event">
-                <span class="lang-es">{t.event_es}</span>
-                <span class="lang-en">{t.event_en}</span>
+                {lang === 'en' ? tk.event_en : tk.event_es}
                 <span class="talk-format">
-                  · <span class="lang-es">{t.format === "online" ? "Online" : "Presencial"}</span>
-                    <span class="lang-en">{t.format === "online" ? "Online" : "In person"}</span>
+                  · {tk.format === 'online' ? 'Online' : t('talks.format_in_person')}
                 </span>
               </span>
             </div>
@@ -87,13 +78,9 @@ const olderCount = talks.filter(t => parseInt(t.date_es.split(' ').pop() ?? '0')
       <div class="talks-more">
         <button id="talks-toggle" class="talks-toggle-btn" aria-expanded="false">
           <span class="toggle-show">
-            <span class="lang-es">Ver {olderCount} anteriores</span>
-            <span class="lang-en">Show {olderCount} older</span>
+            {t('talks.show_older').replace('%d', String(olderCount))}
           </span>
-          <span class="toggle-hide">
-            <span class="lang-es">Ver menos</span>
-            <span class="lang-en">Show less</span>
-          </span>
+          <span class="toggle-hide">{t('talks.show_less')}</span>
           <svg class="toggle-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
             <path d="M6 9l6 6 6-6"/>
           </svg>
@@ -106,11 +93,7 @@ const olderCount = talks.filter(t => parseInt(t.date_es.split(' ').pop() ?? '0')
 
 <style>
   .talks-header { margin-bottom: 0; }
-
-  .talks-list {
-    display: flex;
-    flex-direction: column;
-  }
+  .talks-list { display: flex; flex-direction: column; }
 
   .talk {
     display: grid;
@@ -130,27 +113,9 @@ const olderCount = talks.filter(t => parseInt(t.date_es.split(' ').pop() ?? '0')
     box-shadow: inset 3px 0 0 var(--accent);
   }
 
-  .talk-date {
-    font-size: 0.76rem;
-    color: var(--text-3);
-    font-weight: 500;
-    letter-spacing: 0.01em;
-    padding-top: 0.15rem;
-    white-space: nowrap;
-  }
-
-  .talk-body {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-
-  .talk-title-row {
-    display: flex;
-    align-items: baseline;
-    gap: 0.65rem;
-    flex-wrap: wrap;
-  }
+  .talk-date { font-size: 0.76rem; color: var(--text-3); font-weight: 500; letter-spacing: 0.01em; padding-top: 0.15rem; white-space: nowrap; }
+  .talk-body { display: flex; flex-direction: column; gap: 0.3rem; }
+  .talk-title-row { display: flex; align-items: baseline; gap: 0.65rem; flex-wrap: wrap; }
 
   .talk-badge {
     font-size: 0.62rem;
@@ -162,69 +127,20 @@ const olderCount = talks.filter(t => parseInt(t.date_es.split(' ').pop() ?? '0')
     flex-shrink: 0;
     white-space: nowrap;
   }
+  .talk-badge--keynote { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent-dim); }
+  .talk-badge--talk { background: transparent; color: var(--text-3); border: 1px solid var(--border); }
+  .talk-badge--mentor { background: transparent; color: var(--text-2); border: 1px solid var(--border); }
+  .talk-badge--media { background: transparent; color: var(--text-3); border: 1px solid var(--border); font-style: italic; }
 
-  .talk-badge--keynote {
-    background: var(--accent-dim);
-    color: var(--accent);
-    border: 1px solid var(--accent-dim);
-  }
-  .talk-badge--talk {
-    background: transparent;
-    color: var(--text-3);
-    border: 1px solid var(--border);
-  }
-  .talk-badge--mentor {
-    background: transparent;
-    color: var(--text-2);
-    border: 1px solid var(--border);
-  }
-  .talk-badge--media {
-    background: transparent;
-    color: var(--text-3);
-    border: 1px solid var(--border);
-    font-style: italic;
-  }
-
-  .talk-title {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1.4;
-  }
-
-  .talk-title--link {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0.3rem;
-    transition: color 0.2s;
-    text-decoration: none;
-  }
+  .talk-title { font-size: 0.9rem; font-weight: 600; color: var(--text); line-height: 1.4; }
+  .talk-title--link { display: inline-flex; align-items: baseline; gap: 0.3rem; transition: color 0.2s; text-decoration: none; }
   .talk-title--link:hover { color: var(--accent); }
-  .talk-title--link svg {
-    flex-shrink: 0;
-    position: relative;
-    top: 0.05em;
-    transition: transform 0.2s;
-  }
+  .talk-title--link svg { flex-shrink: 0; position: relative; top: 0.05em; transition: transform 0.2s; }
   .talk-title--link:hover svg { transform: translateX(3px); }
 
-  .talk-footer {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .talk-event {
-    font-size: 0.8rem;
-    color: var(--text-3);
-    font-weight: 400;
-    line-height: 1.5;
-  }
-
-  .talk-format {
-    color: var(--text-3);
-  }
+  .talk-footer { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+  .talk-event { font-size: 0.8rem; color: var(--text-3); font-weight: 400; line-height: 1.5; }
+  .talk-format { color: var(--text-3); }
 
   .talk-slides-link {
     display: inline-flex;
@@ -240,19 +156,10 @@ const olderCount = talks.filter(t => parseInt(t.date_es.split(' ').pop() ?? '0')
   }
   .talk-slides-link:hover { opacity: 0.7; }
 
-  .talk--older {
-    display: none;
-  }
-  .talks-list.talks-expanded .talk--older {
-    display: grid;
-  }
+  .talk--older { display: none; }
+  .talks-list.talks-expanded .talk--older { display: grid; }
 
-  .talks-more {
-    display: flex;
-    justify-content: center;
-    padding: 1.5rem 0 0.5rem;
-    border-top: 1px solid var(--border);
-  }
+  .talks-more { display: flex; justify-content: center; padding: 1.5rem 0 0.5rem; border-top: 1px solid var(--border); }
 
   .talks-toggle-btn {
     display: inline-flex;
@@ -269,31 +176,18 @@ const olderCount = talks.filter(t => parseInt(t.date_es.split(' ').pop() ?? '0')
     cursor: pointer;
     transition: border-color 0.2s, color 0.2s;
   }
-  .talks-toggle-btn:hover {
-    border-color: var(--border-hover);
-    color: var(--text);
-  }
+  .talks-toggle-btn:hover { border-color: var(--border-hover); color: var(--text); }
 
   .toggle-hide { display: none; }
   .talks-toggle-btn[aria-expanded="true"] .toggle-show { display: none; }
   .talks-toggle-btn[aria-expanded="true"] .toggle-hide { display: inline; }
 
-  .toggle-icon {
-    transition: transform 0.25s ease;
-  }
-  .talks-toggle-btn[aria-expanded="true"] .toggle-icon {
-    transform: rotate(180deg);
-  }
+  .toggle-icon { transition: transform 0.25s ease; }
+  .talks-toggle-btn[aria-expanded="true"] .toggle-icon { transform: rotate(180deg); }
 
   @media (max-width: 700px) {
-    .talk {
-      grid-template-columns: 1fr;
-      gap: 0.5rem;
-      padding: 1.25rem 0;
-    }
-    .talk-date {
-      font-size: 0.72rem;
-    }
+    .talk { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.25rem 0; }
+    .talk-date { font-size: 0.72rem; }
   }
 </style>
 
@@ -304,7 +198,6 @@ const olderCount = talks.filter(t => parseInt(t.date_es.split(' ').pop() ?? '0')
   btn?.addEventListener('click', () => {
     const expanded = list?.classList.toggle('talks-expanded');
     btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-
     if (!expanded) {
       document.getElementById('talks')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }

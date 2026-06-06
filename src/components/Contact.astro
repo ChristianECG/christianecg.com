@@ -1,26 +1,21 @@
 ---
+import { useTranslations } from '../i18n';
+import type { Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
 ---
 
 <section id="contact">
   <div class="container">
     <div class="contact-inner">
       <div class="contact-left reveal" style="--reveal-x: -24px; --reveal-y: 0px">
-        <span class="section-eyebrow">
-          <span class="lang-es">Contacto</span>
-          <span class="lang-en">Contact</span>
-        </span>
-        <h2 class="contact-heading">
-          <span class="lang-es">¿Trabajamos juntos?</span>
-          <span class="lang-en">Let's work together.</span>
-        </h2>
-        <p class="contact-sub">
-          <span class="lang-es">
-            Busco posición full-time remota. También doy charlas técnicas para comunidades, sin costo.
-          </span>
-          <span class="lang-en">
-            Looking for full-time remote positions. Open to community tech talks at no cost.
-          </span>
-        </p>
+        <span class="section-eyebrow">{t('contact.eyebrow')}</span>
+        <h2 class="contact-heading">{t('contact.heading')}</h2>
+        <p class="contact-sub">{t('contact.sub')}</p>
       </div>
 
       <div class="contact-links reveal" style="--reveal-x: 24px; --reveal-y: 0px; --delay: 0.12s">
@@ -45,10 +40,9 @@
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
         </a>
-        <a href="/cv" class="contact-link">
+        <a href={`/${locale}/cv`} class="contact-link">
           <span class="cl-label">CV</span>
-          <span class="cl-value lang-es">Ver currículum</span>
-          <span class="cl-value lang-en">View résumé</span>
+          <span class="cl-value">{t('contact.cv_label')}</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
@@ -59,28 +53,26 @@
 </section>
 
 <style>
-  #contact {
-    border-top: 1px solid var(--border);
-  }
-
   .contact-inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
+    gap: 6rem;
+    align-items: start;
+    padding: 5rem 0;
   }
 
   .contact-heading {
-    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
-    font-weight: 800;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700;
     color: var(--text);
-    letter-spacing: -0.03em;
-    margin: 0.75rem 0 1rem;
-    line-height: 1.05;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-top: 0.75rem;
+    margin-bottom: 1rem;
   }
 
   .contact-sub {
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     color: var(--text-2);
     line-height: 1.7;
   }
@@ -88,6 +80,7 @@
   .contact-links {
     display: flex;
     flex-direction: column;
+    gap: 0;
     --delay: 0s;
     transition-delay: var(--delay);
   }
@@ -96,46 +89,39 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 1.5rem 1rem 1.5rem 0.75rem;
-    border-top: 1px solid var(--border);
-    transition: color 0.2s, background 0.25s, box-shadow 0.25s;
-    color: var(--text);
+    padding: 1.1rem 0.6rem;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s, box-shadow 0.2s;
     border-radius: 4px;
   }
-  .contact-link:last-child { border-bottom: 1px solid var(--border); }
-  .contact-link:hover {
-    color: var(--accent);
-    background: rgba(91, 140, 245, 0.03);
-    box-shadow: inset 3px 0 0 var(--accent);
-  }
-
-  .contact-link svg {
-    margin-left: auto;
-    flex-shrink: 0;
-    color: var(--text-3);
-    transition: transform 0.2s, color 0.2s;
-  }
-  .contact-link:hover svg {
-    transform: translateX(4px);
-    color: var(--accent);
-  }
+  .contact-link:first-child { border-top: 1px solid var(--border); }
+  .contact-link:hover { background: rgba(91, 140, 245, 0.03); box-shadow: inset 3px 0 0 var(--accent); }
 
   .cl-label {
-    font-size: 0.72rem;
-    font-weight: 600;
+    font-size: 0.68rem;
+    font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--text-3);
-    width: 70px;
-    flex-shrink: 0;
+    min-width: 60px;
   }
 
   .cl-value {
     font-size: 0.9rem;
     font-weight: 500;
+    color: var(--text-2);
+    flex: 1;
+    transition: color 0.2s;
   }
+  .contact-link:hover .cl-value { color: var(--text); }
 
-  @media (max-width: 900px) {
-    .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .contact-link svg {
+    color: var(--text-3);
+    transition: transform 0.2s, color 0.2s;
+  }
+  .contact-link:hover svg { transform: translateX(3px); color: var(--accent); }
+
+  @media (max-width: 768px) {
+    .contact-inner { grid-template-columns: 1fr; gap: 3rem; padding: 3rem 0; }
   }
 </style>

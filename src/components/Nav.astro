@@ -1,36 +1,56 @@
 ---
+import { useTranslations, getLocaleFromUrl } from '../i18n';
+import type { Locale } from '../i18n';
+
+interface Props {
+  locale?: Locale;
+}
+const { locale: localeProp } = Astro.props;
+const locale: Locale = localeProp ?? getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+// Keep the current path when switching locales
+const slug = Astro.url.pathname.replace(/^\/(es|en|lat)/, '') || '/';
 ---
 
 <nav class="nav">
   <div class="nav-progress" id="nav-progress" aria-hidden="true"></div>
   <div class="container nav-inner">
-    <a href="/" class="nav-logo">cecg</a>
+    <a href={`/${locale}/`} class="nav-logo">cecg</a>
 
     <ul class="nav-links">
-      <li><a href="/#about"><span class="lang-es">Sobre mí</span><span class="lang-en">About</span></a></li>
-      <li><a href="/#experience"><span class="lang-es">Experiencia</span><span class="lang-en">Experience</span></a></li>
-      <li><a href="/#education"><span class="lang-es">Educación</span><span class="lang-en">Education</span></a></li>
-      <li><a href="/#skills"><span class="lang-es">Habilidades</span><span class="lang-en">Skills</span></a></li>
-      <li><a href="/#projects"><span class="lang-es">Proyectos</span><span class="lang-en">Projects</span></a></li>
-      <li><a href="/#talks"><span class="lang-es">Charlas</span><span class="lang-en">Talks</span></a></li>
-      <li><a href="/#contact"><span class="lang-es">Contacto</span><span class="lang-en">Contact</span></a></li>
+      <li><a href={`/${locale}/#about`}>{t('nav.about')}</a></li>
+      <li><a href={`/${locale}/#experience`}>{t('nav.experience')}</a></li>
+      <li><a href={`/${locale}/#education`}>{t('nav.education')}</a></li>
+      <li><a href={`/${locale}/#skills`}>{t('nav.skills')}</a></li>
+      <li><a href={`/${locale}/#projects`}>{t('nav.projects')}</a></li>
+      <li><a href={`/${locale}/#talks`}>{t('nav.talks')}</a></li>
+      <li><a href={`/${locale}/#contact`}>{t('nav.contact')}</a></li>
     </ul>
 
     <div class="nav-right">
       <div class="lang-toggle">
-        <button
-          class="lang-btn active"
-          data-lang-btn="es"
-          onclick="window.setLang('es')"
+        <a
+          href={`/es${slug}`}
+          class:list={['lang-btn', { active: locale === 'es' }]}
           aria-label="Español"
-        >ES</button>
+          aria-current={locale === 'es' ? 'true' : undefined}
+        >ES</a>
         <span class="lang-sep">/</span>
-        <button
-          class="lang-btn"
-          data-lang-btn="en"
-          onclick="window.setLang('en')"
+        <a
+          href={`/en${slug}`}
+          class:list={['lang-btn', { active: locale === 'en' }]}
           aria-label="English"
-        >EN</button>
+          aria-current={locale === 'en' ? 'true' : undefined}
+        >EN</a>
+        <span class="lang-sep">/</span>
+        <a
+          href={`/lat${slug}`}
+          class:list={['lang-btn', 'lang-btn--lat', { active: locale === 'lat' }]}
+          aria-label="Latina"
+          aria-current={locale === 'lat' ? 'true' : undefined}
+          title="Latina (Easter egg)"
+        >LAT</a>
       </div>
 
       <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
@@ -42,16 +62,16 @@
 
 <div class="nav-mobile-menu" id="nav-mobile-menu">
   <ul>
-    <li><a href="/#about" onclick="closeMobileMenu()"><span class="lang-es">Sobre mí</span><span class="lang-en">About</span></a></li>
-    <li><a href="/#experience" onclick="closeMobileMenu()"><span class="lang-es">Experiencia</span><span class="lang-en">Experience</span></a></li>
-    <li><a href="/#education" onclick="closeMobileMenu()"><span class="lang-es">Educación</span><span class="lang-en">Education</span></a></li>
-    <li><a href="/#skills" onclick="closeMobileMenu()"><span class="lang-es">Habilidades</span><span class="lang-en">Skills</span></a></li>
-    <li><a href="/#projects" onclick="closeMobileMenu()"><span class="lang-es">Proyectos</span><span class="lang-en">Projects</span></a></li>
-    <li><a href="/#talks" onclick="closeMobileMenu()"><span class="lang-es">Charlas</span><span class="lang-en">Talks</span></a></li>
-    <li><a href="/#contact" onclick="closeMobileMenu()"><span class="lang-es">Contacto</span><span class="lang-en">Contact</span></a></li>
-    <li><a href="/blog" onclick="closeMobileMenu()">Blog</a></li>
-    <li><a href="/now" onclick="closeMobileMenu()">Now</a></li>
-    <li><a href="/manifiesto" onclick="closeMobileMenu()">Manifiesto</a></li>
+    <li><a href={`/${locale}/#about`} onclick="closeMobileMenu()">{t('nav.about')}</a></li>
+    <li><a href={`/${locale}/#experience`} onclick="closeMobileMenu()">{t('nav.experience')}</a></li>
+    <li><a href={`/${locale}/#education`} onclick="closeMobileMenu()">{t('nav.education')}</a></li>
+    <li><a href={`/${locale}/#skills`} onclick="closeMobileMenu()">{t('nav.skills')}</a></li>
+    <li><a href={`/${locale}/#projects`} onclick="closeMobileMenu()">{t('nav.projects')}</a></li>
+    <li><a href={`/${locale}/#talks`} onclick="closeMobileMenu()">{t('nav.talks')}</a></li>
+    <li><a href={`/${locale}/#contact`} onclick="closeMobileMenu()">{t('nav.contact')}</a></li>
+    <li><a href={`/${locale}/blog`} onclick="closeMobileMenu()">{t('nav.blog')}</a></li>
+    <li><a href={`/${locale}/now`} onclick="closeMobileMenu()">{t('nav.now')}</a></li>
+    <li><a href={`/${locale}/manifiesto`} onclick="closeMobileMenu()">{t('nav.manifiesto')}</a></li>
   </ul>
 </div>
 
@@ -74,8 +94,9 @@
   const secObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
+      const id = entry.target.id;
       navAnchors.forEach((a) => {
-        a.classList.toggle('nav-active', a.getAttribute('href') === `/#${entry.target.id}`);
+        a.classList.toggle('nav-active', a.getAttribute('href')?.endsWith(`#${id}`) ?? false);
       });
     });
   }, { rootMargin: '-20% 0px -70% 0px' });
@@ -182,12 +203,18 @@
     padding: 4px 8px;
     border-radius: 4px;
     transition: all 0.2s;
+    text-decoration: none;
   }
   .lang-btn.active {
     background: var(--accent);
     color: #fff;
   }
   .lang-btn:not(.active):hover { color: var(--text); }
+
+  .lang-btn--lat {
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+  }
 
   .lang-sep { color: var(--text-3); font-size: 0.7rem; display: none; }
 

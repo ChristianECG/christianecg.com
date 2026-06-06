@@ -1,4 +1,13 @@
 ---
+import { useTranslations, getLocaleFromUrl } from '../i18n';
+import type { Locale } from '../i18n';
+
+interface Props {
+  locale?: Locale;
+}
+const { locale: localeProp } = Astro.props;
+const locale: Locale = localeProp ?? getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
 const year = new Date().getFullYear();
 ---
 
@@ -7,54 +16,39 @@ const year = new Date().getFullYear();
 
     <div class="footer-brand">
       <p class="footer-logo">cecg</p>
-      <p class="footer-tagline">
-        <span class="lang-es">Ingeniero de Software Senior</span>
-        <span class="lang-en">Senior Software Engineer</span>
-      </p>
+      <p class="footer-tagline">{t('footer.tagline')}</p>
     </div>
 
     <nav class="footer-cols">
 
       <div class="footer-col">
-        <p class="footer-col-label">
-          <span class="lang-es">Navegación</span>
-          <span class="lang-en">Navigation</span>
-        </p>
+        <p class="footer-col-label">{t('footer.nav_label')}</p>
         <ul>
-          <li><a href="/#about"><span class="lang-es">Sobre mí</span><span class="lang-en">About</span></a></li>
-          <li><a href="/#experience"><span class="lang-es">Experiencia</span><span class="lang-en">Experience</span></a></li>
-          <li><a href="/#education"><span class="lang-es">Educación</span><span class="lang-en">Education</span></a></li>
-          <li><a href="/#skills"><span class="lang-es">Habilidades</span><span class="lang-en">Skills</span></a></li>
-          <li><a href="/#projects"><span class="lang-es">Proyectos</span><span class="lang-en">Projects</span></a></li>
-          <li><a href="/#talks"><span class="lang-es">Charlas</span><span class="lang-en">Talks</span></a></li>
-          <li><a href="/#contact"><span class="lang-es">Contacto</span><span class="lang-en">Contact</span></a></li>
+          <li><a href={`/${locale}/#about`}>{t('nav.about')}</a></li>
+          <li><a href={`/${locale}/#experience`}>{t('nav.experience')}</a></li>
+          <li><a href={`/${locale}/#education`}>{t('nav.education')}</a></li>
+          <li><a href={`/${locale}/#skills`}>{t('nav.skills')}</a></li>
+          <li><a href={`/${locale}/#projects`}>{t('nav.projects')}</a></li>
+          <li><a href={`/${locale}/#talks`}>{t('nav.talks')}</a></li>
+          <li><a href={`/${locale}/#contact`}>{t('nav.contact')}</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <p class="footer-col-label">
-          <span class="lang-es">Páginas</span>
-          <span class="lang-en">Pages</span>
-        </p>
+        <p class="footer-col-label">{t('footer.pages_label')}</p>
         <ul>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/now">Now</a></li>
-          <li><a href="/cv">CV</a></li>
-          <li><a href="/manifiesto">Manifiesto</a></li>
-          <li><a href="/search">
-            <span class="lang-es">Buscar</span>
-            <span class="lang-en">Search</span>
-          </a></li>
+          <li><a href={`/${locale}/blog`}>{t('nav.blog')}</a></li>
+          <li><a href={`/${locale}/now`}>{t('nav.now')}</a></li>
+          <li><a href={`/${locale}/cv`}>CV</a></li>
+          <li><a href={`/${locale}/manifiesto`}>{t('nav.manifiesto')}</a></li>
+          <li><a href={`/${locale}/search`}>{t('footer.search')}</a></li>
           <li><a href="/rss.xml">RSS</a></li>
           <li><a href="/feed.json">JSON Feed</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <p class="footer-col-label">
-          <span class="lang-es">Contacto</span>
-          <span class="lang-en">Contact</span>
-        </p>
+        <p class="footer-col-label">{t('footer.contact_label')}</p>
         <ul>
           <li><a href="https://github.com/ChristianECG" target="_blank" rel="noopener">GitHub</a></li>
           <li><a href="https://www.linkedin.com/in/christianeliascg/" target="_blank" rel="noopener">LinkedIn</a></li>
@@ -68,10 +62,7 @@ const year = new Date().getFullYear();
 
   <div class="footer-bottom">
     <div class="container">
-      <p>
-        <span class="lang-es">© {year} Christian Elías Cruz González. Diseñado y construido con cuidado.</span>
-        <span class="lang-en">© {year} Christian Elías Cruz González. Designed and built with care.</span>
-      </p>
+      <p>© {year} Christian Elías Cruz González. {t('footer.copyright_suffix')}</p>
     </div>
   </div>
 </footer>

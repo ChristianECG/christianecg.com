@@ -1,19 +1,22 @@
 ---
+import { useTranslations, dataLang } from '../i18n';
+import type { Locale } from '../i18n';
 import projectsData from '../data/projects.json';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const lang = dataLang(locale);
 
 const { projects } = projectsData;
 ---
 
 <section id="projects">
   <div class="container">
-    <span class="section-eyebrow reveal">
-      <span class="lang-es">Proyectos</span>
-      <span class="lang-en">Projects</span>
-    </span>
-    <h2 class="section-title reveal">
-      <span class="lang-es">Lo que he construido</span>
-      <span class="lang-en">Things I've built</span>
-    </h2>
+    <span class="section-eyebrow reveal">{t('projects.eyebrow')}</span>
+    <h2 class="section-title reveal">{t('projects.heading')}</h2>
 
     {projects.length === 0 ? (
       <div class="projects-empty reveal">
@@ -23,14 +26,8 @@ const { projects } = projectsData;
             <path d="M12 3v18M3 7l9 4 9-4"/>
           </svg>
         </div>
-        <p class="empty-title">
-          <span class="lang-es">Proyectos en camino</span>
-          <span class="lang-en">Projects on the way</span>
-        </p>
-        <p class="empty-sub">
-          <span class="lang-es">Estoy preparando esta sección. Vuelve pronto.</span>
-          <span class="lang-en">Working on this section. Check back soon.</span>
-        </p>
+        <p class="empty-title">{t('projects.empty_title')}</p>
+        <p class="empty-sub">{t('projects.empty_sub')}</p>
       </div>
     ) : (
       <div class="projects-list">
@@ -45,13 +42,15 @@ const { projects } = projectsData;
               </div>
             </div>
             <div class="project-right">
-              <p class="project-desc lang-es">{project.description_es || project.description}</p>
-              <p class="project-desc lang-en">{project.description_en || project.description}</p>
+              <p class="project-desc">
+                {lang === 'en'
+                  ? (project.description_en || project.description)
+                  : (project.description_es || project.description)}
+              </p>
               <div class="project-links">
                 {project.caseStudy && (
                   <a href={project.caseStudy} class="project-link">
-                    <span class="lang-es">Case study</span>
-                    <span class="lang-en">Case study</span>
+                    {t('projects.case_study')}
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                       <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
@@ -59,8 +58,7 @@ const { projects } = projectsData;
                 )}
                 {project.url && (
                   <a href={project.url} target="_blank" rel="noopener" class="project-link">
-                    <span class="lang-es">{project.caseStudy ? "Ver sitio" : "Ver proyecto"}</span>
-                    <span class="lang-en">{project.caseStudy ? "View site" : "View project"}</span>
+                    {project.caseStudy ? t('projects.view_site') : t('projects.view_project')}
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                       <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
@@ -112,27 +110,11 @@ const { projects } = projectsData;
     gap: 0.75rem;
   }
 
-  .empty-icon {
-    color: var(--text-3);
-    margin-bottom: 0.5rem;
-  }
+  .empty-icon { color: var(--text-3); margin-bottom: 0.5rem; }
+  .empty-title { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; color: var(--text-2); }
+  .empty-sub { font-size: 0.875rem; color: var(--text-3); }
 
-  .empty-title {
-    font-family: var(--font-heading);
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text-2);
-  }
-
-  .empty-sub {
-    font-size: 0.875rem;
-    color: var(--text-3);
-  }
-
-  .projects-list {
-    display: flex;
-    flex-direction: column;
-  }
+  .projects-list { display: flex; flex-direction: column; }
 
   .project-row {
     display: grid;
@@ -149,52 +131,13 @@ const { projects } = projectsData;
   .project-row:last-child { border-bottom: 1px solid var(--border); }
   .project-row:hover { background: rgba(91, 140, 245, 0.028); }
 
-  .project-left {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    padding-top: 0.15rem;
-  }
-
-  .project-title {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -0.01em;
-  }
-
-  .project-meta {
-    display: flex;
-    gap: 0.35rem;
-    flex-wrap: wrap;
-  }
-
-  .project-tag {
-    font-size: 0.68rem;
-    padding: 2px 8px;
-    background: var(--accent-dim);
-    color: var(--accent-light);
-    border-radius: 100px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-  }
-
-  .project-right {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .project-desc {
-    font-size: 0.9rem;
-    color: var(--text-2);
-    line-height: 1.75;
-  }
-
-  .project-links {
-    display: flex;
-    gap: 1.5rem;
-  }
+  .project-left { display: flex; flex-direction: column; gap: 0.75rem; padding-top: 0.15rem; }
+  .project-title { font-size: 1.15rem; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+  .project-meta { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+  .project-tag { font-size: 0.68rem; padding: 2px 8px; background: var(--accent-dim); color: var(--accent-light); border-radius: 100px; font-weight: 600; letter-spacing: 0.04em; }
+  .project-right { display: flex; flex-direction: column; gap: 1rem; }
+  .project-desc { font-size: 0.9rem; color: var(--text-2); line-height: 1.75; }
+  .project-links { display: flex; gap: 1.5rem; }
 
   .project-link {
     display: inline-flex;
@@ -209,12 +152,7 @@ const { projects } = projectsData;
   .project-link:hover { opacity: 0.7; }
   .project-link:hover svg { transform: translateX(3px); }
 
-
   @media (max-width: 700px) {
-    .project-row {
-      grid-template-columns: 1fr;
-      gap: 0.75rem;
-      padding: 2rem 0;
-    }
+    .project-row { grid-template-columns: 1fr; gap: 0.75rem; padding: 2rem 0; }
   }
 </style>

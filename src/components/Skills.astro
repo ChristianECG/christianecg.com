@@ -1,68 +1,43 @@
 ---
+import { useTranslations, dataLang } from '../i18n';
+import type { Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const lang = dataLang(locale);
+
 const groups = [
-  {
-    label_es: "Frontend & Mobile",
-    label_en: "Frontend & Mobile",
-    skills: ["React", "React Native", "TypeScript", "JavaScript (ES6+)", "HTML5", "CSS3"],
-  },
-  {
-    label_es: "Visualización de datos",
-    label_en: "Data Visualization",
-    skills: ["ECharts", "D3.js", "Rendering optimization", "Large dataset handling"],
-  },
-  {
-    label_es: "Estado & fetching",
-    label_en: "State & Fetching",
-    skills: ["TanStack Query", "React state patterns", "WebSockets", "REST APIs"],
-  },
-  {
-    label_es: "Arquitectura",
-    label_en: "Architecture",
-    skills: ["Frontend Architecture", "Component Design", "Design Systems", "Scalable UI"],
-  },
-  {
-    label_es: "Calidad & tooling",
-    label_en: "Quality & Tooling",
-    skills: ["ESLint (custom rules)", "Jest", "React Testing Library", "Git", "CI/CD"],
-  },
-  {
-    label_es: "UX & colaboración",
-    label_en: "UX & Collaboration",
-    skills: ["Responsive Design", "Accessibility (a11y)", "Agile / Scrum"],
-  },
-  {
-    label_es: "IA & LLMs",
-    label_en: "AI & LLMs",
-    skills: ["Claude Code", "GitHub Copilot", "OpenCode", "OpenAI API", "Codex", "Ollama"],
-  },
+  { label_es: "Frontend & Mobile",       label_en: "Frontend & Mobile",        skills: ["React", "React Native", "TypeScript", "JavaScript (ES6+)", "HTML5", "CSS3"] },
+  { label_es: "Visualización de datos",  label_en: "Data Visualization",       skills: ["ECharts", "D3.js", "Rendering optimization", "Large dataset handling"] },
+  { label_es: "Estado & fetching",       label_en: "State & Fetching",         skills: ["TanStack Query", "React state patterns", "WebSockets", "REST APIs"] },
+  { label_es: "Arquitectura",            label_en: "Architecture",             skills: ["Frontend Architecture", "Component Design", "Design Systems", "Scalable UI"] },
+  { label_es: "Calidad & tooling",       label_en: "Quality & Tooling",        skills: ["ESLint (custom rules)", "Jest", "React Testing Library", "Git", "CI/CD"] },
+  { label_es: "UX & colaboración",       label_en: "UX & Collaboration",       skills: ["Responsive Design", "Accessibility (a11y)", "Agile / Scrum"] },
+  { label_es: "IA & LLMs",              label_en: "AI & LLMs",                skills: ["Claude Code", "GitHub Copilot", "OpenCode", "OpenAI API", "Codex", "Ollama"] },
 ];
 ---
 
 <section id="skills">
   <div class="container">
     <div class="skills-header reveal">
-      <span class="section-eyebrow">
-        <span class="lang-es">Habilidades</span>
-        <span class="lang-en">Skills</span>
-      </span>
-      <h2 class="section-title">
-        <span class="lang-es">Con qué trabajo</span>
-        <span class="lang-en">What I work with</span>
-      </h2>
+      <span class="section-eyebrow">{t('skills.eyebrow')}</span>
+      <h2 class="section-title">{t('skills.heading')}</h2>
     </div>
 
     <div class="skills-list">
       {groups.map((g, i) => (
         <div class="skill-row reveal" style={`--delay: ${i * 0.06}s`}>
           <span class="skill-label">
-            <span class="lang-es">{g.label_es}</span>
-            <span class="lang-en">{g.label_en}</span>
+            {lang === 'en' ? g.label_en : g.label_es}
           </span>
           <div class="skill-chips">
-              {g.skills.map((s: string, ci: number) => (
-                <span class="skill-chip" style={`--i: ${ci}`}>{s}</span>
-              ))}
-            </div>
+            {g.skills.map((s: string, ci: number) => (
+              <span class="skill-chip" style={`--i: ${ci}`}>{s}</span>
+            ))}
+          </div>
         </div>
       ))}
     </div>
@@ -123,7 +98,6 @@ const groups = [
     transform: translateY(-2px);
   }
 
-  /* Pop-in when row enters view */
   .skill-row.visible .skill-chip {
     animation: chipIn 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
     animation-delay: calc(var(--i, 0) * 0.04s);

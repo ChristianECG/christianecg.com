@@ -1,5 +1,14 @@
 ---
 import { getCollection } from 'astro:content';
+import { useTranslations, dataLang } from '../i18n';
+import type { Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const lang = dataLang(locale);
 
 const papers = (await getCollection('papers')).sort((a, b) => a.data.order - b.data.order);
 ---
@@ -10,37 +19,37 @@ const papers = (await getCollection('papers')).sort((a, b) => a.data.order - b.d
 
       <div class="extras-col">
         <span class="section-eyebrow reveal" style="--reveal-x: -18px; --reveal-y: 0px">
-          <span class="lang-es">Comunidad</span>
-          <span class="lang-en">Community</span>
+          {t('extras.community_eyebrow')}
         </span>
         <h2 class="section-title extras-title reveal" style="--reveal-x: -18px; --reveal-y: 0px; --delay: 0.06s">
-          <span class="lang-es">Más allá del código</span>
-          <span class="lang-en">Beyond the code</span>
+          {t('extras.community_heading')}
         </h2>
 
         <div class="community-list">
           <div class="cl-item reveal">
             <span class="cl-role">Speaker</span>
             <p class="cl-desc">
-              <span class="lang-es">Charlas en eventos de Frontend, IA y Open Source.</span>
-              <span class="lang-en">Talks at Frontend, AI and Open Source events.</span>
+              {lang === 'en'
+                ? 'Talks at Frontend, AI and Open Source events.'
+                : 'Charlas en eventos de Frontend, IA y Open Source.'}
             </p>
           </div>
           <div class="cl-item reveal" style="--delay: 0.07s">
             <span class="cl-role">
-              <span class="lang-es">Mentor</span>
-              <span class="lang-en">Mentor</span>
+              {lang === 'en' ? 'Mentor' : 'Mentor'}
             </span>
             <p class="cl-desc">
-              <span class="lang-es">Acompaño el crecimiento de desarrolladores en comunidades tech — en línea y en persona, desde sesiones 1:1 hasta grupos en eventos.</span>
-              <span class="lang-en">I support developers' growth in tech communities — online and in person, from 1:1 sessions to group settings at events.</span>
+              {lang === 'en'
+                ? "I support developers' growth in tech communities — online and in person, from 1:1 sessions to group settings at events."
+                : 'Acompaño el crecimiento de desarrolladores en comunidades tech — en línea y en persona, desde sesiones 1:1 hasta grupos en eventos.'}
             </p>
           </div>
           <div class="cl-item reveal" style="--delay: 0.14s">
             <span class="cl-role">Google DSC Lead <span class="cl-year">'20–'21</span></span>
             <p class="cl-desc">
-              <span class="lang-es">+60 miembros, ~20 eventos técnicos organizados.</span>
-              <span class="lang-en">60+ members, ~20 technical events organized.</span>
+              {lang === 'en'
+                ? '60+ members, ~20 technical events organized.'
+                : '+60 miembros, ~20 eventos técnicos organizados.'}
             </p>
           </div>
         </div>
@@ -48,12 +57,10 @@ const papers = (await getCollection('papers')).sort((a, b) => a.data.order - b.d
 
       <div class="extras-col">
         <span class="section-eyebrow reveal" style="--reveal-x: 18px; --reveal-y: 0px">
-          <span class="lang-es">Publicaciones</span>
-          <span class="lang-en">Publications</span>
+          {t('extras.pubs_eyebrow')}
         </span>
         <h2 class="section-title extras-title reveal" style="--reveal-x: 18px; --reveal-y: 0px; --delay: 0.06s">
-          <span class="lang-es">Investigación</span>
-          <span class="lang-en">Research</span>
+          {t('extras.pubs_heading')}
         </h2>
 
         <div class="pub-list">
@@ -67,17 +74,14 @@ const papers = (await getCollection('papers')).sort((a, b) => a.data.order - b.d
                 <span class="pub-year">{paper.data.year}</span>
               </div>
               <h3 class="pub-title">
-                <span class="lang-es">{paper.data.titleEs ?? paper.data.title}</span>
-                <span class="lang-en">{paper.data.title}</span>
+                {lang === 'en' ? paper.data.title : (paper.data.titleEs ?? paper.data.title)}
               </h3>
               <p class="pub-desc">
-                <span class="lang-es">{paper.data.descriptionEs}</span>
-                <span class="lang-en">{paper.data.descriptionEn}</span>
+                {lang === 'en' ? paper.data.descriptionEn : paper.data.descriptionEs}
               </p>
               <div class="pub-actions">
                 <a href={paper.data.externalUrl} target="_blank" rel="noopener" class="pub-link">
-                  <span class="lang-es">Leer en {paper.data.sourceLabel}</span>
-                  <span class="lang-en">Read on {paper.data.sourceLabel}</span>
+                  {t('extras.read_on').replace('%s', paper.data.sourceLabel)}
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                   </svg>
@@ -87,8 +91,7 @@ const papers = (await getCollection('papers')).sort((a, b) => a.data.order - b.d
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                       <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/>
                     </svg>
-                    <span class="lang-es">Ver PDF</span>
-                    <span class="lang-en">View PDF</span>
+                    {t('extras.view_pdf')}
                   </a>
                 )}
               </div>
@@ -102,23 +105,10 @@ const papers = (await getCollection('papers')).sort((a, b) => a.data.order - b.d
 </section>
 
 <style>
-  .extras-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-  }
+  .extras-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; }
+  .extras-title { font-size: clamp(1.4rem, 2.5vw, 1.9rem) !important; margin-bottom: 2rem !important; }
 
-  .extras-title {
-    font-size: clamp(1.4rem, 2.5vw, 1.9rem) !important;
-    margin-bottom: 2rem !important;
-  }
-
-  /* Community list */
-  .community-list {
-    display: flex;
-    flex-direction: column;
-    border-top: 1px solid var(--border);
-  }
+  .community-list { display: flex; flex-direction: column; border-top: 1px solid var(--border); }
 
   .cl-item {
     padding: 1.5rem 0 1.5rem 0.6rem;
@@ -131,38 +121,13 @@ const papers = (await getCollection('papers')).sort((a, b) => a.data.order - b.d
     transition: background 0.25s, box-shadow 0.25s;
     border-radius: 4px;
   }
-  .cl-item:hover {
-    background: rgba(91, 140, 245, 0.025);
-    box-shadow: inset 3px 0 0 var(--accent);
-  }
+  .cl-item:hover { background: rgba(91, 140, 245, 0.025); box-shadow: inset 3px 0 0 var(--accent); }
 
-  .cl-role {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--text);
-    font-family: var(--font-heading);
-    letter-spacing: -0.01em;
-  }
+  .cl-role { font-size: 0.9rem; font-weight: 700; color: var(--text); font-family: var(--font-heading); letter-spacing: -0.01em; }
+  .cl-year { font-weight: 400; color: var(--text-3); font-family: var(--font-body); font-size: 0.8rem; }
+  .cl-desc { font-size: 0.85rem; color: var(--text-2); line-height: 1.6; }
 
-  .cl-year {
-    font-weight: 400;
-    color: var(--text-3);
-    font-family: var(--font-body);
-    font-size: 0.8rem;
-  }
-
-  .cl-desc {
-    font-size: 0.85rem;
-    color: var(--text-2);
-    line-height: 1.6;
-  }
-
-  /* Publication */
-  .pub-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
+  .pub-list { display: flex; flex-direction: column; gap: 1rem; }
 
   .pub {
     display: flex;
@@ -178,94 +143,28 @@ const papers = (await getCollection('papers')).sort((a, b) => a.data.order - b.d
     transform-style: preserve-3d;
     cursor: default;
   }
-  .pub.is-leaving {
-    transition: border-color 0.25s, box-shadow 0.25s, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .pub:hover {
-    border-color: var(--border-hover);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(91, 140, 245, 0.08);
-  }
+  .pub.is-leaving { transition: border-color 0.25s, box-shadow 0.25s, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+  .pub:hover { border-color: var(--border-hover); box-shadow: 0 12px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(91,140,245,0.08); }
 
-  .pub-meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+  .pub-meta { display: flex; align-items: center; justify-content: space-between; }
+  .pub-source { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+  .pub-year { font-size: 0.72rem; font-weight: 500; color: var(--text-3); }
+  .pub-issn { font-weight: 400; color: var(--text-3); letter-spacing: 0.04em; }
+  .pub-title { font-size: 1rem; font-weight: 700; color: var(--text); line-height: 1.4; font-family: var(--font-body); letter-spacing: 0; }
+  .pub-desc { font-size: 0.85rem; color: var(--text-2); line-height: 1.7; }
+  .pub-actions { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; margin-top: 0.25rem; }
 
-  .pub-source {
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-
-  .pub-year {
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: var(--text-3);
-  }
-
-  .pub-issn {
-    font-weight: 400;
-    color: var(--text-3);
-    letter-spacing: 0.04em;
-  }
-
-  .pub-title {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text);
-    line-height: 1.4;
-    font-family: var(--font-body);
-    letter-spacing: 0;
-  }
-
-  .pub-desc {
-    font-size: 0.85rem;
-    color: var(--text-2);
-    line-height: 1.7;
-  }
-
-  .pub-actions {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    flex-wrap: wrap;
-    margin-top: 0.25rem;
-  }
-
-  .pub-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--accent);
-    transition: opacity 0.2s;
-    width: fit-content;
-  }
+  .pub-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; font-weight: 600; color: var(--accent); transition: opacity 0.2s; width: fit-content; }
   .pub-link:hover { opacity: 0.7; }
   .pub-link svg { transition: transform 0.2s; }
   .pub-link:hover svg { transform: translateX(3px); }
 
-  .pub-download {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--text-3);
-    transition: color 0.2s;
-    width: fit-content;
-  }
+  .pub-download { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; font-weight: 600; color: var(--text-3); transition: color 0.2s; width: fit-content; }
   .pub-download:hover { color: var(--text); }
   .pub-download svg { transition: transform 0.2s; }
   .pub-download:hover svg { transform: translateY(2px); }
 
-  @media (max-width: 900px) {
-    .extras-grid { grid-template-columns: 1fr; gap: 3.5rem; }
-  }
+  @media (max-width: 900px) { .extras-grid { grid-template-columns: 1fr; gap: 3.5rem; } }
 </style>
 
 <script>
@@ -279,7 +178,6 @@ const papers = (await getCollection('papers')).sort((a, b) => a.data.order - b.d
       card.style.transform =
         `perspective(700px) rotateX(${-dy * 5}deg) rotateY(${dx * 5}deg) scale(1.015)`;
     }, { passive: true });
-
     card.addEventListener('mouseleave', () => {
       card.classList.add('is-leaving');
       card.style.transform = '';

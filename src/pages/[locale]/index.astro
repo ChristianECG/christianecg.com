@@ -1,0 +1,53 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Hero from '../../components/Hero.astro';
+import About from '../../components/About.astro';
+import Experience from '../../components/Experience.astro';
+import Education from '../../components/Education.astro';
+import Skills from '../../components/Skills.astro';
+import Projects from '../../components/Projects.astro';
+import Talks from '../../components/Talks.astro';
+import Extras from '../../components/Extras.astro';
+import Contact from '../../components/Contact.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+import { LOCALES } from '../../i18n';
+import type { Locale } from '../../i18n';
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params as { locale: Locale };
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Christian Elías Cruz González',
+  url: 'https://christianecg.com',
+  jobTitle: 'Senior Software Engineer',
+  email: 'contacto@christianecg.com',
+  sameAs: [
+    'https://www.linkedin.com/in/christianeliascg/',
+    'https://github.com/ChristianECG',
+    'https://octa.page',
+  ],
+};
+---
+
+<Layout ogImage="https://christianecg.com/og/home.png" jsonLd={personSchema} locale={locale}>
+  <Nav locale={locale} />
+  <main id="main-content">
+    <Hero locale={locale} />
+    <About locale={locale} />
+    <Experience locale={locale} />
+    <Education locale={locale} />
+    <Skills locale={locale} />
+    <Projects locale={locale} />
+    <Talks locale={locale} />
+    <Extras locale={locale} />
+    <Contact locale={locale} />
+  </main>
+  <Footer locale={locale} />
+</Layout>

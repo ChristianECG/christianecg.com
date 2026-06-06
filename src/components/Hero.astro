@@ -1,6 +1,19 @@
 ---
 import { Image } from 'astro:assets';
 import avatarSrc from '../assets/avatar.png';
+import { useTranslations, dataLang } from '../i18n';
+import type { Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const lang = dataLang(locale);
+
+const CV_URL = lang === 'en'
+  ? '/Christian_Elias_Cruz_Gonzalez_eng.pdf'
+  : '/Christian_Elias_Cruz_Gonzalez_esp.pdf';
 ---
 
 <section class="hero">
@@ -9,10 +22,7 @@ import avatarSrc from '../assets/avatar.png';
     <div class="container hero-center-inner">
       <div class="hero-name-block hero-enter-name">
         <h1 class="hero-name">Christian Elías<br />Cruz González</h1>
-        <span class="hero-role">
-          <span class="lang-es">Ingeniero de Software Senior</span>
-          <span class="lang-en">Senior Software Engineer</span>
-        </span>
+        <span class="hero-role">{t('hero.role')}</span>
       </div>
       <Image src={avatarSrc} alt="Christian Elías" class="hero-avatar hero-enter-avatar" loading="eager" width={200} height={200} />
     </div>
@@ -22,36 +32,25 @@ import avatarSrc from '../assets/avatar.png';
     <div class="container hero-strip-inner">
       <div class="hero-strip-left">
         <p class="hero-tagline">
-          <span class="lang-es">
-            150K usuarios usan mi código todos los días.<br />
-            Ninguno sabe que existe. Ese es el punto.
-          </span>
-          <span class="lang-en">
-            150K users run my code every day.<br />
-            None of them know it exists. That's the point.
-          </span>
+          {t('hero.tagline_1')}<br />
+          {t('hero.tagline_2')}
         </p>
         <p class="hero-location">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-          <span class="lang-es">Ciudad de México · Remoto</span>
-          <span class="lang-en">Mexico City · Remote</span>
+          {t('hero.location')}
         </p>
         <div class="hero-creds">
           <div class="cred">
             <span class="cred-label">IEEE Xplore</span>
-            <span class="cred-detail lang-es">1 paper publicado</span>
-            <span class="cred-detail lang-en">1 published paper</span>
+            <span class="cred-detail">{t('hero.cred_ieee')}</span>
           </div>
           <div class="cred">
             <span class="cred-label">Keynote</span>
-            <span class="cred-detail lang-es">3 congresos internacionales</span>
-            <span class="cred-detail lang-en">3 international conferences</span>
+            <span class="cred-detail">{t('hero.cred_keynote')}</span>
           </div>
           <div class="cred">
-            <span class="cred-label lang-es">Televisión</span>
-            <span class="cred-label lang-en">Television</span>
-            <span class="cred-detail lang-es">2 apariciones nacionales</span>
-            <span class="cred-detail lang-en">2 national appearances</span>
+            <span class="cred-label">{t('hero.cred_tv_label')}</span>
+            <span class="cred-detail">{t('hero.cred_tv_detail')}</span>
           </div>
         </div>
       </div>
@@ -60,17 +59,11 @@ import avatarSrc from '../assets/avatar.png';
           <a href="https://github.com/ChristianECG" target="_blank" rel="noopener">GitHub ↗</a>
           <a href="https://www.linkedin.com/in/christianeliascg/" target="_blank" rel="noopener">LinkedIn ↗</a>
           <a href="mailto:contacto@christianecg.com">Email</a>
-          <a href="/Christian_Elias_Cruz_Gonzalez_esp.pdf" download class="hero-link-cv" data-cv-download>CV ↓</a>
+          <a href={CV_URL} download class="hero-link-cv" data-cv-download>CV ↓</a>
         </div>
         <div class="hero-ctas">
-          <a href="#experience" class="cta-primary">
-            <span class="lang-es">Ver experiencia</span>
-            <span class="lang-en">See my work</span>
-          </a>
-          <a href="#contact" class="cta-ghost">
-            <span class="lang-es">Contacto</span>
-            <span class="lang-en">Contact</span>
-          </a>
+          <a href="#experience" class="cta-primary">{t('hero.cta_experience')}</a>
+          <a href="#contact" class="cta-ghost">{t('hero.cta_contact')}</a>
         </div>
       </div>
     </div>
@@ -149,7 +142,6 @@ import avatarSrc from '../assets/avatar.png';
   }
   .hero-link-cv:hover { opacity: 0.75; }
 
-  /* Centered name */
   .hero-center {
     flex: 1;
     display: flex;
@@ -187,7 +179,6 @@ import avatarSrc from '../assets/avatar.png';
       0 0 110px rgba(91, 140, 245, 0.13);
   }
 
-  /* Entrance animations */
   .hero-enter-name {
     animation: heroIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
   }
@@ -198,7 +189,6 @@ import avatarSrc from '../assets/avatar.png';
     animation: heroIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
   }
 
-  /* Bottom strip */
   .hero-strip {
     position: relative;
     z-index: 1;
@@ -264,7 +254,7 @@ import avatarSrc from '../assets/avatar.png';
     font-weight: 500;
   }
 
-.hero-strip-right {
+  .hero-strip-right {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -308,7 +298,6 @@ import avatarSrc from '../assets/avatar.png';
     border-color: var(--text-3);
   }
 
-  /* Cred stagger — fire after strip entrance (~1.05s) */
   .hero-creds .cred:nth-child(1) { animation: credIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) 1.05s both; }
   .hero-creds .cred:nth-child(2) { animation: credIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) 1.18s both; }
   .hero-creds .cred:nth-child(3) { animation: credIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) 1.31s both; }
@@ -329,26 +318,29 @@ import avatarSrc from '../assets/avatar.png';
     animation: cursorBlink 0.75s step-end infinite;
     transition: opacity 0.5s;
   }
-
 </style>
 
 <script>
-  // CV link: swap URL on lang change
-  const CV_URLS: Record<string, string> = {
-    es: '/Christian_Elias_Cruz_Gonzalez_esp.pdf',
-    en: '/Christian_Elias_Cruz_Gonzalez_eng.pdf',
-  };
-  const cvLink = document.querySelector<HTMLAnchorElement>('.hero-link-cv');
-  if (cvLink) {
-    const syncCvLang = () => {
-      const lang = document.documentElement.lang || 'es';
-      cvLink.href = CV_URLS[lang] ?? CV_URLS.es;
-    };
-    syncCvLang();
-    new MutationObserver(syncCvLang).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
-    cvLink.addEventListener('click', () => {
-      window.avelor?.track('cv_download', { url: cvLink.href });
-    });
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const roleEl = document.querySelector<HTMLElement>('.hero-role');
+    if (roleEl) {
+      const full = roleEl.textContent?.trim() ?? '';
+      roleEl.textContent = '';
+      const cursor = document.createElement('span');
+      cursor.className = 'type-cursor';
+      cursor.textContent = '|';
+      roleEl.appendChild(cursor);
+      let i = 0;
+      const type = () => {
+        if (i < full.length) {
+          roleEl.insertBefore(document.createTextNode(full[i++]), cursor);
+          setTimeout(type, 42);
+        } else {
+          setTimeout(() => { cursor.style.opacity = '0'; }, 1500);
+        }
+      };
+      setTimeout(type, 950);
+    }
   }
 
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -367,27 +359,8 @@ import avatarSrc from '../assets/avatar.png';
     });
   }
 
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const roleEl = document.querySelector<HTMLElement>('.hero-role');
-    const lang = document.documentElement.lang || 'es';
-    const span = roleEl?.querySelector<HTMLElement>(`.lang-${lang}`);
-    if (span) {
-      const full = span.textContent?.trim() ?? '';
-      span.textContent = '';
-      const cursor = document.createElement('span');
-      cursor.className = 'type-cursor';
-      cursor.textContent = '|';
-      roleEl!.appendChild(cursor);
-      let i = 0;
-      const type = () => {
-        if (i < full.length) {
-          span.textContent += full[i++];
-          setTimeout(type, 42);
-        } else {
-          setTimeout(() => { cursor.style.opacity = '0'; }, 1500);
-        }
-      };
-      setTimeout(type, 950);
-    }
-  }
+  document.querySelector<HTMLAnchorElement>('[data-cv-download]')?.addEventListener('click', (e) => {
+    const link = e.currentTarget as HTMLAnchorElement;
+    (window as any).avelor?.track('cv_download', { url: link.href });
+  });
 </script>

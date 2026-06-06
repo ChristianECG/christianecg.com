@@ -1,0 +1,121 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+import { LOCALES, useTranslations, dataLang } from '../../i18n';
+import type { Locale } from '../../i18n';
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params as { locale: Locale };
+const t = useTranslations(locale);
+const lang = dataLang(locale);
+
+const cvUrl = lang === 'en'
+  ? '/Christian_Elias_Cruz_Gonzalez_eng.pdf'
+  : '/Christian_Elias_Cruz_Gonzalez_esp.pdf';
+
+const title = locale === 'en'
+  ? 'Resume — Christian Elías Cruz González'
+  : 'CV — Christian Elías Cruz González';
+const description = locale === 'en'
+  ? 'Résumé of Christian Elías Cruz González, Senior Software Engineer — Frontend & Mobile.'
+  : 'Currículum vitae de Christian Elías Cruz González, Senior Software Engineer — Frontend & Mobile.';
+---
+
+<Layout title={title} description={description} ogImage="https://christianecg.com/og/cv.png" locale={locale}>
+  <Nav locale={locale} />
+  <main id="main-content" class="cv-main">
+    <div class="container">
+
+      <header class="cv-header reveal">
+        <div>
+          <p class="section-eyebrow">{t('cv.eyebrow')}</p>
+          <h1 class="cv-title">CV</h1>
+        </div>
+        <a href={cvUrl} download class="cv-download">{t('cv.download')}</a>
+      </header>
+
+      <div class="cv-embed reveal">
+        <iframe
+          src={cvUrl}
+          class="cv-frame"
+          title={`CV — Christian Elías Cruz González`}
+        ></iframe>
+        <p class="cv-fallback">
+          {lang === 'en'
+            ? <><a href={cvUrl} download>Download it here</a>.</>
+            : <><a href={cvUrl} download>Descárgalo aquí</a>.</>}
+        </p>
+      </div>
+
+    </div>
+  </main>
+  <Footer locale={locale} />
+</Layout>
+
+<style>
+  .cv-main { padding-top: 64px; min-height: 100svh; }
+
+  .cv-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 4rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cv-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-top: 0.5rem;
+  }
+
+  .cv-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.375rem;
+    background: var(--accent-dim);
+    border: 1px solid var(--border-hover);
+    border-radius: 8px;
+    color: var(--accent-light);
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+    margin-bottom: 0.4rem;
+  }
+  .cv-download:hover { background: rgba(91, 140, 245, 0.2); border-color: var(--accent); }
+
+  .cv-embed { padding: 2.5rem 0 5rem; }
+
+  .cv-frame {
+    width: 100%;
+    height: 85vh;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+  }
+
+  .cv-fallback {
+    display: none;
+    font-size: 0.875rem;
+    color: var(--text-2);
+    margin-top: 1rem;
+    text-align: center;
+  }
+  .cv-fallback a { color: var(--accent-light); }
+
+  @media (max-width: 700px) {
+    .cv-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    .cv-frame { height: 60vh; }
+    .cv-fallback { display: block; }
+  }
+</style>
