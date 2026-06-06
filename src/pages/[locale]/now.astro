@@ -13,7 +13,8 @@ export function getStaticPaths() {
 const { locale } = Astro.params as { locale: Locale };
 const t = useTranslations(locale);
 
-const en = locale === 'en';
+const en  = locale === 'en';
+const lat = locale === 'lat';
 const updated = '2026-06-01';
 ---
 
@@ -33,6 +34,8 @@ const updated = '2026-06-01';
         <p class="now-intro">
           {en ? (
             <>A <a href="https://nownownow.com/about" target="_blank" rel="noopener">/now</a> page is a snapshot of what I'm focused on at this point in my life.</>
+          ) : lat ? (
+            <>Pagina <a href="https://nownownow.com/about" target="_blank" rel="noopener">/nunc</a> est imago eius quod hoc temporis puncto ago.</>
           ) : (
             <>Una página <a href="https://nownownow.com/about" target="_blank" rel="noopener">/now</a> es un snapshot de lo que estoy haciendo en este momento de mi vida.</>
           )}
@@ -47,6 +50,8 @@ const updated = '2026-06-01';
             <p>
               {en ? (
                 <>I'm open to new opportunities as a <strong>Senior Software Engineer</strong>. My focus is on products with real technical complexity: data dashboards, SaaS platforms, real-time systems. If you're building something like that, <a href="mailto:contacto@christianecg.com">reach out</a>.</>
+              ) : lat ? (
+                <>Novis occasionibus ut <strong>Faber Programmatus Senior</strong> apertus sum. Propositum meum sunt opera cum vera complexitate technica: tabulae datarum, suggestus SaaS, systemata in tempore reali. Si tale aliquid construis, <a href="mailto:contacto@christianecg.com">scribe mihi</a>.</>
               ) : (
                 <>Estoy abierto a nuevas oportunidades como <strong>Ingeniero de Software Senior</strong>. Mi foco está en productos con complejidad técnica real: dashboards de datos, plataformas SaaS, sistemas de tiempo real. Si estás construyendo algo así, <a href="mailto:contacto@christianecg.com">escríbeme</a>.</>
               )}
@@ -60,6 +65,8 @@ const updated = '2026-06-01';
             <p>
               {en ? (
                 <>Building <a href="https://avelor.es" target="_blank" rel="noopener">Avelor</a>, a suite of CLI tools for local development. Four utilities in progress:</>
+              ) : lat ? (
+                <>Construo <a href="https://avelor.es" target="_blank" rel="noopener">Avelor</a>, conlectionem instrumentorum CLI pro evolutione locali. Quattuor utilitates in progressu:</>
               ) : (
                 <>Construyendo <a href="https://avelor.es" target="_blank" rel="noopener">Avelor</a>, una suite de herramientas CLI para el desarrollo local. Cuatro utilidades en progreso:</>
               )}
@@ -68,6 +75,8 @@ const updated = '2026-06-01';
               <li>
                 {en ? (
                   <><strong>mesh</strong> — local dev proxy with named services instead of ports, and failure injection without mocks</>
+                ) : lat ? (
+                  <><strong>mesh</strong> — procurator localis cum nominibus serviciorum pro portis, et iniectio defectuum sine simulacris</>
                 ) : (
                   <><strong>mesh</strong> — proxy local con nombres de servicio en lugar de puertos, e inyección de fallos sin mocks</>
                 )}
@@ -75,6 +84,8 @@ const updated = '2026-06-01';
               <li>
                 {en ? (
                   <><strong>mock</strong> — intercept any URL (fetch, XHR, Node.js) without touching your code</>
+                ) : lat ? (
+                  <><strong>mock</strong> — quamlibet URL (fetch, XHR, Node.js) intercipe sine tactu codicis tui</>
                 ) : (
                   <><strong>mock</strong> — intercepta cualquier URL (fetch, XHR, Node.js) sin tocar el código</>
                 )}
@@ -82,6 +93,8 @@ const updated = '2026-06-01';
               <li>
                 {en ? (
                   <><strong>stale</strong> — finds aged TODO/FIXME markers via <code>git blame</code>, breaks CI when technical debt sits too long</>
+                ) : lat ? (
+                  <><strong>stale</strong> — notas TODO/FIXME veteras per <code>git blame</code> invenit, CI frangit quando debitum technicum nimis diu manet</>
                 ) : (
                   <><strong>stale</strong> — detecta TODOs y FIXMEs viejos usando <code>git blame</code>, rompe CI cuando la deuda técnica se acumula</>
                 )}
@@ -89,6 +102,8 @@ const updated = '2026-06-01';
               <li>
                 {en ? (
                   <><strong>whos</strong> — what process is holding that port</>
+                ) : lat ? (
+                  <><strong>whos</strong> — quis processus portum illum tenet</>
                 ) : (
                   <><strong>whos</strong> — qué proceso está ocupando ese puerto</>
                 )}
@@ -103,6 +118,8 @@ const updated = '2026-06-01';
             <p>
               {en ? (
                 'Integrating AI tooling into frontend development workflows. Experimenting with agents, Claude Code, and AI APIs to automate repetitive tasks and improve code quality.'
+              ) : lat ? (
+                'Instrumenta AI in vias evolutionis frontis integrando. Cum agentibus, Claude Code et APIs AI experior ad opera repetita automatizanda et qualitatem codicis meliorandam.'
               ) : (
                 'Integrando herramientas de IA en flujos de trabajo de desarrollo frontend. Experimentando con agentes, Claude Code y APIs de AI para automatizar tareas repetitivas y mejorar la calidad del código.'
               )}
@@ -115,18 +132,18 @@ const updated = '2026-06-01';
           <div class="now-content">
             <ul>
               <li>
-                {en
-                  ? 'Software architecture: patterns, design principles, and making better structural decisions in large projects'
+                {en ? 'Software architecture: patterns, design principles, and making better structural decisions in large projects'
+                  : lat ? 'Architectura programmatica: exemplaria, principia designationis et meliores decisiones structurales in operibus magnis'
                   : 'Arquitectura de software: patrones, principios de diseño y cómo tomar mejores decisiones estructurales en proyectos grandes'}
               </li>
               <li>
-                {en
-                  ? 'AI agent architectures and their integration with web applications'
+                {en ? 'AI agent architectures and their integration with web applications'
+                  : lat ? 'Architecturae agentium AI et earum integratio cum applicationibus retis'
                   : 'Arquitecturas de agentes de IA y su integración con aplicaciones web'}
               </li>
               <li>
-                {en
-                  ? 'New CSS features: container queries, @layer, anchor positioning'
+                {en ? 'New CSS features: container queries, @layer, anchor positioning'
+                  : lat ? 'Novae facultates CSS: interrogationes receptaculi, @layer, positio anchorae'
                   : 'Nuevas características de CSS: container queries, @layer, anchor positioning'}
               </li>
             </ul>
@@ -137,8 +154,8 @@ const updated = '2026-06-01';
           <h2>{t('now.writing')}</h2>
           <div class="now-content">
             <p>
-              {en
-                ? 'Documenting thoughts on the frontend craft, AI tooling, and daily learnings on the blog.'
+              {en ? 'Documenting thoughts on the frontend craft, AI tooling, and daily learnings on the blog.'
+                : lat ? 'Cogitationes de arte frontis, instrumentis AI et discitis cottidianis in commentariis documendo.'
                 : 'Documentando reflexiones sobre el oficio del frontend, herramientas de IA y lo que aprendo día a día en el blog.'}
             </p>
           </div>

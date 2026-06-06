@@ -1,0 +1,126 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import '../../../styles/global.css';
+import { talks, typeLabel } from '../../../data/talks';
+import { LOCALES, useTranslations, dataLang, pick } from '../../../i18n';
+import type { Locale } from '../../../i18n';
+
+export function getStaticPaths() {
+  return LOCALES.flatMap((locale) =>
+    talks
+      .filter((t) => t.slug && t.slides)
+      .map((t) => ({ params: { locale, slug: t.slug }, props: { talk: t, locale } }))
+  );
+}
+
+const { talk, locale } = Astro.props as { talk: (typeof talks)[number]; locale: Locale };
+const t = useTranslations(locale);
+const lang = dataLang(locale);
+
+const title = pick(talk as any, 'title', lang) as string;
+const date  = pick(talk as any, 'date',  lang) as string;
+const event = pick(talk as any, 'event', lang) as string;
+
+const downloadLabel = locale === 'en' ? 'Download slides' : locale === 'lat' ? 'Laminas depone' : 'Descargar slides';
+const clickLabel    = locale === 'en' ? 'Click to interact' : locale === 'lat' ? 'Tange ut agas' : 'Clic para interactuar';
+const fallbackText  = locale === 'en' ? "Your browser can't display the PDF inline." : locale === 'lat' ? 'Navigatrix PDF directe ostendere non potest.' : 'Tu navegador no puede mostrar el PDF directamente.';
+const fallbackLink  = locale === 'en' ? 'Download it here' : locale === 'lat' ? 'Hic depone' : 'Descárgalo aquí';
+const formatLabel   = talk.format === 'online' ? 'Online' : t('talks.format_in_person');
+---
+
+<Layout
+  title={`${title} — Christian Elías Cruz González`}
+  description={talk.title_en}
+  locale={locale}
+>
+  <Nav locale={locale} />
+  <main id="main-content" class="talk-main">
+    <div class="container">
+
+      <header class="talk-header reveal">
+        <div class="talk-header-meta">
+          <p class="section-eyebrow">
+            <a href={`/${locale}/#talks`} class="back-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+              </svg>
+              {t('talks.heading')}
+            </a>
+          </p>
+          <div class="talk-meta-row">
+            <span class={`talk-badge talk-badge--${talk.type}`}>
+              {t(`talks.type.${talk.type}`)}
+            </span>
+            <span class="talk-date">{date}</span>
+          </div>
+          <h1 class="talk-title">{title}</h1>
+          <p class="talk-event">{event} · {formatLabel}</p>
+        </div>
+
+        <div class="talk-header-actions">
+          <a href={talk.slides} download class="talk-btn talk-btn-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 3v13M5 16l7 7 7-7M3 21h18"/>
+            </svg>
+            {downloadLabel}
+          </a>
+        </div>
+      </header>
+
+      <div class="talk-embed reveal">
+        <div class="frame-wrapper">
+          <iframe src={talk.slides} class="talk-frame" title={title}></iframe>
+          <div class="frame-overlay" id="frame-overlay" aria-hidden="true">
+            <span class="frame-overlay-hint">{clickLabel}</span>
+          </div>
+        </div>
+        <p class="talk-fallback">
+          {fallbackText} <a href={talk.slides} download>{fallbackLink}</a>.
+        </p>
+      </div>
+
+    </div>
+  </main>
+  <Footer locale={locale} />
+</Layout>
+
+<script>
+  const overlay = document.getElementById('frame-overlay');
+  overlay?.addEventListener('click', () => overlay.classList.add('is-active'));
+  document.addEventListener('click', (e) => {
+    if (overlay && !overlay.closest('.frame-wrapper')?.contains(e.target as Node)) {
+      overlay.classList.remove('is-active');
+    }
+  });
+</script>
+
+<style>
+  .talk-main { padding-top: 64px; min-height: 100svh; }
+  .talk-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 3rem; padding: 4rem 0 2.5rem; border-bottom: 1px solid var(--border); }
+  .talk-header-meta { flex: 1; display: flex; flex-direction: column; gap: 0.75rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--text-3); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; transition: color 0.2s; }
+  .back-link:hover { color: var(--text-2); }
+  .talk-meta-row { display: flex; align-items: center; gap: 0.75rem; }
+  .talk-badge { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; white-space: nowrap; }
+  .talk-badge--keynote { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent-dim); }
+  .talk-badge--talk { background: transparent; color: var(--text-3); border: 1px solid var(--border); }
+  .talk-date { font-size: 0.76rem; color: var(--text-3); font-weight: 500; }
+  .talk-title { font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 800; color: var(--text); letter-spacing: -0.03em; line-height: 1.2; max-width: 680px; }
+  .talk-event { font-size: 0.875rem; color: var(--text-3); line-height: 1.5; }
+  .talk-header-actions { flex-shrink: 0; padding-top: 2rem; }
+  .talk-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.625rem 1.375rem; border-radius: 8px; font-weight: 500; font-size: 0.875rem; text-decoration: none; white-space: nowrap; transition: background 0.2s, border-color 0.2s; }
+  .talk-btn-primary { background: var(--accent-dim); border: 1px solid var(--border-hover); color: var(--accent-light); }
+  .talk-btn-primary:hover { background: rgba(91, 140, 245, 0.2); border-color: var(--accent); }
+  .talk-embed { padding: 2.5rem 0 5rem; }
+  .frame-wrapper { position: relative; border-radius: 8px; overflow: hidden; }
+  .talk-frame { width: 100%; height: 85vh; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); display: block; }
+  .frame-overlay { position: absolute; inset: 0; cursor: pointer; border-radius: 8px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 1.25rem; transition: opacity 0.2s; }
+  .frame-overlay.is-active { display: none; }
+  .frame-overlay-hint { font-size: 0.75rem; font-weight: 600; color: var(--text-3); background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 0.3rem 0.75rem; pointer-events: none; opacity: 0; transition: opacity 0.2s; }
+  .frame-overlay:hover .frame-overlay-hint { opacity: 1; }
+  .talk-fallback { display: none; font-size: 0.875rem; color: var(--text-2); margin-top: 1rem; text-align: center; }
+  .talk-fallback a { color: var(--accent-light); }
+  @media (max-width: 768px) { .talk-header { flex-direction: column; gap: 2rem; } .talk-header-actions { padding-top: 0; } .talk-frame { height: 65vh; } .talk-fallback { display: block; } }
+</style>

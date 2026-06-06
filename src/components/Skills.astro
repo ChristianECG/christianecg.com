@@ -1,5 +1,5 @@
 ---
-import { useTranslations, dataLang } from '../i18n';
+import { useTranslations, dataLang, pick } from '../i18n';
 import type { Locale } from '../i18n';
 
 interface Props {
@@ -10,13 +10,13 @@ const t = useTranslations(locale);
 const lang = dataLang(locale);
 
 const groups = [
-  { label_es: "Frontend & Mobile",       label_en: "Frontend & Mobile",        skills: ["React", "React Native", "TypeScript", "JavaScript (ES6+)", "HTML5", "CSS3"] },
-  { label_es: "Visualización de datos",  label_en: "Data Visualization",       skills: ["ECharts", "D3.js", "Rendering optimization", "Large dataset handling"] },
-  { label_es: "Estado & fetching",       label_en: "State & Fetching",         skills: ["TanStack Query", "React state patterns", "WebSockets", "REST APIs"] },
-  { label_es: "Arquitectura",            label_en: "Architecture",             skills: ["Frontend Architecture", "Component Design", "Design Systems", "Scalable UI"] },
-  { label_es: "Calidad & tooling",       label_en: "Quality & Tooling",        skills: ["ESLint (custom rules)", "Jest", "React Testing Library", "Git", "CI/CD"] },
-  { label_es: "UX & colaboración",       label_en: "UX & Collaboration",       skills: ["Responsive Design", "Accessibility (a11y)", "Agile / Scrum"] },
-  { label_es: "IA & LLMs",              label_en: "AI & LLMs",                skills: ["Claude Code", "GitHub Copilot", "OpenCode", "OpenAI API", "Codex", "Ollama"] },
+  { label_es: "Frontend & Mobile",       label_en: "Frontend & Mobile",        label_lat: "Frons & Mobile",             skills: ["React", "React Native", "TypeScript", "JavaScript (ES6+)", "HTML5", "CSS3"] },
+  { label_es: "Visualización de datos",  label_en: "Data Visualization",       label_lat: "Visualizatio Datarum",       skills: ["ECharts", "D3.js", "Rendering optimization", "Large dataset handling"] },
+  { label_es: "Estado & fetching",       label_en: "State & Fetching",         label_lat: "Status & Captatio",          skills: ["TanStack Query", "React state patterns", "WebSockets", "REST APIs"] },
+  { label_es: "Arquitectura",            label_en: "Architecture",             label_lat: "Architectura",               skills: ["Frontend Architecture", "Component Design", "Design Systems", "Scalable UI"] },
+  { label_es: "Calidad & tooling",       label_en: "Quality & Tooling",        label_lat: "Qualitas & Instrumenta",     skills: ["ESLint (custom rules)", "Jest", "React Testing Library", "Git", "CI/CD"] },
+  { label_es: "UX & colaboración",       label_en: "UX & Collaboration",       label_lat: "Usus & Cooperatio",          skills: ["Responsive Design", "Accessibility (a11y)", "Agile / Scrum"] },
+  { label_es: "IA & LLMs",              label_en: "AI & LLMs",                label_lat: "Intelligentia Artificialis", skills: ["Claude Code", "GitHub Copilot", "OpenCode", "OpenAI API", "Codex", "Ollama"] },
 ];
 ---
 
@@ -31,7 +31,7 @@ const groups = [
       {groups.map((g, i) => (
         <div class="skill-row reveal" style={`--delay: ${i * 0.06}s`}>
           <span class="skill-label">
-            {lang === 'en' ? g.label_en : g.label_es}
+            {pick(g as any, 'label', lang) as string}
           </span>
           <div class="skill-chips">
             {g.skills.map((s: string, ci: number) => (

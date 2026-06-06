@@ -43,6 +43,7 @@ const papers = defineCollection({
     pdf: z.string().optional(),
     descriptionEs: z.string(),
     descriptionEn: z.string(),
+    descriptionLat: z.string().optional(),
   }),
 });
 

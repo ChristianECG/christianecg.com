@@ -4,6 +4,7 @@
       "title": "TuAgenda.digital",
       "description_es": "SaaS de automatización de citas para negocios pequeños: página de booking white-label, portal de cliente sin login para reprogramar o cancelar, recordatorios automáticos por email y SMS, y agente de IA para WhatsApp. Stack: Next.js 15, Supabase, Vercel Edge, Stripe, Twilio y OpenAI.",
       "description_en": "Appointment automation SaaS for small businesses: white-label booking pages, zero-login client portal for rescheduling and cancellation, automated email and SMS reminders, and an AI scheduling agent for WhatsApp. Stack: Next.js 15, Supabase, Vercel Edge, Stripe, Twilio, and OpenAI.",
+      "description_lat": "SaaS automationis citationum pro negotiis parvis: pagina booking sine signo utoris, recordationes automaticae per litteras electronicas et SMS, et agentem AI in WhatsApp. Next.js 15, Supabase, Stripe, Twilio, OpenAI.",
       "tags": ["Next.js", "Supabase", "Stripe", "Twilio", "OpenAI"],
       "url": "https://tuagenda.digital",
       "caseStudy": "/projects/tuagenda"
@@ -12,6 +13,7 @@
       "title": "DocPipeline",
       "description_es": "Dashboard de monitoreo en tiempo real para rastrear documentos a través de etapas de procesamiento (pendiente → extrayendo → validando → indexando → listo/fallido). Incluye acciones en lote, notificaciones en vivo y streaming SSE.",
       "description_en": "Real-time document pipeline monitoring dashboard to track documents through multi-step processing stages (pending → extracting → validating → indexing → done/failed). Includes batch actions, live notifications, and SSE streaming.",
+      "description_lat": "Tabula monitorii in tempore reali documentorum per gradus (pendente → extrahere → validare → indicare → factum/frustratum). Actiones massivae, notificationes vivae et SSE fluxus.",
       "tags": ["TypeScript", "Next.js", "WebSocket", "SSE"],
       "url": "https://docpipeline.sbs/",
       "github": "https://github.com/ChrisECG/docpipeline"
@@ -20,6 +22,7 @@
       "title": "Octa.page",
       "description_es": "Cuaderno técnico público construido con Astro donde publico investigación de sistemas, decisiones de arquitectura, análisis de runtimes y notas de rendimiento de frontend.",
       "description_en": "Public technical notebook built with Astro where I publish systems research, architecture decisions, runtime analysis, and frontend performance notes.",
+      "description_lat": "Commentarium technicum publicum in Astro constructum: investigatio systematum, decisiones architecturae, analysis temporum cursus et notae redimenti frontis.",
       "tags": ["Astro", "TypeScript", "Tailwind CSS"],
       "url": "https://octa.page",
       "github": "https://github.com/ChristianECG/octa.page"
@@ -28,6 +31,7 @@
       "title": "Avelor",
       "description_en": "Production back-office platform I designed and built from scratch to manage freelance and side-project operations. Covers custom web analytics with event tracking and dashboards, a URL vault with one-time secret sharing, client brief management, and automated deployment hooks with live output streaming. Built on Astro, PHP, Node.js, and MySQL — self-hosted on a VPS with Tailscale-protected admin access.",
       "description_es": "Plataforma back-office de producción diseñada y construida desde cero para gestionar operaciones freelance y proyectos propios. Cubre analytics web con seguimiento de eventos y dashboards, un vault de URLs con compartición de secretos de un solo uso, gestión de briefs de clientes y hooks de despliegue automatizado con streaming de salida en vivo. Construida sobre Astro, PHP, Node.js y MySQL — autoalojada en un VPS con acceso admin protegido por Tailscale.",
+      "description_lat": "Suggestus administrativus in productione ab initio constructus: analytics web cum tabulis eventuum, cryptarium URLs et secretorum semel tradendorum, gestio brevium clientium et dispositio automatica cum fluxu vivo. Astro, PHP, Node.js, MySQL — se-hospitatus in VPS sub Tailscale.",
       "tags": ["Astro", "Node.js", "PHP", "MySQL", "Tailscale"],
       "url": "https://avelor.es",
       "caseStudy": "/projects/avelor"
@@ -36,6 +40,7 @@
       "title": "CatolicMixquia",
       "description_es": "App React Native en producción desde octubre 2023, disponible en iOS y Android. +500 usuarios en Android, 170 en iOS. Desarrollada para la Parroquia de Mixquiahuala para acercar el Evangelio y las enseñanzas a la comunidad.",
       "description_en": "React Native app in production since October 2023, available on iOS and Android. 500+ Android users, 170 iOS users. Built for the Parish of Mixquiahuala to bring the Gospel and teachings closer to the community.",
+      "description_lat": "Applicatio React Native in productione ab Octobri 2023, in iOS et Android disponibilis. D+ utentes in Android, CLXX in iOS. Pro Paroecia Mixquiahuala facta ut Evangelium communitati propius adferat.",
       "tags": ["React Native", "Mobile", "iOS", "Android"],
       "appStore": "https://apps.apple.com/us/app/catolicmixquia/id6469672864",
       "playStore": "https://play.google.com/store/apps/details?id=mx.parroquiamixquiahuala.catolicmixquia&hl=es"

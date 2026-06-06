@@ -1,5 +1,5 @@
 ---
-import { useTranslations, dataLang } from '../i18n';
+import { useTranslations, dataLang, pick } from '../i18n';
 import type { Locale } from '../i18n';
 
 interface Props {
@@ -14,32 +14,41 @@ const degrees = [
     type: "degree",
     degree_es: "Ingeniería en Tecnologías de la Información y Comunicaciones",
     degree_en: "B.Eng. in Information and Communication Technologies",
+    degree_lat: "Baccalaureus in Technologiis Informationis et Communicationis",
     institution: "Instituto Tecnológico Superior del Occidente del Estado de Hidalgo",
     institution_short: "ITSOEH",
     period: "2018 — 2022",
     location_es: "Hidalgo, México",
     location_en: "Hidalgo, Mexico",
+    location_lat: "Hidalgo, Mexico",
     selective_note_es: null as string | null,
     selective_note_en: null as string | null,
+    selective_note_lat: null as string | null,
     highlight_es: "Publicación en IEEE Xplore sobre seguridad en sistemas blockchain descentralizados.",
     highlight_en: "Published research in IEEE Xplore on security in decentralized blockchain systems.",
+    highlight_lat: "Dissertatio edita in IEEE Xplore de securitate systematum blockchain descentralizatorum.",
     bullets_es: null as string[] | null,
     bullets_en: null as string[] | null,
+    bullets_lat: null as string[] | null,
     links: null as { label: string; url: string }[] | null,
   },
   {
     type: "program",
     degree_es: "Platzi Master Program · Cohorte 8",
     degree_en: "Platzi Master Program · Cohort 8",
+    degree_lat: "Programma Magistrum Platzi · Cohortis VIII",
     institution: "Platzi",
     institution_short: "Platzi",
     period: "Oct 2021 — Mar 2022",
     location_es: null as string | null,
     location_en: null as string | null,
+    location_lat: null as string | null,
     selective_note_es: "Admisión por proceso de selección",
     selective_note_en: "Admission by selection process",
+    selective_note_lat: "Admissio per processum selectionis",
     highlight_es: null as string | null,
     highlight_en: null as string | null,
+    highlight_lat: null as string | null,
     bullets_es: [
       "Retos técnicos semanales de JavaScript y React con pair programming y feedback estructurado.",
       "Comunidad GetHired: colaboración con desarrolladores de toda Latinoamérica en preparación para procesos de selección en la industria.",
@@ -47,6 +56,10 @@ const degrees = [
     bullets_en: [
       "Weekly JavaScript and React challenges with pair programming and structured feedback.",
       "GetHired community: collaborated with developers across Latin America on industry hiring preparation.",
+    ],
+    bullets_lat: [
+      "Certamina technica hebdomadalia de JavaScript et React cum programmis binis et censura structurata.",
+      "Communitas GetHired: cooperatio cum fabricatoribus per totam Americam Latinam in praeparatione selectionis industrivae.",
     ],
     links: [
       { label: "GetHired — GitHub", url: "https://github.com/Platzi-Master-C8/gethired-community" },
@@ -70,27 +83,27 @@ const degrees = [
             <span class="degree-institution" title={d.institution}>{d.institution_short}</span>
             {(d.location_es || d.location_en) && (
               <span class="degree-location">
-                {lang === 'en' ? d.location_en : d.location_es}
+                {pick(d as any, 'location', lang) as string}
               </span>
             )}
           </div>
           <div class="degree-right">
             <h3 class="degree-title">
-              {lang === 'en' ? d.degree_en : d.degree_es}
+              {pick(d as any, 'degree', lang) as string}
             </h3>
             {(d.selective_note_es || d.selective_note_en) && (
               <p class="degree-selective-note">
-                {lang === 'en' ? d.selective_note_en : d.selective_note_es}
+                {pick(d as any, 'selective_note', lang) as string}
               </p>
             )}
             {(d.highlight_es || d.highlight_en) && (
               <p class="degree-highlight">
-                {lang === 'en' ? d.highlight_en : d.highlight_es}
+                {pick(d as any, 'highlight', lang) as string}
               </p>
             )}
             {d.bullets_es && (
               <ul class="degree-bullets">
-                {(lang === 'en' ? d.bullets_en! : d.bullets_es).map((b) => (
+                {(pick(d as any, 'bullets', lang) as string[]).map((b: string) => (
                   <li>{b}</li>
                 ))}
               </ul>

@@ -1,5 +1,5 @@
 ---
-import { useTranslations, dataLang } from '../i18n';
+import { useTranslations, dataLang, pick } from '../i18n';
 import type { Locale } from '../i18n';
 
 interface Props {
@@ -15,6 +15,7 @@ const jobs = [
     url: "https://ubidots.com",
     role_es: "Ingeniero de Software Senior — Frontend & Mobile",
     role_en: "Senior Software Engineer — Frontend & Mobile",
+    role_lat: "Faber Programmatus Senior — Frontend & Mobile",
     period: "Feb 2024 — May 2026",
     current: false,
     caseStudy: "/projects/ubidots",
@@ -30,12 +31,19 @@ const jobs = [
       "Cut release cycle from 50 to 20 min (~60%), reducing delivery friction for a team of 20+ developers.",
       "Established quality standards, an internal ESLint plugin, and code review guidelines adopted by the whole team; mentored 2 junior engineers through pair programming and structured reviews.",
     ],
+    bullets_lat: [
+      "Architecturam et celeritatem suggestus IoT SaaS cum CL milibus utentium activis et data in tempore reali per WebSockets duxi.",
+      "Tempora onerationis a 8s ad 5s (-37%) et redditum ECharts a 30s ad 15s (-50%) per virtualizationem et memoizationem minui.",
+      "Cyclum editionis a 50 ad 20 min (-60%) contraxi; opus XX+ fabricatoribus leviorem feci.",
+      "Normas qualitatis, pluginum ESLint internum et modos recensionis constitui; duos fabricatores iuniores per programmationem pari mentoravi.",
+    ],
   },
   {
     company: "Ubidots",
     url: "https://ubidots.com",
     role_es: "Ingeniero Frontend Mid-Level",
     role_en: "Mid-level Frontend Engineer",
+    role_lat: "Faber Frontend Medius",
     period: "Jun 2022 — Feb 2024",
     current: false,
     bullets_es: [
@@ -48,12 +56,18 @@ const jobs = [
       "Built and maintained the mobile app (iOS + Android) in React Native, shipping new platform features directly to end users.",
       "Contributed to the design and implementation of key components of the real-time IoT dashboard system.",
     ],
+    bullets_lat: [
+      "Modulum solutionis pecuniariae cum Stripe institui et systema TanStack Query adoptavi, status duplicatos delens et conversionem directam freemium ad solutum agens.",
+      "Applicationem mobilem (iOS + Android) in React Native construxi et sustinui, novas functiones utentibus tradidi.",
+      "In consilio et exsecutione componentium dascifolii IoT in tempore reali participavi.",
+    ],
   },
   {
     company: "Clever Cloud",
     url: "https://clevercloud.mx/",
     role_es: "Frontend Developer",
     role_en: "Frontend Developer",
+    role_lat: "Fabricator Frontend",
     period: "Jul 2021 — Jun 2022",
     current: false,
     bullets_es: [
@@ -66,12 +80,18 @@ const jobs = [
       "Directly managed my own client accounts, including Hola Buzz — from initial development through ongoing support.",
       "Implemented CI/CD pipelines to improve deployment cycles.",
     ],
+    bullets_lat: [
+      "Interfacias pro XX+ operibus clientium in React, Vue et PHP construxi.",
+      "Clientibus propriis, incluso Hola Buzz, directe praepositus fui — ab initio usque ad auxilium continuum.",
+      "Vias CI/CD pro cyclis dispositionis meliorum statui, normam gregis factas.",
+    ],
   },
   {
     company: "Google Developers",
     url: "https://developers.google.com/community/gdsc",
     role_es: "Developer Student Club Lead",
     role_en: "Developer Student Club Lead",
+    role_lat: "Dux Collegii Studentium Fabricatorum",
     period: "Ago 2020 — Jul 2021",
     current: false,
     bullets_es: [
@@ -86,8 +106,14 @@ const jobs = [
       "Designed and built the community website.",
       "Participated as speaker and facilitator at software development events.",
     ],
+    bullets_lat: [
+      "Communitatem technicam studentium LX+ membrorum duxi.",
+      "XX eventus technicos institui: colloquia, sermones, sessiones practicas.",
+      "Situm retis communitatis designavi et fabricavi.",
+      "Orator et moderator in eventibus programmationis fui.",
+    ],
   },
-];
+] as const;
 ---
 
 <section id="experience">
@@ -108,17 +134,17 @@ const jobs = [
           </div>
           <div class="job-right">
             <div class="job-title-row">
-              <h3 class="job-role">{lang === 'en' ? job.role_en : job.role_es}</h3>
+              <h3 class="job-role">{pick(job as any, 'role', lang)}</h3>
               {job.current && (
                 <span class="job-current">{t('experience.current')}</span>
               )}
             </div>
             <ul class="job-bullets">
-              {(lang === 'en' ? job.bullets_en : job.bullets_es).map((b) => (
+              {(pick(job as any, 'bullets', lang) as string[]).map((b: string) => (
                 <li>{b}</li>
               ))}
             </ul>
-            {job.caseStudy && (
+            {'caseStudy' in job && job.caseStudy && (
               <a href={job.caseStudy} class="job-case-study">
                 {t('experience.case_study')}
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>

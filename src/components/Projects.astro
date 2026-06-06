@@ -1,5 +1,5 @@
 ---
-import { useTranslations, dataLang } from '../i18n';
+import { useTranslations, dataLang, pick } from '../i18n';
 import type { Locale } from '../i18n';
 import projectsData from '../data/projects.json';
 
@@ -43,9 +43,7 @@ const { projects } = projectsData;
             </div>
             <div class="project-right">
               <p class="project-desc">
-                {lang === 'en'
-                  ? (project.description_en || project.description)
-                  : (project.description_es || project.description)}
+                {pick(project, 'description', lang) as string}
               </p>
               <div class="project-links">
                 {project.caseStudy && (

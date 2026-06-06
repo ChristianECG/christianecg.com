@@ -10,4 +10,5 @@ externalUrl: https://reingtec.itsoeh.edu.mx/reingtec/docs/vol8_2020reingtec/51-5
 pdf: /papers/covid19-ml-mexico.pdf
 descriptionEs: Modelo de Densidad de Kernel (Kernel Ridge) para predecir la tendencia de contagios de COVID-19 en México. Entrenado con datos del CSSE de Johns Hopkins durante los primeros 50 días del brote para estimar los siguientes 150 días. Implementado en Python con sklearn.
 descriptionEn: Kernel Ridge model to predict COVID-19 contagion trends in Mexico. Trained on Johns Hopkins CSSE data from the first 50 days of the outbreak to estimate the following 150 days. Implemented in Python with sklearn.
+descriptionLat: Exemplar Kernel Ridge ad tendentias contagionis COVID-19 in Mexico praedicendas. Eruditum ex datis CSSE Universitatis Hopkins ex primis L diebus ad sequentes CL dies aestimandos. In Python cum sklearn effectum.
 ---

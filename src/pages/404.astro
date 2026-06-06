@@ -3,22 +3,27 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+import { useTranslations, getLocaleFromUrl } from '../i18n';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
 ---
 
 <Layout
-  title="404 — Página no encontrada · Christian Elías"
-  description="La página que buscas no existe."
+  title={`${t('404.title')} — Christian Elías`}
+  description={t('404.description')}
+  locale={locale}
 >
-  <Nav />
+  <Nav locale={locale} />
   <main id="main-content" class="not-found">
     <div class="container">
       <span class="code">404</span>
-      <h1>Página no encontrada</h1>
-      <p>La URL que ingresaste no existe o fue movida.</p>
-      <a href="/" class="btn">Volver al inicio</a>
+      <h1>{t('404.title')}</h1>
+      <p>{t('404.description')}</p>
+      <a href={`/${locale}/`} class="btn">{t('404.back')}</a>
     </div>
   </main>
-  <Footer />
+  <Footer locale={locale} />
 </Layout>
 
 <style>
@@ -40,7 +45,6 @@ import '../styles/global.css';
     font-size: clamp(5rem, 15vw, 10rem);
     font-weight: 800;
     line-height: 1;
-    color: var(--accent-dim);
     background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

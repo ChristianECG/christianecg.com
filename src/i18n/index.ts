@@ -11,9 +11,14 @@ export function useTranslations(locale: Locale) {
     translations[locale]?.[key] ?? translations.es[key] ?? key;
 }
 
-/** Maps 'lat' → 'es' for _es/_en keyed data objects. */
-export function dataLang(locale: Locale): 'es' | 'en' {
-  return locale === 'lat' ? 'es' : locale;
+/** Returns the locale for keyed data lookups. Components should fall back to _es when _lat is absent. */
+export function dataLang(locale: Locale): 'es' | 'en' | 'lat' {
+  return locale;
+}
+
+/** Pick a locale-keyed field from a data object, falling back to Spanish. */
+export function pick<T>(obj: Record<string, T>, key: string, lang: 'es' | 'en' | 'lat'): T {
+  return (obj[`${key}_${lang}`] ?? obj[`${key}_es`]) as T;
 }
 
 export const LOCALES: Locale[] = ['es', 'en', 'lat'];

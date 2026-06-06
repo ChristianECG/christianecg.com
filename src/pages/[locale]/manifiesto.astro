@@ -13,7 +13,8 @@ export function getStaticPaths() {
 const { locale } = Astro.params as { locale: Locale };
 const t = useTranslations(locale);
 
-const en = locale === 'en';
+const en  = locale === 'en';
+const lat = locale === 'lat';
 
 const beliefs = en ? [
   'Code nobody notices is the best code there is. If the user doesn\'t see it, it worked.',
@@ -21,6 +22,12 @@ const beliefs = en ? [
   'Users don\'t owe software their patience. Software owes intelligence to its users.',
   'Writing code is easy. Writing code another person can read without cursing you: that\'s the craft.',
   'The best architecture is the one that disappears. Structure you can see is structure that gets in the way.',
+] : lat ? [
+  'Codex quem nemo animadvertit optimus codex est. Si utens eum non videt, opus peractum est.',
+  'Velocitas non est proprium. Est respectus. Unum secundum latentiae nomen et cognomen habet.',
+  'Utentes patientiam softwaro non debent. Softwarum intelligentiam utentibus debet.',
+  'Codicem scribere facile est. Codicem scribere quem alius legere possit sine maledictionibus: hoc est ars.',
+  'Optima architectura est quae evanescit. Structura quae conspicitur structura est quae impedit.',
 ] : [
   'El código que nadie nota es el mejor código que existe. Si el usuario no lo ve, funcionó.',
   'El rendimiento no es una característica. Es respeto. Un segundo de latencia tiene nombre y apellido.',
@@ -46,6 +53,8 @@ const beliefs = en ? [
         <blockquote class="quote-block reveal" style="--delay: 0.1s">
           {en ? (
             <>At some point you touched a computer and the computer did what you wanted...<br />You made it do what you wanted it to do, and you realised you were a <em>god.</em></>
+          ) : lat ? (
+            <>Aliquando machinae computatrici tetigisti et machina id quod volueras fecit...<br />Fecisti ut id ageret quod tu volueras, et intellexisti te <em>deum</em> esse.</>
           ) : (
             <>En algún punto tocaste una computadora y la computadora hizo lo que querías...<br />Hiciste que hiciera lo que tú querías, y te diste cuenta de que eras un <em>dios.</em></>
           )}
