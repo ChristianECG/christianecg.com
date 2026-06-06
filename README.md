@@ -28,7 +28,7 @@ Built with [Astro](https://astro.build) and deployed to GitHub Pages.
 
 ```sh
 yarn install
-yarn dev       # http://localhost:4321
+yarn dev       # http://localhost:4323
 yarn build     # production build → dist/
 yarn preview   # preview the build locally
 ```

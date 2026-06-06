@@ -71,6 +71,26 @@ const ogLocaleAlt = locale === 'en' ? 'es_MX' : 'en_US';
     <slot />
     <button class="back-to-top" id="back-to-top" aria-label={t('layout.back_to_top')}>↑</button>
     <script>
+      // Console easter egg
+      (function () {
+        const accent = '#5B8CF5';
+        const dim = '#3E4A60';
+        const muted = '#7E8EAB';
+        console.clear();
+        console.log(
+          '%c  cecg  ',
+          `background:${accent};color:#fff;font-size:1.4rem;font-weight:800;letter-spacing:0.1em;padding:6px 18px;border-radius:4px`
+        );
+        console.log('%cchristianecg.com', `color:${muted};font-size:0.9rem;font-style:italic`);
+        console.log(' ');
+        console.log('%cSenior Software Engineer', `color:${accent};font-size:0.85rem;font-weight:600`);
+        console.log('%cFrontend · Mobile · IoT', `color:${dim};font-size:0.75rem`);
+        console.log(' ');
+        console.log('%c↑ ↑ ↓ ↓ ← → ← → B A', `color:${muted};font-size:0.7rem;letter-spacing:0.05em`);
+        console.log('%c(hay un secreto aquí)', `color:${dim};font-size:0.65rem;font-style:italic`);
+      })();
+    </script>
+    <script>
       // Scroll reveal
       const observer = new IntersectionObserver(
         (entries) => {

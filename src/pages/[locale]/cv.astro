@@ -14,15 +14,26 @@ const { locale } = Astro.params as { locale: Locale };
 const t = useTranslations(locale);
 const lang = dataLang(locale);
 
-const cvUrl = lang === 'en'
-  ? '/Christian_Elias_Cruz_Gonzalez_eng.pdf'
-  : '/Christian_Elias_Cruz_Gonzalez_esp.pdf';
+// const cvUrl = lang === 'en'
+//   ? '/Christian_Elias_Cruz_Gonzalez_eng.pdf'
+//   : '/Christian_Elias_Cruz_Gonzalez_esp.pdf';
+const cvUrls = {
+  en: '/Christian_Elias_Cruz_Gonzalez_eng.pdf',
+  lat: '/Christian_Elias_Cruz_Gonzalez_lat.pdf',
+  es: '/Christian_Elias_Cruz_Gonzalez_esp.pdf',
+}
+
+const cvUrl = cvUrls[lang] || cvUrls['es'];
 
 const title = locale === 'en'
   ? 'Resume — Christian Elías Cruz González'
+  : locale === 'lat'
+  ? 'Curriculum Vitae — Christian Elías Cruz González'
   : 'CV — Christian Elías Cruz González';
 const description = locale === 'en'
   ? 'Résumé of Christian Elías Cruz González, Senior Software Engineer — Frontend & Mobile.'
+  : locale === 'lat'
+  ? 'Curriculum vitae Christiani Eliae Cruz González, Faber Programmatus Senior — Frontend & Mobile.'
   : 'Currículum vitae de Christian Elías Cruz González, Senior Software Engineer — Frontend & Mobile.';
 ---
 

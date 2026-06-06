@@ -49,7 +49,7 @@ export interface CVData {
   }
 }
 
-export const cvData: Record<'es' | 'en', CVData> = {
+export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
   es: {
     meta: {
       title: 'CV · Christian Elías Cruz González — Senior Fullstack Engineer',
@@ -307,6 +307,138 @@ export const cvData: Record<'es' | 'en', CVData> = {
           'Keynote speaker at the <strong>5th International Software Congress, UAEH</strong> (2025) and at the <strong>International Engineering Congress, ITSOEH</strong> (2025).',
           '<strong>Google Developer Student Club Lead</strong> — led a community of 60+ students and organized 20+ technical events (2020-2021).',
           'Featured on <strong>Hidalgo Radio and Television</strong> — Con Ciencia and Ya es Hora programs.',
+        ],
+      },
+    },
+  },
+
+  lat: {
+    meta: {
+      title: 'Curriculum Vitae · Christian Elías Cruz González — Faber Programmatus Senior',
+      lang: 'la',
+    },
+    header: {
+      name: 'Christian Elías Cruz González',
+      role: 'Faber Programmatus Senior — SaaS et Integrationes',
+      location: 'Mexicum · CDMX / Hidalgo',
+      availability: 'Inceptio: Iunio MMXXVI · 100% e longinquo',
+      contact: [
+        'christianecg.com',
+        'github.com/ChristianECG',
+        'linkedin.com/in/christianeliascg',
+        'contacto@christianecg.com',
+        '+52 772 120 2886',
+      ],
+    },
+    sections: {
+      summary: {
+        title: 'Descriptio Professionalis',
+        text: 'Faber Programmatus Senior cum quinque et amplius annis systemata in productione tradendi. Dominium technicum ab initio ad finem: construo, administro et augeo — a suggestibus cum CL milibus utentium usque ad opera propria cum vectigali reali. Peritus in processum agentium, integratione LLM et systematibus ad minimam humanam interventionem designatis.',
+      },
+      experience: {
+        title: 'Experientia',
+        jobs: [
+          {
+            title: 'Faber Programmatus Senior',
+            period: 'Feb. MMXXIV – Mai. MMXXVI',
+            company: 'Ubidots · Medellín, Columbia (e longinquo)',
+            bullets: [
+              'Architecturam et celeritatem suggestus IoT SaaS cum CL milibus utentium activorum et data in tempore reali per WebSockets duxi.',
+              'Tempora onerationis a 8s ad 5s (-37%) et redditum ECharts a 30s ad 15s (-50%) per virtualizationem, memoizationem et canvas rendering minui.',
+              'Cyclum editionis a 50 ad 20 min (-60%) contraxi, frictionem tradendi pro grege XX+ fabricatorum minuens.',
+              'Normas qualitatis, pluginum ESLint internum et modos recensionis constitui; duos fabricatores iuniores per programmationem pari et recensiones structuratas mentoravi.',
+            ],
+            stack: 'React, TypeScript, ECharts, TanStack Query, WebSockets, Node.js, Python (Django), ESLint (pluginum internum), Jest, GitHub Actions.',
+          },
+          {
+            title: 'Faber Programmatus Medius',
+            period: 'Iun. MMXXII – Feb. MMXXIV',
+            company: 'Ubidots · Medellín, Columbia (e longinquo)',
+            bullets: [
+              'Modulum solutionis pecuniariae cum Stripe institui et systema petendi ad TanStack Query migravi, status duplicatos delens et conversionem directam a gratuito ad solutum agens.',
+              'Applicationem mobilem (iOS et Android) in React Native construxi et sustinui, novas functiones suggestus utentibus tradidi.',
+              'In consilio et exsecutione componentium principalium systematis dascifolii IoT in tempore reali participavi.',
+            ],
+            stack: 'React, TypeScript, React Native, TanStack Query, Stripe, WebSockets, Node.js, Python (Django), Jest.',
+          },
+          {
+            title: 'Fabricator Programmatum',
+            period: 'Iul. MMXXI – Iun. MMXXII',
+            company: 'Clever Cloud · Mexicum (e longinquo)',
+            bullets: [
+              'Situs in CMS proprietario societatis fabricavi et integravi, cyclum plenum gerens: requisita a clientibus colligens, in speciificationes technicas pro grege quinque fabricatorum vertens, exsecutionem et traditionem curans.',
+              'Paginam introductivam ex imaginibus designatricis graphicae accurate ad pixelem designavi et exsecutioni dedi, traditiones cum cliente directe coordinans usque ad approbationem finalem.',
+              'Vias CI/CD et condicionem dev-staging-productionem definivi, in normam gregis adoptatas.',
+            ],
+            stack: 'React, Vue, PHP, MySQL, GitHub Actions, CI/CD.',
+          },
+        ],
+      },
+      projects: {
+        title: 'Opera',
+        items: [
+          {
+            title: 'TuAgenda.digital',
+            url: 'tuagenda.digital',
+            description: 'SaaS automationis temporum nunc in operatione, cum quinque clientibus activis in primis tribus mensibus et vectigali recurrente per Stripe: inscriptio sub nomine alieno, portale clientis sine ingressu, admonitiones per electronicam epistulam et SMS, agensque AI in WhatsApp cum Claude API in productione — curationem vacationum XXIV/VII agens et onus manuale operationale circa 80% minuens.',
+            tags: 'Next.js 15 · Supabase · Stripe · Twilio · Claude API · OpenAI · Vercel Edge',
+          },
+          {
+            title: 'CatolicMixquia',
+            url: 'iOS · Android',
+            description: 'Applicatio multiinstrumentalis contentus paroecialis cum DCLXX+ utentibus activis: lusor soni cum repraesentatione in fundo, missale cum condictione automatica per GitHub Actions, reflexio cotidiana cum raptione, notificationes impulsae et copia sine rete.',
+            tags: 'React Native · Expo · GitHub Actions · Notificationes Impulsae · AsyncStorage',
+          },
+          {
+            title: 'Avelor',
+            url: 'avelor.es',
+            description: 'Suggestus VI microserviciorum in proprio machinarum hospitio, cum subdominio independenti per modulum: analytics cum schemate calidi in tempore reali, thesaurus secretorum cum AES-256-GCM, verriculi deponendi cum productis persistitis, meatus WebSocket, tabella administrativa post Tailscale VPN et CLI administrationis. Dependentias tertiarum partium in productione reponit.',
+            tags: 'Astro · Node.js · PHP · PostgreSQL · Tailscale · Docker · VPS',
+          },
+        ],
+      },
+      skills: {
+        title: 'Peritiae',
+        categories: [
+          { label: 'Frontend et Mobile', items: 'React, Next.js, TypeScript, JavaScript (ES2021+), React Native, HTML5, CSS3, systemata designationis' },
+          { label: 'Backend et Infrastructura', items: 'Node.js, Python, FastAPI, Django, PHP, PostgreSQL, MySQL, Supabase, Vercel, Docker, VPS (Linux), GitHub Actions (CI/CD), REST APIs, Stripe, Twilio' },
+          { label: 'AI / Integratio LLM', items: 'Claude API, OpenAI API, processus agentium, agentes LLM in productione, ars prompti, evolutio augmentata AI' },
+          { label: 'Qualitas et Instrumenta', items: 'ESLint (plugina propria), Jest, React Testing Library, Git, recensiones codicis, Claude Code, GitHub Copilot' },
+          { label: 'Data in Tempore Reali', items: 'TanStack Query, WebSockets, REST APIs, ECharts, D3.js, optimizatio reddendi' },
+          { label: 'Architectura et Praxis', items: 'Architectura crescens, optimizatio celeritatis, systemata in tempore reali, systemata designationis, exemplaria status, a11y, methodus Agilis, Scrum' },
+        ],
+      },
+      education: {
+        title: 'Educatio',
+        items: [
+          {
+            title: 'Ingeniariae in Technologiis Informationis et Communicationum',
+            period: 'MMXVIII – MMXXII',
+            institution: 'ITSOEH · Technologicum Nationale Mexici',
+          },
+          {
+            title: 'Programma Magistri Platzi · Cohorte VIII',
+            period: 'Oct. MMXXI – Mar. MMXXII',
+            institution: 'Platzi · Admissio per processum selectionis',
+          },
+        ],
+      },
+      languages: {
+        title: 'Linguae',
+        items: [
+          { language: 'Hispanica', level: 'Nativa / C2' },
+          { language: 'Anglica', level: 'Upper-Intermediate / B2 · EF SET' },
+          { language: 'Latina', level: 'Satis — dum paginas construo' },
+        ],
+      },
+      activity: {
+        title: 'Activitas Technica',
+        items: [
+          'In <strong>octa.page</strong> scribit — investigationes de tempore reddendi, decisiones architecturae et notas systematum — registrum publicum rationis technicae post opera.',
+          'Auctor publicatus in <strong>IEEE Xplore</strong> — "Security Issues of a Decentralized Blockchain-Based Messaging System" (VII CONIITI, Universitas Catholica Columbiae, MMXXI).',
+          'Orator in <strong>Quinto Congressu Internationali Programmaticae, UAEH</strong> (MMXXV) et in <strong>Congressu Internationali Ingeniaria, ITSOEH</strong> (MMXXV).',
+          '<strong>Dux Collegii Studentium Fabricatorum Google</strong> — communitatem LX+ studentium duxi et XX+ eventus technicos institui (MMXX–MMXXI).',
+          'In <strong>Radio et Televisione Hidalgi</strong> apparuit — in programmatibus Con Ciencia et Ya es Hora.',
         ],
       },
     },

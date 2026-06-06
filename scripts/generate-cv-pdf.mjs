@@ -7,15 +7,20 @@ const publicDir = resolve(__dirname, '../public');
 
 const configs = [
   {
-    url: 'http://localhost:4321/cv-print/es',
+    url: 'http://localhost:4323/cv-print/es',
     output: resolve(publicDir, 'Christian_Elias_Cruz_Gonzalez_esp.pdf'),
     lang: 'es',
   },
   {
-    url: 'http://localhost:4321/cv-print/en',
+    url: 'http://localhost:4323/cv-print/en',
     output: resolve(publicDir, 'Christian_Elias_Cruz_Gonzalez_eng.pdf'),
     lang: 'en',
   },
+  {
+    url: 'http://localhost:4323/cv-print/lat',
+    output: resolve(publicDir, 'Christian_Elias_Cruz_Gonzalez_lat.pdf'),
+    lang: 'lat',
+  }
 ];
 
 const browser = await chromium.launch();

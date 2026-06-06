@@ -73,9 +73,13 @@ img {
 }
 
 
-/* Legacy i18n visibility — used by /projects, /talks, /papers pages not yet on locale routing */
-html:not([lang="en"]) .lang-en,
-html[lang="en"] .lang-es {
+/* 3-way lang visibility for case study pages */
+html[lang="lat"] .lang-es,
+html[lang="lat"] .lang-en,
+html[lang="en"] .lang-es,
+html[lang="en"] .lang-lat,
+html:not([lang="en"]):not([lang="lat"]) .lang-en,
+html:not([lang="en"]):not([lang="lat"]) .lang-lat {
   display: none !important;
 }
 

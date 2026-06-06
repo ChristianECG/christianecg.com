@@ -43,14 +43,17 @@ const slug = Astro.url.pathname.replace(/^\/(es|en|lat)/, '') || '/';
           aria-label="English"
           aria-current={locale === 'en' ? 'true' : undefined}
         >EN</a>
-        <span class="lang-sep">/</span>
-        <a
-          href={`/lat${slug}`}
-          class:list={['lang-btn', 'lang-btn--lat', { active: locale === 'lat' }]}
-          aria-label="Latina"
-          aria-current={locale === 'lat' ? 'true' : undefined}
-          title="Latina (Easter egg)"
-        >LAT</a>
+        {locale === 'lat' && (
+          <>
+            <span class="lang-sep">/</span>
+            <a
+              href={`/lat${slug}`}
+              class:list={['lang-btn', 'lang-btn--lat', { active: true }]}
+              aria-label="Latina"
+              aria-current="true"
+            >LAT</a>
+          </>
+        )}
       </div>
 
       <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
@@ -88,6 +91,22 @@ const slug = Astro.url.pathname.replace(/^\/(es|en|lat)/, '') || '/';
     mobileMenu?.classList.remove('open');
     hamburger?.classList.remove('open');
   };
+
+  // Konami code → /lat/
+  const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  let konamiIdx = 0;
+  document.addEventListener('keydown', (e) => {
+    if (e.key === KONAMI[konamiIdx]) {
+      konamiIdx++;
+      if (konamiIdx === KONAMI.length) {
+        konamiIdx = 0;
+        const currentPath = window.location.pathname.replace(/^\/(es|en|lat)/, '') || '/';
+        window.location.href = '/lat' + currentPath;
+      }
+    } else {
+      konamiIdx = e.key === KONAMI[0] ? 1 : 0;
+    }
+  });
 
   // Active section highlight
   const navAnchors = document.querySelectorAll<HTMLAnchorElement>('.nav-links a');

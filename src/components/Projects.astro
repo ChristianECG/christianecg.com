@@ -47,7 +47,7 @@ const { projects } = projectsData;
               </p>
               <div class="project-links">
                 {project.caseStudy && (
-                  <a href={project.caseStudy} class="project-link">
+                  <a href={`/${locale}${project.caseStudy}`} class="project-link">
                     {t('projects.case_study')}
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                       <path d="M5 12h14M12 5l7 7-7 7"/>
