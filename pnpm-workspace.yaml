@@ -2,5 +2,4 @@ allowBuilds:
   esbuild: true
   sharp: true
 minimumReleaseAgeExclude:
-  - '@avelor/mesh@0.2.1'
   - '@avelor/mesh@0.3.0'
