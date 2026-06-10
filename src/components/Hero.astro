@@ -85,10 +85,7 @@ const CV_URL = lang === 'en'
     flex-direction: column;
     border-bottom: 1px solid var(--border);
     position: relative;
-    background:
-      radial-gradient(ellipse 70% 60% at 15% 20%, rgba(91, 140, 245, 0.11) 0%, transparent 70%),
-      radial-gradient(ellipse 55% 50% at 85% 35%, rgba(124, 92, 245, 0.08) 0%, transparent 65%),
-      radial-gradient(ellipse 60% 55% at 50% 90%, rgba(58, 142, 245, 0.07) 0%, transparent 65%);
+    background: radial-gradient(ellipse 85% 50% at 0% 0%, rgba(91, 140, 245, 0.06) 0%, transparent 55%);
   }
 
   .scroll-hint {
@@ -123,6 +120,12 @@ const CV_URL = lang === 'en'
     font-weight: 600;
     color: var(--text-2);
     letter-spacing: 0.02em;
+  }
+  .hero-role::before {
+    content: '/ ';
+    color: var(--accent);
+    font-weight: 400;
+    opacity: 0.75;
   }
 
   .hero-links {
@@ -170,13 +173,6 @@ const CV_URL = lang === 'en'
     letter-spacing: -0.02em;
     line-height: 1.0;
     cursor: default;
-    transition: text-shadow 0.45s ease;
-  }
-  .hero-name:hover {
-    text-shadow:
-      0 0 18px rgba(91, 140, 245, 0.55),
-      0 0 55px rgba(91, 140, 245, 0.28),
-      0 0 110px rgba(91, 140, 245, 0.13);
   }
 
   .hero-enter-name {
@@ -310,39 +306,9 @@ const CV_URL = lang === 'en'
     .hero-strip-right { align-items: flex-start; }
   }
 
-  .type-cursor {
-    display: inline-block;
-    margin-left: 2px;
-    color: var(--accent);
-    font-weight: 300;
-    animation: cursorBlink 0.75s step-end infinite;
-    transition: opacity 0.5s;
-  }
 </style>
 
 <script>
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const roleEl = document.querySelector<HTMLElement>('.hero-role');
-    if (roleEl) {
-      const full = roleEl.textContent?.trim() ?? '';
-      roleEl.textContent = '';
-      const cursor = document.createElement('span');
-      cursor.className = 'type-cursor';
-      cursor.textContent = '|';
-      roleEl.appendChild(cursor);
-      let i = 0;
-      const type = () => {
-        if (i < full.length) {
-          roleEl.insertBefore(document.createTextNode(full[i++]), cursor);
-          setTimeout(type, 42);
-        } else {
-          setTimeout(() => { cursor.style.opacity = '0'; }, 1500);
-        }
-      };
-      setTimeout(type, 950);
-    }
-  }
-
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.querySelectorAll<HTMLElement>('.cta-primary, .cta-ghost').forEach((btn) => {
       btn.addEventListener('mousemove', (e) => {
