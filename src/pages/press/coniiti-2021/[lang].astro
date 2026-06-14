@@ -1,0 +1,334 @@
+---
+export const prerender = true;
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: 'es' | 'en' };
+
+const content = {
+  es: {
+    meta: { title: 'Resumen para prensa — CONIITI 2021 · Christian Elías Cruz González', lang: 'es' },
+    label_press: 'Resumen para medios de comunicación',
+    label_ieee: 'Publicado en IEEE Xplore · Octubre 2021',
+    title: 'Seguridad en sistemas de mensajería descentralizada basados en blockchain',
+    original_title: 'Título original: "Security Issues of a Decentralized BlockChain-Based Messaging System"',
+    authors: 'Christian Elías Cruz González · Francisco Javier Cuadros Romero',
+    institution: 'Instituto Tecnológico Superior del Occidente del Estado de Hidalgo (ITSOEH) · Mixquiahuala, Hidalgo, México',
+    event_label: 'Presentado en',
+    event: 'VII Congreso Internacional de Innovación y Tendencias en Ingeniería (CONIITI 2021) · Universidad Católica de Colombia',
+    published_label: 'Publicado en',
+    published: 'IEEE Xplore — Biblioteca digital del Instituto de Ingenieros Eléctricos y Electrónicos',
+    published_url: 'https://ieeexplore.ieee.org/document/9619732',
+    sections: [
+      {
+        title: 'El problema',
+        body: 'Los sistemas de mensajería digital actuales —WhatsApp, Messenger, Telegram— dependen de servidores centralizados operados por grandes corporaciones. Cuando estos servidores fallan, millones de personas pierden acceso a sus comunicaciones simultáneamente. En 2019, una caída de Facebook dejó sin servicio a 2,300 millones de usuarios durante más de 14 horas. Además, estos sistemas son vulnerables a ataques maliciosos, vigilancia gubernamental e interceptación de datos.',
+      },
+      {
+        title: 'La propuesta',
+        body: 'Este trabajo presenta un sistema de mensajería alternativo basado en tecnología blockchain: la misma tecnología que sustenta criptomonedas como Bitcoin. En lugar de enviar mensajes a través de un servidor central, los mensajes viajan directamente entre los usuarios a través de una red distribuida. Cada mensaje es cifrado con criptografía de clave pública antes de ser enviado, lo que garantiza que únicamente el destinatario pueda leerlo, incluso si el contenido es visible en la red. El sistema no requiere que ninguna empresa o servidor centralizado intervenga en la comunicación.',
+      },
+      {
+        title: 'Cómo funciona',
+        body: 'Cada mensaje se cifra con la clave pública del destinatario y se almacena dentro de un bloque en la cadena. Para validar cada bloque se utiliza SHA-256, el mismo algoritmo de seguridad empleado en transacciones bancarias internacionales. La identidad de emisor y receptor permanece anónima dentro de la red. El sistema se opera desde un navegador web estándar, sin necesidad de instalar software adicional.',
+      },
+      {
+        title: 'Limitaciones identificadas',
+        body: 'La investigación también documenta los retos actuales de esta tecnología: la velocidad de verificación de transacciones es más lenta que en sistemas centralizados, lo que limita su adopción masiva a corto plazo. Asimismo, se identificaron vulnerabilidades conocidas como el ataque del 51% —cuando un actor acumula suficiente poder computacional para controlar la red— y el problema del doble gasto, ambos inherentes a las blockchains públicas. El trabajo propone soluciones específicas para cada uno de estos problemas.',
+      },
+      {
+        title: 'Relevancia',
+        body: 'La investigación fue seleccionada para publicación en IEEE Xplore, la base de datos científica de referencia en ingeniería eléctrica y tecnología a nivel mundial, que publica únicamente trabajos que superan revisión por pares. Fue presentada en el CONIITI 2021, congreso internacional organizado por la Universidad Católica de Colombia con participación de investigadores de más de 15 países.',
+      },
+    ],
+    contact_label: 'Contacto para prensa',
+    contact: [
+      { label: 'Autor', value: 'Christian Elías Cruz González' },
+      { label: 'Email', value: 'contacto@christianecg.com' },
+      { label: 'Web', value: 'christianecg.com' },
+      { label: 'Paper completo', value: 'ieeexplore.ieee.org/document/9619732' },
+    ],
+    footer: 'Este documento es un resumen ejecutivo para medios de comunicación. No reemplaza ni reproduce el artículo científico original publicado en IEEE Xplore, cuya consulta se recomienda para información técnica detallada.',
+  },
+  en: {
+    meta: { title: 'Press Summary — CONIITI 2021 · Christian Elías Cruz González', lang: 'en' },
+    label_press: 'Press Summary',
+    label_ieee: 'Published in IEEE Xplore · October 2021',
+    title: 'Security in Decentralized Blockchain-Based Messaging Systems',
+    original_title: 'Original title: "Security Issues of a Decentralized BlockChain-Based Messaging System"',
+    authors: 'Christian Elías Cruz González · Francisco Javier Cuadros Romero',
+    institution: 'Instituto Tecnológico Superior del Occidente del Estado de Hidalgo (ITSOEH) · Mixquiahuala, Hidalgo, Mexico',
+    event_label: 'Presented at',
+    event: 'VII International Congress on Innovation and Trends in Engineering (CONIITI 2021) · Universidad Católica de Colombia',
+    published_label: 'Published in',
+    published: 'IEEE Xplore — Digital library of the Institute of Electrical and Electronics Engineers',
+    published_url: 'https://ieeexplore.ieee.org/document/9619732',
+    sections: [
+      {
+        title: 'The problem',
+        body: 'Today\'s most widely used messaging platforms — WhatsApp, Messenger, Telegram — rely on centralized servers operated by large corporations. When those servers go down, millions of people simultaneously lose access to their communications. In 2019, a Facebook outage left 2.3 billion users without service for more than 14 hours. Beyond reliability, centralized systems are also vulnerable to malicious attacks, government surveillance, and data interception.',
+      },
+      {
+        title: 'The proposal',
+        body: 'This paper presents an alternative messaging system built on blockchain technology — the same technology that powers cryptocurrencies like Bitcoin. Instead of routing messages through a central server, messages travel directly between users across a distributed network. Each message is encrypted using public-key cryptography before it is sent, ensuring that only the intended recipient can read it, even if the content is visible on the network. No company or centralized server needs to be involved in the communication.',
+      },
+      {
+        title: 'How it works',
+        body: 'Each message is encrypted with the recipient\'s public key and stored inside a block on the chain. Every block is validated using SHA-256, the same security algorithm used in international banking transactions. The identities of sender and recipient remain anonymous within the network. The system runs in a standard web browser with no additional software installation required.',
+      },
+      {
+        title: 'Identified limitations',
+        body: 'The research also documents the current challenges of this technology: transaction verification speed is slower than in centralized systems, which limits short-term mass adoption. Known vulnerabilities were also identified — the 51% attack, where a single actor accumulates enough computing power to control the network, and the double-spending problem, both inherent to public blockchains. The paper proposes specific solutions to each of these challenges.',
+      },
+      {
+        title: 'Significance',
+        body: 'The research was selected for publication in IEEE Xplore, the world\'s leading scientific database in electrical engineering and technology, which publishes only peer-reviewed work. It was presented at CONIITI 2021, an international congress organized by Universidad Católica de Colombia with researchers from more than 15 countries.',
+      },
+    ],
+    contact_label: 'Press contact',
+    contact: [
+      { label: 'Author', value: 'Christian Elías Cruz González' },
+      { label: 'Email', value: 'contacto@christianecg.com' },
+      { label: 'Website', value: 'christianecg.com' },
+      { label: 'Full paper', value: 'ieeexplore.ieee.org/document/9619732' },
+    ],
+    footer: 'This document is an executive summary prepared for members of the press. It does not replace or reproduce the original scientific article published in IEEE Xplore, which is recommended for detailed technical information.',
+  },
+};
+
+const c = content[lang];
+---
+
+<!DOCTYPE html>
+<html lang={c.meta.lang}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>{c.meta.title}</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      font-size: 10.5pt;
+      line-height: 1.6;
+      color: #111;
+      background: #fff;
+    }
+
+    body {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      padding: 18mm 18mm 14mm 18mm;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .header {
+      border-bottom: 2px solid #111;
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .label-press {
+      font-family: 'Arial', 'Helvetica Neue', sans-serif;
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 0.6rem;
+    }
+
+    .title {
+      font-family: 'Arial', 'Helvetica Neue', sans-serif;
+      font-size: 17pt;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: #111;
+      margin-bottom: 0.4rem;
+    }
+
+    .original-title {
+      font-size: 8.5pt;
+      color: #777;
+      font-style: italic;
+      margin-bottom: 0.9rem;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .meta-label {
+      font-family: 'Arial', 'Helvetica Neue', sans-serif;
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 0.15rem;
+    }
+
+    .meta-value {
+      font-family: 'Arial', 'Helvetica Neue', sans-serif;
+      font-size: 8.5pt;
+      color: #333;
+      line-height: 1.45;
+    }
+
+    .label-ieee {
+      font-family: 'Arial', 'Helvetica Neue', sans-serif;
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #555;
+      margin-top: 0.75rem;
+    }
+
+    .sections { margin-bottom: 1.5rem; }
+
+    .section {
+      margin-bottom: 1.1rem;
+      page-break-inside: avoid;
+    }
+
+    .section-title {
+      font-family: 'Arial', 'Helvetica Neue', sans-serif;
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #111;
+      border-bottom: 0.75px solid #ddd;
+      padding-bottom: 0.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-body {
+      font-size: 9.5pt;
+      color: #222;
+      line-height: 1.7;
+    }
+
+    .contact {
+      border-top: 1px solid #ddd;
+      padding-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-label {
+      font-family: 'Arial', 'Helvetica Neue', sans-serif;
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #111;
+      margin-bottom: 0.6rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem 1.5rem;
+    }
+
+    .contact-item-label {
+      font-family: 'Arial', 'Helvetica Neue', sans-serif;
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 0.1rem;
+    }
+
+    .contact-item-value {
+      font-family: 'Arial', 'Helvetica Neue', sans-serif;
+      font-size: 8.5pt;
+      color: #333;
+    }
+
+    .footer {
+      border-top: 0.5px solid #ddd;
+      padding-top: 0.75rem;
+      font-size: 8pt;
+      color: #999;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    @page { size: A4; margin: 18mm 18mm 14mm 18mm; }
+    @media print { body { padding: 0; } }
+    @media screen { body { box-shadow: 0 0 40px rgba(0,0,0,0.08); margin: 2rem auto; } }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <p class="label-press">{c.label_press}</p>
+    <h1 class="title">{c.title}</h1>
+    <p class="original-title">{c.original_title}</p>
+
+    <div class="meta-grid">
+      <div>
+        <p class="meta-label">{lang === 'es' ? 'Autores' : 'Authors'}</p>
+        <p class="meta-value">{c.authors}</p>
+      </div>
+      <div>
+        <p class="meta-label">{lang === 'es' ? 'Institución' : 'Institution'}</p>
+        <p class="meta-value">{c.institution}</p>
+      </div>
+      <div>
+        <p class="meta-label">{c.event_label}</p>
+        <p class="meta-value">{c.event}</p>
+      </div>
+      <div>
+        <p class="meta-label">{c.published_label}</p>
+        <p class="meta-value">
+          {c.published}<br />
+          <a href={c.published_url}>{c.published_url}</a>
+        </p>
+      </div>
+    </div>
+
+    <p class="label-ieee">{c.label_ieee}</p>
+  </header>
+
+  <div class="sections">
+    {c.sections.map((s) => (
+      <div class="section">
+        <h2 class="section-title">{s.title}</h2>
+        <p class="section-body">{s.body}</p>
+      </div>
+    ))}
+  </div>
+
+  <div class="contact">
+    <p class="contact-label">{c.contact_label}</p>
+    <div class="contact-grid">
+      {c.contact.map((item) => (
+        <div>
+          <p class="contact-item-label">{item.label}</p>
+          <p class="contact-item-value">{item.value}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <p class="footer">{c.footer}</p>
+
+</body>
+</html>

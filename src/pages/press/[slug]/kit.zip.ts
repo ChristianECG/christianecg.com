@@ -20,15 +20,19 @@ export const GET: APIRoute = async ({ props }) => {
   for (const doc of kit.documents) {
     if (!doc.url.startsWith('/')) continue;
     const filePath = resolve(publicDir, doc.url.slice(1));
-    const data = await readFile(filePath);
-    zip.file(`docs/${doc.url.split('/').pop()!}`, data);
+    try {
+      const data = await readFile(filePath);
+      zip.file(`docs/${doc.url.split('/').pop()!}`, data);
+    } catch { /* file not yet available, skip */ }
   }
 
   for (const photo of kit.photos) {
     if (!photo.url.startsWith('/')) continue;
     const filePath = resolve(publicDir, photo.url.slice(1));
-    const data = await readFile(filePath);
-    zip.file(`photos/${photo.url.split('/').pop()!}`, data);
+    try {
+      const data = await readFile(filePath);
+      zip.file(`photos/${photo.url.split('/').pop()!}`, data);
+    } catch { /* file not yet available, skip */ }
   }
 
   const buffer = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });

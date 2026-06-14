@@ -1,0 +1,368 @@
+---
+export const prerender = true;
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: 'es' | 'en' };
+
+const content = {
+  es: {
+    meta: { title: 'Resumen para prensa — DNS over Avian Carriers · Christian Elías Cruz González', lang: 'es' },
+    label_press: 'Resumen para medios de comunicación',
+    label_ietf: 'Internet-Draft ante el IETF · Junio 2026',
+    title: 'DNS over Avian Carriers (DoAC)',
+    subtitle: 'draft-cruzgonzalez-ipoac-dns',
+    author: 'Christian Elías Cruz González',
+    affiliation: 'Independent Avian Infrastructure Researcher',
+    status_label: 'Estado',
+    status: 'Internet-Draft individual activo — pendiente de revisión y comentarios',
+    ietf_url: 'https://datatracker.ietf.org/doc/draft-cruzgonzalez-ipoac-dns/',
+    sections: [
+      {
+        title: '1. Qué es un RFC de 1 de abril — y por qué importa',
+        body: [
+          'Los RFC (Request for Comments) son los documentos técnicos que definen cómo funciona internet: desde cómo se envía un email hasta cómo tu navegador negocia una conexión segura. Los publica el IETF (Internet Engineering Task Force), el organismo internacional que estandariza los protocolos de la red.',
+          'Desde 1989, el IETF mantiene una tradición: publicar cada 1 de abril un RFC humorístico. El más famoso es el RFC 1149 (1990), que especifica la transmisión de datagramas IP mediante palomas mensajeras. En 2001, un grupo de ingenieros noruegos lo implementó en la práctica, con un ping time promedio de 3,000 segundos y un 55% de pérdida de paquetes — resultados considerados aceptables dadas las circunstancias.',
+          'Estos documentos no son menos rigurosos que cualquier otro RFC. Siguen el mismo formato técnico, utilizan el lenguaje normativo estándar (MUST, SHOULD, MAY), son revisados por la comunidad de ingeniería de internet y quedan registrados permanentemente en el archivo del IETF. La diferencia es que su propósito declarado es humorístico — pero su ejecución técnica es completamente seria.',
+          'Contribuir con un RFC de esta tradición es un reconocimiento dentro de la comunidad técnica global: requiere conocimiento profundo de los estándares de internet, capacidad para identificar una laguna técnica real (aunque absurda), y habilidad para escribir en el registro preciso de un documento normativo. No cualquiera lo publica.',
+        ],
+      },
+      {
+        title: '2. El problema — tres décadas de una laguna inaceptable',
+        body: [
+          'El RFC 1149 resolvió la capa de transporte. El RFC 2549 añadió Calidad de Servicio. El RFC 6214 extendió el soporte a IPv6. Durante más de treinta años, la pila de protocolos aviar avanzó con rigor y determinación.',
+          'Y sin embargo, nadie había abordado lo más básico: ¿cómo resuelve un hostname un nodo en una red de palomas mensajeras?',
+          'La única solución disponible hasta la fecha era hardcodear la dirección IP directamente en el mensaje adjunto al portador. Este enfoque, como cualquier ingeniero con criterio reconocerá, no escala. No admite balanceo de carga entre múltiples palomares. Y convierte cualquier evento de renumeración de palomas en algo que el autor del draft describe, con contención admirable, como "catastrófico".',
+        ],
+      },
+      {
+        title: '3. La propuesta — DoAC cierra la brecha',
+        body: [
+          'DNS over Avian Carriers (DoAC) especifica un mecanismo completo para la resolución de nombres de dominio sobre infraestructura aviar. Las consultas DNS se transcriben en microfilm — recomendado sobre papel en regiones con precipitaciones superiores a 50mm anuales — y se adjuntan a la pata izquierda del portador. Las respuestas, a la derecha. Las implementaciones NO DEBEN adjuntar simultáneamente una consulta y una respuesta a la misma pata.',
+          'El documento introduce el registro de recurso DNS de tipo AA (Avian Address), que codifica las coordenadas geográficas del palomar de destino en lugar de una dirección IP convencional. El campo TTL (Time To Live) conserva su significado semántico DNS habitual, aunque adquiere una interpretación biológica adicional: se RECOMIENDA que los operadores no configuren valores TTL que superen la esperanza de vida del portador. Valores superiores a 15 años NO SON RECOMENDADOS.',
+          'Para situaciones en que ningún portador disponible conozca la ruta al destino, el documento define el Pigeon of Last Resort (PoLR): un portador preentrenado equivalente al resolver recursivo de último recurso. La condición en que un portador no llega a su destino en el tiempo esperado se denomina NXPIGEON.',
+          'El Trusted Courier Pigeon (TCP) es el portador designado para el transporte de material criptográfico sensible. La colisión del acrónimo con Transmission Control Protocol, señala el documento, "es notada y considerada apropiada".',
+        ],
+      },
+      {
+        title: '4. Consideraciones de seguridad — un análisis exhaustivo',
+        body: [
+          'El documento dedica atención rigurosa a las amenazas de seguridad propias de esta arquitectura. Entre las identificadas: el ataque Hawk-in-the-Middle (HitM), en el que un agente intermedio — específicamente, un ave de presa — intercepta al portador antes de que llegue a su destino; la suplantación de palomas mediante autenticación basada en plumaje (Plumage-Based Authentication); y el secuestro de palomares (Loft Hijacking).',
+          'Se documenta también la amenaza del Covert Feather Channel: un canal encubierto en el que información sensible se extrae mediante el análisis del patrón de desgaste del plumaje del portador. El Denial of Flight (DoF) y las anomalías de enrutamiento derivadas de la temporada migratoria completan el modelo de amenazas.',
+          'El gato hambriento es clasificado formalmente como amenaza a la capa física.',
+          'Para respuestas DNS de gran tamaño — como los conjuntos de claves DNSKEY — el documento recomienda el uso de un pájaro de mayor tamaño. El uso de águilas es OPTIONAL, aunque se reconoce expresamente como impresionante.',
+        ],
+      },
+      {
+        title: '5. Estado y próximos pasos',
+        body: [
+          'El draft se encuentra actualmente en revisión ante el IETF como Internet-Draft individual. El documento permanece abierto a comentarios de la comunidad técnica. El texto completo, en inglés, está disponible en el IETF Datatracker.',
+        ],
+      },
+    ],
+    contact_label: 'Contacto para prensa',
+    contact: [
+      { label: 'Autor', value: 'Christian Elías Cruz González' },
+      { label: 'Email', value: 'contacto@christianecg.com' },
+      { label: 'Web', value: 'christianecg.com' },
+      { label: 'Draft completo', value: 'datatracker.ietf.org/doc/draft-cruzgonzalez-ipoac-dns/' },
+    ],
+    footer: 'Este documento es un resumen para medios de comunicación. El Internet-Draft original, en inglés, está disponible en el IETF Datatracker y constituye la fuente técnica de referencia. DNS over Avian Carriers es un documento humorístico en la tradición de los RFC de 1 de abril del IETF. El autor asume plena responsabilidad técnica de su contenido.',
+  },
+  en: {
+    meta: { title: 'Press Summary — DNS over Avian Carriers · Christian Elías Cruz González', lang: 'en' },
+    label_press: 'Press Summary',
+    label_ietf: 'Internet-Draft submitted to the IETF · June 2026',
+    title: 'DNS over Avian Carriers (DoAC)',
+    subtitle: 'draft-cruzgonzalez-ipoac-dns',
+    author: 'Christian Elías Cruz González',
+    affiliation: 'Independent Avian Infrastructure Researcher',
+    status_label: 'Status',
+    status: 'Active individual Internet-Draft — open for review and comments',
+    ietf_url: 'https://datatracker.ietf.org/doc/draft-cruzgonzalez-ipoac-dns/',
+    sections: [
+      {
+        title: '1. What an April 1st RFC is — and why it matters',
+        body: [
+          'RFCs (Requests for Comments) are the technical documents that define how the internet works: from how email is delivered to how your browser negotiates a secure connection. They are published by the IETF (Internet Engineering Task Force), the international body responsible for standardizing internet protocols.',
+          'Since 1989, the IETF has maintained a tradition: publishing a humorous RFC every April 1st. The most famous is RFC 1149 (1990), which specifies the transmission of IP datagrams via homing pigeons. In 2001, a group of Norwegian engineers implemented it in practice, achieving an average ping time of 3,000 seconds and 55% packet loss — results considered acceptable given the circumstances.',
+          'These documents are no less rigorous than any other RFC. They follow the same technical format, use the standard normative language (MUST, SHOULD, MAY), are reviewed by the internet engineering community, and are permanently registered in the IETF archive. The difference is that their stated purpose is humorous — but their technical execution is entirely serious.',
+          'Contributing to this tradition is a form of recognition within the global technical community: it requires deep knowledge of internet standards, the ability to identify a real (if absurd) technical gap, and the skill to write in the precise register of a normative document. Not everyone gets to publish one.',
+        ],
+      },
+      {
+        title: '2. The problem — three decades of an unacceptable gap',
+        body: [
+          'RFC 1149 solved the transport layer. RFC 2549 added Quality of Service. RFC 6214 extended support to IPv6. For over thirty years, the avian-carrier protocol stack advanced with rigor and determination.',
+          'And yet, no one had addressed the most basic question: how does a host on an avian-carrier network resolve a hostname?',
+          'The only available solution to date was to hardcode the IP address directly onto the message attached to the carrier. This approach, as any engineer with judgment will recognize, does not scale. It does not support load balancing across multiple lofts. And it makes pigeon renumbering events what the draft\'s author describes, with admirable restraint, as "catastrophically disruptive".',
+        ],
+      },
+      {
+        title: '3. The proposal — DoAC closes the gap',
+        body: [
+          'DNS over Avian Carriers (DoAC) specifies a complete mechanism for resolving domain names over avian-carrier infrastructure. DNS queries are transcribed onto microfilm — recommended over plain paper in regions with annual precipitation exceeding 50mm — and attached to the carrier\'s left leg. Responses go on the right. Implementations MUST NOT attach both a query and a response to the same leg simultaneously.',
+          'The document introduces the AA (Avian Address) DNS resource record type, which encodes the geographic coordinates of the destination loft rather than a conventional IP address. The TTL (Time To Live) field retains its standard DNS semantic meaning, though it acquires an additional biological interpretation: operators SHOULD NOT configure TTL values exceeding the expected lifespan of the carrier. Values above 15 years are NOT RECOMMENDED.',
+          'For situations in which no available carrier knows the route to the destination, the document defines the Pigeon of Last Resort (PoLR): a pre-trained carrier equivalent to the recursive resolver of last resort. The condition in which a carrier fails to arrive at its destination within the expected window is designated NXPIGEON.',
+          'The Trusted Courier Pigeon (TCP) is the carrier designated for the transport of sensitive keying material. The acronym collision with Transmission Control Protocol, the document notes, "is noted and considered appropriate".',
+        ],
+      },
+      {
+        title: '4. Security considerations — a thorough analysis',
+        body: [
+          'The document gives rigorous attention to the security threats inherent to this architecture. Among those identified: the Hawk-in-the-Middle (HitM) attack, in which an intermediate agent — specifically, a bird of prey — intercepts the carrier before it reaches its destination; pigeon spoofing via Plumage-Based Authentication; and Loft Hijacking.',
+          'Also documented is the Covert Feather Channel: a side channel through which sensitive information may be exfiltrated by analyzing the wear patterns of the carrier\'s plumage. Denial of Flight (DoF) and routing anomalies caused by migration season complete the threat model.',
+          'The hungry cat is formally classified as a physical layer threat.',
+          'For large DNS responses — such as DNSKEY RRsets — the document recommends using a larger bird. The use of eagles is OPTIONAL, though expressly acknowledged as impressive.',
+        ],
+      },
+      {
+        title: '5. Status and next steps',
+        body: [
+          'The draft is currently under review with the IETF as an individual Internet-Draft. The document remains open for comments from the technical community. The full text is available in English on the IETF Datatracker.',
+        ],
+      },
+    ],
+    contact_label: 'Press contact',
+    contact: [
+      { label: 'Author', value: 'Christian Elías Cruz González' },
+      { label: 'Email', value: 'contacto@christianecg.com' },
+      { label: 'Website', value: 'christianecg.com' },
+      { label: 'Full draft', value: 'datatracker.ietf.org/doc/draft-cruzgonzalez-ipoac-dns/' },
+    ],
+    footer: 'This document is a press summary. The original Internet-Draft, in English, is available on the IETF Datatracker and constitutes the authoritative technical reference. DNS over Avian Carriers is a humorous document in the tradition of the IETF\'s April 1st RFCs. The author assumes full technical responsibility for its contents.',
+  },
+};
+
+const c = content[lang];
+---
+
+<!DOCTYPE html>
+<html lang={c.meta.lang}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>{c.meta.title}</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      font-size: 10pt;
+      line-height: 1.6;
+      color: #111;
+      background: #fff;
+    }
+
+    body {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      padding: 16mm 18mm 14mm 18mm;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .header {
+      border-bottom: 2px solid #111;
+      padding-bottom: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .label-press {
+      font-family: 'Arial', 'Helvetica Neue', sans-serif;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 0.5rem;
+    }
+
+    .title {
+      font-family: 'Arial', 'Helvetica Neue', sans-serif;
+      font-size: 18pt;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: #111;
+      margin-bottom: 0.2rem;
+    }
+
+    .subtitle {
+      font-family: 'Courier New', monospace;
+      font-size: 8.5pt;
+      color: #666;
+      margin-bottom: 0.9rem;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.4rem 2rem;
+    }
+
+    .meta-label {
+      font-family: 'Arial', 'Helvetica Neue', sans-serif;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 0.1rem;
+    }
+
+    .meta-value {
+      font-family: 'Arial', 'Helvetica Neue', sans-serif;
+      font-size: 8.5pt;
+      color: #333;
+      line-height: 1.4;
+    }
+
+    .label-ietf {
+      font-family: 'Arial', 'Helvetica Neue', sans-serif;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #555;
+      margin-top: 0.65rem;
+    }
+
+    .sections { margin-bottom: 1.25rem; }
+
+    .section {
+      margin-bottom: 0.9rem;
+      page-break-inside: avoid;
+    }
+
+    .section-title {
+      font-family: 'Arial', 'Helvetica Neue', sans-serif;
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #111;
+      border-bottom: 0.75px solid #ddd;
+      padding-bottom: 0.2rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .section-body p {
+      font-size: 9pt;
+      color: #222;
+      line-height: 1.65;
+      margin-bottom: 0.4rem;
+    }
+    .section-body p:last-child { margin-bottom: 0; }
+
+    .contact {
+      border-top: 1px solid #ddd;
+      padding-top: 0.85rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .contact-label {
+      font-family: 'Arial', 'Helvetica Neue', sans-serif;
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #111;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.4rem 1.5rem;
+    }
+
+    .contact-item-label {
+      font-family: 'Arial', 'Helvetica Neue', sans-serif;
+      font-size: 7pt;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 0.1rem;
+    }
+
+    .contact-item-value {
+      font-family: 'Arial', 'Helvetica Neue', sans-serif;
+      font-size: 8pt;
+      color: #333;
+    }
+
+    .footer {
+      border-top: 0.5px solid #ddd;
+      padding-top: 0.65rem;
+      font-size: 7.5pt;
+      color: #999;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    @page { size: A4; margin: 16mm 18mm 14mm 18mm; }
+    @media print { body { padding: 0; } }
+    @media screen { body { box-shadow: 0 0 40px rgba(0,0,0,0.08); margin: 2rem auto; } }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <p class="label-press">{c.label_press}</p>
+    <h1 class="title">{c.title}</h1>
+    <p class="subtitle">{c.subtitle}</p>
+
+    <div class="meta-grid">
+      <div>
+        <p class="meta-label">{lang === 'es' ? 'Autor' : 'Author'}</p>
+        <p class="meta-value">{c.author}</p>
+      </div>
+      <div>
+        <p class="meta-label">{lang === 'es' ? 'Afiliación' : 'Affiliation'}</p>
+        <p class="meta-value">{c.affiliation}</p>
+      </div>
+      <div>
+        <p class="meta-label">{c.status_label}</p>
+        <p class="meta-value">{c.status}</p>
+      </div>
+    </div>
+
+    <p class="label-ietf">{c.label_ietf} · <a href={c.ietf_url}>{c.ietf_url}</a></p>
+  </header>
+
+  <div class="sections">
+    {c.sections.map((s) => (
+      <div class="section">
+        <h2 class="section-title">{s.title}</h2>
+        <div class="section-body">
+          {s.body.map((p) => <p>{p}</p>)}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div class="contact">
+    <p class="contact-label">{c.contact_label}</p>
+    <div class="contact-grid">
+      {c.contact.map((item) => (
+        <div>
+          <p class="contact-item-label">{item.label}</p>
+          <p class="contact-item-value">{item.value}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <p class="footer">{c.footer}</p>
+
+</body>
+</html>

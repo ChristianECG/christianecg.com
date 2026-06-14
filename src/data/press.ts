@@ -44,6 +44,45 @@ export interface PressMention {
 
 export const pressKits: PressKit[] = [
   {
+    slug: 'ipoac-dns',
+    date: '2027-04-01',
+    date_es: 'Abr 2027',
+    date_en: 'Apr 2027',
+    title_es: 'DNS over Avian Carriers (DoAC)',
+    title_en: 'DNS over Avian Carriers (DoAC)',
+    title_lat: 'DNS super Vectores Aviarios (DoAC)',
+    event_es: 'IETF Internet-Draft · draft-cruzgonzalez-ipoac-dns',
+    event_en: 'IETF Internet-Draft · draft-cruzgonzalez-ipoac-dns',
+    event_lat: 'IETF Epistula Interretialis · draft-cruzgonzalez-ipoac-dns',
+    description_es:
+      'Internet-Draft presentado ante el IETF que especifica un mecanismo para resolver nombres de dominio sobre redes de palomas mensajeras. Cierra la brecha crítica que el RFC 1149 dejó abierta durante más de tres décadas: ¿cómo resuelve un hostname un nodo en una red aviar? El documento sigue el formato técnico completo de los RFC de 1 de abril — tan riguroso en su revisión como cualquier estándar de internet, tan honesto en su propósito.',
+    description_en:
+      'Internet-Draft submitted to the IETF specifying a mechanism for resolving domain names over carrier pigeon networks. It closes the critical gap left open by RFC 1149 for over three decades: how does a host on an avian-carrier network resolve a hostname? The document follows the complete technical format of April 1st RFCs — as rigorous in its review as any internet standard, as honest in its purpose.',
+    photos: [],
+    documents: [
+      {
+        label_es: 'Resumen para prensa (PDF · ES)',
+        label_en: 'Resumen para prensa (PDF · ES)',
+        url: '/press/ipoac-dns/resumen-prensa-es.pdf',
+      },
+      {
+        label_es: 'Press summary (PDF · EN)',
+        label_en: 'Press summary (PDF · EN)',
+        url: '/press/ipoac-dns/press-summary-en.pdf',
+      },
+    ],
+    links: [
+      {
+        label: 'IETF Datatracker',
+        url: 'https://datatracker.ietf.org/doc/draft-cruzgonzalez-ipoac-dns/',
+      },
+      {
+        label: 'RFC 1149',
+        url: 'https://datatracker.ietf.org/doc/html/rfc1149',
+      },
+    ],
+  },
+  {
     slug: 'coniiti-2021',
     date: '2021-10-05',
     date_es: 'Oct 2021',
