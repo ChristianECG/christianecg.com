@@ -6,7 +6,15 @@ interface FeedItem {
   title: string;
   pubDate: Date;
   description: string;
+  content?: string;
   link: string;
+}
+
+function decodeEntities(str: string) {
+  return str
+    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"').replace(/&apos;/g, "'")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)));
 }
 
 async function fetchOctaItems(): Promise<FeedItem[]> {
@@ -14,12 +22,17 @@ async function fetchOctaItems(): Promise<FeedItem[]> {
     const res = await fetch('https://octa.page/rss.xml');
     const xml = await res.text();
     return [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].flatMap(([, item]) => {
-      const title = item.match(/<title><!\[CDATA\[(.*?)\]\]>|<title>(.*?)<\/title>/)?.[1] ?? item.match(/<title>(.*?)<\/title>/)?.[1] ?? '';
-      const link = item.match(/<link>(.*?)<\/link>/)?.[1] ?? '';
-      const pubDate = item.match(/<pubDate>(.*?)<\/pubDate>|<pubdate>(.*?)<\/pubdate>/i)?.[1] ?? '';
-      const desc = item.match(/<description><!\[CDATA\[([\s\S]*?)\]\]>|<description>([\s\S]*?)<\/description>/)?.[1] ?? '';
+      const rawTitle   = item.match(/<title><!\[CDATA\[(.*?)\]\]>|<title>(.*?)<\/title>/);
+      const title      = (rawTitle?.[1] ?? rawTitle?.[2] ?? '').trim();
+      const link       = item.match(/<link>(.*?)<\/link>/)?.[1] ?? '';
+      const rawPubDate = item.match(/<pubDate>(.*?)<\/pubDate>|<pubdate>(.*?)<\/pubdate>/i);
+      const pubDate    = rawPubDate?.[1] ?? rawPubDate?.[2] ?? '';
+      const rawDesc    = item.match(/<description><!\[CDATA\[([\s\S]*?)\]\]>|<description>([\s\S]*?)<\/description>/);
+      const desc       = decodeEntities((rawDesc?.[1] ?? rawDesc?.[2] ?? '').trim());
+      const rawContent = item.match(/<content:encoded>([\s\S]*?)<\/content:encoded>/);
+      const content    = rawContent ? decodeEntities(rawContent[1]) : undefined;
       if (!title || !link) return [];
-      return [{ title: title.trim(), pubDate: new Date(pubDate || Date.now()), description: desc.trim(), link }];
+      return [{ title, pubDate: new Date(pubDate || Date.now()), description: desc, content, link }];
     });
   } catch {
     return [];

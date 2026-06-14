@@ -33,13 +33,15 @@ export async function getAllArticles(): Promise<Article[]> {
     const res = await fetch('https://octa.page/rss.xml');
     const xml = await res.text();
     octaArticles = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].flatMap(([, item], i) => {
-      const title = decodeEntities(item.match(/<title>(.*?)<\/title>/)?.[1]?.trim() ?? '');
-      const link  = item.match(/<link>(.*?)<\/link>/)?.[1]?.trim() ?? '';
-      const pub   = item.match(/<pubDate>(.*?)<\/pubDate>/)?.[1]?.trim() ?? '';
-      const tags  = [...item.matchAll(/<category>(.*?)<\/category>/g)].map(m => m[1]);
-      const date  = pub ? new Date(pub).toISOString().split('T')[0] : '';
+      const title   = decodeEntities(item.match(/<title>(.*?)<\/title>/)?.[1]?.trim() ?? '');
+      const link    = item.match(/<link>(.*?)<\/link>/)?.[1]?.trim() ?? '';
+      const pub     = item.match(/<pubDate>(.*?)<\/pubDate>/)?.[1]?.trim() ?? '';
+      const rawDesc = item.match(/<description><!\[CDATA\[([\s\S]*?)\]\]>|<description>([\s\S]*?)<\/description>/);
+      const excerpt = decodeEntities((rawDesc?.[1] ?? rawDesc?.[2] ?? '').trim());
+      const tags    = [...item.matchAll(/<category>(.*?)<\/category>/g)].map(m => m[1]);
+      const date    = pub ? new Date(pub).toISOString().split('T')[0] : '';
       if (!title || !date) return [];
-      return [{ id: `octa-${i}`, title, date, excerpt: '', tags, source: 'Octa', url: link, external: true, idx: 0 }];
+      return [{ id: `octa-${i}`, title, date, excerpt, tags, source: 'Octa', url: link, external: true, idx: 0 }];
     });
   } catch { /* RSS fetch failed — show only local articles */ }
 

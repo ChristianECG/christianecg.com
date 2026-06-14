@@ -6,6 +6,7 @@ interface FeedItem {
   url: string;
   title: string;
   summary: string;
+  content_html?: string;
   date_published: string;
   image?: string;
   author: { name: string; url: string };
@@ -13,22 +14,35 @@ interface FeedItem {
   external?: boolean;
 }
 
+function decodeEntities(str: string) {
+  return str
+    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"').replace(/&apos;/g, "'")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)));
+}
+
 async function fetchOctaItems(): Promise<FeedItem[]> {
   try {
     const res = await fetch('https://octa.page/rss.xml');
     const xml = await res.text();
     return [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].flatMap(([, item]) => {
-      const title = item.match(/<title><!\[CDATA\[(.*?)\]\]>|<title>(.*?)<\/title>/)?.[1] ?? item.match(/<title>(.*?)<\/title>/)?.[1] ?? '';
-      const link = item.match(/<link>(.*?)<\/link>/)?.[1] ?? '';
-      const pubDate = item.match(/<pubDate>(.*?)<\/pubDate>|<pubdate>(.*?)<\/pubdate>/i)?.[1] ?? '';
-      const desc = item.match(/<description><!\[CDATA\[([\s\S]*?)\]\]>|<description>([\s\S]*?)<\/description>/)?.[1] ?? '';
-      const tags = [...item.matchAll(/<category>(.*?)<\/category>/g)].map(m => m[1]);
+      const rawTitle   = item.match(/<title><!\[CDATA\[(.*?)\]\]>|<title>(.*?)<\/title>/);
+      const title      = (rawTitle?.[1] ?? rawTitle?.[2] ?? '').trim();
+      const link       = item.match(/<link>(.*?)<\/link>/)?.[1] ?? '';
+      const rawPubDate = item.match(/<pubDate>(.*?)<\/pubDate>|<pubdate>(.*?)<\/pubdate>/i);
+      const pubDate    = rawPubDate?.[1] ?? rawPubDate?.[2] ?? '';
+      const rawDesc    = item.match(/<description><!\[CDATA\[([\s\S]*?)\]\]>|<description>([\s\S]*?)<\/description>/);
+      const desc       = decodeEntities((rawDesc?.[1] ?? rawDesc?.[2] ?? '').trim());
+      const rawContent = item.match(/<content:encoded>([\s\S]*?)<\/content:encoded>/);
+      const content_html = rawContent ? decodeEntities(rawContent[1]) : undefined;
+      const tags       = [...item.matchAll(/<category>(.*?)<\/category>/g)].map(m => m[1]);
       if (!title || !link) return [];
       return [{
         id: link,
         url: link,
-        title: title.trim(),
-        summary: desc.replace(/<[^>]*>/g, '').trim().slice(0, 280),
+        title,
+        summary: desc.slice(0, 280),
+        content_html,
         date_published: new Date(pubDate || Date.now()).toISOString(),
         author: { name: 'Christian Elías Cruz González', url: 'https://christianecg.com' },
         tags: tags.length ? tags : undefined,
