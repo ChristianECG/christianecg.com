@@ -70,6 +70,16 @@ export const pressKits: PressKit[] = [
         label_en: 'Press summary (PDF · EN)',
         url: '/press/ipoac-dns/press-summary-en.pdf',
       },
+      {
+        label_es: 'Contexto y citas (PDF · ES)',
+        label_en: 'Contexto y citas (PDF · ES)',
+        url: '/press/ipoac-dns/contexto-es.pdf',
+      },
+      {
+        label_es: 'Context & quotes (PDF · EN)',
+        label_en: 'Context & quotes (PDF · EN)',
+        url: '/press/ipoac-dns/context-en.pdf',
+      },
     ],
     links: [
       {

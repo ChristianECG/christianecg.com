@@ -14,6 +14,7 @@ export const getStaticPaths: GetStaticPaths = () => {
 
 export const GET: APIRoute = async ({ props }) => {
   const { kit } = props as { kit: (typeof pressKits)[number] };
+  const zipFilename = kit.title_en.replace(/[^a-zA-Z0-9 -]/g, '').replace(/\s+/g, '_').replace(/_-_/g, '-') + '_press_kit.zip';
   const publicDir = resolve('public');
   const zip = new JSZip();
 
@@ -40,7 +41,7 @@ export const GET: APIRoute = async ({ props }) => {
   return new Response(buffer, {
     headers: {
       'Content-Type': 'application/zip',
-      'Content-Disposition': `attachment; filename="press-kit-${kit.slug}.zip"`,
+      'Content-Disposition': `attachment; filename="${zipFilename}"`,
     },
   });
 };

@@ -12,6 +12,9 @@ const lang = dataLang(locale);
 
 const sortedKits = [...pressKits].sort((a, b) => b.date.localeCompare(a.date));
 const sortedMentions = [...pressMentions].sort((a, b) => b.date.localeCompare(a.date));
+
+const zipFilename = (title: string) =>
+  title.replace(/[^a-zA-Z0-9 -]/g, '').replace(/\s+/g, '_').replace(/_-_/g, '-') + '_press_kit.zip';
 ---
 
 <section id="press">
@@ -110,7 +113,7 @@ const sortedMentions = [...pressMentions].sort((a, b) => b.date.localeCompare(a.
             </div>
 
             {(kit.documents.some((d) => d.url.startsWith('/')) || kit.photos.some((p) => p.url.startsWith('/'))) && (
-              <a href={`/press/${kit.slug}/kit.zip`} download class="kit-zip-btn">
+              <a href={`/press/${kit.slug}/kit.zip`} download={zipFilename(kit.title_en)} class="kit-zip-btn">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                   <polyline points="7 10 12 15 17 10"/>
@@ -311,10 +314,11 @@ const sortedMentions = [...pressMentions].sort((a, b) => b.date.localeCompare(a.
   /* Actions row */
   .kit-actions {
     display: flex;
-    align-items: center;
-    gap: 0.75rem;
+    align-items: flex-start;
+    gap: 0.5rem 0.75rem;
     flex-wrap: wrap;
     margin-top: 0.5rem;
+    max-width: 62ch;
   }
 
   .kit-doc-link {
