@@ -22,26 +22,21 @@ const year = new Date().getFullYear();
     <nav class="footer-cols">
 
       <div class="footer-col">
-        <p class="footer-col-label">{t('footer.nav_label')}</p>
+        <p class="footer-col-label">{t('footer.pages_label')}</p>
         <ul>
-          <li><a href={`/${locale}/#about`}>{t('nav.about')}</a></li>
-          <li><a href={`/${locale}/#experience`}>{t('nav.experience')}</a></li>
-          <li><a href={`/${locale}/#education`}>{t('nav.education')}</a></li>
-          <li><a href={`/${locale}/#skills`}>{t('nav.skills')}</a></li>
-          <li><a href={`/${locale}/#projects`}>{t('nav.projects')}</a></li>
-          <li><a href={`/${locale}/#talks`}>{t('nav.talks')}</a></li>
-          <li><a href={`/${locale}/#contact`}>{t('nav.contact')}</a></li>
+          <li><a href={`/${locale}/now`}>{t('nav.now')}</a></li>
+          <li><a href={`/${locale}/cv`}>CV</a></li>
+          <li><a href={`/${locale}/manifiesto`}>{t('nav.manifiesto')}</a></li>
+          <li><a href={`/${locale}/press`} class="footer-press-link">{t('nav.press')}</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <p class="footer-col-label">{t('footer.pages_label')}</p>
+        <p class="footer-col-label">{t('footer.publications_label')}</p>
         <ul>
           <li><a href={`/${locale}/blog`}>{t('nav.blog')}</a></li>
-          <li><a href={`/${locale}/now`}>{t('nav.now')}</a></li>
-          <li><a href={`/${locale}/cv`}>CV</a></li>
-          <li><a href={`/${locale}/manifiesto`}>{t('nav.manifiesto')}</a></li>
-          <li><a href={`/${locale}/search`}>{t('footer.search')}</a></li>
+          <li><a href="https://authorprofile.ieee.org/profiles/37089182389" target="_blank" rel="noopener">IEEE</a></li>
+          <li><a href="https://datatracker.ietf.org/person/Christian%20El%C3%ADas%20Cruz%20Gonz%C3%A1lez" target="_blank" rel="noopener">IETF</a></li>
           <li><a href="/rss.xml">RSS</a></li>
           <li><a href="/feed.json">JSON Feed</a></li>
         </ul>
@@ -133,6 +128,8 @@ const year = new Date().getFullYear();
     transition: color 0.2s;
   }
   .footer-col a:hover { color: var(--text); }
+
+  .footer-press-link { color: var(--accent) !important; font-weight: 600; }
 
   .footer-bottom {
     border-top: 1px solid var(--border);

@@ -14,8 +14,8 @@
   "nav.manifiesto": "Manifesto",
 
   "footer.tagline": "Senior Software Engineer",
-  "footer.nav_label": "Navigation",
-  "footer.pages_label": "Pages",
+  "footer.pages_label": "About me",
+  "footer.publications_label": "Publications",
   "footer.contact_label": "Contact",
   "footer.search": "Search",
   "footer.copyright_suffix": "Made in Hidalgo.",
@@ -120,5 +120,13 @@
 
   "404.title": "Page not found",
   "404.description": "The page you're looking for doesn't exist or was moved.",
-  "404.back": "Back to home"
+  "404.back": "Back to home",
+
+  "nav.press": "Press",
+  "press.page_title": "Press",
+  "press.page_description": "Press mentions, media coverage, and press kits by event.",
+  "press.eyebrow": "Press",
+  "press.heading": "Press & press kits",
+  "press.mentions_heading": "In the media",
+  "press.download_kit": "Download press kit (ZIP)"
 }

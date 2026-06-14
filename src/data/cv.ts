@@ -133,6 +133,18 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
             description: 'Ecosistema de 17 herramientas CLI publicadas en npm bajo @avelor. Destacan: mesh (proxy local con HTTPS y fault injection), floo (deployment agent SSH con GitHub Action y Homebrew tap), bifrost (WebSocket tunnel autoalojado) y mira (uptime monitor con página de estado estática). Cada herramienta elimina una dependencia de tercero en producción.',
             tags: 'Node.js · CLI · npm · WebSocket · SSH · self-hosted',
           },
+          {
+            title: 'Stratum',
+            url: 'stratum.christianecg.com',
+            description: 'Herramienta de arte generativo que convierte 75 años de datos meteorológicos históricos en visualizaciones de franjas de color por ciudad. Temperatura diaria, precipitación y horas de sol se codifican como grosor, tono y superposición; exportable en SVG, PNG y PDF sin servidor.',
+            tags: 'React · TypeScript · Vite · ECharts · Open-Meteo',
+          },
+          {
+            title: 'Loft',
+            url: 'loft.christianecg.com',
+            description: 'Implementación de referencia de RFC 1149 (IP sobre portadores aviares): rastreo en tiempo real de paquetes IP transportados por palomas. Física de vuelo modelada con datos meteorológicos reales, mapa global con rutas de gran círculo, streaming SSE y soporte en tres idiomas incluyendo latín.',
+            tags: 'Next.js · SQLite · MapLibre · SSE · i18n',
+          },
         ],
       },
       skills: {
@@ -264,6 +276,18 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
             description: 'Ecosystem of 17 CLI tools published on npm under @avelor. Highlights: mesh (local dev proxy with HTTPS and fault injection), floo (SSH deployment agent with GitHub Action and Homebrew tap), bifrost (self-hosted WebSocket tunnel relay), and mira (uptime monitor with auto-generated static status page). Each tool eliminates a third-party dependency in production.',
             tags: 'Node.js · CLI · npm · WebSocket · SSH · self-hosted',
           },
+          {
+            title: 'Stratum',
+            url: 'stratum.christianecg.com',
+            description: 'Generative art tool that converts 75 years of historical weather data into color-coded stripe visualizations per city. Daily temperature range, precipitation, and sunshine hours are encoded as stripe width, hue, and overlay. Exportable as SVG, PNG, and PDF with no server required.',
+            tags: 'React · TypeScript · Vite · ECharts · Open-Meteo',
+          },
+          {
+            title: 'Loft',
+            url: 'loft.christianecg.com',
+            description: 'Reference implementation of RFC 1149 (IP over Avian Carriers): real-time tracking of IP datagrams transported by homing pigeons. Flight physics modeled with live meteorological data, global map with great-circle routes, SSE streaming, and three-language support including Latin.',
+            tags: 'Next.js · SQLite · MapLibre · SSE · i18n',
+          },
         ],
       },
       skills: {
@@ -394,6 +418,18 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
             url: 'pkg.avelor.es',
             description: 'Systema XVII instrumentorum CLI in npm sub @avelor editorum. Praecipua: mesh (procurator localis cum HTTPS et iniectione defectionis), floo (agens dispositionis SSH cum actione GitHub et tabula Homebrew), bifrost (translactor WebSocket se-hospitatus) et mira (monitor stabilitatis cum pagina status statice generata). Quodque instrumentum dependentiam tertiae partis in productione tollit.',
             tags: 'Node.js · CLI · npm · WebSocket · SSH · self-hosted',
+          },
+          {
+            title: 'Stratum',
+            url: 'stratum.christianecg.com',
+            description: 'Instrumentum artis generativae quod LXXV annos datorum meteorologicorum historicorum in visualizationes viarum coloratarum per urbem convertit. Temperatura diurna, imber et horae solis in latitudinem, colorem et stratum transformantur; in SVG, PNG et PDF sine ministro exportabilia.',
+            tags: 'React · TypeScript · Vite · ECharts · Open-Meteo',
+          },
+          {
+            title: 'Loft',
+            url: 'loft.christianecg.com',
+            description: 'Exsecutio referentiae RFC 1149 (IP per portitores aviares): observatio in tempore reali datagrammatum IP per columbas nuntias. Physica volatus cum datis meteorologicis veris simulatur, mappa globalis cum viis circuli magni, fluxus SSE et subsidium trium linguarum, Latinae inclusae.',
+            tags: 'Next.js · SQLite · MapLibre · SSE · i18n',
           },
         ],
       },

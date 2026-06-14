@@ -14,8 +14,8 @@
   "nav.manifiesto": "Manifiesto",
 
   "footer.tagline": "Ingeniero de Software Senior",
-  "footer.nav_label": "Navegación",
-  "footer.pages_label": "Páginas",
+  "footer.pages_label": "Sobre mí",
+  "footer.publications_label": "Publicaciones",
   "footer.contact_label": "Contacto",
   "footer.search": "Buscar",
   "footer.copyright_suffix": "Hecho en Hidalgo.",
@@ -120,5 +120,13 @@
 
   "404.title": "Página no encontrada",
   "404.description": "La página que buscas no existe o fue movida.",
-  "404.back": "Volver al inicio"
+  "404.back": "Volver al inicio",
+
+  "nav.press": "Prensa",
+  "press.page_title": "Prensa",
+  "press.page_description": "Notas de prensa, cobertura mediática y press kits por evento.",
+  "press.eyebrow": "Prensa",
+  "press.heading": "Prensa & press kits",
+  "press.mentions_heading": "En los medios",
+  "press.download_kit": "Descargar press kit (ZIP)"
 }

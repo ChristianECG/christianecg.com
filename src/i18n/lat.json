@@ -14,8 +14,8 @@
   "nav.manifiesto": "Manifestum",
 
   "footer.tagline": "Faber Programmatus Senior",
-  "footer.nav_label": "Navigatio",
-  "footer.pages_label": "Paginae",
+  "footer.pages_label": "De me",
+  "footer.publications_label": "Publicationes",
   "footer.contact_label": "Contactus",
   "footer.search": "Quaerere",
   "footer.copyright_suffix": "In Hidalgo factum.",
@@ -120,5 +120,13 @@
 
   "404.title": "Pagina non inventa",
   "404.description": "Pagina quam quaeris non exstat aut mota est.",
-  "404.back": "Revertere ad initium"
+  "404.back": "Revertere ad initium",
+
+  "nav.press": "Prela",
+  "press.page_title": "Prela",
+  "press.page_description": "Notitiae prelariae, cobertura mediorum et fasciculi prelarii per eventum.",
+  "press.eyebrow": "Prela",
+  "press.heading": "Prela & fasciculi prelarii",
+  "press.mentions_heading": "In mediis",
+  "press.download_kit": "Depone fasciculum prelarium (ZIP)"
 }

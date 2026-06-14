@@ -28,13 +28,22 @@
       "github": "https://github.com/avelor-es"
     },
     {
-      "title": "CatolicMixquia",
-      "description_es": "App React Native en producción desde octubre 2023, disponible en iOS y Android. +500 usuarios en Android, 170 en iOS. Desarrollada para la Parroquia de Mixquiahuala para acercar el Evangelio y las enseñanzas a la comunidad.",
-      "description_en": "React Native app in production since October 2023, available on iOS and Android. 500+ Android users, 170 iOS users. Built for the Parish of Mixquiahuala to bring the Gospel and teachings closer to the community.",
-      "description_lat": "Applicatio React Native in productione ab Octobri 2023, in iOS et Android disponibilis. D+ utentes in Android, CLXX in iOS. Pro Paroecia Mixquiahuala facta ut Evangelium communitati propius adferat.",
-      "tags": ["React Native", "Mobile", "iOS", "Android"],
-      "appStore": "https://apps.apple.com/us/app/catolicmixquia/id6469672864",
-      "playStore": "https://play.google.com/store/apps/details?id=mx.parroquiamixquiahuala.catolicmixquia&hl=es"
+      "title": "Stratum",
+      "description_es": "Herramienta de arte generativo que convierte 75 años de datos meteorológicos históricos en visualizaciones de franjas de color por ciudad. La temperatura diaria, precipitación y horas de sol se codifican como grosor, tono y superposición, y el resultado es exportable en SVG, PNG y PDF sin servidor.",
+      "description_en": "Generative art tool that converts 75 years of historical weather data into color-coded stripe visualizations per city. Daily temperature range, precipitation, and sunshine hours are encoded as stripe width, hue, and overlay. Exportable as SVG, PNG, and PDF with no server required.",
+      "description_lat": "Instrumentum artis generativae quod LXXV annos datorum meteorologicorum historicorum in visualizationes viarum coloratarum per urbem convertit. Temperatura diurna, imber et horae solis in latitudinem, colorem et stratum transformantur; in SVG, PNG et PDF sine ministro exportabilia.",
+      "tags": ["React", "TypeScript", "Vite", "ECharts", "Open-Meteo"],
+      "url": "https://stratum.christianecg.com",
+      "github": "https://github.com/ChristianECG/stratum"
+    },
+    {
+      "title": "Loft",
+      "description_es": "Implementación de referencia de RFC 1149 (IP sobre portadores aviares): rastreo en tiempo real de paquetes IP transportados por palomas mensajeras. Simula física de vuelo con datos meteorológicos reales vía Open-Meteo, mapa global con rutas de gran círculo, streaming SSE y soporte en tres idiomas, incluyendo latín.",
+      "description_en": "Reference implementation of RFC 1149 (IP over Avian Carriers): real-time tracking of IP datagrams transported by homing pigeons. Simulates flight physics with live meteorological data via Open-Meteo, global map with great-circle routes, SSE streaming, and three-language support including Latin.",
+      "description_lat": "Exsecutio referentiae RFC 1149 (IP per portitores aviares): observatio in tempore reali datagrammatum IP per columbas nuntias. Physica volatus cum datis meteorologicis veris per Open-Meteo simulatur, mappa globalis cum viis circuli magni, fluxus SSE et subsidium trium linguarum, Latinae inclusae.",
+      "tags": ["Next.js", "TypeScript", "SQLite", "MapLibre", "SSE", "i18n"],
+      "url": "https://loft.christianecg.com",
+      "github": "https://github.com/ChristianECG/rfc1149"
     }
   ]
 }

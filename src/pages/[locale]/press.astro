@@ -1,0 +1,28 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Press from '../../components/Press.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+import { LOCALES, useTranslations } from '../../i18n';
+import type { Locale } from '../../i18n';
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params as { locale: Locale };
+const t = useTranslations(locale);
+---
+
+<Layout
+  title={`${t('press.page_title')} — Christian Elías Cruz González`}
+  description={t('press.page_description')}
+  locale={locale}
+>
+  <Nav locale={locale} />
+  <main id="main-content">
+    <Press locale={locale} />
+  </main>
+  <Footer locale={locale} />
+</Layout>
