@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /bio/
+Disallow: /cv-print/
+Disallow: /press/ipoac-dns/
+Disallow: /press/coniiti-2021/
 
 Sitemap: https://christianecg.com/sitemap-index.xml
