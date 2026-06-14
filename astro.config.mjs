@@ -9,7 +9,10 @@ export default defineConfig({
     sitemap({
       filter: (page) =>
         !page.includes('/bio/') &&
-        !page.includes('/lat/'),
+        !page.includes('/lat/') &&
+        !page.includes('/cv-print/') &&
+        !page.includes('/press/ipoac-dns/') &&
+        !page.includes('/press/coniiti-2021/'),
     }),
   ],
   server: {
