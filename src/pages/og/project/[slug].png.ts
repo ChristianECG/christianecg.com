@@ -20,6 +20,9 @@ export async function GET({ props }: APIContext) {
     join(process.cwd(), 'node_modules/@fontsource/bricolage-grotesque/files/bricolage-grotesque-latin-800-normal.woff')
   );
 
+  const fontSize =
+    title.length <= 30 ? 72 : title.length <= 50 ? 58 : title.length <= 70 ? 46 : 36;
+
   const svg = await satori(
     {
       type: 'div',
@@ -30,75 +33,231 @@ export async function GET({ props }: APIContext) {
           display: 'flex',
           flexDirection: 'column',
           backgroundColor: '#0B0D12',
-          padding: '72px 80px',
           fontFamily: 'Bricolage Grotesque',
-          borderTop: '4px solid #5B8CF5',
+          overflow: 'hidden',
         },
         children: [
-          {
-            type: 'div',
-            props: {
-              style: {
-                fontSize: '14px',
-                color: '#5B8CF5',
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-                fontWeight: 800,
-                marginBottom: 'auto',
-              },
-              children: 'Case Study · christianecg.com',
-            },
-          },
-          {
-            type: 'div',
-            props: {
-              style: {
-                fontSize: '72px',
-                fontWeight: 800,
-                color: '#E8EDF5',
-                letterSpacing: '-0.03em',
-                lineHeight: 1.1,
-                marginBottom: '28px',
-              },
-              children: title,
-            },
-          },
+          // macOS title bar
           {
             type: 'div',
             props: {
               style: {
                 display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
                 gap: '10px',
-                flexWrap: 'wrap',
-                marginBottom: '40px',
+                padding: '0 24px',
+                height: '52px',
+                backgroundColor: '#111520',
+                borderBottom: '1px solid #1e2538',
+                flexShrink: 0,
               },
-              children: tags.map((tag) => ({
-                type: 'span',
-                props: {
-                  style: {
-                    fontSize: '14px',
-                    fontWeight: 800,
-                    color: '#7E8EAB',
-                    backgroundColor: '#161A24',
-                    border: '1px solid #252D40',
-                    borderRadius: '4px',
-                    padding: '4px 10px',
-                    letterSpacing: '0.02em',
+              children: [
+                // Traffic lights
+                {
+                  type: 'div',
+                  props: {
+                    style: { width: '14px', height: '14px', borderRadius: '50%', backgroundColor: '#FF5F56', flexShrink: 0 },
+                    children: '',
                   },
-                  children: tag,
                 },
-              })),
+                {
+                  type: 'div',
+                  props: {
+                    style: { width: '14px', height: '14px', borderRadius: '50%', backgroundColor: '#FFBD2E', flexShrink: 0 },
+                    children: '',
+                  },
+                },
+                {
+                  type: 'div',
+                  props: {
+                    style: { width: '14px', height: '14px', borderRadius: '50%', backgroundColor: '#27C93F', flexShrink: 0 },
+                    children: '',
+                  },
+                },
+                // Path
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      marginLeft: '16px',
+                      fontSize: '13px',
+                      fontWeight: 800,
+                      color: '#3E4A60',
+                      letterSpacing: '0.02em',
+                    },
+                    children: '~/projects/',
+                  },
+                },
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      fontSize: '13px',
+                      fontWeight: 800,
+                      color: '#7E8EAB',
+                      letterSpacing: '0.02em',
+                    },
+                    children: title,
+                  },
+                },
+              ],
             },
           },
+
+          // Terminal content
           {
             type: 'div',
             props: {
               style: {
-                fontSize: '18px',
-                color: '#7E8EAB',
-                fontWeight: 800,
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                padding: '52px 72px 56px',
               },
-              children: 'Christian Elías Cruz González',
+              children: [
+                // Prompt line
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                    },
+                    children: [
+                      {
+                        type: 'div',
+                        props: {
+                          style: {
+                            fontSize: '14px',
+                            fontWeight: 800,
+                            color: '#5B8CF5',
+                            letterSpacing: '0.04em',
+                          },
+                          children: '$',
+                        },
+                      },
+                      {
+                        type: 'div',
+                        props: {
+                          style: {
+                            fontSize: '14px',
+                            fontWeight: 800,
+                            color: '#3E4A60',
+                            letterSpacing: '0.04em',
+                          },
+                          children: 'open project --name',
+                        },
+                      },
+                      {
+                        type: 'div',
+                        props: {
+                          style: {
+                            fontSize: '14px',
+                            fontWeight: 800,
+                            color: '#7E8EAB',
+                            letterSpacing: '0.02em',
+                          },
+                          children: `"${title}"`,
+                        },
+                      },
+                    ],
+                  },
+                },
+
+                // Project title
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      fontSize: `${fontSize}px`,
+                      fontWeight: 800,
+                      color: '#E8EDF5',
+                      letterSpacing: '-0.03em',
+                      lineHeight: 1.1,
+                      maxWidth: '1000px',
+                    },
+                    children: title,
+                  },
+                },
+
+                // Tags + author
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'flex-end',
+                    },
+                    children: [
+                      // Tags
+                      {
+                        type: 'div',
+                        props: {
+                          style: { display: 'flex', gap: '8px', flexWrap: 'nowrap' },
+                          children: tags.slice(0, 5).map((tag) => ({
+                            type: 'div',
+                            props: {
+                              style: {
+                                fontSize: '12px',
+                                fontWeight: 800,
+                                color: '#5B8CF5',
+                                backgroundColor: '#111520',
+                                border: '1px solid #1e2538',
+                                borderRadius: '4px',
+                                padding: '4px 10px',
+                                letterSpacing: '0.04em',
+                              },
+                              children: `<${tag}>`,
+                            },
+                          })),
+                        },
+                      },
+                      // Deploy status + author
+                      {
+                        type: 'div',
+                        props: {
+                          style: {
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'flex-end',
+                            gap: '4px',
+                          },
+                          children: [
+                            {
+                              type: 'div',
+                              props: {
+                                style: {
+                                  fontSize: '12px',
+                                  fontWeight: 800,
+                                  color: '#27C93F',
+                                  letterSpacing: '0.06em',
+                                },
+                                children: '● deployed',
+                              },
+                            },
+                            {
+                              type: 'div',
+                              props: {
+                                style: {
+                                  fontSize: '14px',
+                                  fontWeight: 800,
+                                  color: '#3E4A60',
+                                  letterSpacing: '0.02em',
+                                },
+                                children: 'christianecg.com',
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
             },
           },
         ],
@@ -107,21 +266,11 @@ export async function GET({ props }: APIContext) {
     {
       width: 1200,
       height: 630,
-      fonts: [
-        {
-          name: 'Bricolage Grotesque',
-          data: fontData,
-          weight: 800,
-          style: 'normal',
-        },
-      ],
+      fonts: [{ name: 'Bricolage Grotesque', data: fontData, weight: 800, style: 'normal' }],
     }
   );
 
   const resvg = new Resvg(svg);
   const png = resvg.render().asPng();
-
-  return new Response(new Uint8Array(png), {
-    headers: { 'Content-Type': 'image/png' },
-  });
+  return new Response(new Uint8Array(png), { headers: { 'Content-Type': 'image/png' } });
 }

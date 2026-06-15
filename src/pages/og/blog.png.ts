@@ -2,8 +2,12 @@ import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 import { readFileSync } from 'fs';
 import { join } from 'path';
+import { getAllArticles } from '../../utils/blogData';
 
 export async function GET() {
+  const articles = await getAllArticles();
+  const total = articles.length;
+
   const fontData = readFileSync(
     join(process.cwd(), 'node_modules/@fontsource/bricolage-grotesque/files/bricolage-grotesque-latin-800-normal.woff')
   );
@@ -18,49 +22,163 @@ export async function GET() {
           display: 'flex',
           flexDirection: 'column',
           backgroundColor: '#0B0D12',
-          padding: '72px 80px',
           fontFamily: 'Bricolage Grotesque',
-          borderTop: '4px solid #5B8CF5',
+          padding: '48px 72px 44px',
         },
         children: [
+          // Header row
           {
             type: 'div',
             props: {
               style: {
-                fontSize: '14px',
-                color: '#5B8CF5',
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-                fontWeight: 800,
-                marginBottom: 'auto',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: '20px',
               },
-              children: 'christianecg.com',
+              children: [
+                // Left: Blog label + domain
+                {
+                  type: 'div',
+                  props: {
+                    style: { display: 'flex', alignItems: 'center', gap: '12px' },
+                    children: [
+                      {
+                        type: 'div',
+                        props: {
+                          style: {
+                            fontSize: '11px',
+                            fontWeight: 800,
+                            color: '#0B0D12',
+                            backgroundColor: '#5B8CF5',
+                            padding: '4px 12px',
+                            borderRadius: '4px',
+                            letterSpacing: '0.12em',
+                            textTransform: 'uppercase',
+                          },
+                          children: 'Blog',
+                        },
+                      },
+                      {
+                        type: 'div',
+                        props: {
+                          style: {
+                            fontSize: '11px',
+                            fontWeight: 800,
+                            color: '#3E4A60',
+                            letterSpacing: '0.1em',
+                            textTransform: 'uppercase',
+                          },
+                          children: '· christianecg.com',
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      fontSize: '11px',
+                      fontWeight: 800,
+                      color: '#3E4A60',
+                      letterSpacing: '0.1em',
+                      textTransform: 'uppercase',
+                    },
+                    children: `${total} artículos`,
+                  },
+                },
+              ],
             },
           },
+
+          // Accent rule
           {
             type: 'div',
             props: {
-              style: {
-                fontSize: '96px',
-                fontWeight: 800,
-                color: '#E8EDF5',
-                letterSpacing: '-0.04em',
-                lineHeight: 1.0,
-                marginBottom: '24px',
-              },
-              children: 'Blog',
+              style: { height: '3px', backgroundColor: '#5B8CF5', marginBottom: '0' },
+              children: '',
             },
           },
+
+          // Title — fills available space
           {
             type: 'div',
             props: {
               style: {
-                fontSize: '22px',
-                color: '#7E8EAB',
-                fontWeight: 800,
-                letterSpacing: '-0.01em',
+                flex: 1,
+                display: 'flex',
+                alignItems: 'center',
               },
-              children: 'Desarrollo web, frontend, tecnología y comunidad.',
+              children: [
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      fontSize: '160px',
+                      fontWeight: 800,
+                      color: '#E8EDF5',
+                      letterSpacing: '-0.05em',
+                      lineHeight: 1,
+                    },
+                    children: 'Blog',
+                  },
+                },
+              ],
+            },
+          },
+
+          // Footer
+          {
+            type: 'div',
+            props: {
+              style: { display: 'flex', flexDirection: 'column', gap: '14px' },
+              children: [
+                {
+                  type: 'div',
+                  props: {
+                    style: { height: '1px', backgroundColor: '#1e2538' },
+                    children: '',
+                  },
+                },
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    },
+                    children: [
+                      {
+                        type: 'div',
+                        props: {
+                          style: {
+                            fontSize: '14px',
+                            fontWeight: 800,
+                            color: '#7E8EAB',
+                            letterSpacing: '-0.01em',
+                          },
+                          children: 'Christian Elías Cruz González',
+                        },
+                      },
+                      {
+                        type: 'div',
+                        props: {
+                          style: {
+                            fontSize: '13px',
+                            fontWeight: 800,
+                            color: '#3E4A60',
+                            letterSpacing: '0.08em',
+                            textTransform: 'uppercase',
+                          },
+                          children: 'Desarrollo · Frontend · Comunidad',
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
             },
           },
         ],

@@ -1,7 +1,7 @@
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 import { readFileSync } from 'fs';
-import { fileURLToPath } from 'url';
+import { join } from 'path';
 import { pressKits, pressMentions } from '../../data/press';
 
 export async function GET() {
@@ -12,11 +12,9 @@ export async function GET() {
     0
   );
 
-  const fontURL = new URL(
-    '../../../node_modules/@fontsource/bricolage-grotesque/files/bricolage-grotesque-latin-800-normal.woff',
-    import.meta.url
+  const fontData = readFileSync(
+    join(process.cwd(), 'node_modules/@fontsource/bricolage-grotesque/files/bricolage-grotesque-latin-800-normal.woff')
   );
-  const fontData = readFileSync(fileURLToPath(fontURL));
 
   const svg = await satori(
     {
