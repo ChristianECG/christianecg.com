@@ -286,11 +286,13 @@ const slug = Astro.url.pathname.replace(/^\/(es|en|lat)/, '') || '/';
     backdrop-filter: blur(16px);
     transform: translateY(-8px);
     opacity: 0;
+    pointer-events: none;
     transition: opacity 0.2s, transform 0.2s;
   }
   .nav-mobile-menu.open {
     opacity: 1;
     transform: none;
+    pointer-events: all;
   }
   .nav-mobile-menu ul {
     list-style: none;
