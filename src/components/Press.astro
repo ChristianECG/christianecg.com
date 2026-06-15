@@ -1,7 +1,7 @@
 ---
 import { useTranslations, dataLang, pick } from '../i18n';
 import type { Locale } from '../i18n';
-import { pressKits, pressMentions } from '../data/press';
+import { pressKits, pressMentions, pressMediaPhotos } from '../data/press';
 
 interface Props {
   locale: Locale;
@@ -73,6 +73,30 @@ const zipFilename = (title: string) =>
         </div>
       </div>
     )}
+
+    <div class="media-assets-section reveal" id="media-assets">
+      <h2 class="subsection-label">{t('press.media_assets_heading')}</h2>
+      <div class="media-assets-grid">
+        {pressMediaPhotos.map((photo, idx) => {
+          const photoAlt = pick(photo as any, 'alt', lang) as string;
+          return (
+            <div
+              class="kit-photo-wrap media-photo-wrap"
+              data-kit={String(sortedKits.length)}
+              data-idx={String(idx)}
+              data-url={photo.url}
+              data-alt={photoAlt}
+              data-lightbox-open
+              role="button"
+              tabindex="0"
+              aria-label={photoAlt}
+            >
+              <img src={photo.url} alt={photoAlt} class="kit-photo" loading="lazy" draggable="false" style={photo.object_fit ? `object-fit: ${photo.object_fit}` : undefined} />
+            </div>
+          );
+        })}
+      </div>
+    </div>
 
     <div class="kits-list">
       {sortedKits.map((kit, i) => (
@@ -607,6 +631,22 @@ const zipFilename = (title: string) =>
   .kit-zip-btn:hover {
     background: rgba(255,255,255,0.09);
     box-shadow: 0 0 0 1px rgba(255,255,255,0.14);
+  }
+
+  /* ── Media assets section ── */
+  .media-assets-section {
+    margin-bottom: 5rem;
+  }
+
+  .media-assets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 0.65rem;
+    margin-top: 1rem;
+  }
+
+  .media-photo-wrap {
+    aspect-ratio: 3 / 2;
   }
 
   /* ── Lightbox ── */

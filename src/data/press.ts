@@ -182,6 +182,23 @@ export const pressKits: PressKit[] = [
   },
 ];
 
+export const pressMediaPhotos: PressPhoto[] = [
+  {
+    url: '/press/foto-prensa-1.jpg',
+    alt_es: 'Christian Elías Cruz González durante una entrevista en televisión — foto de prensa 1',
+    alt_en: 'Christian Elías Cruz González during a television interview — press photo 1',
+    alt_lat: 'Christianus Elias Cruz González in colloquio televisfico — imago prelaria 1',
+    object_fit: 'cover',
+  },
+  {
+    url: '/press/foto-prensa-2.jpg',
+    alt_es: 'Christian Elías Cruz González durante una entrevista en televisión — foto de prensa 2',
+    alt_en: 'Christian Elías Cruz González during a television interview — press photo 2',
+    alt_lat: 'Christianus Elias Cruz González in colloquio televisfico — imago prelaria 2',
+    object_fit: 'cover',
+  },
+];
+
 export const pressMentions: PressMention[] = [
   {
     date: '2021-10-05',
