@@ -10,6 +10,7 @@ export interface PressPhoto {
   alt_es: string;
   alt_en: string;
   alt_lat?: string;
+  object_fit?: 'contain' | 'cover' | 'fill' | 'scale-down';
 }
 
 export interface PressKit {
@@ -58,7 +59,14 @@ export const pressKits: PressKit[] = [
       'Internet-Draft presentado ante el IETF que especifica un mecanismo para resolver nombres de dominio sobre redes de palomas mensajeras. Cierra la brecha crítica que el RFC 1149 dejó abierta durante más de tres décadas: ¿cómo resuelve un hostname un nodo en una red aviar? El documento sigue el formato técnico completo de los RFC de 1 de abril — tan riguroso en su revisión como cualquier estándar de internet, tan honesto en su propósito.',
     description_en:
       'Internet-Draft submitted to the IETF specifying a mechanism for resolving domain names over carrier pigeon networks. It closes the critical gap left open by RFC 1149 for over three decades: how does a host on an avian-carrier network resolve a hostname? The document follows the complete technical format of April 1st RFCs — as rigorous in its review as any internet standard, as honest in its purpose.',
-    photos: [],
+    photos: [
+      {
+        url: '/press/ipoac-dns/ietf-logo.png',
+        alt_es: 'Logotipo de la IETF (Internet Engineering Task Force)',
+        alt_en: 'IETF (Internet Engineering Task Force) logo',
+        alt_lat: 'Signum IETF (Consorcii Machinamentorum Interretis)',
+      },
+    ],
     documents: [
       {
         label_es: 'Resumen para prensa (PDF · ES)',
@@ -115,6 +123,14 @@ export const pressKits: PressKit[] = [
         url: '/press/coniiti-2021/foto-autor.jpg',
         alt_es: 'Christian Elías Cruz González — CONIITI 2021',
         alt_en: 'Christian Elías Cruz González — CONIITI 2021',
+        alt_lat: 'Christian Elías Cruz González — CONIITI 2021',
+        object_fit: 'cover',
+      },
+      {
+        url: '/press/coniiti-2021/ieee-logo.jpg',
+        alt_es: 'Logotipo de IEEE Xplore',
+        alt_en: 'IEEE Xplore logo',
+        alt_lat: 'Signum IEEE Xplore',
       },
     ],
     documents: [
@@ -160,8 +176,8 @@ export const pressMentions: PressMention[] = [
   },
   {
     date: '2022-03-01',
-    date_es: 'Mar 2022',
-    date_en: 'Mar 2022',
+    date_es: '1 Mar 2022',
+    date_en: 'Mar 1, 2022',
     lang: 'es',
     outlet: 'Horizontes ANUIES',
     title: 'Estudiante del ITSOEH publica artículo en la plataforma científica más importante del mundo «IEEE Xplore»',

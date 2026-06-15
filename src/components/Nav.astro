@@ -24,11 +24,11 @@ const slug = Astro.url.pathname.replace(/^\/(es|en|lat)/, '') || '/';
       <li><a href={`/${locale}/#education`}>{t('nav.education')}</a></li>
       <li><a href={`/${locale}/#skills`}>{t('nav.skills')}</a></li>
       <li><a href={`/${locale}/#projects`}>{t('nav.projects')}</a></li>
-      <li><a href={`/${locale}/#talks`}>{t('nav.talks')}</a></li>
       <li><a href={`/${locale}/#contact`}>{t('nav.contact')}</a></li>
     </ul>
 
     <div class="nav-right">
+      <a href={`/${locale}/blog`} class="nav-blog-btn">{t('nav.blog')}</a>
       <div class="lang-toggle">
         <a
           href={`/es${slug}`}
@@ -72,7 +72,7 @@ const slug = Astro.url.pathname.replace(/^\/(es|en|lat)/, '') || '/';
     <li><a href={`/${locale}/#projects`} onclick="closeMobileMenu()">{t('nav.projects')}</a></li>
     <li><a href={`/${locale}/#talks`} onclick="closeMobileMenu()">{t('nav.talks')}</a></li>
     <li><a href={`/${locale}/#contact`} onclick="closeMobileMenu()">{t('nav.contact')}</a></li>
-    <li><a href={`/${locale}/blog`} onclick="closeMobileMenu()">{t('nav.blog')}</a></li>
+    <li><a href={`/${locale}/blog`} onclick="closeMobileMenu()" class="mobile-blog-link">{t('nav.blog')}</a></li>
     <li><a href={`/${locale}/now`} onclick="closeMobileMenu()">{t('nav.now')}</a></li>
     <li><a href={`/${locale}/manifiesto`} onclick="closeMobileMenu()">{t('nav.manifiesto')}</a></li>
     <li><a href={`/${locale}/press`} onclick="closeMobileMenu()">{t('nav.press')}</a></li>
@@ -201,6 +201,20 @@ const slug = Astro.url.pathname.replace(/^\/(es|en|lat)/, '') || '/';
     gap: 1rem;
   }
 
+  .nav-blog-btn {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    border-radius: 5px;
+    padding: 0.35rem 0.85rem;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+  .nav-blog-btn:hover {
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+  }
+
   .lang-toggle {
     display: flex;
     align-items: center;
@@ -292,6 +306,7 @@ const slug = Astro.url.pathname.replace(/^\/(es|en|lat)/, '') || '/';
     transition: color 0.2s;
   }
   .nav-mobile-menu a:hover { color: var(--accent); }
+  .mobile-blog-link { color: var(--accent) !important; }
 
   @media (max-width: 768px) {
     .nav-links { display: none; }

@@ -25,104 +25,118 @@ const zipFilename = (title: string) =>
       <h1 class="section-title" set:html={t('press.heading')}></h1>
     </div>
 
+    <nav class="press-index reveal" aria-label="Tabla de contenidos">
+      {sortedKits.map((kit) => (
+        <a href={`#kit-${kit.slug}`} class="index-card">
+          <span class="index-card-date">{lang === 'en' ? kit.date_en : lang === 'lat' ? (kit.date_lat ?? kit.date_es) : kit.date_es}</span>
+          <span class="index-card-title">{pick(kit as any, 'title', lang) as string}</span>
+          <svg class="index-card-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </a>
+      ))}
+    </nav>
+
     {sortedMentions.length > 0 && (
-      <div class="mentions-wrapper reveal">
+      <div class="mentions-wrapper reveal" id="press-mentions">
         <h2 class="subsection-label">{t('press.mentions_heading')}</h2>
-        <div class="mentions-viewport">
-        <div class="mentions-track" role="list">
+        <div class="mentions-list" role="list">
           {sortedMentions.map((m) => (
-            <a
-              href={m.url}
-              target="_blank"
-              rel="noopener"
-              class="mention-card"
-              role="listitem"
-              draggable="false"
-            >
+            <a href={m.url} target="_blank" rel="noopener" class="mention-row" role="listitem">
               <div class="mention-top">
                 <span class="mention-outlet">{m.outlet}</span>
-                <span class={`mention-lang mention-lang--${m.lang}`}>{m.lang.toUpperCase()}</span>
+                <svg class="mention-arrow" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                </svg>
               </div>
               <span class="mention-title">{m.title}</span>
               <span class="mention-date">{lang === 'en' ? m.date_en : m.date_es}</span>
-              <svg class="mention-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <path d="M7 17L17 7M17 7H7M17 7v10"/>
-              </svg>
             </a>
           ))}
-        </div>
         </div>
       </div>
     )}
 
     <div class="kits-list">
       {sortedKits.map((kit, i) => (
-        <article class="kit-card reveal" style={`--delay: ${i * 0.06}s`}>
-          <div class="kit-meta">
-            <span class="kit-date">{lang === 'en' ? kit.date_en : lang === 'lat' ? (kit.date_lat ?? kit.date_es) : kit.date_es}</span>
-            <span class="kit-event">{pick(kit as any, 'event', lang) as string}</span>
-          </div>
+        <article class="kit-card reveal" id={`kit-${kit.slug}`} style={`--delay: ${i * 0.06}s`}>
 
-          <div class="kit-body">
+          <header class="kit-header">
+            <div class="kit-eyebrow">
+              <div class="kit-eyebrow-meta">
+                <span class="kit-date">{lang === 'en' ? kit.date_en : lang === 'lat' ? (kit.date_lat ?? kit.date_es) : kit.date_es}</span>
+                <span class="kit-sep" aria-hidden="true">·</span>
+                <span class="kit-event">{pick(kit as any, 'event', lang) as string}</span>
+              </div>
+              {(kit.documents.some((d) => d.url.startsWith('/')) || kit.photos.some((p) => p.url.startsWith('/'))) && (
+                <a href={`/press/${kit.slug}/kit.zip`} download={zipFilename(kit.title_en)} class="kit-zip-btn">
+                  {t('press.download_kit')}
+                </a>
+              )}
+            </div>
             <h2 class="kit-title">{pick(kit as any, 'title', lang) as string}</h2>
-            <p class="kit-description">{pick(kit as any, 'description', lang) as string}</p>
+            {(() => {
+              const desc = pick(kit as any, 'description', lang) as string;
+              const cut = desc.search(/\.\s+[A-ZÁÉÍÓÚ]/);
+              const hook = cut > 0 ? desc.slice(0, cut + 1) : desc;
+              const body = cut > 0 ? desc.slice(cut + 2) : '';
+              return (
+                <>
+                  <p class="kit-hook">{hook}</p>
+                  {body && <p class="kit-description">{body}</p>}
+                </>
+              );
+            })()}
+          </header>
 
-            {kit.photos.length > 0 && (
-              <div class="kit-photos">
-                {kit.photos.map((photo) => (
-                  <a href={photo.url} download class="kit-photo-wrap">
-                    <img
-                      src={photo.url}
-                      alt={pick(photo as any, 'alt', lang) as string}
-                      class="kit-photo"
-                      loading="lazy"
-                      draggable="false"
-                    />
-                    <div class="kit-photo-overlay" aria-hidden="true">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                        <polyline points="7 10 12 15 17 10"/>
-                        <line x1="12" y1="15" x2="12" y2="3"/>
-                      </svg>
-                    </div>
+          {(kit.photos.length > 0 || kit.documents.length > 0 || (kit.links && kit.links.length > 0)) && (
+            <div class="kit-assets">
+              <p class="kit-assets-label">{lang === 'en' ? 'Press assets' : lang === 'lat' ? 'Subsidia prelaria' : 'Recursos de prensa'}</p>
+
+              <div class="kit-assets-cols">
+              {kit.photos.length > 0 && (
+                <div class="kit-photos">
+                  {kit.photos.map((photo, photoIdx) => {
+                    const photoAlt = pick(photo as any, 'alt', lang) as string;
+                    return (
+                      <div
+                        class="kit-photo-wrap"
+                        data-kit={String(i)}
+                        data-idx={String(photoIdx)}
+                        data-url={photo.url}
+                        data-alt={photoAlt}
+                        data-lightbox-open
+                        role="button"
+                        tabindex="0"
+                        aria-label={photoAlt}
+                      >
+                        <img src={photo.url} alt={photoAlt} class="kit-photo" loading="lazy" draggable="false" style={photo.object_fit ? `object-fit: ${photo.object_fit}` : undefined} />
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+
+              <div class="kit-doc-grid">
+                {kit.documents.map((doc) => {
+                  const ext = doc.url.split('.').pop()?.toUpperCase() ?? 'DOC';
+                  return (
+                    <a href={doc.url} target="_blank" rel="noopener" class="kit-doc-card">
+                      <span class="kit-doc-type">{ext}</span>
+                      <span class="kit-doc-name">{pick(doc as any, 'label', lang) as string}</span>
+                    </a>
+                  );
+                })}
+                {kit.links && kit.links.map((link) => (
+                  <a href={link.url} target="_blank" rel="noopener" class="kit-doc-card">
+                    <span class="kit-doc-type">↗</span>
+                    <span class="kit-doc-name">{link.label}</span>
                   </a>
                 ))}
               </div>
-            )}
-
-            <div class="kit-actions">
-              {kit.documents.map((doc) => (
-                <a href={doc.url} target="_blank" rel="noopener" class="kit-doc-link">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                    <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
-                  </svg>
-                  {pick(doc as any, 'label', lang) as string}
-                </a>
-              ))}
-
-              {kit.links && kit.links.map((link) => (
-                <a href={link.url} target="_blank" rel="noopener" class="kit-doc-link">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                  </svg>
-                  {link.label}
-                </a>
-              ))}
-
+              </div>
             </div>
+          )}
 
-            {(kit.documents.some((d) => d.url.startsWith('/')) || kit.photos.some((p) => p.url.startsWith('/'))) && (
-              <a href={`/press/${kit.slug}/kit.zip`} download={zipFilename(kit.title_en)} class="kit-zip-btn">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                  <polyline points="7 10 12 15 17 10"/>
-                  <line x1="12" y1="15" x2="12" y2="3"/>
-                </svg>
-                {t('press.download_kit')}
-              </a>
-            )}
-          </div>
+
         </article>
       ))}
     </div>
@@ -130,332 +144,480 @@ const zipFilename = (title: string) =>
   </div>
 </section>
 
+<!-- Lightbox -->
+<div id="photo-lightbox" role="dialog" aria-modal="true" aria-label="Vista de foto">
+  <div class="lb-backdrop" id="lb-backdrop"></div>
+  <div class="lb-shell">
+    <button class="lb-btn lb-close" id="lb-close" aria-label="Cerrar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="lb-img-wrap">
+      <button class="lb-btn lb-nav lb-prev" id="lb-prev" aria-label="Anterior">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <img class="lb-img" id="lb-img" src="" alt="" />
+      <button class="lb-btn lb-nav lb-next" id="lb-next" aria-label="Siguiente">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+    <div class="lb-footer">
+      <span class="lb-alt" id="lb-alt"></span>
+      <a class="lb-download" id="lb-download" href="" download>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar
+      </a>
+    </div>
+  </div>
+</div>
+
 <style>
   #press { padding: 6rem 0 5rem; }
-
   .press-header { margin-bottom: 3rem; }
 
-  /* ── Mentions carousel ── */
-  .mentions-wrapper { margin-bottom: 3.5rem; }
+  /* ── Index grid ── */
+  .press-index {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 5rem;
+  }
+
+  .index-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.25rem 1.4rem 1.1rem;
+    border-radius: 12px;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 2px 12px rgba(0,0,0,0.18);
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    transition: box-shadow 0.2s;
+  }
+  .index-card:hover {
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 4px 20px rgba(0,0,0,0.28);
+  }
+
+  .index-card-arrow {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.1rem;
+    color: var(--accent);
+    opacity: 0.5;
+    transition: opacity 0.15s, transform 0.2s;
+  }
+  .index-card:hover .index-card-arrow { opacity: 1; transform: translateY(2px); }
+
+  .index-card-date {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    text-transform: uppercase;
+    padding-right: 1.5rem;
+  }
+  .index-card-title {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-2);
+    line-height: 1.4;
+    transition: color 0.15s;
+  }
+  .index-card:hover .index-card-title { color: var(--text); }
+
+  /* ── Mentions ── */
+  .mentions-wrapper { margin-bottom: 4rem; scroll-margin-top: calc(64px + 2rem); }
 
   .subsection-label {
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--text-3);
+    color: var(--text-2);
     margin-bottom: 1rem;
   }
 
-  .mentions-viewport {
-    overflow: hidden;
-    padding-bottom: 0.75rem;
-  }
+  .mentions-list { display: flex; flex-direction: column; }
 
-  .mentions-track {
-    display: flex;
-    gap: 1rem;
-    width: max-content;
-    cursor: grab;
-    user-select: none;
-    will-change: transform;
-  }
-  .mentions-track.dragging { cursor: grabbing; }
-
-  .mention-card {
-    flex: 0 0 260px;
+  .mention-row {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
-    padding: 1.1rem 2.25rem 1.1rem 1.25rem;
-    border: 1px solid var(--border);
-    border-radius: 8px;
+    gap: 0.15rem;
+    padding: 0.6rem 0;
+    border-top: 1px solid var(--border);
     text-decoration: none;
     color: inherit;
-    position: relative;
-    transition: border-color 0.2s, background 0.2s;
+    transition: color 0.15s;
   }
-  .mention-card:hover {
-    border-color: var(--accent);
-    background: rgba(91, 140, 245, 0.03);
-  }
+  .mention-row:last-child { border-bottom: 1px solid var(--border); }
   .mention-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 0.5rem;
   }
   .mention-outlet {
-    font-size: 0.68rem;
+    font-size: 0.75rem; font-weight: 800; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .mention-title { font-size: 0.9rem; font-weight: 500; color: var(--text-2); line-height: 1.5; }
+  .mention-row:hover .mention-title { color: var(--text); }
+  .mention-date { font-size: 0.72rem; color: var(--text-2); font-weight: 500; margin-top: 0.1rem; }
+  .mention-arrow { color: var(--text-3); flex-shrink: 0; transition: transform 0.2s, color 0.15s; }
+  .mention-row:hover .mention-arrow { transform: translate(2px, -2px); color: var(--accent); }
+
+  /* ── Press kits ── */
+  .kits-list { display: flex; flex-direction: column; gap: 2rem; }
+
+  .kit-card {
+    border-radius: 16px;
+    overflow: hidden;
+    --delay: 0s;
+    transition-delay: var(--delay);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 4px 24px rgba(0,0,0,0.22);
+    scroll-margin-top: calc(64px + 2rem);
+  }
+
+  /* Header */
+  .kit-header {
+    padding: 3rem 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .kit-eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .kit-eyebrow-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .kit-date {
+    font-size: 0.7rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--accent);
   }
-  .mention-lang {
-    font-size: 0.6rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    padding: 1px 5px;
-    border-radius: 3px;
-    border: 1px solid var(--border);
-    color: var(--text-3);
-    flex-shrink: 0;
-  }
-  .mention-title {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1.45;
-    flex: 1;
-  }
-  .mention-date {
-    font-size: 0.72rem;
-    color: var(--text-3);
-  }
-  .mention-arrow {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    color: var(--text-3);
-    transition: transform 0.2s, color 0.2s;
-  }
-  .mention-card:hover .mention-arrow {
-    transform: translate(2px, -2px);
-    color: var(--accent);
-  }
-
-  /* ── Press kits ── */
-  .kits-list { display: flex; flex-direction: column; gap: 2.5rem; }
-
-  .kit-card {
-    display: grid;
-    grid-template-columns: 160px 1fr;
-    gap: 2.5rem;
-    padding: 2rem 0;
-    border-top: 1px solid var(--border);
-    --delay: 0s;
-    transition-delay: var(--delay);
-  }
-  .kit-card:last-child { border-bottom: 1px solid var(--border); }
-
-  .kit-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    padding-top: 0.15rem;
-  }
-  .kit-date {
-    font-size: 0.76rem;
-    color: var(--text-3);
-    font-weight: 500;
-    white-space: nowrap;
-  }
-  .kit-event {
-    font-size: 0.75rem;
-    color: var(--text-3);
-    font-weight: 400;
-    line-height: 1.4;
-  }
-
-  .kit-body { display: flex; flex-direction: column; gap: 0.75rem; }
+  .kit-sep { color: var(--text-3); font-size: 0.7rem; }
+  .kit-event { font-size: 0.7rem; color: var(--text-2); font-weight: 500; letter-spacing: 0.03em; }
 
   .kit-title {
-    font-size: 1.05rem;
+    font-size: clamp(1.6rem, 2.8vw, 2.2rem);
     font-weight: 700;
     color: var(--text);
-    line-height: 1.35;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
     margin: 0;
   }
-
-  .kit-description {
-    font-size: 0.875rem;
-    color: var(--text-2);
-    line-height: 1.65;
+  .kit-hook {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.6;
     margin: 0;
-    max-width: 62ch;
+  }
+  .kit-description {
+    font-size: 0.85rem;
+    color: var(--text-2);
+    line-height: 1.75;
+    margin: 0;
+    max-width: 58ch;
+  }
+
+  /* Assets section */
+  .kit-assets {
+    border-top: 1px solid var(--border);
+    background: var(--surface-2);
+    padding: 1.75rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .kit-assets-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-2);
+  }
+
+  .kit-assets-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    align-items: start;
   }
 
   /* Photos */
   .kit-photos {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 0.65rem;
-    flex-wrap: wrap;
-    margin-top: 0.25rem;
+    order: 2;
   }
+
   .kit-photo-wrap {
-    border-radius: 6px;
+    border-radius: 8px;
     overflow: hidden;
-    border: 1px solid var(--border);
-    flex: 0 0 auto;
     position: relative;
+    cursor: pointer;
+    aspect-ratio: 4 / 3;
+    background: #fff;
   }
   .kit-photo {
     display: block;
-    width: 120px;
-    height: 80px;
-    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     transition: opacity 0.2s;
   }
-  .kit-photo-wrap:hover .kit-photo { opacity: 0.5; }
-
-  .kit-photo-overlay {
+  .kit-photo-wrap::after {
+    content: '';
     position: absolute;
     inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text);
-    opacity: 0;
+    background: rgba(0, 0, 0, 0.6);
+    transition: opacity 0.25s;
+    pointer-events: none;
+  }
+  .kit-photo-wrap:hover::after { opacity: 0; }
+  .kit-photo-wrap:hover .kit-photo { opacity: 1; }
+
+  .kit-photo-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 3 21 3 21 9'/%3E%3Cpolyline points='9 21 3 21 3 15'/%3E%3Cline x1='21' y1='3' x2='14' y2='10'/%3E%3Cline x1='3' y1='21' x2='10' y2='14'/%3E%3C/svg%3E") center / 28px no-repeat;
+    opacity: 1;
     transition: opacity 0.2s;
+    z-index: 1;
+    pointer-events: none;
   }
-  .kit-photo-wrap:hover .kit-photo-overlay { opacity: 1; }
+  .kit-photo-wrap:hover::before { opacity: 0; }
 
-  /* Actions row */
-  .kit-actions {
+
+  /* Doc grid */
+  .kit-doc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.6rem;
+  }
+
+  .kit-doc-card {
     display: flex;
-    align-items: flex-start;
-    gap: 0.5rem 0.75rem;
-    flex-wrap: wrap;
-    margin-top: 0.5rem;
-    max-width: 62ch;
-  }
-
-  .kit-doc-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--accent);
+    flex-direction: column;
+    gap: 0.65rem;
+    padding: 1.1rem 1.1rem 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.07), 0 2px 8px rgba(0,0,0,0.2);
     text-decoration: none;
-    transition: opacity 0.2s;
-    white-space: nowrap;
+    transition: box-shadow 0.2s;
   }
-  .kit-doc-link:hover { opacity: 0.7; }
+  .kit-doc-card:hover {
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.13), 0 4px 16px rgba(0,0,0,0.28);
+  }
+
+  .kit-doc-type {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .kit-doc-name {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-2);
+    line-height: 1.4;
+    transition: color 0.15s;
+  }
+  .kit-doc-card:hover .kit-doc-name { color: var(--text); }
+
+  .kit-footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 1.25rem 3rem;
+    display: flex;
+    justify-content: flex-end;
+  }
 
   .kit-zip-btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
-    padding: 0.2rem 0.6rem;
+    padding: 0.5rem 1.5rem;
     background: transparent;
     color: var(--accent);
-    border: 1.5px solid var(--accent);
-    border-radius: 4px;
-    font-size: 0.78rem;
-    font-weight: 600;
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
     text-decoration: none;
-    white-space: nowrap;
-    align-self: flex-start;
-    transition: background 0.2s, color 0.2s;
+    transition: background 0.2s, border-color 0.2s;
   }
-  .kit-zip-btn:hover { background: var(--accent); color: #fff; }
-  .kit-zip-btn:active { opacity: 0.85; }
+  .kit-zip-btn:hover {
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    border-color: color-mix(in srgb, var(--accent) 65%, transparent);
+  }
 
+  /* ── Lightbox ── */
+  #photo-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  #photo-lightbox.open { opacity: 1; pointer-events: all; }
+
+  .lb-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(6px);
+  }
+
+  .lb-shell {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.85rem;
+    max-width: min(90vw, 960px);
+  }
+
+  .lb-close { position: absolute; top: -44px; right: 0; }
+
+  .lb-img-wrap { position: relative; display: flex; align-items: center; }
+
+  .lb-img {
+    display: block;
+    max-width: min(80vw, 860px);
+    max-height: 70vh;
+    border-radius: 8px;
+    object-fit: contain;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .lb-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14);
+    color: #fff; cursor: pointer; transition: background 0.15s; flex-shrink: 0;
+  }
+  .lb-btn:hover { background: rgba(255,255,255,0.18); }
+
+  .lb-nav { position: absolute; top: 50%; translate: 0 -50%; }
+  .lb-prev { left: -52px; }
+  .lb-next { right: -52px; }
+
+  .lb-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; width: 100%;
+  }
+  .lb-alt { font-size: 0.78rem; color: rgba(255,255,255,0.5); flex: 1; }
+  .lb-download {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.75);
+    text-decoration: none; transition: color 0.15s; flex-shrink: 0;
+  }
+  .lb-download:hover { color: #fff; }
+
+  /* Mobile */
   @media (max-width: 700px) {
-    .kit-card { grid-template-columns: 1fr; gap: 0.75rem; padding: 1.5rem 0; }
-    .kit-meta { flex-direction: row; gap: 0.5rem; align-items: baseline; }
-    .mention-card { flex: 0 0 220px; }
-    .kit-zip-btn { margin-top: 0.5rem; width: 100%; justify-content: center; }
+    .kit-header { padding: 1.5rem 1.5rem 1.25rem; }
+    .kit-assets { padding: 1.25rem 1.5rem; }
+    .kit-footer { padding: 1rem 1.5rem; }
+    .kit-assets-cols { grid-template-columns: 1fr; }
+    .kit-photos { order: unset; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    .kit-zip-btn { width: 100%; justify-content: center; }
+    .mention-row { grid-template-columns: auto 1fr auto; }
+    .mention-date { display: none; }
+    .lb-prev { left: -42px; }
+    .lb-next { right: -42px; }
   }
 </style>
 
 <script>
-  const viewport = document.querySelector<HTMLElement>('.mentions-viewport');
-  const track = document.querySelector<HTMLElement>('.mentions-track');
+  // === Lightbox ===
+  const lightbox = document.getElementById('photo-lightbox') as HTMLElement | null;
+  const lbImg = document.getElementById('lb-img') as HTMLImageElement | null;
+  const lbAlt = document.getElementById('lb-alt') as HTMLElement | null;
+  const lbDownload = document.getElementById('lb-download') as HTMLAnchorElement | null;
+  const lbPrev = document.getElementById('lb-prev') as HTMLButtonElement | null;
+  const lbNext = document.getElementById('lb-next') as HTMLButtonElement | null;
 
-  if (viewport && track) {
-    const GAP = 16;
-    const SPEED = 0.5;
-    let offset = 0;
-    let paused = false;
+  if (lightbox && lbImg) {
+    const kitPhotos: { url: string; alt: string }[][] = [];
+    document.querySelectorAll<HTMLElement>('.kit-photo-wrap[data-url]').forEach((wrap) => {
+      const kitIdx = parseInt(wrap.dataset.kit ?? '0');
+      if (!kitPhotos[kitIdx]) kitPhotos[kitIdx] = [];
+      kitPhotos[kitIdx].push({ url: wrap.dataset.url ?? '', alt: wrap.dataset.alt ?? '' });
+    });
 
-    // Clone cards for infinite loop
-    const originals = Array.from(track.children) as HTMLElement[];
-    originals.forEach(card => track.appendChild(card.cloneNode(true)));
+    let lbKitIdx = 0;
+    let lbPhotoIdx = 0;
 
-    function setWidth() {
-      const card = track.firstElementChild as HTMLElement;
-      return (card.offsetWidth + GAP) * originals.length;
+    function showPhoto() {
+      const photos = kitPhotos[lbKitIdx] ?? [];
+      const photo = photos[lbPhotoIdx];
+      if (!photo) return;
+      lbImg!.src = photo.url;
+      lbImg!.alt = photo.alt;
+      if (lbAlt) lbAlt.textContent = photo.alt;
+      if (lbDownload) { lbDownload.href = photo.url; lbDownload.download = photo.url.split('/').pop() ?? ''; }
+      const multi = photos.length > 1;
+      if (lbPrev) lbPrev.style.display = multi ? '' : 'none';
+      if (lbNext) lbNext.style.display = multi ? '' : 'none';
     }
 
-    function tick() {
-      if (!paused) {
-        offset += SPEED;
-        if (offset >= setWidth()) offset -= setWidth();
-        track.style.transform = `translateX(${-offset}px)`;
-      }
-      requestAnimationFrame(tick);
+    function openLightbox(kitIdx: number, photoIdx: number) {
+      lbKitIdx = kitIdx; lbPhotoIdx = photoIdx;
+      showPhoto();
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
     }
 
-    requestAnimationFrame(tick);
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
 
-    // Pause on hover
-    viewport.addEventListener('mouseenter', () => { paused = true; });
-    viewport.addEventListener('mouseleave', () => { paused = false; });
-
-    // Drag — mouse
-    const DRAG_THRESHOLD = 5;
-    let isDragging = false;
-    let didDrag = false;
-    let dragStartX = 0;
-    let dragStartOffset = 0;
-
-    viewport.addEventListener('dragstart', (e) => e.preventDefault());
-
-    viewport.addEventListener('mousedown', (e) => {
-      isDragging = true;
-      didDrag = false;
-      dragStartX = e.clientX;
-      dragStartOffset = offset;
+    document.querySelectorAll<HTMLElement>('.kit-photo-wrap[data-lightbox-open]').forEach((wrap) => {
+      const open = () => openLightbox(parseInt(wrap.dataset.kit ?? '0'), parseInt(wrap.dataset.idx ?? '0'));
+      wrap.addEventListener('click', open);
+      wrap.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
     });
 
-    window.addEventListener('mousemove', (e) => {
-      if (!isDragging) return;
-      const delta = dragStartX - e.clientX;
-      if (!didDrag && Math.abs(delta) < DRAG_THRESHOLD) return;
-      if (!didDrag) {
-        didDrag = true;
-        paused = true;
-        track.classList.add('dragging');
-      }
-      const sw = setWidth();
-      offset = ((dragStartOffset + delta) % sw + sw) % sw;
-      track.style.transform = `translateX(${-offset}px)`;
+    document.getElementById('lb-close')?.addEventListener('click', closeLightbox);
+    document.getElementById('lb-backdrop')?.addEventListener('click', closeLightbox);
+
+    lbPrev?.addEventListener('click', () => {
+      const len = (kitPhotos[lbKitIdx] ?? []).length;
+      lbPhotoIdx = (lbPhotoIdx - 1 + len) % len;
+      showPhoto();
+    });
+    lbNext?.addEventListener('click', () => {
+      const len = (kitPhotos[lbKitIdx] ?? []).length;
+      lbPhotoIdx = (lbPhotoIdx + 1) % len;
+      showPhoto();
     });
 
-    window.addEventListener('mouseup', () => {
-      if (!isDragging) return;
-      isDragging = false;
-      if (didDrag) {
-        paused = false;
-        track.classList.remove('dragging');
-      }
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') lbPrev?.click();
+      if (e.key === 'ArrowRight') lbNext?.click();
     });
-
-    // Prevent click on links after a drag
-    track.addEventListener('click', (e) => {
-      if (didDrag) e.preventDefault();
-    });
-
-    // Drag — touch
-    let touchStartX = 0;
-    let touchStartOffset = 0;
-
-    viewport.addEventListener('touchstart', (e) => {
-      paused = true;
-      touchStartX = e.touches[0].clientX;
-      touchStartOffset = offset;
-    }, { passive: true });
-
-    viewport.addEventListener('touchmove', (e) => {
-      const delta = touchStartX - e.touches[0].clientX;
-      const sw = setWidth();
-      offset = ((touchStartOffset + delta) % sw + sw) % sw;
-      track.style.transform = `translateX(${-offset}px)`;
-    }, { passive: true });
-
-    viewport.addEventListener('touchend', () => { paused = false; });
   }
 </script>
