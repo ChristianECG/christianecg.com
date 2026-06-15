@@ -1,0 +1,806 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import Nav from '../../../../components/Nav.astro';
+import Footer from '../../../../components/Footer.astro';
+import '../../../../styles/global.css';
+import { LOCALES, useTranslations, dataLang } from '../../../../i18n';
+import type { Locale } from '../../../../i18n';
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params as { locale: Locale };
+const t = useTranslations(locale);
+const rawLang = dataLang(locale);
+const lang = rawLang === 'lat' ? 'es' : rawLang;
+
+type Platform = 'x' | 'hn';
+type HighlightType = 'viral' | 'technical';
+
+interface Reaction {
+  id: string;
+  platform: Platform;
+  date_es: string;
+  date_en: string;
+  author: string;
+  handle: string;
+  verified?: boolean;
+  content_es: string;
+  content_en: string;
+  original?: string;
+  original_lang?: string;
+  views?: number;
+  retweets?: number;
+  likes?: number;
+  replies?: number;
+  shares?: number;
+  highlight?: HighlightType;
+  url?: string;
+}
+
+const reactions: Reaction[] = [
+  {
+    id: 'flano-yuki',
+    platform: 'x',
+    date_es: '8 jun. 2026',
+    date_en: 'Jun 8, 2026',
+    author: 'ゆき',
+    handle: 'flano_yuki',
+    original: '『鳥類キャリアによるDNS』\n有名なジョークRFC（RFC1149）のオマージュぽいんだけど。4月1日ではない',
+    original_lang: 'ja',
+    content_es: '"DNS via Portadores Aviares"\nParece un homenaje al famoso RFC de broma (RFC 1149). Y no es 1 de abril.',
+    content_en: '"DNS via Avian Carriers"\nLooks like a homage to the famous joke RFC (RFC 1149). And it\'s not April 1st.',
+    views: 6279,
+    shares: 30,
+    highlight: 'viral',
+  },
+  {
+    id: 'neko3x',
+    platform: 'x',
+    date_es: '9 jun. 2026',
+    date_en: 'Jun 9, 2026',
+    author: 'ねこ',
+    handle: 'neko3_x',
+    original: 'DNSは応答がなければ5秒以内に再送信すべきだが、avian-carrier transportでは不適切なので最低72時間待てとwww',
+    original_lang: 'ja',
+    content_es: 'DNS debería retransmitir si no hay respuesta en 5 segundos, pero para transporte aviar eso es inapropiado — espera mínimo 72 horas lol',
+    content_en: 'DNS should retransmit if no response in 5 seconds, but for avian-carrier transport that\'s inappropriate — wait at least 72 hours lol',
+    views: 134,
+    highlight: 'technical',
+  },
+  {
+    id: 'orange-morishita',
+    platform: 'x',
+    date_es: '9 jun. 2026',
+    date_en: 'Jun 9, 2026',
+    author: 'Yasuhiro Morishita',
+    handle: 'OrangeMorishita',
+    verified: true,
+    original: '【自分用メモ】何て読むんだろう。ドアック？',
+    original_lang: 'ja',
+    content_es: '[Nota personal] ¿Cómo se pronuncia? ¿DoACK?',
+    content_en: '[Personal note] How do you read it? DoACK?',
+    views: 714,
+    retweets: 2,
+    likes: 9,
+    replies: 1,
+  },
+  {
+    id: 'pcarboni',
+    platform: 'x',
+    date_es: '9 jun. 2026',
+    date_en: 'Jun 9, 2026',
+    author: 'Pablo Carboni',
+    handle: 'pcarboni',
+    content_es: 'Me da curiosidad el ataque Hitm. 🙂',
+    content_en: 'I\'m curious abouth the Hitm attacks. 🙂',
+    views: 19,
+    highlight: 'technical',
+  },
+  {
+    id: 'daisuke',
+    platform: 'x',
+    date_es: '9 jun. 2026',
+    date_en: 'Jun 9, 2026',
+    author: 'original だいすけ',
+    handle: 'daisuke',
+    verified: true,
+    content_es: 'draft-cruzgonzalez-ipoac-dns-00 — DNS over Avian Carriers (DoAC)',
+    content_en: 'draft-cruzgonzalez-ipoac-dns-00 — DNS over Avian Carriers (DoAC)',
+    views: 45,
+  },
+  {
+    id: 'tss0101',
+    platform: 'x',
+    date_es: '9 jun. 2026',
+    date_en: 'Jun 9, 2026',
+    author: 'tss (夜行性昼行燈)',
+    handle: 'tss_0101',
+    original: 'Author の所属と、 Acknowledgements が....。',
+    original_lang: 'ja',
+    content_es: 'La afiliación del Author y los Acknowledgements...',
+    content_en: 'The Author\'s affiliation and the Acknowledgements...',
+    views: 57,
+    likes: 1,
+  },
+];
+
+interface HNComment {
+  id: string;
+  author: string;
+  points?: number;
+  content: string;
+  link?: { label: string; url: string };
+  isAuthor?: boolean;
+  replyTo?: string;
+}
+
+const hnComments: HNComment[] = [
+  {
+    id: 'chrisarchitect',
+    author: 'ChrisArchitect',
+    content: 'See also: IP over Avian Carriers with Quality of Service (1999)',
+    link: {
+      label: 'news.ycombinator.com/item?id=46690530',
+      url: 'https://news.ycombinator.com/item?id=46690530',
+    },
+  },
+  {
+    id: 'christianecg-reply',
+    author: 'ChristianECG',
+    points: 3,
+    isAuthor: true,
+    replyTo: 'chrisarchitect',
+    content: 'Exactly. After RFC 1149, RFC 2549 and RFC 6214, the lack of a hostname resolution protocol felt like an obvious gap in the avian networking stack',
+  },
+  {
+    id: 'stop50',
+    author: 'stop50',
+    content: 'lets hope it gets approved 01.04.2027',
+  },
+];
+
+const ui = {
+  es: {
+    pageTitle: 'Reacciones de la comunidad — DNS over Avian Carriers',
+    pageDesc: 'Lo que la comunidad técnica internacional dice sobre draft-cruzgonzalez-ipoac-dns, el Internet-Draft de DNS over Avian Carriers.',
+    back: 'Press kit',
+    eyebrow: 'Reacciones de la comunidad',
+    title: 'Lo que dice la comunidad',
+    subtitle: 'draft-cruzgonzalez-ipoac-dns · Jun 2026',
+    xHeading: 'X / Twitter',
+    hnHeading: 'Hacker News',
+    hnPoints: 'puntos',
+    hnComments: 'comentarios',
+    viralBadge: 'Más viral',
+    technicalBadge: 'Contenido técnico',
+    originalLabel: 'Original',
+    translationLabel: 'Traducción',
+    viewsLabel: 'visualizaciones',
+    sharesLabel: 'compartidos',
+    retweetsLabel: 'retweets',
+    likesLabel: 'likes',
+    retransmissionNote: 'Sección 6 del draft — Comportamiento de Retransmisión',
+    hitm: 'Sección 8 del draft — Hawk-in-the-Middle (HitM)',
+    draftLink: 'Draft completo en IETF Datatracker',
+    pressLink: 'Volver al press kit',
+    footerNote: 'Reacciones recopiladas del 8 al 9 de junio de 2026. Métricas registradas en esas fechas.',
+  },
+  en: {
+    pageTitle: 'Community Reactions — DNS over Avian Carriers',
+    pageDesc: 'What the international technical community is saying about draft-cruzgonzalez-ipoac-dns, the DNS over Avian Carriers Internet-Draft.',
+    back: 'Press kit',
+    eyebrow: 'Community reactions',
+    title: 'What the community is saying',
+    subtitle: 'draft-cruzgonzalez-ipoac-dns · Jun 2026',
+    xHeading: 'X / Twitter',
+    hnHeading: 'Hacker News',
+    hnPoints: 'points',
+    hnComments: 'comments',
+    viralBadge: 'Most viral',
+    technicalBadge: 'Technical engagement',
+    originalLabel: 'Original',
+    translationLabel: 'Translation',
+    viewsLabel: 'views',
+    sharesLabel: 'shares',
+    retweetsLabel: 'retweets',
+    likesLabel: 'likes',
+    retransmissionNote: 'Draft section 6 — Retransmission Behavior',
+    hitm: 'Draft section 8 — Hawk-in-the-Middle (HitM)',
+    draftLink: 'Full draft on IETF Datatracker',
+    pressLink: 'Back to press kit',
+    footerNote: 'Reactions collected June 8–9, 2026. Metrics recorded on those dates.',
+  },
+};
+
+const c = ui[lang];
+const pressUrl = `/${locale}/press#kit-ipoac-dns`;
+const ietfUrl = 'https://datatracker.ietf.org/doc/draft-cruzgonzalez-ipoac-dns/';
+
+function initials(name: string) {
+  const clean = name.replace(/[^\w\s]/gu, '').split(/\s+/).slice(0, 2).map((w) => w[0]?.toUpperCase() ?? '').join('');
+  return clean || (name[0]?.toUpperCase() ?? '?');
+}
+---
+
+<Layout
+  title={c.pageTitle}
+  description={c.pageDesc}
+  locale={locale}
+  ogImage="https://christianecg.com/og/press.png"
+>
+  <Nav locale={locale} />
+
+  <main class="reactions-page">
+    <div class="rp-container">
+
+      <!-- Back nav -->
+      <nav class="rp-back-nav">
+        <a href={pressUrl} class="rp-back-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M5 12l7-7M5 12l7 7"/></svg>
+          {c.back}
+        </a>
+        <span class="rp-draft-id">draft-cruzgonzalez-ipoac-dns</span>
+      </nav>
+
+      <!-- Hero -->
+      <header class="rp-hero">
+        <span class="rp-eyebrow">{c.eyebrow}</span>
+        <h1 class="rp-title">{c.title}</h1>
+        <p class="rp-subtitle">{c.subtitle}</p>
+      </header>
+
+      <!-- X / Twitter -->
+      <section class="rp-section">
+        <h2 class="rp-section-heading">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          {c.xHeading}
+        </h2>
+
+        <!-- Featured -->
+        {(() => {
+          const featured = reactions.find((r) => r.id === 'flano-yuki')!;
+          const content = lang === 'en' ? featured.content_en : featured.content_es;
+          return (
+            <div class="rp-card rp-card--featured">
+              <div class="rp-card-badge rp-badge--viral">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                {c.viralBadge}
+              </div>
+              <div class="rp-card-header">
+                <div class="rp-avatar">{initials(featured.author)}</div>
+                <div class="rp-card-meta">
+                  <span class="rp-author">{featured.author}</span>
+                  <span class="rp-handle">@{featured.handle}</span>
+                  <span class="rp-date">{lang === 'en' ? featured.date_en : featured.date_es}</span>
+                </div>
+              </div>
+              <p class="rp-content">{content}</p>
+              {featured.original && (
+                <div class="rp-original">
+                  <span class="rp-original-label">{c.originalLabel}</span>
+                  <span class="rp-original-text">{featured.original}</span>
+                </div>
+              )}
+              <div class="rp-metrics">
+                {featured.views && (
+                  <span class="rp-metric">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    <strong>{featured.views.toLocaleString()}</strong> {c.viewsLabel}
+                  </span>
+                )}
+                {featured.shares && (
+                  <span class="rp-metric">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                    <strong>{featured.shares}+</strong> {c.sharesLabel}
+                  </span>
+                )}
+              </div>
+            </div>
+          );
+        })()}
+
+        <!-- Grid of other reactions -->
+        <div class="rp-grid">
+          {reactions.filter((r) => r.id !== 'flano-yuki').map((r) => {
+            const content = lang === 'en' ? r.content_en : r.content_es;
+            return (
+              <div class={`rp-card${r.highlight === 'technical' ? ' rp-card--technical' : ''}`}>
+                {r.highlight === 'technical' && (
+                  <div class="rp-card-badge rp-badge--technical">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    {c.technicalBadge}
+                  </div>
+                )}
+                <div class="rp-card-header">
+                  <div class="rp-avatar rp-avatar--sm">{initials(r.author)}</div>
+                  <div class="rp-card-meta">
+                    <span class="rp-author">
+                      {r.author}
+                      {r.verified && (
+                        <svg class="rp-verified" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-label="verificado"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                      )}
+                    </span>
+                    <span class="rp-handle">@{r.handle}</span>
+                    <span class="rp-date">{lang === 'en' ? r.date_en : r.date_es}</span>
+                  </div>
+                </div>
+
+                <p class="rp-content">{content}</p>
+
+                {r.id === 'neko3x' && (
+                  <div class="rp-quote-block">
+                    <span class="rp-quote-label">{c.retransmissionNote}</span>
+                    <p class="rp-quote-text">Implementations of DoAC <mark>MUST NOT retransmit a query until a minimum of 72 hours has elapsed</mark> since the initial dispatch.</p>
+                  </div>
+                )}
+
+                {r.id === 'pcarboni' && (
+                  <div class="rp-quote-block">
+                    <span class="rp-quote-label">{c.hitm}</span>
+                    <p class="rp-quote-text">Hawk-in-the-Middle (HitM) — a threat actor, specifically a bird of prey, intercepts the Carrier in transit prior to delivery.</p>
+                  </div>
+                )}
+
+                {r.original && (
+                  <div class="rp-original">
+                    <span class="rp-original-label">{c.originalLabel}</span>
+                    <span class="rp-original-text">{r.original}</span>
+                  </div>
+                )}
+
+                <div class="rp-metrics">
+                  {r.views && (
+                    <span class="rp-metric">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                      <strong>{r.views.toLocaleString()}</strong>
+                    </span>
+                  )}
+                  {r.retweets && (
+                    <span class="rp-metric">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                      <strong>{r.retweets}</strong>
+                    </span>
+                  )}
+                  {r.likes && (
+                    <span class="rp-metric">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                      <strong>{r.likes}</strong>
+                    </span>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <!-- Hacker News -->
+      <section class="rp-section rp-section--hn">
+        <h2 class="rp-section-heading rp-section-heading--hn">
+          <span class="rp-hn-logo" aria-hidden="true">Y</span>
+          {c.hnHeading}
+        </h2>
+
+        <div class="rp-hn-submission">
+          <div class="rp-hn-sub-title">DNS over Avian Carriers (DoAC) <span class="rp-hn-domain">(ietf.org)</span></div>
+          <div class="rp-hn-sub-meta">
+            <span class="rp-hn-points">4 {c.hnPoints}</span>
+            <span>·</span>
+            <span>4 {c.hnComments}</span>
+            <span>·</span>
+            <span>9 jun. 2026</span>
+          </div>
+        </div>
+
+        <div class="rp-hn-thread">
+          {hnComments.map((comment) => (
+            <div class={`rp-hn-comment${comment.replyTo ? ' rp-hn-comment--reply' : ''}${comment.isAuthor ? ' rp-hn-comment--author' : ''}`}>
+              <div class="rp-hn-comment-header">
+                <span class={`rp-hn-username${comment.isAuthor ? ' rp-hn-username--author' : ''}`}>{comment.author}</span>
+                {comment.points && <span class="rp-hn-pts">{comment.points} {c.hnPoints}</span>}
+              </div>
+              <p class="rp-hn-text">{comment.content}</p>
+              {comment.link && (
+                <a href={comment.link.url} target="_blank" rel="noopener" class="rp-hn-link">{comment.link.label}</a>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="rp-footer">
+        <div class="rp-footer-links">
+          <a href={ietfUrl} target="_blank" rel="noopener" class="rp-footer-link">
+            {c.draftLink}
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </a>
+          <a href={pressUrl} class="rp-footer-link">
+            {c.pressLink}
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M19 12H5M5 12l7-7M5 12l7 7"/></svg>
+          </a>
+        </div>
+        <p class="rp-footer-note">{c.footerNote}</p>
+      </footer>
+
+    </div>
+  </main>
+
+  <Footer locale={locale} />
+</Layout>
+
+<style>
+  .reactions-page {
+    padding: 5rem 0 6rem;
+  }
+
+  .rp-container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Back nav */
+  .rp-back-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+  }
+  .rp-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-2);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .rp-back-link:hover { color: var(--text); }
+  .rp-draft-id {
+    font-family: 'Courier New', monospace;
+    font-size: 0.68rem;
+    color: var(--text-3);
+    letter-spacing: 0.04em;
+  }
+
+  /* Hero */
+  .rp-hero { margin-bottom: 4rem; }
+  .rp-eyebrow {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  .rp-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+  .rp-subtitle {
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    color: var(--text-3);
+    margin-bottom: 2.5rem;
+  }
+
+  /* Section */
+  .rp-section { margin-bottom: 4rem; }
+  .rp-section-heading {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    margin-bottom: 1.25rem;
+  }
+  .rp-section-heading--hn { color: #ff6600; }
+
+  /* HN logo */
+  .rp-hn-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: #ff6600;
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    border-radius: 3px;
+  }
+
+  /* Cards */
+  .rp-card {
+    background: var(--surface);
+    border: 1px solid rgba(100, 140, 220, 0.09);
+    border-radius: 14px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .rp-card--featured {
+    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 15%, transparent), 0 4px 24px rgba(0,0,0,0.25);
+    margin-bottom: 1rem;
+  }
+
+  .rp-card--technical {
+    border-color: color-mix(in srgb, #4ade80 30%, transparent);
+  }
+
+  /* Grid */
+  .rp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 0.75rem;
+  }
+
+  /* Badge */
+  .rp-card-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    align-self: flex-start;
+  }
+  .rp-badge--viral {
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+  .rp-badge--technical {
+    color: #4ade80;
+    background: rgba(74, 222, 128, 0.08);
+    border: 1px solid rgba(74, 222, 128, 0.22);
+  }
+
+  /* Card header */
+  .rp-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .rp-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--accent-dim);
+    border: 1px solid rgba(100, 140, 220, 0.14);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent);
+    flex-shrink: 0;
+    letter-spacing: 0.02em;
+  }
+  .rp-avatar--sm { width: 34px; height: 34px; font-size: 0.72rem; }
+  .rp-card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.05rem;
+    padding-top: 0.1rem;
+  }
+  .rp-author {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .rp-verified { color: var(--accent); flex-shrink: 0; }
+  .rp-handle { font-size: 0.75rem; color: var(--text-2); }
+  .rp-date { font-size: 0.68rem; color: var(--text-3); }
+
+  /* Content */
+  .rp-content {
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.65;
+    white-space: pre-line;
+  }
+
+  /* Original text block */
+  .rp-original {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.7rem 0.9rem;
+    background: var(--surface-2);
+    border-radius: 8px;
+    border-left: 2px solid var(--text-3);
+  }
+  .rp-original-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+  .rp-original-text {
+    font-size: 0.78rem;
+    color: var(--text-2);
+    line-height: 1.55;
+    white-space: pre-line;
+  }
+
+  /* Quote block (RFC excerpt) */
+  .rp-quote-block {
+    background: var(--surface-2);
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .rp-quote-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #4ade80;
+  }
+  .rp-quote-text {
+    font-size: 0.78rem;
+    color: var(--text-2);
+    line-height: 1.6;
+    font-family: 'Courier New', monospace;
+  }
+  .rp-quote-text mark {
+    background: rgba(74, 222, 128, 0.18);
+    color: var(--text);
+    border-radius: 2px;
+    padding: 0 0.15rem;
+  }
+
+  /* Metrics */
+  .rp-metrics {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-top: 0.65rem;
+    border-top: 1px solid rgba(100, 140, 220, 0.07);
+  }
+  .rp-metric {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.75rem;
+    color: var(--text-2);
+  }
+  .rp-metric strong { color: var(--text); font-weight: 700; }
+
+  /* HN */
+  .rp-section--hn { margin-bottom: 3rem; }
+
+  .rp-hn-submission {
+    background: var(--surface);
+    border: 1px solid rgba(255, 102, 0, 0.2);
+    border-radius: 12px;
+    padding: 1.1rem 1.4rem;
+    margin-bottom: 0.75rem;
+  }
+  .rp-hn-sub-title {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+  }
+  .rp-hn-domain { font-size: 0.8rem; color: var(--text-2); font-weight: 400; }
+  .rp-hn-sub-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-2);
+  }
+  .rp-hn-points { color: #ff6600; font-weight: 700; }
+
+  .rp-hn-thread {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .rp-hn-comment {
+    background: var(--surface);
+    border: 1px solid rgba(100, 140, 220, 0.09);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+  }
+  .rp-hn-comment--reply {
+    margin-left: 1.5rem;
+    border-left: 2px solid var(--accent);
+  }
+  .rp-hn-comment--author {
+    border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+  .rp-hn-comment-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.45rem;
+  }
+  .rp-hn-username {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .rp-hn-username--author { color: var(--accent-light); }
+  .rp-hn-pts {
+    font-size: 0.7rem;
+    color: #ff6600;
+    font-weight: 600;
+  }
+  .rp-hn-text {
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .rp-hn-link {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.75rem;
+    color: var(--text-2);
+    text-decoration: none;
+    font-family: 'Courier New', monospace;
+    transition: color 0.15s;
+  }
+  .rp-hn-link:hover { color: var(--accent); }
+
+  /* Footer */
+  .rp-footer {
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(100, 140, 220, 0.09);
+  }
+  .rp-footer-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  .rp-footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-2);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .rp-footer-link:hover { color: var(--text); }
+  .rp-footer-note {
+    font-size: 0.7rem;
+    color: var(--text-3);
+  }
+
+  @media (max-width: 640px) {
+    .rp-stats { gap: 1.5rem; padding: 1.25rem; }
+    .rp-stat-value { font-size: 1.5rem; }
+    .rp-grid { grid-template-columns: 1fr; }
+    .rp-hn-comment--reply { margin-left: 0.75rem; }
+    .rp-back-nav { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  }
+</style>

@@ -34,6 +34,7 @@ export interface PressKit {
   photos: PressPhoto[];
   documents: PressDocument[];
   links?: { label: string; url: string }[];
+  hasReactions?: boolean;
 }
 
 export interface PressMention {
@@ -112,6 +113,7 @@ export const pressKits: PressKit[] = [
         url: 'https://datatracker.ietf.org/doc/html/rfc1149',
       },
     ],
+    hasReactions: true,
   },
   {
     slug: 'coniiti-2021',
