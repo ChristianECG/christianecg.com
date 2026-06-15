@@ -27,10 +27,10 @@ const zipFilename = (title: string) =>
 
     <nav class="press-index reveal" aria-label="Tabla de contenidos">
       {sortedKits.map((kit) => (
-        <a href={`#kit-${kit.slug}`} class="index-card">
+        <a href={`#kit-${kit.slug}`} class="index-card" data-target={`kit-${kit.slug}`}>
           <span class="index-card-date">{lang === 'en' ? kit.date_en : lang === 'lat' ? (kit.date_lat ?? kit.date_es) : kit.date_es}</span>
           <span class="index-card-title">{pick(kit as any, 'title', lang) as string}</span>
-          <svg class="index-card-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          <span class="index-card-cta">{t('press.view_kit')} <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></span>
         </a>
       ))}
     </nav>
@@ -66,11 +66,15 @@ const zipFilename = (title: string) =>
                 <span class="kit-sep" aria-hidden="true">·</span>
                 <span class="kit-event">{pick(kit as any, 'event', lang) as string}</span>
               </div>
-              {(kit.documents.some((d) => d.url.startsWith('/')) || kit.photos.some((p) => p.url.startsWith('/'))) && (
-                <a href={`/press/${kit.slug}/kit.zip`} download={zipFilename(kit.title_en)} class="kit-zip-btn">
-                  {t('press.download_kit')}
-                </a>
-              )}
+              <button class="kit-link-btn" data-slug={kit.slug} aria-label="Copiar enlace">
+                <svg class="kit-link-icon kit-link-icon--link" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                </svg>
+                <svg class="kit-link-icon kit-link-icon--check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </button>
             </div>
             <h2 class="kit-title">{pick(kit as any, 'title', lang) as string}</h2>
             {(() => {
@@ -89,7 +93,19 @@ const zipFilename = (title: string) =>
 
           {(kit.photos.length > 0 || kit.documents.length > 0 || (kit.links && kit.links.length > 0)) && (
             <div class="kit-assets">
-              <p class="kit-assets-label">{lang === 'en' ? 'Press assets' : lang === 'lat' ? 'Subsidia prelaria' : 'Recursos de prensa'}</p>
+              <div class="kit-assets-header">
+                <p class="kit-assets-label">{lang === 'en' ? 'Press assets' : lang === 'lat' ? 'Subsidia prelaria' : 'Recursos de prensa'}</p>
+                {(kit.documents.some((d) => d.url.startsWith('/')) || kit.photos.some((p) => p.url.startsWith('/'))) && (
+                  <a href={`/press/${kit.slug}/kit.zip`} download={zipFilename(kit.title_en)} class="kit-zip-btn">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="7 10 12 15 17 10"/>
+                      <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    {t('press.download_kit')}
+                  </a>
+                )}
+              </div>
 
               <div class="kit-assets-cols">
               {kit.photos.length > 0 && (
@@ -198,16 +214,6 @@ const zipFilename = (title: string) =>
     box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 4px 20px rgba(0,0,0,0.28);
   }
 
-  .index-card-arrow {
-    position: absolute;
-    top: 1.1rem;
-    right: 1.1rem;
-    color: var(--accent);
-    opacity: 0.5;
-    transition: opacity 0.15s, transform 0.2s;
-  }
-  .index-card:hover .index-card-arrow { opacity: 1; transform: translateY(2px); }
-
   .index-card-date {
     font-size: 0.7rem;
     font-weight: 700;
@@ -224,6 +230,28 @@ const zipFilename = (title: string) =>
     transition: color 0.15s;
   }
   .index-card:hover .index-card-title { color: var(--text); }
+
+  .index-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0.25rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-3);
+    transition: color 0.15s, transform 0.2s;
+  }
+  .index-card:hover .index-card-cta {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+  }
+
+  @keyframes kit-pulse {
+    0%   { box-shadow: 0 0 0 2px var(--accent), 0 4px 24px rgba(0,0,0,0.22); }
+    70%  { box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent), 0 4px 24px rgba(0,0,0,0.22); }
+    100% { box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 4px 24px rgba(0,0,0,0.22); }
+  }
+  .kit-card.highlighted { animation: kit-pulse 1s ease-out forwards; }
 
   /* ── Mentions ── */
   .mentions-wrapper { margin-bottom: 4rem; scroll-margin-top: calc(64px + 2rem); }
@@ -304,6 +332,27 @@ const zipFilename = (title: string) =>
     color: var(--accent);
   }
   .kit-sep { color: var(--text-3); font-size: 0.7rem; }
+
+  .kit-link-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: transparent;
+    border: none;
+    color: var(--text-3);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    flex-shrink: 0;
+  }
+  .kit-link-btn:hover { background: rgba(255,255,255,0.06); color: var(--text-2); }
+  .kit-link-btn.copied { color: var(--accent); }
+
+  .kit-link-icon--check { display: none; }
+  .kit-link-btn.copied .kit-link-icon--link { display: none; }
+  .kit-link-btn.copied .kit-link-icon--check { display: block; }
   .kit-event { font-size: 0.7rem; color: var(--text-2); font-weight: 500; letter-spacing: 0.03em; }
 
   .kit-title {
@@ -339,12 +388,20 @@ const zipFilename = (title: string) =>
     gap: 1.25rem;
   }
 
+  .kit-assets-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
   .kit-assets-label {
     font-size: 0.65rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--text-2);
+    margin: 0;
   }
 
   .kit-assets-cols {
@@ -439,30 +496,25 @@ const zipFilename = (title: string) =>
   }
   .kit-doc-card:hover .kit-doc-name { color: var(--text); }
 
-  .kit-footer {
-    border-top: 1px solid rgba(255,255,255,0.06);
-    padding: 1.25rem 3rem;
-    display: flex;
-    justify-content: flex-end;
-  }
-
   .kit-zip-btn {
     display: inline-flex;
     align-items: center;
-    padding: 0.5rem 1.5rem;
-    background: transparent;
+    gap: 0.4rem;
+    padding: 0.4rem 1.1rem;
+    background: rgba(255,255,255,0.05);
     color: var(--accent);
-    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
-    border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: 400;
-    letter-spacing: 0.01em;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
     text-decoration: none;
-    transition: background 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+    transition: background 0.15s, box-shadow 0.15s;
   }
   .kit-zip-btn:hover {
-    background: color-mix(in srgb, var(--accent) 10%, transparent);
-    border-color: color-mix(in srgb, var(--accent) 65%, transparent);
+    background: rgba(255,255,255,0.09);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.14);
   }
 
   /* ── Lightbox ── */
@@ -537,10 +589,8 @@ const zipFilename = (title: string) =>
   @media (max-width: 700px) {
     .kit-header { padding: 1.5rem 1.5rem 1.25rem; }
     .kit-assets { padding: 1.25rem 1.5rem; }
-    .kit-footer { padding: 1rem 1.5rem; }
     .kit-assets-cols { grid-template-columns: 1fr; }
     .kit-photos { order: unset; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
-    .kit-zip-btn { width: 100%; justify-content: center; }
     .mention-row { grid-template-columns: auto 1fr auto; }
     .mention-date { display: none; }
     .lb-prev { left: -42px; }
@@ -549,6 +599,34 @@ const zipFilename = (title: string) =>
 </style>
 
 <script>
+  // === Index card navigation ===
+  document.querySelectorAll<HTMLAnchorElement>('.index-card[data-target]').forEach((card) => {
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.getElementById(card.dataset.target!);
+      if (!target) return;
+      history.pushState(null, '', `#${card.dataset.target}`);
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      target.classList.remove('highlighted');
+      void target.offsetWidth; // reflow to restart animation
+      target.classList.add('highlighted');
+      target.addEventListener('animationend', () => target.classList.remove('highlighted'), { once: true });
+    });
+  });
+
+  // === Copy kit link ===
+  document.querySelectorAll<HTMLButtonElement>('.kit-link-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const slug = btn.dataset.slug;
+      const hash = `#kit-${slug}`;
+      history.replaceState(null, '', hash);
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        btn.classList.add('copied');
+        setTimeout(() => btn.classList.remove('copied'), 2000);
+      });
+    });
+  });
+
   // === Lightbox ===
   const lightbox = document.getElementById('photo-lightbox') as HTMLElement | null;
   const lbImg = document.getElementById('lb-img') as HTMLImageElement | null;

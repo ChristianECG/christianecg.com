@@ -46,9 +46,9 @@ export interface PressMention {
 export const pressKits: PressKit[] = [
   {
     slug: 'ipoac-dns',
-    date: '2027-04-01',
-    date_es: 'Abr 2027',
-    date_en: 'Apr 2027',
+    date: '2026-06-01',
+    date_es: 'Jun 2026',
+    date_en: 'Jun 2026',
     title_es: 'DNS over Avian Carriers (DoAC)',
     title_en: 'DNS over Avian Carriers (DoAC)',
     title_lat: 'DNS super Vectores Aviarios (DoAC)',
