@@ -28,6 +28,9 @@ export interface PressKit {
   description_es: string;
   description_en: string;
   description_lat?: string;
+  badge_es?: string;
+  badge_en?: string;
+  badge_lat?: string;
   photos: PressPhoto[];
   documents: PressDocument[];
   links?: { label: string; url: string }[];
@@ -55,11 +58,21 @@ export const pressKits: PressKit[] = [
     event_es: 'IETF Internet-Draft · draft-cruzgonzalez-ipoac-dns',
     event_en: 'IETF Internet-Draft · draft-cruzgonzalez-ipoac-dns',
     event_lat: 'IETF Epistula Interretialis · draft-cruzgonzalez-ipoac-dns',
+    badge_es: 'Humor técnico',
+    badge_en: 'Technical humor',
+    badge_lat: 'Iocus technicus',
     description_es:
       'Internet-Draft presentado ante el IETF que especifica un mecanismo para resolver nombres de dominio sobre redes de palomas mensajeras. Cierra la brecha crítica que el RFC 1149 dejó abierta durante más de tres décadas: ¿cómo resuelve un hostname un nodo en una red aviar? El documento sigue el formato técnico completo de los RFC de 1 de abril — tan riguroso en su revisión como cualquier estándar de internet, tan honesto en su propósito.',
     description_en:
       'Internet-Draft submitted to the IETF specifying a mechanism for resolving domain names over carrier pigeon networks. It closes the critical gap left open by RFC 1149 for over three decades: how does a host on an avian-carrier network resolve a hostname? The document follows the complete technical format of April 1st RFCs — as rigorous in its review as any internet standard, as honest in its purpose.',
     photos: [
+      {
+        url: '/press/ipoac-dns/doac-architecture.png',
+        alt_es: 'Diagrama de arquitectura del sistema DNS over Avian Carriers (DoAC)',
+        alt_en: 'Architecture diagram of the DNS over Avian Carriers (DoAC) system',
+        alt_lat: 'Diagramma architecturae systematis DNS super Vectores Aviarios (DoAC)',
+        object_fit: 'cover',
+      },
       {
         url: '/press/ipoac-dns/ietf-logo.png',
         alt_es: 'Logotipo de la IETF (Internet Engineering Task Force)',
@@ -131,6 +144,20 @@ export const pressKits: PressKit[] = [
         alt_es: 'Logotipo de IEEE Xplore',
         alt_en: 'IEEE Xplore logo',
         alt_lat: 'Signum IEEE Xplore',
+      },
+      {
+        url: '/press/coniiti-2021/blockchain-message-flow.png',
+        alt_es: 'Diagrama de flujo de mensajes en el sistema de mensajería blockchain descentralizado',
+        alt_en: 'Message flow diagram for the decentralized blockchain-based messaging system',
+        alt_lat: 'Diagramma fluxus nuntiorum in systemate nuntiatorio blockchain decentralizato',
+        object_fit: 'cover',
+      },
+      {
+        url: '/press/coniiti-2021/blockchain-consensus.png',
+        alt_es: 'Diagrama del mecanismo de consenso en la red blockchain descentralizada',
+        alt_en: 'Consensus mechanism diagram for the decentralized blockchain network',
+        alt_lat: 'Diagramma mechanismi consensus in rete blockchain decentralizata',
+        object_fit: 'cover',
       },
     ],
     documents: [

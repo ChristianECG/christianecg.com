@@ -129,5 +129,8 @@
   "press.heading": "Prela & fasciculi prelarii",
   "press.mentions_heading": "In mediis",
   "press.download_kit": "Depone fasciculum prelarium",
-  "press.view_kit": "Vide fasciculum"
+  "press.view_kit": "Vide fasciculum",
+  "press.bio_p1": "<span class=\"bio-name\">Christianus Elias Cruz González</span> artifex programmationis senior est, ex Mixquiahuala de Juárez, Hidalgo, Mexici oriundus, in interfacies celerrimas, applicationes mobiles et systemata temporis realis peritus. Opus eius productum cum investigatione technica coniungit: auctor in IEEE Xplore publicatus est et auctor Interretis-Instrumenti apud IETF oblati — duo loca raro ab eadem persona frequentata.",
+  "press.bio_p2": "Orator in conventibus technicis internationalibus interfuit et ab instrumentis televisificis et radiophonicis in Mexici interrogatus est. Ex anno MMXXI remotim laborat.",
+  "press.contact_intro": "Ad colloquia, citationes vel materiam additam"
 }

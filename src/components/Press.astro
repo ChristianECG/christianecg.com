@@ -25,12 +25,31 @@ const zipFilename = (title: string) =>
       <h1 class="section-title" set:html={t('press.heading')}></h1>
     </div>
 
+    <div class="press-bio reveal">
+      <img src="/avatar.jpg" alt="Christian Elías" class="press-bio-avatar" width="56" height="56" loading="eager" />
+      <div class="press-bio-body">
+        <p class="press-bio-text" set:html={t('press.bio_p1')}></p>
+        <p class="press-bio-text press-bio-text--p2">{t('press.bio_p2')}</p>
+        <div class="press-bio-contacts">
+          <span class="press-bio-contact-intro">{t('press.contact_intro')}:</span>
+          <a href="mailto:contacto@christianecg.com" class="press-bio-contact">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+            contacto@christianecg.com
+          </a>
+          <a href="https://www.linkedin.com/in/christianeliascg/" target="_blank" rel="noopener" class="press-bio-contact">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+
     <nav class="press-index reveal" aria-label="Tabla de contenidos">
       {sortedKits.map((kit) => (
         <a href={`#kit-${kit.slug}`} class="index-card" data-target={`kit-${kit.slug}`}>
           <span class="index-card-date">{lang === 'en' ? kit.date_en : lang === 'lat' ? (kit.date_lat ?? kit.date_es) : kit.date_es}</span>
           <span class="index-card-title">{pick(kit as any, 'title', lang) as string}</span>
-          <span class="index-card-cta">{t('press.view_kit')} <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></span>
+          <span class="index-card-cta">{t('press.view_kit')} <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg></span>
         </a>
       ))}
     </nav>
@@ -65,6 +84,9 @@ const zipFilename = (title: string) =>
                 <span class="kit-date">{lang === 'en' ? kit.date_en : lang === 'lat' ? (kit.date_lat ?? kit.date_es) : kit.date_es}</span>
                 <span class="kit-sep" aria-hidden="true">·</span>
                 <span class="kit-event">{pick(kit as any, 'event', lang) as string}</span>
+                {(kit.badge_es || kit.badge_en) && (
+                  <span class="kit-badge">{lang === 'en' ? kit.badge_en : lang === 'lat' ? (kit.badge_lat ?? kit.badge_es) : kit.badge_es}</span>
+                )}
               </div>
               <button class="kit-link-btn" data-slug={kit.slug} aria-label="Copiar enlace">
                 <svg class="kit-link-icon kit-link-icon--link" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -190,6 +212,63 @@ const zipFilename = (title: string) =>
   #press { padding: 6rem 0 5rem; }
   .press-header { margin-bottom: 3rem; }
 
+  /* ── Bio strip ── */
+  .press-bio {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+    padding: 1.5rem 1.75rem;
+    border-radius: 12px;
+    background: var(--surface-2);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.06);
+    max-width: 720px;
+  }
+  .press-bio-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.1);
+  }
+  .press-bio-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  .press-bio-text {
+    font-size: 0.88rem;
+    color: var(--text-2);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .press-bio-text--p2 { color: var(--text-2); }
+  .press-bio-text :global(.bio-name) { color: var(--accent); font-weight: 600; }
+  .press-bio-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    margin-top: 0.15rem;
+  }
+  .press-bio-contact-intro {
+    font-size: 0.75rem;
+    color: var(--text-2);
+  }
+  .press-bio-contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+  .press-bio-contact:hover { opacity: 0.7; }
+
   /* ── Index grid ── */
   .press-index {
     display: grid;
@@ -243,7 +322,7 @@ const zipFilename = (title: string) =>
   }
   .index-card:hover .index-card-cta {
     color: var(--accent);
-    transform: translate(2px, -2px);
+    transform: translateY(2px);
   }
 
   @keyframes kit-pulse {
@@ -354,6 +433,19 @@ const zipFilename = (title: string) =>
   .kit-link-btn.copied .kit-link-icon--link { display: none; }
   .kit-link-btn.copied .kit-link-icon--check { display: block; }
   .kit-event { font-size: 0.7rem; color: var(--text-2); font-weight: 500; letter-spacing: 0.03em; }
+  .kit-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--accent) 70%, var(--text-2));
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  }
 
   .kit-title {
     font-size: clamp(1.6rem, 2.8vw, 2.2rem);
