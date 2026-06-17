@@ -13,7 +13,7 @@ interface Props {
 
 const {
   title = 'Christian Elías Cruz González — Senior Software Engineer',
-  description = 'Senior Software Engineer specializing in high-performance React interfaces, mobile apps, and real-time IoT platforms.',
+  description,
   ogType = 'website',
   ogImage = 'https://christianecg.com/og/default.png',
   jsonLd,
@@ -22,6 +22,7 @@ const {
 
 const locale: Locale = localeProp ?? getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
+const metaDescription = description || t('meta.description');
 
 const base = 'https://christianecg.com';
 const slug = Astro.url.pathname.replace(/^\/(es|en|lat)/, '');
@@ -38,7 +39,7 @@ const ogLocaleAlt = locale === 'en' ? 'es_MX' : 'en_US';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
+    <meta name="description" content={metaDescription} />
     <meta name="author" content="Christian Elías Cruz González" />
     <link rel="canonical" href={canonicalURL} />
     <link rel="alternate" hreflang="es" href={hrefEs} />
@@ -46,14 +47,14 @@ const ogLocaleAlt = locale === 'en' ? 'es_MX' : 'en_US';
     <link rel="alternate" hreflang="x-default" href={hrefEs} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={metaDescription} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:type" content={ogType} />
     <meta property="og:locale" content={ogLocale} />
     <meta property="og:locale:alternate" content={ogLocaleAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={metaDescription} />
     <meta name="twitter:image" content={ogImage} />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="alternate" type="application/rss+xml" title="Christian Elías — Blog" href="/rss.xml" />
