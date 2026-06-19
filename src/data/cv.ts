@@ -135,7 +135,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
           },
           {
             title: 'Stratum',
-            url: 'stratum.christianecg.com',
+            url: 'stratum.ov.fyi',
             description: 'Herramienta de arte generativo que convierte 75 años de datos meteorológicos históricos en visualizaciones de franjas de color por ciudad. Temperatura diaria, precipitación y horas de sol se codifican como grosor, tono y superposición; exportable en SVG, PNG y PDF sin servidor.',
             tags: 'React · TypeScript · Vite · ECharts · Open-Meteo',
           },
@@ -278,7 +278,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
           },
           {
             title: 'Stratum',
-            url: 'stratum.christianecg.com',
+            url: 'stratum.ov.fyi',
             description: 'Generative art tool that converts 75 years of historical weather data into color-coded stripe visualizations per city. Daily temperature range, precipitation, and sunshine hours are encoded as stripe width, hue, and overlay. Exportable as SVG, PNG, and PDF with no server required.',
             tags: 'React · TypeScript · Vite · ECharts · Open-Meteo',
           },
@@ -421,7 +421,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
           },
           {
             title: 'Stratum',
-            url: 'stratum.christianecg.com',
+            url: 'stratum.ov.fyi',
             description: 'Instrumentum artis generativae quod LXXV annos datorum meteorologicorum historicorum in visualizationes viarum coloratarum per urbem convertit. Temperatura diurna, imber et horae solis in latitudinem, colorem et stratum transformantur; in SVG, PNG et PDF sine ministro exportabilia.',
             tags: 'React · TypeScript · Vite · ECharts · Open-Meteo',
           },

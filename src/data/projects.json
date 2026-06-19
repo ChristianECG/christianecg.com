@@ -33,7 +33,7 @@
       "description_en": "Generative art tool that converts 75 years of historical weather data into color-coded stripe visualizations per city. Daily temperature range, precipitation, and sunshine hours are encoded as stripe width, hue, and overlay. Exportable as SVG, PNG, and PDF with no server required.",
       "description_lat": "Instrumentum artis generativae quod LXXV annos datorum meteorologicorum historicorum in visualizationes viarum coloratarum per urbem convertit. Temperatura diurna, imber et horae solis in latitudinem, colorem et stratum transformantur; in SVG, PNG et PDF sine ministro exportabilia.",
       "tags": ["React", "TypeScript", "Vite", "ECharts", "Open-Meteo"],
-      "url": "https://stratum.christianecg.com",
+      "url": "https://stratum.ov.fyi",
       "github": "https://github.com/ChristianECG/stratum"
     },
     {
