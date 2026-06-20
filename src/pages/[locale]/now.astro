@@ -15,7 +15,7 @@ const t = useTranslations(locale);
 
 const en  = locale === 'en';
 const lat = locale === 'lat';
-const updated = '2026-06-01';
+const updated = '2026-06-20';
 ---
 
 <Layout
@@ -109,6 +109,15 @@ const updated = '2026-06-01';
                 )}
               </li>
             </ul>
+            <p style="margin-top: 1.25rem;">
+              {en ? (
+                <>Also iterating on this site: updated CV in three languages (EN/ES/LAT), added a press page with community reactions, and cleaning up project metadata.</>
+              ) : lat ? (
+                <>Etiam hanc paginam emendans: curriculum vitae in tribus linguis (EN/ES/LAT) renovavi, paginam de recensionibus communitatis addidi, et metadata operum mundavi.</>
+              ) : (
+                <>También iterando sobre este sitio: actualicé el CV en tres idiomas (EN/ES/LAT), agregué una página de reacciones de la comunidad y limpié metadatos de proyectos.</>
+              )}
+            </p>
           </div>
         </div>
 
@@ -117,11 +126,11 @@ const updated = '2026-06-01';
           <div class="now-content">
             <p>
               {en ? (
-                'Integrating AI tooling into frontend development workflows. Experimenting with agents, Claude Code, and AI APIs to automate repetitive tasks and improve code quality.'
+                'Using Claude Code as a daily driver for real development — not just for boilerplate, but for architecture decisions, refactors, and shipping features faster. Also exploring how AI agents fit into personal projects and what that changes about how I scope and build things.'
               ) : lat ? (
-                'Instrumenta AI in vias evolutionis frontis integrando. Cum agentibus, Claude Code et APIs AI experior ad opera repetita automatizanda et qualitatem codicis meliorandam.'
+                'Claude Code ut instrumentum cotidianum pro evolutione reali utens — non solum pro formulis, sed pro decisionibus architecturae, refacturis et functionalitate citius tradenda. Etiam explorans quomodo agentes AI in opera personalia se inserant et quid hoc mutet in modo quo res amplector et construo.'
               ) : (
-                'Integrando herramientas de IA en flujos de trabajo de desarrollo frontend. Experimentando con agentes, Claude Code y APIs de AI para automatizar tareas repetitivas y mejorar la calidad del código.'
+                'Usando Claude Code como herramienta diaria para desarrollo real — no solo para boilerplate, sino para decisiones de arquitectura, refactors y lanzar features más rápido. También explorando cómo encajan los agentes de IA en proyectos personales y qué cambia eso en la forma de planear y construir.'
               )}
             </p>
           </div>
