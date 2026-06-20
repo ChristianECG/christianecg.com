@@ -123,7 +123,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
           },
           {
             title: 'Squawk',
-            url: 'squawk.christianecg.com',
+            url: 'squawk.creu.cat',
             description: 'Dashboard de aviación global en tiempo real: datos ADS-B vía OpenSky Network, worker Node.js con SQLite (WAL mode), mapa de densidad con deck.gl + MapLibre, 6 gráficas en vivo con ECharts y alertas de squawks de emergencia (7700/7600/7500) sobre streaming SSE cada 5s.',
             tags: 'Next.js 15 · TypeScript · deck.gl · MapLibre · ECharts · SQLite · SSE',
           },
@@ -135,13 +135,13 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
           },
           {
             title: 'Stratum',
-            url: 'stratum.ov.fyi',
+            url: 'stratum.creu.cat',
             description: 'Herramienta de arte generativo que convierte 75 años de datos meteorológicos históricos en visualizaciones de franjas de color por ciudad. Temperatura diaria, precipitación y horas de sol se codifican como grosor, tono y superposición; exportable en SVG, PNG y PDF sin servidor.',
             tags: 'React · TypeScript · Vite · ECharts · Open-Meteo',
           },
           {
             title: 'Loft',
-            url: 'loft.christianecg.com',
+            url: 'loft.creu.cat',
             description: 'Implementación de referencia de RFC 1149 (IP sobre portadores aviares): rastreo en tiempo real de paquetes IP transportados por palomas. Física de vuelo modelada con datos meteorológicos reales, mapa global con rutas de gran círculo, streaming SSE y soporte en tres idiomas incluyendo latín.',
             tags: 'Next.js · SQLite · MapLibre · SSE · i18n',
           },
@@ -266,7 +266,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
           },
           {
             title: 'Squawk',
-            url: 'squawk.christianecg.com',
+            url: 'squawk.creu.cat',
             description: 'Real-time global aviation dashboard: ADS-B transponder data via OpenSky Network, Node.js worker with SQLite WAL mode, density heatmap via deck.gl + MapLibre, 6 live ECharts charts, and emergency squawk alerts (7700/7600/7500) over SSE streaming every 5s.',
             tags: 'Next.js 15 · TypeScript · deck.gl · MapLibre · ECharts · SQLite · SSE',
           },
@@ -278,13 +278,13 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
           },
           {
             title: 'Stratum',
-            url: 'stratum.ov.fyi',
+            url: 'stratum.creu.cat',
             description: 'Generative art tool that converts 75 years of historical weather data into color-coded stripe visualizations per city. Daily temperature range, precipitation, and sunshine hours are encoded as stripe width, hue, and overlay. Exportable as SVG, PNG, and PDF with no server required.',
             tags: 'React · TypeScript · Vite · ECharts · Open-Meteo',
           },
           {
             title: 'Loft',
-            url: 'loft.christianecg.com',
+            url: 'loft.creu.cat',
             description: 'Reference implementation of RFC 1149 (IP over Avian Carriers): real-time tracking of IP datagrams transported by homing pigeons. Flight physics modeled with live meteorological data, global map with great-circle routes, SSE streaming, and three-language support including Latin.',
             tags: 'Next.js · SQLite · MapLibre · SSE · i18n',
           },
@@ -409,7 +409,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
           },
           {
             title: 'Squawk',
-            url: 'squawk.christianecg.com',
+            url: 'squawk.creu.cat',
             description: 'Tabula navigationis aereae globalis in tempore reali: data ADS-B per OpenSky Network, operarius Node.js cum SQLite (modus WAL), mappa densitatis per deck.gl + MapLibre, VI tabulae vivae per ECharts et monitus squawkorum urgentium (7700/7600/7500) per fluxum SSE quovis quinquennio secundo.',
             tags: 'Next.js 15 · TypeScript · deck.gl · MapLibre · ECharts · SQLite · SSE',
           },
@@ -421,13 +421,13 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
           },
           {
             title: 'Stratum',
-            url: 'stratum.ov.fyi',
+            url: 'stratum.creu.cat',
             description: 'Instrumentum artis generativae quod LXXV annos datorum meteorologicorum historicorum in visualizationes viarum coloratarum per urbem convertit. Temperatura diurna, imber et horae solis in latitudinem, colorem et stratum transformantur; in SVG, PNG et PDF sine ministro exportabilia.',
             tags: 'React · TypeScript · Vite · ECharts · Open-Meteo',
           },
           {
             title: 'Loft',
-            url: 'loft.christianecg.com',
+            url: 'loft.creu.cat',
             description: 'Exsecutio referentiae RFC 1149 (IP per portitores aviares): observatio in tempore reali datagrammatum IP per columbas nuntias. Physica volatus cum datis meteorologicis veris simulatur, mappa globalis cum viis circuli magni, fluxus SSE et subsidium trium linguarum, Latinae inclusae.',
             tags: 'Next.js · SQLite · MapLibre · SSE · i18n',
           },

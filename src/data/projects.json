@@ -15,7 +15,7 @@
       "description_en": "Real-time global aviation dashboard: ADS-B transponder data via OpenSky Network, Node.js worker with SQLite WAL mode, density heatmap via deck.gl + MapLibre, 6 live ECharts charts, and emergency squawk alerts (7700/7600/7500) over SSE streaming every 5s.",
       "description_lat": "Tabula navigationis aereae globalis in tempore reali: data ADS-B per OpenSky Network, operarius Node.js cum SQLite (modus WAL), mappa densitatis per deck.gl + MapLibre, VI tabulae vivae per ECharts et monitus squawkorum urgentium (7700/7600/7500) per fluxum SSE quovis quinquennio secundo.",
       "tags": ["Next.js", "TypeScript", "deck.gl", "MapLibre", "ECharts", "SQLite", "SSE"],
-      "url": "https://squawk.christianecg.com",
+      "url": "https://squawk.creu.cat",
       "github": "https://github.com/ChristianECG/squawk"
     },
     {
@@ -33,7 +33,7 @@
       "description_en": "Generative art tool that converts 75 years of historical weather data into color-coded stripe visualizations per city. Daily temperature range, precipitation, and sunshine hours are encoded as stripe width, hue, and overlay. Exportable as SVG, PNG, and PDF with no server required.",
       "description_lat": "Instrumentum artis generativae quod LXXV annos datorum meteorologicorum historicorum in visualizationes viarum coloratarum per urbem convertit. Temperatura diurna, imber et horae solis in latitudinem, colorem et stratum transformantur; in SVG, PNG et PDF sine ministro exportabilia.",
       "tags": ["React", "TypeScript", "Vite", "ECharts", "Open-Meteo"],
-      "url": "https://stratum.ov.fyi",
+      "url": "https://stratum.creu.cat",
       "github": "https://github.com/ChristianECG/stratum"
     },
     {
@@ -42,8 +42,8 @@
       "description_en": "Reference implementation of RFC 1149 (IP over Avian Carriers): real-time tracking of IP datagrams transported by homing pigeons. Simulates flight physics with live meteorological data via Open-Meteo, global map with great-circle routes, SSE streaming, and three-language support including Latin.",
       "description_lat": "Exsecutio referentiae RFC 1149 (IP per portitores aviares): observatio in tempore reali datagrammatum IP per columbas nuntias. Physica volatus cum datis meteorologicis veris per Open-Meteo simulatur, mappa globalis cum viis circuli magni, fluxus SSE et subsidium trium linguarum, Latinae inclusae.",
       "tags": ["Next.js", "TypeScript", "SQLite", "MapLibre", "SSE", "i18n"],
-      "url": "https://loft.christianecg.com",
-      "github": "https://github.com/ChristianECG/rfc1149"
+      "url": "https://loft.creu.cat",
+      "github": "https://github.com/ChristianECG/pigeon-as-a-service"
     }
   ]
 }
