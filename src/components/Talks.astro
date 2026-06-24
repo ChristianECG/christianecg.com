@@ -26,7 +26,7 @@ const olderCount = talks.filter(tk => parseInt(tk.date_es.split(' ').pop() ?? '0
         const year = parseInt(tk.date_es.split(' ').pop() ?? '0');
         const isOlder = year < CURRENT_THRESHOLD;
         return (
-        <div class={`talk reveal${isOlder ? ' talk--older' : ''}`} style={`--delay: ${i * 0.04}s`} aria-hidden={isOlder ? 'true' : undefined}>
+        <div class={`talk spotlight reveal${isOlder ? ' talk--older' : ''}`} style={`--delay: ${i * 0.04}s`} aria-hidden={isOlder ? 'true' : undefined}>
           <span class="talk-date">{pick(tk as any, 'date', lang) as string}</span>
           <div class="talk-body">
             <div class="talk-title-row">

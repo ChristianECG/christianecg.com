@@ -46,7 +46,7 @@ const zipFilename = (title: string) =>
 
     <nav class="press-index reveal" aria-label="Tabla de contenidos">
       {sortedKits.map((kit) => (
-        <a href={`#kit-${kit.slug}`} class="index-card" data-target={`kit-${kit.slug}`}>
+        <a href={`#kit-${kit.slug}`} class="index-card spotlight" data-target={`kit-${kit.slug}`}>
           <span class="index-card-date">{lang === 'en' ? kit.date_en : lang === 'lat' ? (kit.date_lat ?? kit.date_es) : kit.date_es}</span>
           <span class="index-card-title">{pick(kit as any, 'title', lang) as string}</span>
           <span class="index-card-cta">{t('press.view_kit')} <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg></span>
@@ -59,7 +59,7 @@ const zipFilename = (title: string) =>
         <h2 class="subsection-label">{t('press.mentions_heading')}</h2>
         <div class="mentions-list" role="list">
           {sortedMentions.map((m) => (
-            <a href={m.url} target="_blank" rel="noopener" class="mention-row" role="listitem">
+            <a href={m.url} target="_blank" rel="noopener" class="mention-row spotlight" role="listitem">
               <div class="mention-top">
                 <span class="mention-outlet">{m.outlet}</span>
                 <svg class="mention-arrow" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
@@ -192,14 +192,14 @@ const zipFilename = (title: string) =>
                 {kit.documents.map((doc) => {
                   const ext = doc.url.split('.').pop()?.toUpperCase() ?? 'DOC';
                   return (
-                    <a href={doc.url} target="_blank" rel="noopener" class="kit-doc-card">
+                    <a href={doc.url} target="_blank" rel="noopener" class="kit-doc-card spotlight">
                       <span class="kit-doc-type">{ext}</span>
                       <span class="kit-doc-name">{pick(doc as any, 'label', lang) as string}</span>
                     </a>
                   );
                 })}
                 {kit.links && kit.links.map((link) => (
-                  <a href={link.url} target="_blank" rel="noopener" class="kit-doc-card">
+                  <a href={link.url} target="_blank" rel="noopener" class="kit-doc-card spotlight">
                     <span class="kit-doc-type">↗</span>
                     <span class="kit-doc-name">{link.label}</span>
                   </a>
@@ -327,6 +327,13 @@ const zipFilename = (title: string) =>
   .index-card:hover {
     box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 4px 20px rgba(0,0,0,0.28);
   }
+
+  /* Scrollspy — highlights the card whose kit is in view */
+  .index-card.index-active {
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 45%, transparent), 0 4px 22px rgba(0,0,0,0.3);
+  }
+  .index-card.index-active .index-card-title { color: var(--text); }
+  .index-card.index-active .index-card-cta { color: var(--accent); }
 
   .index-card-date {
     font-size: 0.7rem;
@@ -576,6 +583,15 @@ const zipFilename = (title: string) =>
     cursor: pointer;
     aspect-ratio: 4 / 3;
     background: #fff;
+    transition: transform 0.1s linear, box-shadow 0.3s ease;
+    will-change: transform;
+  }
+  .kit-photo-wrap.is-leaving {
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+  }
+  .kit-photo-wrap:hover {
+    box-shadow: 0 14px 38px rgba(0, 0, 0, 0.4);
+    z-index: 2;
   }
   .kit-photo {
     display: block;
@@ -782,6 +798,39 @@ const zipFilename = (title: string) =>
       target.addEventListener('animationend', () => target.classList.remove('highlighted'), { once: true });
     });
   });
+
+  // === Scrollspy: highlight the index card for the kit currently in view ===
+  const spyCards = document.querySelectorAll<HTMLAnchorElement>('.index-card[data-target]');
+  if (spyCards.length) {
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const id = (entry.target as HTMLElement).id;
+        spyCards.forEach((c) => c.classList.toggle('index-active', c.dataset.target === id));
+      });
+    }, { rootMargin: '-25% 0px -65% 0px' });
+    document.querySelectorAll<HTMLElement>('.kit-card[id]').forEach((k) => spy.observe(k));
+  }
+
+  // === 3D tilt on press photos (mirrors the case-study screenshot tilt) ===
+  const tiltFine = window.matchMedia('(pointer: fine)').matches;
+  const tiltReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (tiltFine && !tiltReduce) {
+    document.querySelectorAll<HTMLElement>('.kit-photo-wrap').forEach((wrap) => {
+      wrap.addEventListener('mousemove', (e) => {
+        const rect = wrap.getBoundingClientRect();
+        const dx = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
+        const dy = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
+        wrap.style.transform =
+          `perspective(700px) rotateX(${-dy * 4}deg) rotateY(${dx * 4}deg) scale(1.03)`;
+      }, { passive: true });
+      wrap.addEventListener('mouseleave', () => {
+        wrap.classList.add('is-leaving');
+        wrap.style.transform = '';
+        setTimeout(() => wrap.classList.remove('is-leaving'), 500);
+      });
+    });
+  }
 
   // === Copy kit link ===
   document.querySelectorAll<HTMLButtonElement>('.kit-link-btn').forEach((btn) => {

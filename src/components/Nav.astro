@@ -160,6 +160,25 @@ const slug = Astro.url.pathname.replace(/^\/(es|en|lat)/, '') || '/';
     z-index: 101;
   }
 
+  /* Native scroll-driven progress — no per-frame JS on supporting browsers */
+  @supports (animation-timeline: scroll()) {
+    .nav-progress {
+      width: 100%;
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: navProgressGrow linear both;
+      animation-timeline: scroll(root);
+    }
+    @keyframes navProgressGrow {
+      to { transform: scaleX(1); }
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    @supports (animation-timeline: scroll()) {
+      .nav-progress { animation: navProgressGrow linear both; animation-timeline: scroll(root); }
+    }
+  }
+
   .nav-inner {
     display: flex;
     align-items: center;

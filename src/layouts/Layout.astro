@@ -101,6 +101,7 @@ const ogLocaleAlt = locale === 'en' ? 'es_MX' : 'en_US';
     <script>
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const finePointer = window.matchMedia('(pointer: fine)').matches;
+      const nativeScrollTimeline = typeof CSS !== 'undefined' && CSS.supports('animation-timeline: scroll()');
       let globalBound = false;
 
       // Re-runs on first load AND after every view transition
@@ -132,6 +133,22 @@ const ogLocaleAlt = locale === 'en' ? 'es_MX' : 'en_US';
               el.style.setProperty('--my', `${e.clientY - r.top}px`);
             }, { passive: true });
           });
+
+          // 3D tilt on case-study screenshots (mirrors the .pub card tilt)
+          document.querySelectorAll<HTMLImageElement>('.cs-screenshot img').forEach((img) => {
+            img.addEventListener('mousemove', (e) => {
+              const rect = img.getBoundingClientRect();
+              const dx = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
+              const dy = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
+              img.style.transform =
+                `perspective(900px) rotateX(${-dy * 5}deg) rotateY(${dx * 5}deg) scale(1.02)`;
+            }, { passive: true });
+            img.addEventListener('mouseleave', () => {
+              img.classList.add('is-leaving');
+              img.style.transform = '';
+              setTimeout(() => img.classList.remove('is-leaving'), 500);
+            });
+          });
         }
       }
 
@@ -147,10 +164,14 @@ const ogLocaleAlt = locale === 'en' ? 'es_MX' : 'en_US';
           const scrollHint = document.getElementById('scroll-hint') as HTMLElement | null;
           if (scrollHint && window.scrollY > 60) scrollHint.style.opacity = '0';
 
-          const navProgress = document.getElementById('nav-progress') as HTMLElement | null;
-          if (navProgress) {
-            const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-            navProgress.style.width = (pct * 100) + '%';
+          // CSS scroll-timeline drives the bar natively when supported; only
+          // fall back to JS width writes on browsers without it.
+          if (!nativeScrollTimeline) {
+            const navProgress = document.getElementById('nav-progress') as HTMLElement | null;
+            if (navProgress) {
+              const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+              navProgress.style.width = (pct * 100) + '%';
+            }
           }
         }, { passive: true });
 

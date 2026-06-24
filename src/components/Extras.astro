@@ -26,7 +26,7 @@ const papers = (await getCollection('papers')).sort((a, b) => a.data.order - b.d
         </h2>
 
         <div class="community-list">
-          <div class="cl-item reveal">
+          <div class="cl-item spotlight reveal">
             <span class="cl-role">Speaker</span>
             <p class="cl-desc">
               {lang === 'en'
@@ -36,7 +36,7 @@ const papers = (await getCollection('papers')).sort((a, b) => a.data.order - b.d
                 : 'Charlas en eventos de Frontend, IA y Open Source.'}
             </p>
           </div>
-          <div class="cl-item reveal" style="--delay: 0.07s">
+          <div class="cl-item spotlight reveal" style="--delay: 0.07s">
             <span class="cl-role">
               {lang === 'lat' ? 'Monitor' : 'Mentor'}
             </span>
@@ -48,7 +48,7 @@ const papers = (await getCollection('papers')).sort((a, b) => a.data.order - b.d
                 : 'Acompaño el crecimiento de desarrolladores en comunidades tech — en línea y en persona, desde sesiones 1:1 hasta grupos en eventos.'}
             </p>
           </div>
-          <div class="cl-item reveal" style="--delay: 0.14s">
+          <div class="cl-item spotlight reveal" style="--delay: 0.14s">
             <span class="cl-role">Google DSC Lead <span class="cl-year">'20–'21</span></span>
             <p class="cl-desc">
               {lang === 'en'
