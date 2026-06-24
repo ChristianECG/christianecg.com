@@ -3,6 +3,8 @@
   "layout.back_to_top": "Volver arriba",
   "meta.description": "Ingeniero de Software Senior — 5 años construyendo Ubidots, plataforma IoT con 150K usuarios. React, apps móviles y sistemas en tiempo real. Remoto desde 2021.",
 
+  "nav.aria": "Navegación principal",
+  "footer.aria": "Enlaces del pie de página",
   "nav.about": "Sobre mí",
   "nav.experience": "Experiencia",
   "nav.education": "Educación",
@@ -122,6 +124,8 @@
   "404.title": "Página no encontrada",
   "404.description": "La página que buscas no existe o fue movida.",
   "404.back": "Volver al inicio",
+  "404.read_blog": "Leer el blog",
+  "404.lead": "No encontramos",
 
   "nav.press": "Prensa",
   "press.page_title": "Prensa",

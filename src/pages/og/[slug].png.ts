@@ -1,9 +1,6 @@
 import type { APIContext } from 'astro';
 import { getCollection } from 'astro:content';
-import satori from 'satori';
-import { Resvg } from '@resvg/resvg-js';
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import { C, h, png, glow } from './_og';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -13,171 +10,73 @@ export async function getStaticPaths() {
   }));
 }
 
+// Concept — "Article card": kicker + large headline (white for legibility),
+// date, and a gradient hairline; author and domain anchored at the bottom.
 export async function GET({ props }: APIContext) {
   const { title, date } = props as { title: string; date: string };
 
-  const fontData = readFileSync(
-    join(process.cwd(), 'node_modules/@fontsource/bricolage-grotesque/files/bricolage-grotesque-latin-800-normal.woff')
-  );
-
-  const fontSize =
-    title.length <= 40 ? 68 : title.length <= 65 ? 52 : title.length <= 85 ? 42 : 34;
-
+  const fontSize = title.length <= 40 ? 70 : title.length <= 65 ? 56 : title.length <= 85 ? 46 : 38;
   const formattedDate = date
     ? new Date(date).toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' })
     : '';
 
-  const svg = await satori(
-    {
-      type: 'div',
-      props: {
-        style: {
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'row',
-          backgroundColor: '#0B0D12',
-          fontFamily: 'Bricolage Grotesque',
-          overflow: 'hidden',
-        },
-        children: [
-          // Left accent bar
-          {
-            type: 'div',
-            props: {
-              style: {
-                width: '8px',
-                height: '100%',
-                backgroundColor: '#5B8CF5',
-                flexShrink: 0,
-              },
-              children: '',
-            },
-          },
-
-          // Content
-          {
-            type: 'div',
-            props: {
-              style: {
-                flex: 1,
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                padding: '60px 80px',
-              },
-              children: [
-                // Top: badge + date
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '14px',
-                    },
-                    children: [
-                      {
-                        type: 'div',
-                        props: {
-                          style: {
-                            fontSize: '11px',
-                            fontWeight: 800,
-                            color: '#0B0D12',
-                            backgroundColor: '#5B8CF5',
-                            padding: '4px 12px',
-                            borderRadius: '4px',
-                            letterSpacing: '0.12em',
-                            textTransform: 'uppercase',
-                          },
-                          children: 'Artículo',
-                        },
-                      },
-                      {
-                        type: 'div',
-                        props: {
-                          style: {
-                            fontSize: '13px',
-                            fontWeight: 800,
-                            color: '#3E4A60',
-                            letterSpacing: '0.06em',
-                          },
-                          children: formattedDate,
-                        },
-                      },
-                    ],
-                  },
-                },
-
-                // Title
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      fontSize: `${fontSize}px`,
-                      fontWeight: 800,
-                      color: '#E8EDF5',
-                      letterSpacing: '-0.03em',
-                      lineHeight: 1.12,
-                      maxWidth: '980px',
-                    },
-                    children: title,
-                  },
-                },
-
-                // Bottom: author + domain
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                    },
-                    children: [
-                      {
-                        type: 'div',
-                        props: {
-                          style: {
-                            fontSize: '16px',
-                            fontWeight: 800,
-                            color: '#7E8EAB',
-                            letterSpacing: '-0.01em',
-                          },
-                          children: 'Christian Elías Cruz González',
-                        },
-                      },
-                      {
-                        type: 'div',
-                        props: {
-                          style: {
-                            fontSize: '13px',
-                            fontWeight: 800,
-                            color: '#3E4A60',
-                            letterSpacing: '0.08em',
-                            textTransform: 'uppercase',
-                          },
-                          children: 'christianecg.com',
-                        },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
+  return png(
+    h(
+      'div',
+      {
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        backgroundColor: C.bg,
+        fontFamily: 'Bricolage Grotesque',
+        padding: '64px 72px',
+        position: 'relative',
+        overflow: 'hidden',
       },
-    },
-    {
-      width: 1200,
-      height: 630,
-      fonts: [{ name: 'Bricolage Grotesque', data: fontData, weight: 800, style: 'normal' }],
-    }
-  );
+      [
+        glow({ width: '720px', height: '720px', top: '-320px', right: '-220px' }),
 
-  const resvg = new Resvg(svg);
-  const png = resvg.render().asPng();
-  return new Response(new Uint8Array(png), { headers: { 'Content-Type': 'image/png' } });
+        // Top: kicker + date
+        h('div', { display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'relative' }, [
+          h('div', { display: 'flex', alignItems: 'center', gap: '14px' }, [
+            h('div', { width: '34px', height: '3px', backgroundColor: C.accent, borderRadius: '2px' }),
+            h(
+              'div',
+              { fontSize: '14px', fontWeight: 800, color: C.accent, letterSpacing: '0.16em', textTransform: 'uppercase' },
+              'Artículo'
+            ),
+          ]),
+          formattedDate
+            ? h('div', { fontSize: '15px', fontWeight: 700, color: C.text3, letterSpacing: '0.02em' }, formattedDate)
+            : h('div', {}),
+        ]),
+
+        // Middle: headline
+        h('div', { display: 'flex', flexDirection: 'column', gap: '26px', position: 'relative' }, [
+          h('div', { width: '64px', height: '5px', borderRadius: '3px', backgroundImage: `linear-gradient(90deg, ${C.accent}, ${C.accent2})` }),
+          h(
+            'div',
+            {
+              display: 'flex',
+              fontSize: `${fontSize}px`,
+              fontWeight: 800,
+              color: C.text,
+              letterSpacing: '-0.03em',
+              lineHeight: 1.1,
+              maxWidth: '1000px',
+            },
+            title
+          ),
+        ]),
+
+        // Bottom: author + domain
+        h('div', { display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'relative' }, [
+          h('div', { fontSize: '20px', fontWeight: 800, color: C.text2, letterSpacing: '-0.01em' }, 'Christian Elías Cruz González'),
+          h('div', { fontSize: '15px', fontWeight: 800, color: C.text3, letterSpacing: '0.1em', textTransform: 'uppercase' }, 'christianecg.com'),
+        ]),
+      ]
+    )
+  );
 }

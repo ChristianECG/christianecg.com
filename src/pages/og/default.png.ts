@@ -1,178 +1,55 @@
-import satori from 'satori';
-import { Resvg } from '@resvg/resvg-js';
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import { C, h, png, gradientText, glow } from './_og';
 
+// Concept — "Gradient monogram": the cecg mark as the hero, in the site's
+// blue→teal gradient, over a dark field with a corner glow.
 export async function GET() {
-  const fontData = readFileSync(
-    join(process.cwd(), 'node_modules/@fontsource/bricolage-grotesque/files/bricolage-grotesque-latin-800-normal.woff')
-  );
-
-  const svg = await satori(
-    {
-      type: 'div',
-      props: {
-        style: {
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'row',
-          backgroundColor: '#0B0D12',
-          fontFamily: 'Bricolage Grotesque',
-          overflow: 'hidden',
-        },
-        children: [
-          // Left panel — monogram
-          {
-            type: 'div',
-            props: {
-              style: {
-                width: '380px',
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'flex-end',
-                alignItems: 'flex-start',
-                padding: '52px 44px',
-                backgroundColor: '#0d1018',
-                position: 'relative',
-                overflow: 'hidden',
-              },
-              children: [
-                // Monogram watermark
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      position: 'absolute',
-                      bottom: '-32px',
-                      left: '-12px',
-                      fontSize: '220px',
-                      fontWeight: 800,
-                      color: '#5B8CF5',
-                      opacity: 0.06,
-                      letterSpacing: '-0.06em',
-                      lineHeight: 1,
-                    },
-                    children: 'cecg',
-                  },
-                },
-                // Domain
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      position: 'absolute',
-                      top: '52px',
-                      left: '44px',
-                      fontSize: '11px',
-                      fontWeight: 800,
-                      color: '#3E4A60',
-                      letterSpacing: '0.14em',
-                      textTransform: 'uppercase',
-                    },
-                    children: 'christianecg.com',
-                  },
-                },
-                // Accent bar
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      width: '32px',
-                      height: '3px',
-                      backgroundColor: '#5B8CF5',
-                      borderRadius: '2px',
-                      marginBottom: '8px',
-                    },
-                    children: '',
-                  },
-                },
-              ],
-            },
-          },
-
-          // Divider
-          {
-            type: 'div',
-            props: {
-              style: {
-                width: '3px',
-                height: '100%',
-                backgroundColor: '#5B8CF5',
-                opacity: 0.5,
-                flexShrink: 0,
-              },
-              children: '',
-            },
-          },
-
-          // Right — identity
-          {
-            type: 'div',
-            props: {
-              style: {
-                flex: 1,
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                padding: '56px 64px',
-                gap: '16px',
-              },
-              children: [
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      fontSize: '13px',
-                      fontWeight: 800,
-                      color: '#5B8CF5',
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase',
-                    },
-                    children: 'Senior Software Engineer',
-                  },
-                },
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      fontSize: '64px',
-                      fontWeight: 800,
-                      color: '#E8EDF5',
-                      letterSpacing: '-0.03em',
-                      lineHeight: 1.08,
-                    },
-                    children: 'Christian Elías Cruz González',
-                  },
-                },
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      fontSize: '18px',
-                      fontWeight: 800,
-                      color: '#3E4A60',
-                      letterSpacing: '0.02em',
-                    },
-                    children: 'Hidalgo · México',
-                  },
-                },
-              ],
-            },
-          },
-        ],
+  return png(
+    h(
+      'div',
+      {
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        backgroundColor: C.bg,
+        fontFamily: 'Bricolage Grotesque',
+        padding: '72px 80px',
+        position: 'relative',
+        overflow: 'hidden',
       },
-    },
-    {
-      width: 1200,
-      height: 630,
-      fonts: [{ name: 'Bricolage Grotesque', data: fontData, weight: 800, style: 'normal' }],
-    }
-  );
+      [
+        glow({ width: '760px', height: '760px', top: '-280px', right: '-220px' }),
 
-  const resvg = new Resvg(svg);
-  const png = resvg.render().asPng();
-  return new Response(new Uint8Array(png), { headers: { 'Content-Type': 'image/png' } });
+        // Top: domain label with accent bar
+        h('div', { display: 'flex', alignItems: 'center', gap: '14px', position: 'relative' }, [
+          h('div', { width: '34px', height: '3px', backgroundColor: C.accent, borderRadius: '2px' }),
+          h(
+            'div',
+            { fontSize: '14px', fontWeight: 800, color: C.accent, letterSpacing: '0.16em', textTransform: 'uppercase' },
+            'christianecg.com'
+          ),
+        ]),
+
+        // Center: the monogram
+        h('div', { display: 'flex', flexDirection: 'column', gap: '8px', position: 'relative' }, [
+          gradientText('cecg', { fontSize: '230px', fontWeight: 800, letterSpacing: '-0.05em', lineHeight: 1 }),
+        ]),
+
+        // Bottom: name + role
+        h('div', { display: 'flex', flexDirection: 'column', gap: '10px', position: 'relative' }, [
+          h(
+            'div',
+            { fontSize: '46px', fontWeight: 800, color: C.text, letterSpacing: '-0.03em' },
+            'Christian Elías Cruz González'
+          ),
+          h(
+            'div',
+            { fontSize: '22px', fontWeight: 700, color: C.text2, letterSpacing: '-0.01em' },
+            'Senior Software Engineer · Hidalgo, México'
+          ),
+        ]),
+      ]
+    )
+  );
 }

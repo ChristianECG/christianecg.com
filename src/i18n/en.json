@@ -3,6 +3,8 @@
   "layout.back_to_top": "Back to top",
   "meta.description": "Senior Software Engineer. 5 years at Ubidots, an IoT platform with 150K+ users. React, mobile apps, real-time systems. Remote since 2021. IEEE-published author.",
 
+  "nav.aria": "Primary navigation",
+  "footer.aria": "Footer links",
   "nav.about": "About",
   "nav.experience": "Experience",
   "nav.education": "Education",
@@ -122,6 +124,8 @@
   "404.title": "Page not found",
   "404.description": "The page you're looking for doesn't exist or was moved.",
   "404.back": "Back to home",
+  "404.read_blog": "Read the blog",
+  "404.lead": "We couldn't find",
 
   "nav.press": "Press",
   "press.page_title": "Press",

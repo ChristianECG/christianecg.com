@@ -1,197 +1,107 @@
-import satori from 'satori';
-import { Resvg } from '@resvg/resvg-js';
-import { readFileSync } from 'fs';
-import { join } from 'path';
 import { getAllArticles } from '../../utils/blogData';
+import { C, h, png, gradientText, glow } from './_og';
 
+// Concept — "Editorial index": big gradient "Blog" wordmark on the left, a
+// numbered list of the latest articles on the right, like a magazine contents
+// page. Uses the same source as /blog (local posts + octa.page RSS).
 export async function GET() {
   const articles = await getAllArticles();
-  const total = articles.length;
+  const recent = articles.slice(0, 3);
 
-  const fontData = readFileSync(
-    join(process.cwd(), 'node_modules/@fontsource/bricolage-grotesque/files/bricolage-grotesque-latin-800-normal.woff')
-  );
-
-  const svg = await satori(
-    {
-      type: 'div',
-      props: {
-        style: {
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          backgroundColor: '#0B0D12',
-          fontFamily: 'Bricolage Grotesque',
-          padding: '48px 72px 44px',
-        },
-        children: [
-          // Header row
-          {
-            type: 'div',
-            props: {
-              style: {
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginBottom: '20px',
-              },
-              children: [
-                // Left: Blog label + domain
-                {
-                  type: 'div',
-                  props: {
-                    style: { display: 'flex', alignItems: 'center', gap: '12px' },
-                    children: [
-                      {
-                        type: 'div',
-                        props: {
-                          style: {
-                            fontSize: '11px',
-                            fontWeight: 800,
-                            color: '#0B0D12',
-                            backgroundColor: '#5B8CF5',
-                            padding: '4px 12px',
-                            borderRadius: '4px',
-                            letterSpacing: '0.12em',
-                            textTransform: 'uppercase',
-                          },
-                          children: 'Blog',
-                        },
-                      },
-                      {
-                        type: 'div',
-                        props: {
-                          style: {
-                            fontSize: '11px',
-                            fontWeight: 800,
-                            color: '#3E4A60',
-                            letterSpacing: '0.1em',
-                            textTransform: 'uppercase',
-                          },
-                          children: '· christianecg.com',
-                        },
-                      },
-                    ],
-                  },
-                },
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      fontSize: '11px',
-                      fontWeight: 800,
-                      color: '#3E4A60',
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase',
-                    },
-                    children: `${total} artículos`,
-                  },
-                },
-              ],
-            },
-          },
-
-          // Accent rule
-          {
-            type: 'div',
-            props: {
-              style: { height: '3px', backgroundColor: '#5B8CF5', marginBottom: '0' },
-              children: '',
-            },
-          },
-
-          // Title — fills available space
-          {
-            type: 'div',
-            props: {
-              style: {
-                flex: 1,
-                display: 'flex',
-                alignItems: 'center',
-              },
-              children: [
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      fontSize: '160px',
-                      fontWeight: 800,
-                      color: '#E8EDF5',
-                      letterSpacing: '-0.05em',
-                      lineHeight: 1,
-                    },
-                    children: 'Blog',
-                  },
-                },
-              ],
-            },
-          },
-
-          // Footer
-          {
-            type: 'div',
-            props: {
-              style: { display: 'flex', flexDirection: 'column', gap: '14px' },
-              children: [
-                {
-                  type: 'div',
-                  props: {
-                    style: { height: '1px', backgroundColor: '#1e2538' },
-                    children: '',
-                  },
-                },
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                    },
-                    children: [
-                      {
-                        type: 'div',
-                        props: {
-                          style: {
-                            fontSize: '14px',
-                            fontWeight: 800,
-                            color: '#7E8EAB',
-                            letterSpacing: '-0.01em',
-                          },
-                          children: 'Christian Elías Cruz González',
-                        },
-                      },
-                      {
-                        type: 'div',
-                        props: {
-                          style: {
-                            fontSize: '13px',
-                            fontWeight: 800,
-                            color: '#3E4A60',
-                            letterSpacing: '0.08em',
-                            textTransform: 'uppercase',
-                          },
-                          children: 'Desarrollo · Frontend · Comunidad',
-                        },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
+  return png(
+    h(
+      'div',
+      {
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        backgroundColor: C.bg,
+        fontFamily: 'Bricolage Grotesque',
+        padding: '64px 72px',
+        position: 'relative',
+        overflow: 'hidden',
       },
-    },
-    {
-      width: 1200,
-      height: 630,
-      fonts: [{ name: 'Bricolage Grotesque', data: fontData, weight: 800, style: 'normal' }],
-    }
-  );
+      [
+        glow({ width: '700px', height: '700px', bottom: '-320px', right: '-180px' }),
 
-  const resvg = new Resvg(svg);
-  const png = resvg.render().asPng();
-  return new Response(new Uint8Array(png), { headers: { 'Content-Type': 'image/png' } });
+        // Left — wordmark
+        h(
+          'div',
+          {
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            width: '470px',
+            position: 'relative',
+          },
+          [
+            h('div', { display: 'flex', alignItems: 'center', gap: '14px' }, [
+              h('div', { width: '34px', height: '3px', backgroundColor: C.accent, borderRadius: '2px' }),
+              h(
+                'div',
+                { fontSize: '14px', fontWeight: 800, color: C.accent, letterSpacing: '0.16em', textTransform: 'uppercase' },
+                'christianecg.com'
+              ),
+            ]),
+            h('div', { display: 'flex', flexDirection: 'column', gap: '14px' }, [
+              gradientText('Blog', { fontSize: '150px', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 0.95 }),
+              h(
+                'div',
+                { fontSize: '22px', fontWeight: 700, color: C.text2, maxWidth: '420px', lineHeight: 1.35 },
+                'Ensayos sobre desarrollo, web y carrera.'
+              ),
+            ]),
+            h(
+              'div',
+              { fontSize: '15px', fontWeight: 800, color: C.text3, letterSpacing: '0.1em', textTransform: 'uppercase' },
+              `${articles.length} artículos`
+            ),
+          ]
+        ),
+
+        // Right — latest posts
+        h(
+          'div',
+          {
+            display: 'flex',
+            flexDirection: 'column',
+            flex: 1,
+            justifyContent: 'center',
+            gap: '22px',
+            paddingLeft: '56px',
+            borderLeft: `1px solid ${C.surface}`,
+            marginLeft: '32px',
+          },
+          recent.map((article, i) =>
+            h('div', { display: 'flex', alignItems: 'flex-start', gap: '18px' }, [
+              h(
+                'div',
+                { fontSize: '20px', fontWeight: 800, color: C.accent2, width: '34px', flexShrink: 0 },
+                String(i + 1).padStart(2, '0')
+              ),
+              h('div', { display: 'flex', flexDirection: 'column', gap: '6px' }, [
+                h(
+                  'div',
+                  {
+                    display: 'flex',
+                    fontSize: article.title.length > 48 ? '24px' : '28px',
+                    fontWeight: 800,
+                    color: C.text,
+                    letterSpacing: '-0.02em',
+                    lineHeight: 1.18,
+                  },
+                  article.title
+                ),
+                h(
+                  'div',
+                  { fontSize: '13px', fontWeight: 800, color: C.text3, letterSpacing: '0.06em', textTransform: 'uppercase' },
+                  article.source
+                ),
+              ]),
+            ])
+          )
+        ),
+      ]
+    )
+  );
 }

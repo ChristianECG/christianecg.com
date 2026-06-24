@@ -1,255 +1,110 @@
-import satori from 'satori';
-import { Resvg } from '@resvg/resvg-js';
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import { C, h, png, gradientText, glow } from './_og';
+
+// Concept — "CV sheet": a document-like card with the name, role and a few
+// résumé facts, plus the available formats as a download chip.
+const facts: [string, string][] = [
+  ['Enfoque', 'Frontend · Mobile · IoT'],
+  ['Ubicación', 'Hidalgo, México'],
+  ['Modalidad', 'Remoto desde 2021'],
+];
 
 export async function GET() {
-  const fontData = readFileSync(
-    join(process.cwd(), 'node_modules/@fontsource/bricolage-grotesque/files/bricolage-grotesque-latin-800-normal.woff')
-  );
-
-  const milestones = [
-    { year: '2021', label: 'IEEE Xplore', active: true },
-    { year: '2022', label: 'Keynote Speaker', active: true },
-    { year: '2024', label: 'TV Nacional', active: true },
-    { year: '2025', label: 'IETF · IPoAC', active: false },
-  ];
-
-  const svg = await satori(
-    {
-      type: 'div',
-      props: {
-        style: {
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'row',
-          backgroundColor: '#0B0D12',
-          fontFamily: 'Bricolage Grotesque',
-          overflow: 'hidden',
-        },
-        children: [
-          // Timeline column
-          {
-            type: 'div',
-            props: {
-              style: {
-                width: '96px',
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: '#0d1018',
-                gap: '0px',
-                position: 'relative',
-              },
-              children: [
-                // Vertical line connecting dots
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      position: 'absolute',
-                      top: '130px',
-                      bottom: '130px',
-                      left: '47px',
-                      width: '2px',
-                      backgroundColor: '#1e2538',
-                    },
-                    children: '',
-                  },
-                },
-                // Dots
-                ...milestones.map((m, i) => ({
-                  type: 'div',
-                  props: {
-                    style: {
-                      width: '14px',
-                      height: '14px',
-                      borderRadius: '50%',
-                      backgroundColor: m.active ? '#5B8CF5' : '#1e2538',
-                      border: m.active ? '0' : '2px solid #252D40',
-                      flexShrink: 0,
-                      marginTop: i === 0 ? '0' : '60px',
-                    },
-                    children: '',
-                  },
-                })),
-              ],
-            },
-          },
-
-          // Thin vertical rule
-          {
-            type: 'div',
-            props: {
-              style: {
-                width: '1px',
-                height: '100%',
-                backgroundColor: '#1e2538',
-                flexShrink: 0,
-              },
-              children: '',
-            },
-          },
-
-          // Main content
-          {
-            type: 'div',
-            props: {
-              style: {
-                flex: 1,
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                padding: '56px 72px',
-              },
-              children: [
-                // Top badge
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '12px',
-                    },
-                    children: [
-                      {
-                        type: 'div',
-                        props: {
-                          style: {
-                            fontSize: '11px',
-                            fontWeight: 800,
-                            color: '#0B0D12',
-                            backgroundColor: '#5B8CF5',
-                            padding: '4px 12px',
-                            borderRadius: '4px',
-                            letterSpacing: '0.12em',
-                            textTransform: 'uppercase',
-                          },
-                          children: 'Curriculum Vitae',
-                        },
-                      },
-                      {
-                        type: 'div',
-                        props: {
-                          style: {
-                            fontSize: '11px',
-                            fontWeight: 800,
-                            color: '#3E4A60',
-                            letterSpacing: '0.1em',
-                            textTransform: 'uppercase',
-                          },
-                          children: '· christianecg.com',
-                        },
-                      },
-                    ],
-                  },
-                },
-
-                // Name + role
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '12px',
-                    },
-                    children: [
-                      {
-                        type: 'div',
-                        props: {
-                          style: {
-                            fontSize: '62px',
-                            fontWeight: 800,
-                            color: '#E8EDF5',
-                            letterSpacing: '-0.03em',
-                            lineHeight: 1.05,
-                          },
-                          children: 'Christian Elías Cruz González',
-                        },
-                      },
-                      {
-                        type: 'div',
-                        props: {
-                          style: {
-                            fontSize: '20px',
-                            fontWeight: 800,
-                            color: '#7E8EAB',
-                            letterSpacing: '-0.01em',
-                          },
-                          children: 'Senior Software Engineer',
-                        },
-                      },
-                    ],
-                  },
-                },
-
-                // Milestone list
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      display: 'flex',
-                      gap: '24px',
-                    },
-                    children: milestones.slice(0, 4).map((m) => ({
-                      type: 'div',
-                      props: {
-                        style: {
-                          display: 'flex',
-                          flexDirection: 'column',
-                          gap: '4px',
-                        },
-                        children: [
-                          {
-                            type: 'div',
-                            props: {
-                              style: {
-                                fontSize: '11px',
-                                fontWeight: 800,
-                                color: m.active ? '#5B8CF5' : '#3E4A60',
-                                letterSpacing: '0.08em',
-                                textTransform: 'uppercase',
-                              },
-                              children: m.year,
-                            },
-                          },
-                          {
-                            type: 'div',
-                            props: {
-                              style: {
-                                fontSize: '13px',
-                                fontWeight: 800,
-                                color: m.active ? '#E8EDF5' : '#7E8EAB',
-                                letterSpacing: '-0.01em',
-                              },
-                              children: m.label,
-                            },
-                          },
-                        ],
-                      },
-                    })),
-                  },
-                },
-              ],
-            },
-          },
-        ],
+  return png(
+    h(
+      'div',
+      {
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        backgroundColor: C.bg,
+        fontFamily: 'Bricolage Grotesque',
+        padding: '54px',
+        position: 'relative',
+        overflow: 'hidden',
       },
-    },
-    {
-      width: 1200,
-      height: 630,
-      fonts: [{ name: 'Bricolage Grotesque', data: fontData, weight: 800, style: 'normal' }],
-    }
-  );
+      [
+        glow({ width: '700px', height: '700px', bottom: '-320px', left: '-200px' }),
 
-  const resvg = new Resvg(svg);
-  const png = resvg.render().asPng();
-  return new Response(new Uint8Array(png), { headers: { 'Content-Type': 'image/png' } });
+        // Document card
+        h(
+          'div',
+          {
+            display: 'flex',
+            flex: 1,
+            backgroundColor: C.panel,
+            border: `1px solid ${C.surface}`,
+            borderRadius: '18px',
+            overflow: 'hidden',
+            position: 'relative',
+          },
+          [
+            // Accent spine
+            h('div', { width: '10px', height: '100%', backgroundImage: `linear-gradient(180deg, ${C.accent}, ${C.accent2})` }),
+
+            // Sheet body
+            h(
+              'div',
+              { display: 'flex', flexDirection: 'column', justifyContent: 'space-between', flex: 1, padding: '56px 60px' },
+              [
+                // Header
+                h('div', { display: 'flex', flexDirection: 'column', gap: '16px' }, [
+                  h('div', { display: 'flex', alignItems: 'center', gap: '14px' }, [
+                    h('div', { width: '34px', height: '3px', backgroundColor: C.accent, borderRadius: '2px' }),
+                    h(
+                      'div',
+                      { fontSize: '14px', fontWeight: 800, color: C.accent, letterSpacing: '0.16em', textTransform: 'uppercase' },
+                      'Curriculum Vitae'
+                    ),
+                  ]),
+                  gradientText('Christian Elías Cruz González', {
+                    fontSize: '58px',
+                    fontWeight: 800,
+                    letterSpacing: '-0.03em',
+                    lineHeight: 1.05,
+                  }),
+                  h('div', { fontSize: '24px', fontWeight: 700, color: C.text2 }, 'Senior Software Engineer'),
+                ]),
+
+                // Facts row
+                h(
+                  'div',
+                  { display: 'flex', gap: '48px' },
+                  facts.map(([label, value]) =>
+                    h('div', { display: 'flex', flexDirection: 'column', gap: '6px' }, [
+                      h(
+                        'div',
+                        { fontSize: '12px', fontWeight: 800, color: C.accent2, letterSpacing: '0.1em', textTransform: 'uppercase' },
+                        label
+                      ),
+                      h('div', { fontSize: '19px', fontWeight: 700, color: C.text }, value),
+                    ])
+                  )
+                ),
+
+                // Footer: format chip + domain
+                h('div', { display: 'flex', alignItems: 'center', justifyContent: 'space-between' }, [
+                  h(
+                    'div',
+                    {
+                      display: 'flex',
+                      fontSize: '14px',
+                      fontWeight: 800,
+                      color: C.accentLight,
+                      backgroundColor: C.bg,
+                      border: `1px solid ${C.surface}`,
+                      borderRadius: '8px',
+                      padding: '8px 16px',
+                      letterSpacing: '0.04em',
+                    },
+                    'PDF · Español · English'
+                  ),
+                  h('div', { fontSize: '15px', fontWeight: 800, color: C.text3, letterSpacing: '0.1em', textTransform: 'uppercase' }, 'christianecg.com'),
+                ]),
+              ]
+            ),
+          ]
+        ),
+      ]
+    )
+  );
 }

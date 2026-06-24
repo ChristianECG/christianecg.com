@@ -13,7 +13,7 @@ const t = useTranslations(locale);
 const slug = Astro.url.pathname.replace(/^\/(es|en|lat)/, '') || '/';
 ---
 
-<nav class="nav">
+<nav class="nav" aria-label={t('nav.aria')}>
   <div class="nav-progress" id="nav-progress" aria-hidden="true"></div>
   <div class="container nav-inner">
     <a href={`/${locale}/`} class="nav-logo">cecg</a>
@@ -254,7 +254,7 @@ const slug = Astro.url.pathname.replace(/^\/(es|en|lat)/, '') || '/';
   }
   .lang-btn.active {
     background: var(--accent);
-    color: #fff;
+    color: var(--bg);
   }
   .lang-btn:not(.active):hover { color: var(--text); }
 

@@ -229,6 +229,15 @@ html:not([lang="en"]):not([lang="lat"]) .lang-lat {
 
 .tabular { font-variant-numeric: tabular-nums; }
 
+/* Windows High Contrast: transparent clipped text would vanish — restore a solid color */
+@media (forced-colors: active) {
+  .text-gradient {
+    background: none;
+    -webkit-text-fill-color: CanvasText;
+    color: CanvasText;
+  }
+}
+
 /* View Transitions — gentle cross-fade with slight lift */
 ::view-transition-old(root) {
   animation: vtOut 0.28s cubic-bezier(0.4, 0, 0.2, 1) both;

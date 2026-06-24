@@ -7,6 +7,11 @@ import { useTranslations, getLocaleFromUrl } from '../i18n';
 
 const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
+
+// The path the visitor actually hit, shown back to them in the terminal line.
+const attempted = Astro.url.pathname.length > 1
+  ? Astro.url.pathname.replace(/\/$/, '')
+  : '/unknown';
 ---
 
 <Layout
@@ -16,40 +21,108 @@ const t = useTranslations(locale);
 >
   <Nav locale={locale} />
   <main id="main-content" class="not-found">
-    <div class="container">
-      <span class="code">404</span>
+    <div class="nf-grid" aria-hidden="true"></div>
+    <div class="container nf-inner">
+      <span class="nf-code" data-text="404">404</span>
+
       <h1>{t('404.title')}</h1>
-      <p>{t('404.description')}</p>
-      <a href={`/${locale}/`} class="btn">{t('404.back')}</a>
+      <p class="nf-lead">{t('404.lead')} <code class="nf-path" data-path>{attempted}</code></p>
+      <p class="nf-sub">{t('404.description')}</p>
+
+      <div class="nf-ctas">
+        <a href={`/${locale}/`} class="btn btn-primary">{t('404.back')}</a>
+        <a href={`/${locale}/blog`} class="btn btn-ghost">{t('404.read_blog')}</a>
+      </div>
     </div>
   </main>
   <Footer locale={locale} />
 </Layout>
 
+<script>
+  // 404.astro is prerendered, so the build-time path is always "/404".
+  // Replace it with the path the visitor actually hit, at runtime.
+  function fillPath() {
+    const real = location.pathname.length > 1 ? location.pathname.replace(/\/$/, '') : '/unknown';
+    document.querySelectorAll('[data-path]').forEach((el) => { el.textContent = real; });
+  }
+  fillPath();
+  document.addEventListener('astro:page-load', fillPath);
+</script>
+
 <style>
   .not-found {
+    position: relative;
     min-height: calc(100vh - 120px);
     display: flex;
     align-items: center;
+    overflow: hidden;
   }
 
-  .not-found .container {
+  .nf-grid {
+    position: absolute;
+    inset: -10%;
+    z-index: 0;
+    background-image: radial-gradient(rgba(100, 140, 220, 0.14) 1px, transparent 1px);
+    background-size: 34px 34px;
+    -webkit-mask-image: radial-gradient(ellipse 60% 55% at 30% 45%, #000 0%, transparent 75%);
+    mask-image: radial-gradient(ellipse 60% 55% at 30% 45%, #000 0%, transparent 75%);
+    pointer-events: none;
+  }
+
+  .nf-inner {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 1.25rem;
   }
 
-  .code {
+  .nf-code {
+    position: relative;
     font-family: var(--font-heading);
-    font-size: clamp(5rem, 15vw, 10rem);
+    font-size: clamp(5rem, 16vw, 11rem);
     font-weight: 800;
     line-height: 1;
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     letter-spacing: -0.04em;
+    background: linear-gradient(120deg, var(--accent) 0%, var(--accent-light) 45%, var(--accent-2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Glitch — only on hover, layered copies offset on each axis */
+  .nf-code::before,
+  .nf-code::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .nf-code:hover::before {
+    animation: glitchA 0.5s steps(2, end) infinite;
+    opacity: 0.85;
+    mix-blend-mode: screen;
+  }
+  .nf-code:hover::after {
+    animation: glitchB 0.5s steps(2, end) infinite;
+    opacity: 0.85;
+    mix-blend-mode: screen;
+  }
+  @keyframes glitchA {
+    0%, 100% { transform: translate(0, 0); clip-path: inset(0 0 70% 0); }
+    50%      { transform: translate(-3px, -2px); clip-path: inset(20% 0 40% 0); }
+  }
+  @keyframes glitchB {
+    0%, 100% { transform: translate(0, 0); clip-path: inset(70% 0 0 0); }
+    50%      { transform: translate(3px, 2px); clip-path: inset(40% 0 20% 0); }
   }
 
   h1 {
@@ -57,29 +130,72 @@ const t = useTranslations(locale);
     color: var(--text);
   }
 
-  p {
-    color: var(--text-2);
+  .nf-lead {
+    color: var(--text);
     font-size: 1.0625rem;
+    max-width: 52ch;
+  }
+
+  .nf-path {
+    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.92em;
+    color: var(--accent-light);
+    background: var(--accent-dim);
+    border: 1px solid var(--border-hover);
+    border-radius: 6px;
+    padding: 0.1em 0.45em;
+    word-break: break-all;
+  }
+
+  .nf-sub {
+    color: var(--text-2);
+    font-size: 1rem;
+    max-width: 46ch;
+  }
+
+  .nf-ctas {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
   }
 
   .btn {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.625rem 1.375rem;
-    background: var(--accent-dim);
-    border: 1px solid var(--border-hover);
+    padding: 0.65rem 1.4rem;
     border-radius: 8px;
-    color: var(--accent-light);
-    font-weight: 500;
-    font-size: 0.9375rem;
+    font-weight: 600;
+    font-size: 0.9rem;
     text-decoration: none;
-    transition: background 0.2s, border-color 0.2s;
-    margin-top: 0.5rem;
+    transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.1s;
+  }
+  .btn-primary {
+    background: var(--text);
+    color: var(--bg);
+  }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-ghost {
+    color: var(--text-2);
+    border: 1px solid var(--border-hover);
+  }
+  .btn-ghost:hover {
+    color: var(--text);
+    border-color: var(--text-3);
   }
 
-  .btn:hover {
-    background: rgba(91, 140, 245, 0.2);
-    border-color: var(--accent);
+  @media (prefers-reduced-motion: reduce) {
+    .nf-code:hover::before,
+    .nf-code:hover::after { animation: none; opacity: 0; }
+  }
+
+  @media (forced-colors: active) {
+    .nf-code {
+      background: none;
+      -webkit-text-fill-color: CanvasText;
+      color: CanvasText;
+    }
+    .nf-code::before, .nf-code::after { display: none; }
   }
 </style>

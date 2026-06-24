@@ -3,6 +3,8 @@
   "layout.back_to_top": "Ad summum redi",
   "meta.description": "Ingeniero de Software Senior — 5 años construyendo Ubidots, plataforma IoT con 150K usuarios. React, apps móviles y sistemas en tiempo real. Remoto desde 2021.",
 
+  "nav.aria": "Navigatio principalis",
+  "footer.aria": "Nexus pedis paginae",
   "nav.about": "De me",
   "nav.experience": "Experientia",
   "nav.education": "Educatio",
@@ -122,6 +124,8 @@
   "404.title": "Pagina non inventa",
   "404.description": "Pagina quam quaeris non exstat aut mota est.",
   "404.back": "Revertere ad initium",
+  "404.read_blog": "Lege blog",
+  "404.lead": "Non invenimus",
 
   "nav.press": "Prela",
   "press.page_title": "Prela",
