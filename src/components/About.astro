@@ -98,6 +98,7 @@ const t = useTranslations(locale);
     transition: background 0.25s;
   }
   .fact:last-child { border-right: none; }
+  .fact:first-child { padding-left: 1.5rem; }
   .fact:not(:first-child) { padding-left: 2rem; }
   .fact:hover { background: rgba(91, 140, 245, 0.025); }
 
@@ -118,7 +119,9 @@ const t = useTranslations(locale);
 
   @media (max-width: 700px) {
     .about-facts { grid-template-columns: 1fr; }
-    .fact {
+    .fact,
+    .fact:first-child,
+    .fact:not(:first-child) {
       border-right: none;
       border-top: 1px solid var(--border);
       padding: 1.25rem 0;

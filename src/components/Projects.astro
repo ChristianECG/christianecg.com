@@ -1,7 +1,23 @@
 ---
+import { Image } from 'astro:assets';
 import { useTranslations, dataLang, pick } from '../i18n';
 import type { Locale } from '../i18n';
 import projectsData from '../data/projects.json';
+
+// Project screenshots — keyed by the `slug` field in projects.json
+import tuagendaShot from '../assets/projects/tuagenda.png';
+import squawkShot from '../assets/projects/squawk.png';
+import avelorShot from '../assets/projects/avelor.png';
+import stratumShot from '../assets/projects/stratum.png';
+import loftShot from '../assets/projects/loft.png';
+
+const shots: Record<string, ImageMetadata> = {
+  tuagenda: tuagendaShot,
+  squawk: squawkShot,
+  avelor: avelorShot,
+  stratum: stratumShot,
+  loft: loftShot,
+};
 
 interface Props {
   locale: Locale;
@@ -11,6 +27,15 @@ const t = useTranslations(locale);
 const lang = dataLang(locale);
 
 const { projects } = projectsData;
+
+const hostname = (url?: string) => {
+  if (!url) return '';
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return url;
+  }
+};
 ---
 
 <section id="projects">
@@ -31,65 +56,89 @@ const { projects } = projectsData;
       </div>
     ) : (
       <div class="projects-list">
-        {projects.map((project: any, i: number) => (
-          <article class="project-row spotlight reveal" style={`--delay: ${i * 0.08}s`}>
-            <div class="project-left">
-              <h3 class="project-title">{project.title}</h3>
-              <div class="project-meta">
-                {project.tags?.map((tag: string) => (
-                  <span class="project-tag">{tag}</span>
-                ))}
+        {projects.map((project: any, i: number) => {
+          const shot = shots[project.slug];
+          const mediaHref = project.caseStudy ? `/${locale}${project.caseStudy}` : project.url;
+          return (
+            <article class="project-row spotlight reveal" style={`--delay: ${i * 0.08}s`}>
+              <div class="project-content">
+                <h3 class="project-title">{project.title}</h3>
+                <div class="project-meta">
+                  {project.tags?.map((tag: string) => (
+                    <span class="project-tag">{tag}</span>
+                  ))}
+                </div>
+                <p class="project-desc">
+                  {pick(project, 'description', lang) as string}
+                </p>
+                <div class="project-links">
+                  {project.caseStudy && (
+                    <a href={`/${locale}${project.caseStudy}`} class="project-link">
+                      {t('projects.case_study')}
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </a>
+                  )}
+                  {project.url && (
+                    <a href={project.url} target="_blank" rel="noopener" class="project-link">
+                      {project.caseStudy ? t('projects.view_site') : t('projects.view_project')}
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </a>
+                  )}
+                  {project.github && (
+                    <a href={project.github} target="_blank" rel="noopener" class="project-link">
+                      GitHub
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </a>
+                  )}
+                  {project.appStore && (
+                    <a href={project.appStore} target="_blank" rel="noopener" class="project-link">
+                      App Store
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </a>
+                  )}
+                  {project.playStore && (
+                    <a href={project.playStore} target="_blank" rel="noopener" class="project-link">
+                      Play Store
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </a>
+                  )}
+                </div>
               </div>
-            </div>
-            <div class="project-right">
-              <p class="project-desc">
-                {pick(project, 'description', lang) as string}
-              </p>
-              <div class="project-links">
-                {project.caseStudy && (
-                  <a href={`/${locale}${project.caseStudy}`} class="project-link">
-                    {t('projects.case_study')}
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                      <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                  </a>
-                )}
-                {project.url && (
-                  <a href={project.url} target="_blank" rel="noopener" class="project-link">
-                    {project.caseStudy ? t('projects.view_site') : t('projects.view_project')}
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                      <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                  </a>
-                )}
-                {project.github && (
-                  <a href={project.github} target="_blank" rel="noopener" class="project-link">
-                    GitHub
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                      <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                  </a>
-                )}
-                {project.appStore && (
-                  <a href={project.appStore} target="_blank" rel="noopener" class="project-link">
-                    App Store
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                      <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                  </a>
-                )}
-                {project.playStore && (
-                  <a href={project.playStore} target="_blank" rel="noopener" class="project-link">
-                    Play Store
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                      <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                  </a>
-                )}
-              </div>
-            </div>
-          </article>
-        ))}
+
+              {shot && (
+                <a
+                  href={mediaHref}
+                  target={project.caseStudy ? undefined : '_blank'}
+                  rel={project.caseStudy ? undefined : 'noopener'}
+                  class="project-media"
+                  aria-label={`${project.title} — ${hostname(project.url)}`}
+                >
+                  <div class="browser-frame">
+                    <div class="browser-bar">
+                      <span class="browser-dots">
+                        <i></i><i></i><i></i>
+                      </span>
+                      <span class="browser-url">{hostname(project.url)}</span>
+                    </div>
+                    <div class="browser-viewport">
+                      <Image src={shot} alt={`${project.title} interface screenshot`} loading="lazy" widths={[400, 640, 900]} sizes="(max-width: 860px) 90vw, 460px" />
+                    </div>
+                  </div>
+                </a>
+              )}
+            </article>
+          );
+        })}
       </div>
     )}
   </div>
@@ -116,26 +165,29 @@ const { projects } = projectsData;
 
   .project-row {
     display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: 3rem;
-    padding: 2.5rem 0 2.5rem 0.6rem;
+    grid-template-columns: 1fr 1.05fr;
+    gap: 3.5rem;
+    padding: 3rem 0;
     border-top: 1px solid var(--border);
     --delay: 0s;
     transition-delay: var(--delay);
-    align-items: start;
+    align-items: center;
     transition: background 0.25s;
     border-radius: 4px;
   }
   .project-row:last-child { border-bottom: 1px solid var(--border); }
   .project-row:hover { background: rgba(91, 140, 245, 0.028); }
 
-  .project-left { display: flex; flex-direction: column; gap: 0.75rem; padding-top: 0.15rem; }
-  .project-title { font-size: 1.15rem; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+  /* Alternate the media side for editorial rhythm */
+  .project-row:nth-child(even) .project-content { order: 2; }
+  .project-row:nth-child(even) .project-media { order: 1; }
+
+  .project-content { display: flex; flex-direction: column; gap: 1rem; padding: 0 1.5rem; }
+  .project-title { font-size: 1.3rem; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
   .project-meta { display: flex; gap: 0.35rem; flex-wrap: wrap; }
   .project-tag { font-size: 0.68rem; padding: 2px 8px; background: var(--accent-dim); color: var(--accent-light); border-radius: 100px; font-weight: 600; letter-spacing: 0.04em; }
-  .project-right { display: flex; flex-direction: column; gap: 1rem; }
   .project-desc { font-size: 0.9rem; color: var(--text-2); line-height: 1.75; }
-  .project-links { display: flex; gap: 1.5rem; }
+  .project-links { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 0.25rem; }
 
   .project-link {
     display: inline-flex;
@@ -150,7 +202,72 @@ const { projects } = projectsData;
   .project-link:hover { opacity: 0.7; }
   .project-link:hover svg { transform: translateX(3px); }
 
-  @media (max-width: 700px) {
-    .project-row { grid-template-columns: 1fr; gap: 0.75rem; padding: 2rem 0; }
+  /* ── Browser-framed screenshot ── */
+  .project-media {
+    display: block;
+    border-radius: 10px;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+  .project-media:hover { transform: translateY(-4px); }
+
+  .browser-frame {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--surface);
+    box-shadow: 0 12px 40px -16px rgba(0, 0, 0, 0.6);
+    transition: border-color 0.3s, box-shadow 0.4s;
+  }
+  .project-media:hover .browser-frame {
+    border-color: var(--border-hover);
+    box-shadow: 0 22px 60px -20px rgba(0, 0, 0, 0.7);
+  }
+
+  .browser-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    height: 34px;
+    padding: 0 0.85rem;
+    background: #0d1019;
+    border-bottom: 1px solid var(--border);
+  }
+  .browser-dots { display: flex; gap: 6px; flex-shrink: 0; }
+  .browser-dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--surface-2); }
+  .browser-dots i:nth-child(1) { background: #ff5f56; opacity: 0.55; }
+  .browser-dots i:nth-child(2) { background: #ffbd2e; opacity: 0.55; }
+  .browser-dots i:nth-child(3) { background: #27c93f; opacity: 0.55; }
+  .browser-url {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-3);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .browser-viewport { background: var(--bg); }
+  .browser-viewport img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  @media (max-width: 860px) {
+    .project-row {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 2.5rem 0;
+    }
+    .project-row:nth-child(even) .project-content { order: 2; }
+    .project-row:nth-child(even) .project-media { order: 1; }
+    .project-content { order: 2; padding: 0; }
+    .project-media { order: 1; }
   }
 </style>

@@ -1,6 +1,7 @@
 {
   "projects": [
     {
+      "slug": "tuagenda",
       "title": "TuAgenda.digital",
       "description_es": "SaaS de automatización de citas en operación, con 5 clientes activos en los primeros 3 meses y facturación recurrente vía Stripe: booking white-label, portal de cliente sin login, recordatorios automáticos por email y SMS, y agente de IA para WhatsApp con Claude API en producción — atendiendo reservas 24/7 y reduciendo la carga operativa manual en ~80%.",
       "description_en": "Appointment automation SaaS in operation, with 5 active clients in the first 3 months and recurring revenue via Stripe: white-label booking pages, zero-login client portal, automated email and SMS reminders, and an AI scheduling agent for WhatsApp with Claude API in production — handling reservations 24/7 and reducing manual operational load by ~80%.",
@@ -10,6 +11,7 @@
       "caseStudy": "/projects/tuagenda"
     },
     {
+      "slug": "squawk",
       "title": "Squawk",
       "description_es": "Dashboard de aviación global en tiempo real: datos ADS-B de la red OpenSky, worker Node.js con SQLite en modo WAL, mapa de densidad con deck.gl + MapLibre, 6 gráficas en vivo con ECharts y alertas de squawks de emergencia (7700/7600/7500) vía streaming SSE cada 5s.",
       "description_en": "Real-time global aviation dashboard: ADS-B transponder data via OpenSky Network, Node.js worker with SQLite WAL mode, density heatmap via deck.gl + MapLibre, 6 live ECharts charts, and emergency squawk alerts (7700/7600/7500) over SSE streaming every 5s.",
@@ -19,6 +21,7 @@
       "github": "https://github.com/ChristianECG/squawk"
     },
     {
+      "slug": "avelor",
       "title": "Avelor",
       "description_es": "Ecosistema de 17 herramientas CLI para developers, publicadas en npm bajo @avelor. Destacan: mesh — proxy local con HTTPS y fault injection; floo — deployment agent SSH con GitHub Action y Homebrew tap; bifrost — WebSocket tunnel relay autoalojado; y mira — uptime monitor con página de estado estática generada automáticamente. Cada herramienta elimina una dependencia de tercero en producción.",
       "description_en": "Ecosystem of 17 CLI tools for developers, published on npm under @avelor. Highlights: mesh — local dev proxy with HTTPS and fault injection; floo — SSH deployment agent with GitHub Action and Homebrew tap; bifrost — self-hosted WebSocket tunnel relay; and mira — uptime monitor with auto-generated static status page. Each tool eliminates a third-party dependency in production.",
@@ -28,6 +31,7 @@
       "github": "https://github.com/avelor-es"
     },
     {
+      "slug": "stratum",
       "title": "Stratum",
       "description_es": "Herramienta de arte generativo que convierte 75 años de datos meteorológicos históricos en visualizaciones de franjas de color por ciudad. La temperatura diaria, precipitación y horas de sol se codifican como grosor, tono y superposición, y el resultado es exportable en SVG, PNG y PDF sin servidor.",
       "description_en": "Generative art tool that converts 75 years of historical weather data into color-coded stripe visualizations per city. Daily temperature range, precipitation, and sunshine hours are encoded as stripe width, hue, and overlay. Exportable as SVG, PNG, and PDF with no server required.",
@@ -37,6 +41,7 @@
       "github": "https://github.com/ChristianECG/stratum"
     },
     {
+      "slug": "loft",
       "title": "Loft",
       "description_es": "Implementación de referencia de RFC 1149 (IP sobre portadores aviares): rastreo en tiempo real de paquetes IP transportados por palomas mensajeras. Simula física de vuelo con datos meteorológicos reales vía Open-Meteo, mapa global con rutas de gran círculo, streaming SSE y soporte en tres idiomas, incluyendo latín.",
       "description_en": "Reference implementation of RFC 1149 (IP over Avian Carriers): real-time tracking of IP datagrams transported by homing pigeons. Simulates flight physics with live meteorological data via Open-Meteo, global map with great-circle routes, SSE streaming, and three-language support including Latin.",
