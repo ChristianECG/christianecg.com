@@ -29,7 +29,7 @@ const groups = [
 
     <div class="skills-list">
       {groups.map((g, i) => (
-        <div class="skill-row reveal" style={`--delay: ${i * 0.06}s`}>
+        <div class="skill-row spotlight reveal" style={`--delay: ${i * 0.06}s`}>
           <span class="skill-label">
             {pick(g as any, 'label', lang) as string}
           </span>

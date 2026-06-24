@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && pagefind --site dist",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
     "cv:pdf": "node scripts/generate-cv-pdf.mjs",
@@ -26,7 +26,6 @@
   },
   "devDependencies": {
     "@avelor/mesh": "^0.3.0",
-    "pagefind": "^1.5.2",
     "playwright": "^1.60.0",
     "sharp": "^0.34.5"
   }

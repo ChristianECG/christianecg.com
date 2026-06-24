@@ -128,8 +128,9 @@ const t = useTranslations(locale);
 </style>
 
 <script>
-  const el = document.getElementById('fact-count');
-  if (el) {
+  function initFactCount() {
+    const el = document.getElementById('fact-count');
+    if (!el) return;
     const target = parseInt(el.dataset.target ?? '150', 10);
     let started = false;
 
@@ -154,4 +155,6 @@ const t = useTranslations(locale);
     );
     obs.observe(el);
   }
+
+  document.addEventListener('astro:page-load', initFactCount);
 </script>

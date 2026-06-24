@@ -25,6 +25,11 @@
   --accent-light: #82AAFF;
   --accent-dim: rgba(91, 140, 245, 0.12);
 
+  /* Secondary accent — teal, used for secondary states & gradients */
+  --accent-2: #46E0BE;
+  --accent-2-light: #7CF2D9;
+  --accent-2-dim: rgba(70, 224, 190, 0.12);
+
   --font-heading: 'Bricolage Grotesque', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
 
@@ -168,6 +173,76 @@ html:not([lang="en"]):not([lang="lat"]) .lang-lat {
 }
 .cursor-glow.visible { opacity: 1; }
 
+/* Cursor-tracking spotlight — set --mx / --my via JS (px relative to element) */
+.spotlight { position: relative; isolation: isolate; }
+.spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    340px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(91, 140, 245, 0.08),
+    transparent 62%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+.spotlight:hover::before { opacity: 1; }
+
+/* Animated wipe underline */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Gradient text — animated sheen */
+.text-gradient {
+  background: linear-gradient(100deg, var(--text) 0%, var(--accent-light) 45%, var(--accent-2-light) 70%, var(--text) 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientSheen 9s ease-in-out infinite;
+}
+@keyframes gradientSheen {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* View Transitions — gentle cross-fade with slight lift */
+::view-transition-old(root) {
+  animation: vtOut 0.28s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+::view-transition-new(root) {
+  animation: vtIn 0.36s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes vtOut {
+  to { opacity: 0; transform: translateY(-6px); }
+}
+@keyframes vtIn {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
@@ -175,6 +250,10 @@ html:not([lang="en"]):not([lang="lat"]) .lang-lat {
     transition: none;
   }
   .cursor-glow { display: none; }
+  .spotlight::before { display: none; }
+  .text-gradient { animation: none; }
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation: none; }
   * {
     animation-duration: 0.01ms !important;
     animation-delay: 0.01ms !important;

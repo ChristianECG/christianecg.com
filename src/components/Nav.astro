@@ -80,47 +80,60 @@ const slug = Astro.url.pathname.replace(/^\/(es|en|lat)/, '') || '/';
 </div>
 
 <script>
-  const hamburger = document.getElementById('nav-hamburger');
-  const mobileMenu = document.getElementById('nav-mobile-menu');
-
-  hamburger?.addEventListener('click', () => {
-    const open = mobileMenu?.classList.toggle('open');
-    hamburger.classList.toggle('open', !!open);
-  });
-
+  // closeMobileMenu queries live elements so it survives view transitions
   (window as any).closeMobileMenu = function () {
-    mobileMenu?.classList.remove('open');
-    hamburger?.classList.remove('open');
+    document.getElementById('nav-mobile-menu')?.classList.remove('open');
+    document.getElementById('nav-hamburger')?.classList.remove('open');
   };
 
-  // Konami code → /lat/
-  const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
-  let konamiIdx = 0;
-  document.addEventListener('keydown', (e) => {
-    if (e.key === KONAMI[konamiIdx]) {
-      konamiIdx++;
-      if (konamiIdx === KONAMI.length) {
-        konamiIdx = 0;
-        const currentPath = window.location.pathname.replace(/^\/(es|en|lat)/, '') || '/';
-        window.location.href = '/lat' + currentPath;
-      }
-    } else {
-      konamiIdx = e.key === KONAMI[0] ? 1 : 0;
-    }
-  });
+  let navGlobalBound = false;
+  function bindNavGlobals() {
+    if (navGlobalBound) return;
+    navGlobalBound = true;
 
-  // Active section highlight
-  const navAnchors = document.querySelectorAll<HTMLAnchorElement>('.nav-links a');
-  const secObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      const id = entry.target.id;
-      navAnchors.forEach((a) => {
-        a.classList.toggle('nav-active', a.getAttribute('href')?.endsWith(`#${id}`) ?? false);
-      });
+    // Konami code → /lat/
+    const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+    let konamiIdx = 0;
+    document.addEventListener('keydown', (e) => {
+      if (e.key === KONAMI[konamiIdx]) {
+        konamiIdx++;
+        if (konamiIdx === KONAMI.length) {
+          konamiIdx = 0;
+          const currentPath = window.location.pathname.replace(/^\/(es|en|lat)/, '') || '/';
+          window.location.href = '/lat' + currentPath;
+        }
+      } else {
+        konamiIdx = e.key === KONAMI[0] ? 1 : 0;
+      }
     });
-  }, { rootMargin: '-20% 0px -70% 0px' });
-  document.querySelectorAll('section[id]').forEach((s) => secObserver.observe(s));
+  }
+
+  function initNav() {
+    const hamburger = document.getElementById('nav-hamburger');
+    const mobileMenu = document.getElementById('nav-mobile-menu');
+    hamburger?.addEventListener('click', () => {
+      const open = mobileMenu?.classList.toggle('open');
+      hamburger.classList.toggle('open', !!open);
+    });
+
+    // Active section highlight
+    const navAnchors = document.querySelectorAll<HTMLAnchorElement>('.nav-links a');
+    const secObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.id;
+        navAnchors.forEach((a) => {
+          a.classList.toggle('nav-active', a.getAttribute('href')?.endsWith(`#${id}`) ?? false);
+        });
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    document.querySelectorAll('section[id]').forEach((s) => secObserver.observe(s));
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    bindNavGlobals();
+    initNav();
+  });
 </script>
 
 <style>
@@ -140,10 +153,10 @@ const slug = Astro.url.pathname.replace(/^\/(es|en|lat)/, '') || '/';
     position: absolute;
     bottom: -1px;
     left: 0;
-    height: 1px;
+    height: 2px;
     width: 0%;
-    background: var(--accent);
-    opacity: 0.55;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    box-shadow: 0 0 8px rgba(70, 224, 190, 0.4);
     z-index: 101;
   }
 

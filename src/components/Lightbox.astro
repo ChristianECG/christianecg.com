@@ -77,35 +77,53 @@
 </style>
 
 <script>
-  const lightbox   = document.getElementById('lightbox')!;
-  const img        = document.getElementById('lightbox-img') as HTMLImageElement;
-  const closeBtn   = document.getElementById('lightbox-close')!;
-  const backdrop   = document.getElementById('lightbox-backdrop')!;
+  let lightboxKeydownBound = false;
 
-  const open = (src: string, alt: string) => {
-    img.src = src;
-    img.alt = alt;
-    lightbox.removeAttribute('hidden');
-    document.body.style.overflow = 'hidden';
-    closeBtn.focus();
-  };
+  function initLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    const img      = document.getElementById('lightbox-img') as HTMLImageElement | null;
+    const closeBtn = document.getElementById('lightbox-close');
+    const backdrop = document.getElementById('lightbox-backdrop');
+    if (!lightbox || !img) return;
 
-  const close = () => {
-    lightbox.setAttribute('hidden', '');
-    document.body.style.overflow = '';
-    img.src = '';
-  };
+    const open = (src: string, alt: string) => {
+      img.src = src;
+      img.alt = alt;
+      lightbox.removeAttribute('hidden');
+      document.body.style.overflow = 'hidden';
+      closeBtn?.focus();
+    };
 
-  document.querySelectorAll<HTMLImageElement>('.cs-screenshot img').forEach((el) => {
-    el.style.cursor = 'zoom-in';
-    el.addEventListener('click', () => open(el.src, el.alt));
-  });
+    const close = () => {
+      lightbox.setAttribute('hidden', '');
+      document.body.style.overflow = '';
+      img.src = '';
+    };
 
-  closeBtn.addEventListener('click', close);
-  backdrop.addEventListener('click', close);
-  img.addEventListener('click', close);
+    document.querySelectorAll<HTMLImageElement>('.cs-screenshot img').forEach((el) => {
+      el.style.cursor = 'zoom-in';
+      el.addEventListener('click', () => open(el.src, el.alt));
+    });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !lightbox.hasAttribute('hidden')) close();
-  });
+    closeBtn?.addEventListener('click', close);
+    backdrop?.addEventListener('click', close);
+    img.addEventListener('click', close);
+
+    // Bind the document-level key handler once; query live nodes inside
+    if (!lightboxKeydownBound) {
+      lightboxKeydownBound = true;
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        const lb = document.getElementById('lightbox');
+        if (lb && !lb.hasAttribute('hidden')) {
+          lb.setAttribute('hidden', '');
+          document.body.style.overflow = '';
+          const lbImg = document.getElementById('lightbox-img') as HTMLImageElement | null;
+          if (lbImg) lbImg.src = '';
+        }
+      });
+    }
+  }
+
+  document.addEventListener('astro:page-load', initLightbox);
 </script>

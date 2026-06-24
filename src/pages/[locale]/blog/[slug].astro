@@ -86,7 +86,7 @@ const articleSchema = {
           <p class="article-excerpt">{entry.data.excerpt}</p>
         </header>
 
-        <div class="article-content prose" data-pagefind-body>
+        <div class="article-content prose">
           <Content />
         </div>
 
@@ -177,13 +177,20 @@ const articleSchema = {
 </style>
 
 <script>
-  // Reading progress bar
-  const bar = document.getElementById('reading-progress') as HTMLElement;
+  let progressBound = false;
+
+  function initArticle() {
+  // Reading progress bar — bind scroll once, read the live bar element
   function updateProgress() {
+    const bar = document.getElementById('reading-progress') as HTMLElement | null;
+    if (!bar) return;
     const total = document.documentElement.scrollHeight - window.innerHeight;
     bar.style.width = total > 0 ? `${(window.scrollY / total) * 100}%` : '0%';
   }
-  window.addEventListener('scroll', updateProgress, { passive: true });
+  if (!progressBound) {
+    progressBound = true;
+    window.addEventListener('scroll', updateProgress, { passive: true });
+  }
   updateProgress();
 
   // Lang banner: show when ?from= param is present
@@ -214,6 +221,7 @@ const articleSchema = {
 
   // Copy buttons on code blocks
   document.querySelectorAll('.prose pre').forEach((pre) => {
+    if (pre.querySelector('.copy-btn')) return;
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
     btn.setAttribute('aria-label', 'Copiar código');
@@ -229,4 +237,7 @@ const articleSchema = {
       });
     });
   });
+  }
+
+  document.addEventListener('astro:page-load', initArticle);
 </script>

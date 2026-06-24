@@ -157,6 +157,7 @@ const beliefs = en ? [
 </style>
 
 <script>
+  function initManifesto() {
   const pref    = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const canvas  = document.getElementById('mq-canvas') as HTMLCanvasElement | null;
   const section = document.querySelector<HTMLElement>('.manifesto-quote');
@@ -219,4 +220,7 @@ const beliefs = en ? [
     ro.observe(section);
     document.addEventListener('astro:before-swap', () => { cancelAnimationFrame(raf); ro.disconnect(); }, { once: true });
   }
+  }
+
+  document.addEventListener('astro:page-load', initManifesto);
 </script>

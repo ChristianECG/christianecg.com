@@ -765,6 +765,9 @@ const zipFilename = (title: string) =>
 </style>
 
 <script>
+  let pressKeydownBound = false;
+
+  function initPress() {
   // === Index card navigation ===
   document.querySelectorAll<HTMLAnchorElement>('.index-card[data-target]').forEach((card) => {
     card.addEventListener('click', (e) => {
@@ -857,11 +860,21 @@ const zipFilename = (title: string) =>
       showPhoto();
     });
 
-    document.addEventListener('keydown', (e) => {
-      if (!lightbox.classList.contains('open')) return;
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft') lbPrev?.click();
-      if (e.key === 'ArrowRight') lbNext?.click();
-    });
+    if (!pressKeydownBound) {
+      pressKeydownBound = true;
+      document.addEventListener('keydown', (e) => {
+        const lb = document.getElementById('photo-lightbox');
+        if (!lb || !lb.classList.contains('open')) return;
+        if (e.key === 'Escape') {
+          lb.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+        if (e.key === 'ArrowLeft') document.getElementById('lb-prev')?.click();
+        if (e.key === 'ArrowRight') document.getElementById('lb-next')?.click();
+      });
+    }
   }
+  }
+
+  document.addEventListener('astro:page-load', initPress);
 </script>

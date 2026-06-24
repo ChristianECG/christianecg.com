@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from 'astro:transitions';
 import { useTranslations, getLocaleFromUrl } from '../i18n';
 import type { Locale } from '../i18n';
 
@@ -63,11 +64,12 @@ const ogLocaleAlt = locale === 'en' ? 'es_MX' : 'en_US';
     {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/<\/script>/gi, '<\\/script>')} />}
     <script is:inline defer src="https://analytics.avelor.es/av.js" data-project="christianecg"></script>
     <title>{title}</title>
+    <ClientRouter />
     <slot name="head" />
   </head>
   <body>
-    <div class="noise-overlay" aria-hidden="true"></div>
-    <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+    <div class="noise-overlay" aria-hidden="true" transition:persist></div>
+    <div class="cursor-glow" id="cursor-glow" aria-hidden="true" transition:persist></div>
     <a href="#main-content" class="skip-link">{t('layout.skip_to_content')}</a>
     <slot />
     <button class="back-to-top" id="back-to-top" aria-label={t('layout.back_to_top')}>↑</button>
@@ -92,47 +94,108 @@ const ogLocaleAlt = locale === 'en' ? 'es_MX' : 'en_US';
       })();
     </script>
     <script>
-      // Scroll reveal
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
-            }
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const finePointer = window.matchMedia('(pointer: fine)').matches;
+      let globalBound = false;
+
+      // Re-runs on first load AND after every view transition
+      function initPage() {
+        // Scroll reveal — observe only not-yet-revealed elements
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.08, rootMargin: '0px 0px -48px 0px' }
+        );
+        document.querySelectorAll('.reveal:not(.visible)').forEach((el) => observer.observe(el));
+
+        // Back-to-top click (button is re-created per navigation, so re-bind here)
+        const btt = document.getElementById('back-to-top') as HTMLButtonElement | null;
+        btt?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // Cursor-tracking spotlight on cards/rows
+        if (finePointer && !reduceMotion) {
+          document.querySelectorAll<HTMLElement>('.spotlight').forEach((el) => {
+            el.addEventListener('pointermove', (e) => {
+              const r = el.getBoundingClientRect();
+              el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+              el.style.setProperty('--my', `${e.clientY - r.top}px`);
+            }, { passive: true });
           });
-        },
-        { threshold: 0.08, rootMargin: '0px 0px -48px 0px' }
-      );
-      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-
-      // Back to top + scroll hint hide
-      const btt = document.getElementById('back-to-top') as HTMLButtonElement;
-      const scrollHint = document.getElementById('scroll-hint') as HTMLElement | null;
-      window.addEventListener('scroll', () => {
-        btt?.classList.toggle('btt-visible', window.scrollY > 400);
-        if (scrollHint && window.scrollY > 60) scrollHint.style.opacity = '0';
-      }, { passive: true });
-      btt?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-      // Cursor glow
-      const glow = document.getElementById('cursor-glow') as HTMLElement;
-      if (glow && window.matchMedia('(pointer: fine)').matches) {
-        document.addEventListener('mousemove', (e) => {
-          glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-          glow.classList.add('visible');
-        }, { passive: true });
-        document.addEventListener('mouseleave', () => glow.classList.remove('visible'));
+        }
       }
 
-      // Scroll progress
-      const navProgress = document.getElementById('nav-progress') as HTMLElement;
-      if (navProgress) {
+      // Global listeners — bound once, read live elements inside
+      function bindGlobals() {
+        if (globalBound) return;
+        globalBound = true;
+
         window.addEventListener('scroll', () => {
-          const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-          navProgress.style.width = (pct * 100) + '%';
+          const bttEl = document.getElementById('back-to-top');
+          bttEl?.classList.toggle('btt-visible', window.scrollY > 400);
+
+          const scrollHint = document.getElementById('scroll-hint') as HTMLElement | null;
+          if (scrollHint && window.scrollY > 60) scrollHint.style.opacity = '0';
+
+          const navProgress = document.getElementById('nav-progress') as HTMLElement | null;
+          if (navProgress) {
+            const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+            navProgress.style.width = (pct * 100) + '%';
+          }
         }, { passive: true });
+
+        // Cursor glow (element is transition:persist, so binds once)
+        const glow = document.getElementById('cursor-glow') as HTMLElement | null;
+        if (glow && finePointer) {
+          document.addEventListener('mousemove', (e) => {
+            glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+            glow.classList.add('visible');
+          }, { passive: true });
+          document.addEventListener('mouseleave', () => glow.classList.remove('visible'));
+        }
       }
+
+      // av.js only emits a pageview on full load and does not hook the History
+      // API, so SPA navigations go uncounted. Re-send a pageview per navigation,
+      // skipping the initial load that av.js already recorded.
+      let avFirstLoad = true;
+      function trackSpaPageview() {
+        if (avFirstLoad) { avFirstLoad = false; return; }
+        const host = location.hostname;
+        if (host === 'localhost' || host === '127.0.0.1' || host === '::1') return;
+        const project = document.querySelector('script[data-project]')?.getAttribute('data-project');
+        if (!project) return;
+        try {
+          let s = sessionStorage.getItem('_av_sid');
+          if (!s) {
+            s = Date.now().toString(36) + Math.random().toString(36).slice(2);
+            sessionStorage.setItem('_av_sid', s);
+          }
+          fetch('https://analytics.avelor.es/collect', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              project_id: project,
+              url: location.pathname + (location.search || ''),
+              referrer: document.referrer || null,
+              session_id: s,
+            }),
+            keepalive: true,
+            credentials: 'omit',
+          }).catch(() => {});
+        } catch (_) {}
+      }
+
+      document.addEventListener('astro:page-load', () => {
+        bindGlobals();
+        initPage();
+        trackSpaPageview();
+      });
     </script>
   </body>
 </html>
@@ -161,11 +224,13 @@ const ogLocaleAlt = locale === 'en' ? 'es_MX' : 'en_US';
     position: fixed;
     bottom: 2rem;
     right: 2rem;
-    width: 38px;
-    height: 38px;
-    background: var(--surface-2);
+    width: 40px;
+    height: 40px;
+    background: rgba(25, 30, 45, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: 10px;
     color: var(--text-2);
     font-size: 1rem;
     cursor: pointer;
@@ -173,16 +238,19 @@ const ogLocaleAlt = locale === 'en' ? 'es_MX' : 'en_US';
     align-items: center;
     justify-content: center;
     opacity: 0;
+    transform: translateY(8px);
     pointer-events: none;
-    transition: opacity 0.2s, border-color 0.2s, color 0.2s;
+    transition: opacity 0.25s, transform 0.25s, border-color 0.2s, color 0.2s, box-shadow 0.25s;
     z-index: 90;
   }
   .back-to-top.btt-visible {
     opacity: 1;
+    transform: none;
     pointer-events: auto;
   }
   .back-to-top:hover {
     border-color: var(--border-hover);
-    color: var(--text);
+    color: var(--accent-light);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(91, 140, 245, 0.15);
   }
 </style>

@@ -192,14 +192,18 @@ const olderCount = talks.filter(tk => parseInt(tk.date_es.split(' ').pop() ?? '0
 </style>
 
 <script>
-  const btn = document.getElementById('talks-toggle') as HTMLButtonElement | null;
-  const list = document.getElementById('talks-list');
+  function initTalks() {
+    const btn = document.getElementById('talks-toggle') as HTMLButtonElement | null;
+    const list = document.getElementById('talks-list');
 
-  btn?.addEventListener('click', () => {
-    const expanded = list?.classList.toggle('talks-expanded');
-    btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-    if (!expanded) {
-      document.getElementById('talks')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
+    btn?.addEventListener('click', () => {
+      const expanded = list?.classList.toggle('talks-expanded');
+      btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      if (!expanded) {
+        document.getElementById('talks')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
+
+  document.addEventListener('astro:page-load', initTalks);
 </script>

@@ -251,19 +251,23 @@ function pageUrl(page: number) {
 </style>
 
 <script>
-  const featured = document.querySelector<HTMLElement>('.blog-featured');
-  if (featured && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const MAX = 4;
-    featured.addEventListener('mousemove', (e) => {
-      featured.style.transition = 'border-color 0.25s, background 0.25s, box-shadow 0.25s';
-      const r = featured.getBoundingClientRect();
-      const dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
-      const dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
-      featured.style.transform = `perspective(800px) rotateX(${-dy * MAX}deg) rotateY(${dx * MAX}deg)`;
-    }, { passive: true });
-    featured.addEventListener('mouseleave', () => {
-      featured.style.transition = 'border-color 0.25s, background 0.25s, box-shadow 0.25s, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)';
-      featured.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg)';
-    });
+  function initFeaturedTilt() {
+    const featured = document.querySelector<HTMLElement>('.blog-featured');
+    if (featured && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const MAX = 4;
+      featured.addEventListener('mousemove', (e) => {
+        featured.style.transition = 'border-color 0.25s, background 0.25s, box-shadow 0.25s';
+        const r = featured.getBoundingClientRect();
+        const dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+        const dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+        featured.style.transform = `perspective(800px) rotateX(${-dy * MAX}deg) rotateY(${dx * MAX}deg)`;
+      }, { passive: true });
+      featured.addEventListener('mouseleave', () => {
+        featured.style.transition = 'border-color 0.25s, background 0.25s, box-shadow 0.25s, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)';
+        featured.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg)';
+      });
+    }
   }
+
+  document.addEventListener('astro:page-load', initFeaturedTilt);
 </script>
