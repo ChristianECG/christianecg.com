@@ -60,6 +60,8 @@
   "projects.case_study": "Case study",
   "projects.view_site": "Ver sitio",
   "projects.view_project": "Ver proyecto",
+  "projects.status_live": "En producción",
+  "projects.status_experimental": "Experimental",
 
   "talks.eyebrow": "Apariciones públicas",
   "talks.heading": "Charlas & eventos",

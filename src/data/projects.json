@@ -6,7 +6,8 @@
       "description_es": "SaaS de automatización de citas en operación, con 5 clientes activos en los primeros 3 meses y facturación recurrente vía Stripe: booking white-label, portal de cliente sin login, recordatorios automáticos por email y SMS, y agente de IA para WhatsApp con Claude API en producción — atendiendo reservas 24/7 y reduciendo la carga operativa manual en ~80%.",
       "description_en": "Appointment automation SaaS in operation, with 5 active clients in the first 3 months and recurring revenue via Stripe: white-label booking pages, zero-login client portal, automated email and SMS reminders, and an AI scheduling agent for WhatsApp with Claude API in production — handling reservations 24/7 and reducing manual operational load by ~80%.",
       "description_lat": "SaaS automationis citationum in operatione, cum quinque clientibus activis in primis tribus mensibus et vectigali recurrente per Stripe: inscriptio sub nomine alieno, portale clientis sine ingressu, admonitiones automaticae per electronicam epistulam et SMS, agensque AI in WhatsApp cum Claude API in productione — curationem vacationum XXIV/VII agens et onus manuale circa 80% minuens.",
-      "tags": ["Next.js", "Supabase", "Stripe", "Twilio", "Claude API", "OpenAI"],
+      "tags": ["Claude API", "Next.js", "Supabase", "Stripe", "Twilio"],
+      "status": "live",
       "url": "https://tuagenda.digital",
       "caseStudy": "/projects/tuagenda"
     },
@@ -16,7 +17,8 @@
       "description_es": "Dashboard de aviación global en tiempo real: datos ADS-B de la red OpenSky, worker Node.js con SQLite en modo WAL, mapa de densidad con deck.gl + MapLibre, 6 gráficas en vivo con ECharts y alertas de squawks de emergencia (7700/7600/7500) vía streaming SSE cada 5s.",
       "description_en": "Real-time global aviation dashboard: ADS-B transponder data via OpenSky Network, Node.js worker with SQLite WAL mode, density heatmap via deck.gl + MapLibre, 6 live ECharts charts, and emergency squawk alerts (7700/7600/7500) over SSE streaming every 5s.",
       "description_lat": "Tabula navigationis aereae globalis in tempore reali: data ADS-B per OpenSky Network, operarius Node.js cum SQLite (modus WAL), mappa densitatis per deck.gl + MapLibre, VI tabulae vivae per ECharts et monitus squawkorum urgentium (7700/7600/7500) per fluxum SSE quovis quinquennio secundo.",
-      "tags": ["Next.js", "TypeScript", "deck.gl", "MapLibre", "ECharts", "SQLite", "SSE"],
+      "tags": ["deck.gl", "MapLibre", "ECharts", "SSE", "Next.js"],
+      "status": "live",
       "url": "https://squawk.creu.cat",
       "github": "https://github.com/ChristianECG/squawk"
     },
@@ -26,7 +28,8 @@
       "description_es": "Ecosistema de 17 herramientas CLI para developers, publicadas en npm bajo @avelor. Destacan: mesh — proxy local con HTTPS y fault injection; floo — deployment agent SSH con GitHub Action y Homebrew tap; bifrost — WebSocket tunnel relay autoalojado; y mira — uptime monitor con página de estado estática generada automáticamente. Cada herramienta elimina una dependencia de tercero en producción.",
       "description_en": "Ecosystem of 17 CLI tools for developers, published on npm under @avelor. Highlights: mesh — local dev proxy with HTTPS and fault injection; floo — SSH deployment agent with GitHub Action and Homebrew tap; bifrost — self-hosted WebSocket tunnel relay; and mira — uptime monitor with auto-generated static status page. Each tool eliminates a third-party dependency in production.",
       "description_lat": "Systema XVII instrumentorum CLI pro fabricatoribus, in npm sub @avelor editorum. Praecipua: mesh — procurator localis cum HTTPS et iniectione defectionis; floo — agens dispositionis SSH cum actione GitHub et tabula Homebrew; bifrost — translactor WebSocket se-hospitatus; et mira — monitor stabilitatis cum pagina status statice generata. Quodque instrumentum dependentiam tertiae partis in productione tollit.",
-      "tags": ["Node.js", "CLI", "npm", "WebSocket", "SSH", "self-hosted"],
+      "tags": ["Node.js", "CLI", "npm", "WebSocket", "self-hosted"],
+      "status": "live",
       "url": "https://pkg.avelor.es",
       "github": "https://github.com/avelor-es"
     },
@@ -36,7 +39,8 @@
       "description_es": "Herramienta de arte generativo que convierte 75 años de datos meteorológicos históricos en visualizaciones de franjas de color por ciudad. La temperatura diaria, precipitación y horas de sol se codifican como grosor, tono y superposición, y el resultado es exportable en SVG, PNG y PDF sin servidor.",
       "description_en": "Generative art tool that converts 75 years of historical weather data into color-coded stripe visualizations per city. Daily temperature range, precipitation, and sunshine hours are encoded as stripe width, hue, and overlay. Exportable as SVG, PNG, and PDF with no server required.",
       "description_lat": "Instrumentum artis generativae quod LXXV annos datorum meteorologicorum historicorum in visualizationes viarum coloratarum per urbem convertit. Temperatura diurna, imber et horae solis in latitudinem, colorem et stratum transformantur; in SVG, PNG et PDF sine ministro exportabilia.",
-      "tags": ["React", "TypeScript", "Vite", "ECharts", "Open-Meteo"],
+      "tags": ["React", "Vite", "ECharts", "Open-Meteo"],
+      "status": "live",
       "url": "https://stratum.creu.cat",
       "github": "https://github.com/ChristianECG/stratum"
     },
@@ -46,7 +50,8 @@
       "description_es": "Implementación de referencia de RFC 1149 (IP sobre portadores aviares): rastreo en tiempo real de paquetes IP transportados por palomas mensajeras. Simula física de vuelo con datos meteorológicos reales vía Open-Meteo, mapa global con rutas de gran círculo, streaming SSE y soporte en tres idiomas, incluyendo latín.",
       "description_en": "Reference implementation of RFC 1149 (IP over Avian Carriers): real-time tracking of IP datagrams transported by homing pigeons. Simulates flight physics with live meteorological data via Open-Meteo, global map with great-circle routes, SSE streaming, and three-language support including Latin.",
       "description_lat": "Exsecutio referentiae RFC 1149 (IP per portitores aviares): observatio in tempore reali datagrammatum IP per columbas nuntias. Physica volatus cum datis meteorologicis veris per Open-Meteo simulatur, mappa globalis cum viis circuli magni, fluxus SSE et subsidium trium linguarum, Latinae inclusae.",
-      "tags": ["Next.js", "TypeScript", "SQLite", "MapLibre", "SSE", "i18n"],
+      "tags": ["Next.js", "MapLibre", "SSE", "SQLite", "i18n"],
+      "status": "experimental",
       "url": "https://loft.creu.cat",
       "github": "https://github.com/ChristianECG/pigeon-as-a-service"
     }

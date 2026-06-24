@@ -60,6 +60,8 @@
   "projects.case_study": "Casus studii",
   "projects.view_site": "Vide situm",
   "projects.view_project": "Vide opus",
+  "projects.status_live": "In productione",
+  "projects.status_experimental": "Experimentale",
 
   "talks.eyebrow": "Apparitiones publicae",
   "talks.heading": "Allocutiones & eventus",
