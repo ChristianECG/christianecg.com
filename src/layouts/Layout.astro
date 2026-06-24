@@ -134,19 +134,19 @@ const ogLocaleAlt = locale === 'en' ? 'es_MX' : 'en_US';
             }, { passive: true });
           });
 
-          // 3D tilt on case-study screenshots (mirrors the .pub card tilt)
-          document.querySelectorAll<HTMLImageElement>('.cs-screenshot img').forEach((img) => {
-            img.addEventListener('mousemove', (e) => {
-              const rect = img.getBoundingClientRect();
+          // 3D tilt on case-study screenshots and portfolio frames (mirrors the .pub card tilt)
+          document.querySelectorAll<HTMLElement>('.cs-screenshot img, .project-media .browser-frame').forEach((el) => {
+            el.addEventListener('mousemove', (e) => {
+              const rect = el.getBoundingClientRect();
               const dx = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
               const dy = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
-              img.style.transform =
+              el.style.transform =
                 `perspective(900px) rotateX(${-dy * 5}deg) rotateY(${dx * 5}deg) scale(1.02)`;
             }, { passive: true });
-            img.addEventListener('mouseleave', () => {
-              img.classList.add('is-leaving');
-              img.style.transform = '';
-              setTimeout(() => img.classList.remove('is-leaving'), 500);
+            el.addEventListener('mouseleave', () => {
+              el.classList.add('is-leaving');
+              el.style.transform = '';
+              setTimeout(() => el.classList.remove('is-leaving'), 500);
             });
           });
         }
