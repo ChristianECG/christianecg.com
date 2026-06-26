@@ -323,7 +323,7 @@ const { header, sections } = cv;
     <h1 class="cv-name">{header.name}</h1>
     <p class="cv-role">{header.role}</p>
     <p class="cv-location">{header.location}</p>
-    <p class="cv-availability">{header.availability}</p>
+    {header.availability && <p class="cv-availability">{header.availability}</p>}
     <p class="cv-contact">
       {header.contact.map((item, i) => (
         <>

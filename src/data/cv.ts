@@ -35,7 +35,7 @@ export interface CVData {
     name: string
     role: string
     location: string
-    availability: string
+    availability?: string
     contact: string[]
   }
   sections: {
@@ -59,7 +59,6 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
       name: 'Christian Elías Cruz González',
       role: 'Senior Fullstack Engineer',
       location: 'México · CDMX / Hidalgo',
-      availability: 'Incorporación: junio 2026 · 100% remoto',
       contact: [
         'christianecg.com',
         'github.com/ChristianECG',
@@ -202,7 +201,6 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
       name: 'Christian Elías Cruz González',
       role: 'Senior Fullstack Engineer — SaaS & Integrations',
       location: 'Mexico · CDMX / Hidalgo',
-      availability: 'Available: June 2026 · 100% Remote',
       contact: [
         'christianecg.com',
         'github.com/ChristianECG',
@@ -345,7 +343,6 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
       name: 'Christian Elías Cruz González',
       role: 'Faber Programmatus Senior — SaaS et Integrationes',
       location: 'Mexicum · CDMX / Hidalgo',
-      availability: 'Inceptio: Iunio MMXXVI · 100% e longinquo',
       contact: [
         'christianecg.com',
         'github.com/ChristianECG',
