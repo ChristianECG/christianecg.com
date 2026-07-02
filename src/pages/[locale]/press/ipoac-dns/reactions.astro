@@ -161,6 +161,40 @@ const hnComments: HNComment[] = [
   },
 ];
 
+interface BlogPost {
+  id: string;
+  source: string;
+  author: string;
+  date_es: string;
+  date_en: string;
+  title_es: string;
+  title_en: string;
+  content_es: string;
+  content_en: string;
+  original?: string;
+  original_lang?: string;
+  likes?: number;
+  url: string;
+}
+
+const blogPosts: BlogPost[] = [
+  {
+    id: 'oresamalabo',
+    source: 'note.com',
+    author: 'おれさまラボ',
+    date_es: '10 jun. 2026',
+    date_en: 'Jun 10, 2026',
+    title_es: 'La era en la que la IA crea atajos — Diario: Oresama Labo',
+    title_en: 'The era where AI builds shortcuts — Daily: Oresama Labo',
+    original: '宛先LoftのIPアドレスを直接メッセージに書く必要があり、負荷分散や番号変更に弱いことが課題として示されています。',
+    original_lang: 'ja',
+    content_es: 'Recogido en la sección de "curiosidades" de su boletín diario de tecnología: la propuesta extiende el protocolo de RFC 1149 añadiendo resolución de nombres. Señalan como problema que haya que escribir la IP del Loft de destino directamente en el mensaje, lo que lo hace vulnerable al balanceo de carga y a los cambios de numeración.',
+    content_en: 'Featured in the "fun picks" section of their daily tech digest: the proposal extends RFC 1149 by adding name resolution. They point out that having to write the destination Loft\'s IP address directly into the message is the key problem — it makes things vulnerable to load balancing and address renumbering.',
+    likes: 5,
+    url: 'https://note.com/oresamalabo/n/na15ff425725c',
+  },
+];
+
 const ui = {
   es: {
     pageTitle: 'Reacciones de la comunidad — DNS over Avian Carriers',
@@ -171,6 +205,9 @@ const ui = {
     subtitle: 'draft-cruzgonzalez-ipoac-dns · Jun 2026',
     xHeading: 'X / Twitter',
     hnHeading: 'Hacker News',
+    blogHeading: 'Blogs y prensa',
+    readArticle: 'Leer artículo',
+    likesLabelBlog: 'me gusta',
     hnPoints: 'puntos',
     hnComments: 'comentarios',
     viralBadge: 'Más viral',
@@ -196,6 +233,9 @@ const ui = {
     subtitle: 'draft-cruzgonzalez-ipoac-dns · Jun 2026',
     xHeading: 'X / Twitter',
     hnHeading: 'Hacker News',
+    blogHeading: 'Blogs & press',
+    readArticle: 'Read article',
+    likesLabelBlog: 'likes',
     hnPoints: 'points',
     hnComments: 'comments',
     viralBadge: 'Most viral',
@@ -408,6 +448,54 @@ function initials(name: string) {
             </div>
           ))}
         </div>
+      </section>
+
+      <!-- Blogs & press -->
+      <section class="rp-section rp-section--blog">
+        <h2 class="rp-section-heading rp-section-heading--blog">
+          <span class="rp-note-logo" aria-hidden="true">note</span>
+          {c.blogHeading}
+        </h2>
+
+        {blogPosts.map((post) => {
+          const title = lang === 'en' ? post.title_en : post.title_es;
+          const content = lang === 'en' ? post.content_en : post.content_es;
+          return (
+            <article class="rp-card rp-card--blog">
+              <div class="rp-card-header">
+                <div class="rp-avatar rp-avatar--sm">{initials(post.author)}</div>
+                <div class="rp-card-meta">
+                  <span class="rp-author">{post.author}</span>
+                  <span class="rp-handle">{post.source}</span>
+                  <span class="rp-date">{lang === 'en' ? post.date_en : post.date_es}</span>
+                </div>
+              </div>
+
+              <h3 class="rp-blog-title">{title}</h3>
+              <p class="rp-content">{content}</p>
+
+              {post.original && (
+                <div class="rp-original">
+                  <span class="rp-original-label">{c.originalLabel}</span>
+                  <span class="rp-original-text">{post.original}</span>
+                </div>
+              )}
+
+              <div class="rp-metrics">
+                {post.likes && (
+                  <span class="rp-metric">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    <strong>{post.likes}</strong> {c.likesLabelBlog}
+                  </span>
+                )}
+                <a href={post.url} target="_blank" rel="noopener" class="rp-blog-link">
+                  {c.readArticle}
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                </a>
+              </div>
+            </article>
+          );
+        })}
       </section>
 
       <!-- Footer -->
@@ -768,6 +856,46 @@ function initials(name: string) {
     transition: color 0.15s;
   }
   .rp-hn-link:hover { color: var(--accent); }
+
+  /* Blogs & press */
+  .rp-section--blog { margin-bottom: 3rem; }
+  .rp-section-heading--blog { color: #41c9b4; }
+  .rp-note-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.1rem 0.4rem;
+    height: 18px;
+    background: #41c9b4;
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    border-radius: 3px;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+  }
+  .rp-card--blog {
+    border-color: color-mix(in srgb, #41c9b4 28%, transparent);
+  }
+  .rp-blog-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+  .rp-blog-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-left: auto;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #41c9b4;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .rp-blog-link:hover { color: var(--text); }
 
   /* Footer */
   .rp-footer {
