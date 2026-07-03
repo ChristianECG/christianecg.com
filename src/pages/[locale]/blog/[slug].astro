@@ -200,13 +200,10 @@ const articleSchema = {
     const text = document.getElementById('lang-banner-text') as HTMLElement;
     const dismiss = document.getElementById('lang-banner-dismiss') as HTMLButtonElement;
 
-    const enHref = location.pathname.replace('/es/blog/', '/en/blog/');
-    const latHref = location.pathname.replace('/es/blog/', '/lat/blog/');
-
     if (from === 'en') {
-      text.innerHTML = `This post is only available in Spanish. <a href="${enHref}">Go back to English</a>.`;
+      text.innerHTML = `This post is only available in Spanish. <a href="/en/blog">Go back to English</a>.`;
     } else if (from === 'lat') {
-      text.innerHTML = `Hic articulus solum Hispanice scriptus est. <a href="${latHref}">Redi ad Latinum</a>.`;
+      text.innerHTML = `Hic articulus solum Hispanice scriptus est. <a href="/lat/blog">Redi ad Latinum</a>.`;
     } else {
       text.textContent = 'Este artículo solo está disponible en español.';
     }

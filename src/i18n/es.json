@@ -38,7 +38,7 @@
   "about.heading": "Cinco años optimizando el frontend de una plataforma con 150K usuarios. Ahora construyo herramientas para developers.",
   "about.bio_1": "En Ubidots había un widget de ECharts que tardaba 30 segundos en renderizar. Nadie abrió un bug. Los usuarios solo cerraban la pestaña. Lo encontré en una sesión de DevTools a las 11 de la noche.",
   "about.bio_2": "Trabajé como Senior Engineer en Ubidots, una plataforma IoT con más de 150K usuarios y millones de eventos en tiempo real. Fuera del código, soy speaker, mentor y autor publicado en IEEE Xplore.",
-  "about.fact_label_users": "usuarios activos diarios · código en producción",
+  "about.fact_label_users": "usuarios activos diarios · mi código sigue en producción",
   "about.fact_label_community": "Comunidad",
   "about.fact_label_ieee": "1 paper publicado",
 
@@ -141,5 +141,13 @@
   "press.bio_p2": "Ha participado como speaker en congresos internacionales de tecnología y ha sido entrevistado por medios de televisión y radio en México. Trabaja de forma remota desde 2021.",
   "press.contact_intro": "Para entrevistas, citas o material adicional",
   "press.media_assets_heading": "Fotos de prensa",
-  "press.reactions_link": "Reacciones de la comunidad"
+  "press.reactions_link": "Reacciones de la comunidad",
+
+  "testimonials.eyebrow": "Testimonios",
+  "testimonials.heading": "Lo que dicen quienes trabajaron conmigo",
+  "testimonials.source": "vía LinkedIn",
+  "testimonials.q1": "Su profesionalismo y sus habilidades técnicas son sobresalientes, pero sobre todo destacan sus cualidades humanas. Siempre recuerda que, aunque trabajamos en tecnología, trabajamos con humanos.",
+  "testimonials.q1_context": "Cargo superior · Ubidots",
+  "testimonials.q2": "Un excelente desarrollador con grandes habilidades en desarrollo web, además de una capacidad de liderazgo natural y un gran talento para enseñar.",
+  "testimonials.q2_context": "Mismo equipo · Clever Cloud"
 }

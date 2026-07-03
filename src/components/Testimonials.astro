@@ -1,0 +1,163 @@
+---
+import { useTranslations } from '../i18n';
+import type { Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const testimonials = [
+  {
+    quote: t('testimonials.q1'),
+    author: 'Bernardo Aguayo Ortega',
+    role: 'AI Engineer',
+    context: t('testimonials.q1_context'),
+    featured: true,
+  },
+  {
+    quote: t('testimonials.q2'),
+    author: 'Marcos Rogelio Mera',
+    role: 'QA Automation Engineer',
+    context: t('testimonials.q2_context'),
+    featured: false,
+  },
+];
+
+function initials(name: string) {
+  return name.split(' ').slice(0, 2).map((w) => w[0]).join('');
+}
+---
+
+<section id="testimonials">
+  <div class="container">
+    <span class="section-eyebrow reveal">{t('testimonials.eyebrow')}</span>
+    <h2 class="section-title reveal" style="--delay: 0.06s">{t('testimonials.heading')}</h2>
+
+    <div class="testimonials-grid">
+      {testimonials.map((item, i) => (
+        <figure
+          class:list={['testimonial', 'spotlight', 'reveal', { 'testimonial--featured': item.featured }]}
+          style={`--delay: ${0.1 + i * 0.08}s`}
+        >
+          <svg class="testimonial-mark" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M9.5 5C6.5 6.6 4.5 9.4 4.5 13v6h6v-6H7.3c0-2.4 1.2-4.3 3.2-5.5L9.5 5zm10 0c-3 1.6-5 4.4-5 8v6h6v-6h-3.2c0-2.4 1.2-4.3 3.2-5.5L19.5 5z"/>
+          </svg>
+          <blockquote class="testimonial-quote">{item.quote}</blockquote>
+          <figcaption class="testimonial-footer">
+            <span class="testimonial-avatar" aria-hidden="true">{initials(item.author)}</span>
+            <span class="testimonial-meta">
+              <span class="testimonial-author">{item.author}</span>
+              <span class="testimonial-role">{item.role} · {item.context}</span>
+            </span>
+            <span class="testimonial-source">{t('testimonials.source')}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    align-items: stretch;
+  }
+
+  .testimonial {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem 2.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: border-color 0.25s, background 0.25s;
+  }
+  .testimonial:hover {
+    border-color: var(--border-hover);
+    background: var(--surface-2);
+  }
+
+  .testimonial--featured {
+    border-color: rgba(91, 140, 245, 0.22);
+    background: linear-gradient(160deg, rgba(91, 140, 245, 0.06) 0%, var(--surface) 45%);
+  }
+
+  .testimonial-mark {
+    color: var(--accent);
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+
+  .testimonial-quote {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text);
+    font-style: italic;
+    flex: 1;
+  }
+  .testimonial-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .testimonial-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent-dim);
+    border: 1px solid rgba(91, 140, 245, 0.25);
+    color: var(--accent-light);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    flex-shrink: 0;
+  }
+
+  .testimonial-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    min-width: 0;
+  }
+
+  .testimonial-author {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  .testimonial-role {
+    font-size: 0.75rem;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+
+  .testimonial-source {
+    margin-left: auto;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 800px) {
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .testimonial { padding: 1.5rem; }
+    .testimonial-source { display: none; }
+  }
+</style>

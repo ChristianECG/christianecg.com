@@ -45,6 +45,7 @@ const ogLocaleAlt = locale === 'en' ? 'es_MX' : 'en_US';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={metaDescription} />
     <meta name="author" content="Christian Elías Cruz González" />
+    {locale === 'lat' && <meta name="robots" content="noindex" />}
     <link rel="preload" href={bricolage700} as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="preload" href={inter400} as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="canonical" href={canonicalURL} />

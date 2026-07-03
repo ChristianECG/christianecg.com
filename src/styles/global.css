@@ -39,6 +39,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Solid backdrop on <html> so macOS/iOS overscroll never flashes white */
+  background: var(--bg);
 }
 
 body {

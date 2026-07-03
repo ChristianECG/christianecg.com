@@ -11,9 +11,11 @@ const { locale } = Astro.props;
 const t = useTranslations(locale);
 const lang = dataLang(locale);
 
-const CV_URL = lang === 'en'
-  ? '/Christian_Elias_Cruz_Gonzalez_eng.pdf'
-  : '/Christian_Elias_Cruz_Gonzalez_esp.pdf';
+const CV_URL = {
+  en: '/Christian_Elias_Cruz_Gonzalez_eng.pdf',
+  lat: '/Christian_Elias_Cruz_Gonzalez_lat.pdf',
+  es: '/Christian_Elias_Cruz_Gonzalez_esp.pdf',
+}[lang];
 ---
 
 <section class="hero" id="hero">
@@ -296,7 +298,7 @@ const CV_URL = lang === 'en'
   }
 
   .cred-label {
-    font-size: 0.66rem;
+    font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.07em;
     text-transform: uppercase;

@@ -56,7 +56,7 @@ const slug = Astro.url.pathname.replace(/^\/(es|en|lat)/, '') || '/';
         )}
       </div>
 
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-mobile-menu">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -83,7 +83,9 @@ const slug = Astro.url.pathname.replace(/^\/(es|en|lat)/, '') || '/';
   // closeMobileMenu queries live elements so it survives view transitions
   (window as any).closeMobileMenu = function () {
     document.getElementById('nav-mobile-menu')?.classList.remove('open');
-    document.getElementById('nav-hamburger')?.classList.remove('open');
+    const hamburger = document.getElementById('nav-hamburger');
+    hamburger?.classList.remove('open');
+    hamburger?.setAttribute('aria-expanded', 'false');
   };
 
   let navGlobalBound = false;
@@ -114,6 +116,7 @@ const slug = Astro.url.pathname.replace(/^\/(es|en|lat)/, '') || '/';
     hamburger?.addEventListener('click', () => {
       const open = mobileMenu?.classList.toggle('open');
       hamburger.classList.toggle('open', !!open);
+      hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
 
     // Active section highlight
@@ -278,7 +281,7 @@ const slug = Astro.url.pathname.replace(/^\/(es|en|lat)/, '') || '/';
   .lang-btn:not(.active):hover { color: var(--text); }
 
   .lang-btn--lat {
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     letter-spacing: 0.04em;
   }
 

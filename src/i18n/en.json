@@ -38,7 +38,7 @@
   "about.heading": "Five years optimizing the frontend of a 150K-user platform. Now building developer tools.",
   "about.bio_1": "At Ubidots, there was an ECharts widget that took up to 30 seconds to render. Nobody filed a bug report — users just closed the tab. I found it in a DevTools session at 11pm.",
   "about.bio_2": "I worked as a Senior Engineer at Ubidots, an IoT platform with 150K+ users and millions of real-time events. Outside of code, I'm a speaker, mentor, and published author at IEEE Xplore.",
-  "about.fact_label_users": "daily active users · production code",
+  "about.fact_label_users": "daily active users · my code still runs in production",
   "about.fact_label_community": "Community",
   "about.fact_label_ieee": "1 published paper",
 
@@ -141,5 +141,13 @@
   "press.bio_p2": "He has spoken at international technology conferences and has been interviewed by television and radio media in Mexico. He has worked remotely since 2021.",
   "press.contact_intro": "For interviews, quotes, or additional material",
   "press.media_assets_heading": "Press photos",
-  "press.reactions_link": "Community reactions"
+  "press.reactions_link": "Community reactions",
+
+  "testimonials.eyebrow": "Testimonials",
+  "testimonials.heading": "What people I've worked with say",
+  "testimonials.source": "via LinkedIn",
+  "testimonials.q1": "His professionalism and technical skills are outstanding, but above all, his human qualities are remarkable. He always remembers that even though we work in technology, we work with humans.",
+  "testimonials.q1_context": "Senior colleague · Ubidots",
+  "testimonials.q2": "An excellent developer with great skills in web development, with a natural leadership ability and great teaching skills.",
+  "testimonials.q2_context": "Same team · Clever Cloud"
 }

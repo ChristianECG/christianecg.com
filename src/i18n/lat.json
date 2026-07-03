@@ -38,7 +38,7 @@
   "about.heading": "Per quinque annos frontem suggestus CL milium utentium perfeci. Nunc instrumenta fabricatorum construo.",
   "about.bio_1": "Apud Ubidots, machina ECharts erat quae triginta secundis reddebatur. Nemo defectum nuntiavit — utentes solum tabulam clauserunt. Inveni eam in sessione DevTools hora undecima noctis.",
   "about.bio_2": "Laboravi ut Faber Senior apud Ubidots, suggestum IoT cum CL milibus utentium. Extra codicem, orator, monitor et auctor editus in IEEE Xplore sum.",
-  "about.fact_label_users": "utentes cotidiani · codex in usu",
+  "about.fact_label_users": "utentes cotidiani · codex meus adhuc in usu",
   "about.fact_label_community": "Communitas",
   "about.fact_label_ieee": "1 dissertatio edita",
 
@@ -140,5 +140,14 @@
   "press.bio_p1": "<span class=\"bio-name\">Christianus Elias Cruz González</span> artifex programmationis senior est, ex Mixquiahuala de Juárez, Hidalgo, Mexici oriundus, in interfacies celerrimas, applicationes mobiles et systemata temporis realis peritus. Opus eius productum cum investigatione technica coniungit: auctor in IEEE Xplore publicatus est et auctor Interretis-Instrumenti apud IETF oblati — duo loca raro ab eadem persona frequentata.",
   "press.bio_p2": "Orator in conventibus technicis internationalibus interfuit et ab instrumentis televisificis et radiophonicis in Mexici interrogatus est. Ex anno MMXXI remotim laborat.",
   "press.contact_intro": "Ad colloquia, citationes vel materiam additam",
-  "press.media_assets_heading": "Imagines prelariae"
+  "press.media_assets_heading": "Imagines prelariae",
+  "press.reactions_link": "Reactiones communitatis",
+
+  "testimonials.eyebrow": "Testimonia",
+  "testimonials.heading": "Quae dicunt qui mecum laboraverunt",
+  "testimonials.source": "per LinkedIn",
+  "testimonials.q1": "Professionalismus eius et artes technicae eximiae sunt, sed ante omnia qualitates humanae eius notabiles sunt. Semper meminit nos, quamquam in technologia laboramus, cum hominibus laborare.",
+  "testimonials.q1_context": "Collega superior · Ubidots",
+  "testimonials.q2": "Fabricator excellens cum magnis artibus in progressione interretiali, cum naturali facultate ducendi et magno ingenio docendi.",
+  "testimonials.q2_context": "Eadem turma · Clever Cloud"
 }
