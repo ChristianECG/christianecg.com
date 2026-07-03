@@ -157,5 +157,11 @@
   "timeline.count_label": "años",
   "timeline.desc": "De estudiante en Hidalgo a senior engineer con productos propios: código, papers, charlas y una que otra paloma — en una sola línea de tiempo.",
   "timeline.end": "La línea sigue creciendo. Si quieres ser parte del siguiente hito, hablemos.",
-  "timeline.cta": "Contacto"
+  "timeline.cta": "Contacto",
+
+  "api.desc": "Los datos de este sitio como endpoints JSON públicos, generados en cada build desde las mismas fuentes que alimentan las páginas. Sin auth, sin rate limits, sin sorpresas.",
+  "api.count_label": "endpoints",
+  "api.try": "Pruébalo",
+  "api.index_desc": "Directorio de todos los endpoints disponibles.",
+  "api.note": "Todos los endpoints son GET, estáticos y de solo lectura. Los campos localizados se entregan como objetos { es, en, lat }. Si construyes algo con esto, me encantaría saberlo: contacto@christianecg.com."
 }

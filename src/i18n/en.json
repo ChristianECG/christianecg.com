@@ -157,5 +157,11 @@
   "timeline.count_label": "years",
   "timeline.desc": "From student in Hidalgo to senior engineer with products of his own: code, papers, talks, and the occasional pigeon — on a single timeline.",
   "timeline.end": "The line keeps growing. If you want to be part of the next milestone, let's talk.",
-  "timeline.cta": "Contact"
+  "timeline.cta": "Contact",
+
+  "api.desc": "This site's data as public JSON endpoints, generated on every build from the same sources that feed the pages. No auth, no rate limits, no surprises.",
+  "api.count_label": "endpoints",
+  "api.try": "Try it",
+  "api.index_desc": "Directory of all available endpoints.",
+  "api.note": "All endpoints are GET, static, and read-only. Localized fields are delivered as { es, en, lat } objects. If you build something with this, I'd love to hear about it: contacto@christianecg.com."
 }

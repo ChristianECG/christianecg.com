@@ -1,0 +1,208 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+import { LOCALES, useTranslations, pick } from '../../i18n';
+import type { Locale } from '../../i18n';
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params as { locale: Locale };
+const t = useTranslations(locale);
+
+const endpoints = [
+  {
+    path: '/api/profile.json',
+    desc_es: 'Quién soy: rol, ubicación, enlaces y CV en tres idiomas.',
+    desc_en: 'Who I am: role, location, links, and CVs in three languages.',
+    desc_lat: 'Quis sum: munus, locus, nexus et CV in tribus linguis.',
+  },
+  {
+    path: '/api/timeline.json',
+    desc_es: 'Hitos de la trayectoria de 2018 a hoy, curados y trilingües.',
+    desc_en: 'Career milestones from 2018 to today, curated and trilingual.',
+    desc_lat: 'Lapides miliarii itineris ab MMXVIII ad hodie.',
+  },
+  {
+    path: '/api/talks.json',
+    desc_es: 'Charlas, keynotes, mentorías y apariciones en medios.',
+    desc_en: 'Talks, keynotes, mentorships, and media appearances.',
+    desc_lat: 'Sermones, orationes principales, mentoratus et apparitiones.',
+  },
+  {
+    path: '/api/papers.json',
+    desc_es: 'Papers académicos publicados (IEEE Xplore, REINGTEC).',
+    desc_en: 'Published academic papers (IEEE Xplore, REINGTEC).',
+    desc_lat: 'Dissertationes academicae editae (IEEE Xplore, REINGTEC).',
+  },
+  {
+    path: '/api/projects.json',
+    desc_es: 'Proyectos y productos, con stack y case studies.',
+    desc_en: 'Side projects and products, with stack tags and case studies.',
+    desc_lat: 'Opera et producta, cum instrumentis et studiis casuum.',
+  },
+  {
+    path: '/api/articles.json',
+    desc_es: 'Artículos del blog: archivo local + el feed de octa.page.',
+    desc_en: 'Blog articles: local archive plus the octa.page feed.',
+    desc_lat: 'Articuli blogi: archivum locale + fluxus octa.page.',
+  },
+  {
+    path: '/api/press.json',
+    desc_es: 'Press kits, materiales descargables y menciones en medios.',
+    desc_en: 'Press kits, downloadable assets, and media mentions.',
+    desc_lat: 'Fasciculi prelarii, materiae deponendae et mentiones.',
+  },
+];
+
+const items = endpoints.map((e) => ({ ...e, desc: pick(e as any, 'desc', locale) }));
+---
+
+<Layout
+  title={`API — Christian Elías Cruz González`}
+  description={t('api.desc')}
+  locale={locale}
+>
+  <Nav locale={locale} />
+  <main id="main-content" class="api-main">
+    <div class="container">
+
+      <header class="api-header reveal">
+        <div class="api-header-top">
+          <div>
+            <p class="section-eyebrow">API</p>
+            <h1 class="api-title">API</h1>
+          </div>
+          <div class="api-meta">
+            <span class="api-count">{items.length + 1}</span>
+            <span class="api-count-label">{t('api.count_label')}</span>
+          </div>
+        </div>
+        <p class="api-desc">{t('api.desc')}</p>
+      </header>
+
+      <div class="api-try reveal">
+        <span class="api-try-label">{t('api.try')}</span>
+        <code class="api-try-cmd">curl https://christianecg.com/api/index.json</code>
+      </div>
+
+      <div class="api-list">
+        <a href="/api/index.json" class="api-row spotlight reveal">
+          <span class="api-method">GET</span>
+          <div class="api-row-body">
+            <code class="api-path">/api/index.json</code>
+            <p class="api-row-desc">{t('api.index_desc')}</p>
+          </div>
+          <span class="api-arrow">↗</span>
+        </a>
+        {items.map((e, i) => (
+          <a href={e.path} class="api-row spotlight reveal" style={`--delay: ${Math.min((i + 1) * 0.05, 0.35)}s`}>
+            <span class="api-method">GET</span>
+            <div class="api-row-body">
+              <code class="api-path">{e.path}</code>
+              <p class="api-row-desc">{e.desc}</p>
+            </div>
+            <span class="api-arrow">↗</span>
+          </a>
+        ))}
+      </div>
+
+      <p class="api-note reveal">{t('api.note')}</p>
+
+    </div>
+  </main>
+  <Footer locale={locale} />
+</Layout>
+
+<style>
+  .api-main { padding-top: 64px; min-height: 100svh; }
+
+  .api-header { padding: 4rem 0 3rem; border-bottom: 1px solid var(--border); }
+  .api-header-top { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 1.25rem; }
+  .api-title { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; color: var(--text); letter-spacing: -0.03em; line-height: 1; margin-top: 0.5rem; }
+  .api-meta { text-align: right; padding-bottom: 0.4rem; }
+  .api-count { display: block; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--accent); letter-spacing: -0.04em; line-height: 1; }
+  .api-count-label { font-size: 0.75rem; color: var(--text-2); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
+  .api-desc { font-size: 0.92rem; color: var(--text-2); line-height: 1.7; max-width: 560px; }
+
+  .api-try {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .api-try-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); flex-shrink: 0; }
+  .api-try-cmd {
+    font-family: 'SF Mono', 'Fira Code', 'Fira Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--text);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 0.45rem 0.8rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+
+  .api-list { padding: 2rem 0 1.5rem; display: flex; flex-direction: column; }
+
+  .api-row {
+    display: grid;
+    grid-template-columns: 48px 1fr 24px;
+    gap: 1.25rem;
+    align-items: start;
+    padding: 1.25rem 1rem;
+    margin: 0 -1rem;
+    border-bottom: 1px solid var(--border);
+    border-radius: 4px;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .api-row:first-child { border-top: 1px solid var(--border); }
+  .api-row:hover { background: var(--surface); box-shadow: inset 3px 0 0 var(--accent); }
+  .api-row:hover .api-path { color: var(--accent-light); }
+  .api-row:hover .api-arrow { opacity: 1; transform: translate(2px, -2px); }
+
+  .api-method {
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--accent-2-light);
+    background: var(--accent-2-dim);
+    border: 1px solid rgba(70, 224, 190, 0.22);
+    border-radius: 4px;
+    padding: 2px 0;
+    text-align: center;
+    margin-top: 0.15rem;
+  }
+
+  .api-row-body { display: flex; flex-direction: column; gap: 0.3rem; min-width: 0; }
+  .api-path {
+    font-family: 'SF Mono', 'Fira Code', 'Fira Mono', monospace;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text);
+    transition: color 0.15s;
+    word-break: break-all;
+  }
+  .api-row-desc { font-size: 0.82rem; color: var(--text-2); line-height: 1.6; }
+
+  .api-arrow { font-size: 0.85rem; color: var(--text-3); opacity: 0; transition: opacity 0.15s, transform 0.15s; padding-top: 0.2rem; }
+
+  .api-note { font-size: 0.78rem; color: var(--text-3); line-height: 1.7; max-width: 620px; padding: 0 0 5rem; }
+
+  @media (max-width: 700px) {
+    .api-header-top { align-items: flex-start; flex-direction: column; gap: 1rem; }
+    .api-meta { text-align: left; }
+    .api-row { grid-template-columns: 44px 1fr; margin: 0; padding-left: 0; padding-right: 0; }
+    .api-arrow { display: none; }
+  }
+</style>

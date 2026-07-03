@@ -157,5 +157,11 @@
   "timeline.count_label": "anni",
   "timeline.desc": "A discipulo in Hidalgo ad fabrum seniorem cum operibus propriis: codex, dissertationes, sermones et interdum columba — in una linea temporis.",
   "timeline.end": "Linea crescere pergit. Si pars proximi lapidis miliarii esse vis, colloquamur.",
-  "timeline.cta": "Contactus"
+  "timeline.cta": "Contactus",
+
+  "api.desc": "Data huius situs ut punctahedra JSON publica, in quoque build ex iisdem fontibus generata qui paginas alunt. Sine auctoritate, sine limitibus, sine miraculis.",
+  "api.count_label": "punctahedra",
+  "api.try": "Proba",
+  "api.index_desc": "Index omnium punctorum finalium praesto.",
+  "api.note": "Omnia puncta finalia sunt GET, statica et lectionis solae. Campi localizati ut obiecta { es, en, lat } traduntur. Si aliquid cum his construis, libenter audiam: contacto@christianecg.com."
 }
