@@ -1,0 +1,30 @@
+# Christian Elías Cruz González
+
+> Personal site of Christian Elías Cruz González — software engineer, speaker, and author. Content is available in Spanish (default, at the root), English (/en/), and Latin (/lat/). All structured data is also exposed through a public JSON API.
+
+## API (preferred for machines)
+
+- [API index](https://christianecg.com/api/index.json): directory of every JSON endpoint
+- [Profile](https://christianecg.com/api/profile.json): role, location, links, CVs in three languages
+- [Timeline](https://christianecg.com/api/timeline.json): career milestones from 2018 to today
+- [Talks](https://christianecg.com/api/talks.json): talks, keynotes, mentorships, media appearances
+- [Papers](https://christianecg.com/api/papers.json): published academic papers
+- [Projects](https://christianecg.com/api/projects.json): side projects and products with stack tags
+- [Articles](https://christianecg.com/api/articles.json): blog articles and external feed
+- [Press](https://christianecg.com/api/press.json): press kits, assets, and media mentions
+
+## Pages
+
+- [Home](https://christianecg.com/): who I am and what I do
+- [Blog](https://christianecg.com/blog/): articles and essays
+- [CV](https://christianecg.com/cv/): full curriculum vitae
+- [Timeline](https://christianecg.com/timeline/): career milestones
+- [Now](https://christianecg.com/now/): what I'm focused on right now
+- [Manifiesto](https://christianecg.com/manifiesto/): personal manifesto
+- [Talks](https://christianecg.com/talks/): speaking engagements
+- [Press](https://christianecg.com/press/): press kit and mentions
+
+## Feeds
+
+- [RSS](https://christianecg.com/rss.xml): blog RSS feed
+- [JSON Feed](https://christianecg.com/feed.json): blog JSON feed

@@ -57,9 +57,9 @@ const zipFilename = (title: string) =>
     {sortedMentions.length > 0 && (
       <div class="mentions-wrapper reveal" id="press-mentions">
         <h2 class="subsection-label">{t('press.mentions_heading')}</h2>
-        <div class="mentions-list" role="list">
+        <div class="mentions-list">
           {sortedMentions.map((m) => (
-            <a href={m.url} target="_blank" rel="noopener" class="mention-row spotlight" role="listitem">
+            <a href={m.url} target="_blank" rel="noopener" class="mention-row spotlight">
               <div class="mention-top">
                 <span class="mention-outlet">{m.outlet}</span>
                 <svg class="mention-arrow" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">

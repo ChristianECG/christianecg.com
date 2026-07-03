@@ -1,0 +1,6 @@
+#!/bin/sh
+# Run the a11y audit only when the commit touches something that affects output.
+git diff --cached --name-only | grep -q '^src/\|^public/\|^astro\.config\|^package\.json' || exit 0
+
+echo "pre-commit: running a11y audit..."
+node scripts/a11y-check.mjs
