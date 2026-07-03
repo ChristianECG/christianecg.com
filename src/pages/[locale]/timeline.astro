@@ -1,0 +1,281 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+import { LOCALES, useTranslations, pick } from '../../i18n';
+import type { Locale } from '../../i18n';
+import { milestones, typeLabels } from '../../data/timeline';
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params as { locale: Locale };
+const t = useTranslations(locale);
+
+const items = milestones.map((m) => ({
+  ...m,
+  date: pick(m as any, 'date', locale),
+  title: pick(m as any, 'title', locale),
+  detail: pick(m as any, 'detail', locale),
+  typeLabel: typeLabels[m.type][locale],
+}));
+
+// Group consecutive items by year so the year marker shows once per block
+const byYear: { year: string; items: typeof items }[] = [];
+for (const item of items) {
+  const last = byYear[byYear.length - 1];
+  if (last && last.year === item.year) last.items.push(item);
+  else byYear.push({ year: item.year, items: [item] });
+}
+---
+
+<Layout
+  title={`${t('timeline.title')} — Christian Elías Cruz González`}
+  description={t('timeline.desc')}
+  ogImage="https://christianecg.com/og/timeline.png"
+  locale={locale}
+>
+  <Nav locale={locale} />
+  <main id="main-content" class="tl-main">
+    <div class="container">
+
+      <header class="tl-header reveal">
+        <div class="tl-header-top">
+          <div>
+            <p class="section-eyebrow">{t('timeline.eyebrow')}</p>
+            <h1 class="tl-title">{t('timeline.title')}</h1>
+          </div>
+          <div class="tl-meta">
+            <span class="tl-count">{new Date().getFullYear() - 2018}</span>
+            <span class="tl-count-label">{t('timeline.count_label')}</span>
+          </div>
+        </div>
+        <p class="tl-desc">{t('timeline.desc')}</p>
+      </header>
+
+      <div class="tl-body">
+        <div class="tl-track" aria-hidden="true"></div>
+
+        {byYear.map((group, gi) => (
+          <section class="tl-year-group" data-year={group.year}>
+            <div class="tl-year reveal" style={`--delay: ${Math.min(gi * 0.04, 0.2)}s`}>{group.year}</div>
+            <div class="tl-items">
+              {group.items.map((item) => (
+                <article class:list={['tl-item', 'reveal', { 'tl-item--featured': item.featured }]}>
+                  <span class="tl-dot" aria-hidden="true"></span>
+                  <div class:list={['tl-card', 'spotlight']}>
+                    <div class="tl-card-top">
+                      <span class="tl-date">{item.date}</span>
+                      <span class:list={['tl-type', `tl-type--${item.type}`]}>{item.typeLabel}</span>
+                    </div>
+                    <h2 class="tl-item-title">
+                      {item.href ? (
+                        item.external ? (
+                          <a href={item.href} target="_blank" rel="noopener">{item.title} ↗</a>
+                        ) : (
+                          <a href={`/${locale}${item.href}`}>{item.title} →</a>
+                        )
+                      ) : (
+                        item.title
+                      )}
+                    </h2>
+                    <p class="tl-detail">{item.detail}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        ))}
+
+        <div class="tl-end reveal">
+          <span class="tl-end-dot" aria-hidden="true"></span>
+          <p class="tl-end-text">{t('timeline.end')}</p>
+          <a href={`/${locale}/#contact`} class="tl-end-cta link-underline">{t('timeline.cta')} →</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <Footer locale={locale} />
+</Layout>
+
+<style>
+  .tl-main { padding-top: 64px; min-height: 100svh; }
+
+  .tl-header { padding: 4rem 0 3rem; border-bottom: 1px solid var(--border); }
+  .tl-header-top { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 1.25rem; }
+  .tl-title { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; color: var(--text); letter-spacing: -0.03em; line-height: 1; margin-top: 0.5rem; }
+  .tl-meta { text-align: right; padding-bottom: 0.4rem; }
+  .tl-count { display: block; font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: var(--accent); letter-spacing: -0.04em; line-height: 1; }
+  .tl-count-label { font-size: 0.75rem; color: var(--text-2); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
+  .tl-desc { font-size: 0.92rem; color: var(--text-2); line-height: 1.7; max-width: 560px; }
+
+  .tl-body {
+    position: relative;
+    padding: 3.5rem 0 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    --rail: 120px;      /* year column width */
+    --dot-gap: 2rem;    /* space between rail and cards */
+  }
+
+  /* The vertical line — drawn along the rail edge */
+  .tl-track {
+    position: absolute;
+    top: 3.5rem;
+    bottom: 4rem;
+    left: var(--rail);
+    width: 1px;
+    background: linear-gradient(180deg, var(--accent) 0%, var(--border-hover) 18%, var(--border-hover) 82%, var(--accent-2) 100%);
+    opacity: 0.65;
+  }
+  /* Progressive enhancement: line draws itself as it enters the viewport */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .tl-track {
+        transform-origin: top;
+        animation: tlTrackGrow linear both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 85%;
+      }
+    }
+  }
+
+  .tl-year-group {
+    display: grid;
+    grid-template-columns: var(--rail) 1fr;
+    padding: 0;
+  }
+
+  .tl-year {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    color: var(--text-3);
+    position: sticky;
+    top: 84px;
+    align-self: start;
+    padding-top: 0.35rem;
+    padding-right: 2rem;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tl-items { display: flex; flex-direction: column; gap: 1.25rem; }
+
+  .tl-item { position: relative; padding-left: var(--dot-gap); }
+
+  .tl-dot {
+    position: absolute;
+    left: -4.5px;
+    top: 1.35rem;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    border: 1.5px solid var(--text-3);
+    z-index: 1;
+    transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+  }
+  .tl-item--featured .tl-dot {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-dim), 0 0 18px rgba(91, 140, 245, 0.35);
+  }
+  .tl-item:hover .tl-dot {
+    border-color: var(--accent);
+    background: var(--accent);
+  }
+
+  .tl-card {
+    padding: 1.25rem 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: border-color 0.25s, background 0.25s, transform 0.25s;
+  }
+  .tl-item:hover .tl-card {
+    border-color: var(--border-hover);
+    background: var(--surface-2);
+    transform: translateX(3px);
+  }
+  .tl-item--featured .tl-card {
+    border-color: rgba(91, 140, 245, 0.22);
+    background: linear-gradient(160deg, rgba(91, 140, 245, 0.05) 0%, var(--surface) 50%);
+  }
+
+  .tl-card-top { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+  .tl-date { font-size: 0.75rem; color: var(--text-3); font-weight: 600; letter-spacing: 0.03em; font-variant-numeric: tabular-nums; }
+
+  .tl-type {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 1px 8px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    color: var(--text-2);
+    background: var(--surface-2);
+  }
+  .tl-type--work        { color: var(--accent-light); border-color: rgba(91, 140, 245, 0.25); background: var(--accent-dim); }
+  .tl-type--publication { color: var(--accent-2-light); border-color: rgba(70, 224, 190, 0.22); background: var(--accent-2-dim); }
+  .tl-type--project     { color: var(--accent-2-light); border-color: rgba(70, 224, 190, 0.22); background: var(--accent-2-dim); }
+
+  .tl-item-title { font-family: var(--font-heading); font-size: 1.05rem; font-weight: 700; color: var(--text); letter-spacing: -0.01em; line-height: 1.3; margin-bottom: 0.4rem; }
+  .tl-item-title a { color: inherit; transition: color 0.2s; }
+  .tl-item-title a:hover { color: var(--accent-light); }
+
+  .tl-detail { font-size: 0.85rem; color: var(--text-2); line-height: 1.7; max-width: 640px; }
+
+  .tl-end {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-left: calc(var(--rail) + var(--dot-gap));
+    position: relative;
+  }
+  .tl-end-dot {
+    position: absolute;
+    left: calc(-1 * var(--dot-gap) - 5.5px);
+    top: 0.3rem;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--accent-2);
+    box-shadow: 0 0 0 4px var(--accent-2-dim), 0 0 18px rgba(70, 224, 190, 0.4);
+    animation: badgePulse 2.4s ease-in-out infinite;
+  }
+  .tl-end-text { font-size: 0.9rem; color: var(--text-2); line-height: 1.7; max-width: 560px; }
+  .tl-end-cta {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--accent);
+    display: inline-block;
+    transition: color 0.2s;
+  }
+  .tl-end-cta:hover { color: var(--accent-light); }
+
+  @media (max-width: 700px) {
+    .tl-body { --rail: 16px; --dot-gap: 1.5rem; }
+    .tl-year { position: static; text-align: left; padding: 0 0 0.75rem calc(var(--rail) + var(--dot-gap)); font-size: 0.95rem; color: var(--text-2); }
+    .tl-year-group { grid-template-columns: 1fr; }
+    .tl-items { margin-left: var(--rail); }
+    .tl-end { margin-left: calc(var(--rail) + var(--dot-gap)); }
+    .tl-header-top { align-items: flex-start; flex-direction: column; gap: 1rem; }
+    .tl-meta { text-align: left; }
+    .tl-card { padding: 1rem 1.1rem; }
+  }
+</style>
+
+<style is:global>
+  @keyframes tlTrackGrow {
+    from { transform: scaleY(0); }
+    to   { transform: scaleY(1); }
+  }
+</style>

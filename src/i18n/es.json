@@ -15,6 +15,7 @@
   "nav.blog": "Blog",
   "nav.now": "Now",
   "nav.manifiesto": "Manifiesto",
+  "nav.timeline": "Trayectoria",
 
   "footer.tagline": "Ingeniero de Software Senior",
   "footer.pages_label": "Sobre mí",
@@ -149,5 +150,12 @@
   "testimonials.q1": "Su profesionalismo y sus habilidades técnicas son sobresalientes, pero sobre todo destacan sus cualidades humanas. Siempre recuerda que, aunque trabajamos en tecnología, trabajamos con humanos.",
   "testimonials.q1_context": "Cargo superior · Ubidots",
   "testimonials.q2": "Un excelente desarrollador con grandes habilidades en desarrollo web, además de una capacidad de liderazgo natural y un gran talento para enseñar.",
-  "testimonials.q2_context": "Mismo equipo · Clever Cloud"
+  "testimonials.q2_context": "Mismo equipo · Clever Cloud",
+
+  "timeline.eyebrow": "Trayectoria",
+  "timeline.title": "Trayectoria",
+  "timeline.count_label": "años",
+  "timeline.desc": "De estudiante en Hidalgo a senior engineer con productos propios: código, papers, charlas y una que otra paloma — en una sola línea de tiempo.",
+  "timeline.end": "La línea sigue creciendo. Si quieres ser parte del siguiente hito, hablemos.",
+  "timeline.cta": "Contacto"
 }

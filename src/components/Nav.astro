@@ -73,6 +73,7 @@ const slug = Astro.url.pathname.replace(/^\/(es|en|lat)/, '') || '/';
     <li><a href={`/${locale}/#talks`} onclick="closeMobileMenu()">{t('nav.talks')}</a></li>
     <li><a href={`/${locale}/#contact`} onclick="closeMobileMenu()">{t('nav.contact')}</a></li>
     <li><a href={`/${locale}/blog`} onclick="closeMobileMenu()" class="mobile-blog-link">{t('nav.blog')}</a></li>
+    <li><a href={`/${locale}/timeline`} onclick="closeMobileMenu()">{t('nav.timeline')}</a></li>
     <li><a href={`/${locale}/now`} onclick="closeMobileMenu()">{t('nav.now')}</a></li>
     <li><a href={`/${locale}/manifiesto`} onclick="closeMobileMenu()">{t('nav.manifiesto')}</a></li>
     <li><a href={`/${locale}/press`} onclick="closeMobileMenu()">{t('nav.press')}</a></li>

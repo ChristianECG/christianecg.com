@@ -14,6 +14,7 @@
   "nav.contact": "Contact",
   "nav.blog": "Blog",
   "nav.now": "Now",
+  "nav.timeline": "Timeline",
   "nav.manifiesto": "Manifesto",
 
   "footer.tagline": "Senior Software Engineer",
@@ -149,5 +150,12 @@
   "testimonials.q1": "His professionalism and technical skills are outstanding, but above all, his human qualities are remarkable. He always remembers that even though we work in technology, we work with humans.",
   "testimonials.q1_context": "Senior colleague · Ubidots",
   "testimonials.q2": "An excellent developer with great skills in web development, with a natural leadership ability and great teaching skills.",
-  "testimonials.q2_context": "Same team · Clever Cloud"
+  "testimonials.q2_context": "Same team · Clever Cloud",
+
+  "timeline.eyebrow": "Timeline",
+  "timeline.title": "Timeline",
+  "timeline.count_label": "years",
+  "timeline.desc": "From student in Hidalgo to senior engineer with products of his own: code, papers, talks, and the occasional pigeon — on a single timeline.",
+  "timeline.end": "The line keeps growing. If you want to be part of the next milestone, let's talk.",
+  "timeline.cta": "Contact"
 }

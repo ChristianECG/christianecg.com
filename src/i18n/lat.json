@@ -14,6 +14,7 @@
   "nav.contact": "Contactus",
   "nav.blog": "Commentarii",
   "nav.now": "Nunc",
+  "nav.timeline": "Iter",
   "nav.manifiesto": "Manifestum",
 
   "footer.tagline": "Faber Programmatus Senior",
@@ -149,5 +150,12 @@
   "testimonials.q1": "Professionalismus eius et artes technicae eximiae sunt, sed ante omnia qualitates humanae eius notabiles sunt. Semper meminit nos, quamquam in technologia laboramus, cum hominibus laborare.",
   "testimonials.q1_context": "Collega superior · Ubidots",
   "testimonials.q2": "Fabricator excellens cum magnis artibus in progressione interretiali, cum naturali facultate ducendi et magno ingenio docendi.",
-  "testimonials.q2_context": "Eadem turma · Clever Cloud"
+  "testimonials.q2_context": "Eadem turma · Clever Cloud",
+
+  "timeline.eyebrow": "Iter",
+  "timeline.title": "Iter",
+  "timeline.count_label": "anni",
+  "timeline.desc": "A discipulo in Hidalgo ad fabrum seniorem cum operibus propriis: codex, dissertationes, sermones et interdum columba — in una linea temporis.",
+  "timeline.end": "Linea crescere pergit. Si pars proximi lapidis miliarii esse vis, colloquamur.",
+  "timeline.cta": "Contactus"
 }
