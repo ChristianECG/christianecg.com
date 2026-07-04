@@ -4,7 +4,7 @@ import { build, preview } from 'astro';
 import { chromium } from 'playwright';
 import { AxeBuilder } from '@axe-core/playwright';
 
-const PAGES = ['/', '/blog/', '/cv/', '/timeline/', '/now/', '/manifiesto/', '/press/', '/talks/', '/404', '/en/', '/api/'];
+const PAGES = ['/', '/blog/', '/cv/', '/timeline/', '/now/', '/manifiesto/', '/colophon/', '/press/', '/talks/', '/404', '/en/', '/api/'];
 
 await build({ logLevel: 'error' });
 const server = await preview({ logLevel: 'error' });

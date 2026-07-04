@@ -112,6 +112,15 @@
   "now.learning": "Discens",
   "now.writing": "Scribens",
 
+  "colophon.eyebrow": "Quomodo factum est",
+  "colophon.heading": "Colophon",
+  "colophon.stack": "Instrumenta",
+  "colophon.typography": "Typographia",
+  "colophon.data_api": "Data et API",
+  "colophon.quality": "Qualitas",
+  "colophon.details": "Curiosa",
+  "nav.colophon": "Colophon",
+
   "manifesto.eyebrow": "Manifestum",
   "manifesto.beliefs_eyebrow": "Quae credo",
   "manifesto.beliefs_heading": "Principia quibus construo.",

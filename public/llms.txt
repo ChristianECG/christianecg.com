@@ -21,6 +21,7 @@
 - [Timeline](https://christianecg.com/timeline/): career milestones
 - [Now](https://christianecg.com/now/): what I'm focused on right now
 - [Manifiesto](https://christianecg.com/manifiesto/): personal manifesto
+- [Colophon](https://christianecg.com/colophon/): how this site is built
 - [Talks](https://christianecg.com/talks/): speaking engagements
 - [Press](https://christianecg.com/press/): press kit and mentions
 

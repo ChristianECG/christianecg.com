@@ -112,6 +112,15 @@
   "now.learning": "Aprendiendo",
   "now.writing": "Escribiendo",
 
+  "colophon.eyebrow": "Cómo está hecho",
+  "colophon.heading": "Colofón",
+  "colophon.stack": "El stack",
+  "colophon.typography": "Tipografía",
+  "colophon.data_api": "Datos y API",
+  "colophon.quality": "Calidad",
+  "colophon.details": "Detalles",
+  "nav.colophon": "Colofón",
+
   "manifesto.eyebrow": "Manifiesto",
   "manifesto.beliefs_eyebrow": "Lo que creo",
   "manifesto.beliefs_heading": "Principios con los que construyo.",
