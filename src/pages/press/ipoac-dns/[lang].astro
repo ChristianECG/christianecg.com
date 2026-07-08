@@ -12,7 +12,7 @@ const { lang } = Astro.params as { lang: 'es' | 'en' };
 
 const content = {
   es: {
-    meta: { title: 'Resumen para prensa — DNS over Avian Carriers · Christian Elías Cruz González', lang: 'es' },
+    meta: { title: 'Resumen para prensa — DNS over Avian Carriers · Christian Elías Cruz González', lang: 'es', description: 'Resumen para prensa de DNS over Avian Carriers (DoAC), Internet-Draft ante el IETF que extiende la saga del RFC 1149 con resolución de nombres sobre palomas mensajeras.' },
     label_press: 'Resumen para medios de comunicación',
     label_ietf: 'Internet-Draft ante el IETF · Junio 2026',
     title: 'DNS over Avian Carriers (DoAC)',
@@ -75,7 +75,7 @@ const content = {
     footer: 'Este documento es un resumen para medios de comunicación. El Internet-Draft original, en inglés, está disponible en el IETF Datatracker y constituye la fuente técnica de referencia. DNS over Avian Carriers es un documento humorístico en la tradición de los RFC de 1 de abril del IETF. El autor asume plena responsabilidad técnica de su contenido.',
   },
   en: {
-    meta: { title: 'Press Summary — DNS over Avian Carriers · Christian Elías Cruz González', lang: 'en' },
+    meta: { title: 'Press Summary — DNS over Avian Carriers · Christian Elías Cruz González', lang: 'en', description: 'Press summary of DNS over Avian Carriers (DoAC), an IETF Internet-Draft extending the RFC 1149 avian saga with name resolution over carrier pigeons.' },
     label_press: 'Press Summary',
     label_ietf: 'Internet-Draft submitted to the IETF · June 2026',
     title: 'DNS over Avian Carriers (DoAC)',
@@ -149,6 +149,13 @@ const c = content[lang];
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
   <title>{c.meta.title}</title>
+  <meta name="description" content={c.meta.description} />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content={c.meta.title} />
+  <meta property="og:description" content={c.meta.description} />
+  <meta property="og:url" content={`https://christianecg.com${Astro.url.pathname}`} />
+  <meta property="og:image" content="https://christianecg.com/og/press.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 

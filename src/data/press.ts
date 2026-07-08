@@ -41,6 +41,7 @@ export interface PressMention {
   date: string; // ISO YYYY-MM-DD for sorting
   date_es: string;
   date_en: string;
+  date_lat?: string;
   outlet: string;
   lang: 'es' | 'en' | 'lat'; // original language of the article
   title: string; // always in the original language
@@ -53,6 +54,7 @@ export const pressKits: PressKit[] = [
     date: '2026-06-01',
     date_es: 'Jun 2026',
     date_en: 'Jun 2026',
+    date_lat: 'Iun 2026',
     title_es: 'DNS over Avian Carriers (DoAC)',
     title_en: 'DNS over Avian Carriers (DoAC)',
     title_lat: 'DNS super Vectores Aviarios (DoAC)',
@@ -66,6 +68,8 @@ export const pressKits: PressKit[] = [
       'Internet-Draft presentado ante el IETF que especifica un mecanismo para resolver nombres de dominio sobre redes de palomas mensajeras. Cierra la brecha crítica que el RFC 1149 dejó abierta durante más de tres décadas: ¿cómo resuelve un hostname un nodo en una red aviar? El documento sigue el formato técnico completo de los RFC de 1 de abril — tan riguroso en su revisión como cualquier estándar de internet, tan honesto en su propósito.',
     description_en:
       'Internet-Draft submitted to the IETF specifying a mechanism for resolving domain names over carrier pigeon networks. It closes the critical gap left open by RFC 1149 for over three decades: how does a host on an avian-carrier network resolve a hostname? The document follows the complete technical format of April 1st RFCs — as rigorous in its review as any internet standard, as honest in its purpose.',
+    description_lat:
+      'Epistula Interretialis (Internet-Draft) apud IETF praesentata quae mechanismum ad nomina dominiorum super retia columbarum nuntiarum resolvenda specificat. Lacunam criticam claudit quam RFC 1149 per plus quam tria decennia apertam reliquit: quomodo nodus in rete aviario nomen hospitis resolvit? Documentum formam technicam plenam RFC diei primi Aprilis sequitur — tam rigorosum in recensione quam quodlibet normativum interretis, tam honestum in proposito.',
     photos: [
       {
         url: '/press/ipoac-dns/doac-architecture.png',
@@ -85,21 +89,25 @@ export const pressKits: PressKit[] = [
       {
         label_es: 'Resumen para prensa (PDF · ES)',
         label_en: 'Resumen para prensa (PDF · ES)',
+        label_lat: 'Resumen para prensa (PDF · ES)',
         url: '/press/ipoac-dns/resumen-prensa-es.pdf',
       },
       {
         label_es: 'Press summary (PDF · EN)',
         label_en: 'Press summary (PDF · EN)',
+        label_lat: 'Press summary (PDF · EN)',
         url: '/press/ipoac-dns/press-summary-en.pdf',
       },
       {
         label_es: 'Contexto y citas (PDF · ES)',
         label_en: 'Contexto y citas (PDF · ES)',
+        label_lat: 'Contexto y citas (PDF · ES)',
         url: '/press/ipoac-dns/contexto-es.pdf',
       },
       {
         label_es: 'Context & quotes (PDF · EN)',
         label_en: 'Context & quotes (PDF · EN)',
+        label_lat: 'Context & quotes (PDF · EN)',
         url: '/press/ipoac-dns/context-en.pdf',
       },
     ],
@@ -121,9 +129,9 @@ export const pressKits: PressKit[] = [
     date_es: 'Oct 2021',
     date_en: 'Oct 2021',
     date_lat: 'Oct 2021',
-    title_es: 'Security Issues of a Decentralized BlockChain-Based Messaging System',
-    title_en: 'Security Issues of a Decentralized BlockChain-Based Messaging System',
-    title_lat: 'Security Issues of a Decentralized BlockChain-Based Messaging System',
+    title_es: 'Security Issues of a Decentralized Blockchain-Based Messaging System',
+    title_en: 'Security Issues of a Decentralized Blockchain-Based Messaging System',
+    title_lat: 'Security Issues of a Decentralized Blockchain-Based Messaging System',
     event_es: 'VII CONIITI · Universidad Católica de Colombia · IEEE Xplore',
     event_en: 'VII CONIITI · Universidad Católica de Colombia · IEEE Xplore',
     event_lat: 'VII CONIITI · Universitas Catholica Columbiae · IEEE Xplore',
@@ -132,7 +140,7 @@ export const pressKits: PressKit[] = [
     description_en:
       'Research paper presented at the VII International Congress on Innovation and Trends in Engineering (CONIITI) at Universidad Católica de Colombia, subsequently accepted for publication in IEEE Xplore. Proposes a decentralized blockchain-based messaging system as an alternative to centralized services, following the principles of Satoshi Nakamoto\'s white paper.',
     description_lat:
-      'Dissertatio investigationis in VII Congressu Internationali Innovationis et Tendentiarum in Ingenieria (CONIITI) apud Universitatem Catholicam Columbiae praesentation, postea in IEEE Xplore edita. Systema nuntiorum decentralizatum in nexu nexuum proponitur ut alternativa servitiis centralibus.',
+      'Dissertatio investigationis in VII Congressu Internationali Innovationis et Tendentiarum in Ingenieria (CONIITI) apud Universitatem Catholicam Columbiae praesentata, postea in IEEE Xplore edita. Systema nuntiorum decentralizatum in nexu nexuum proponitur ut alternativa servitiis centralibus.',
     photos: [
       {
         url: '/press/coniiti-2021/foto-autor.jpg',
@@ -172,11 +180,13 @@ export const pressKits: PressKit[] = [
       {
         label_es: 'Resumen para prensa (PDF · ES)',
         label_en: 'Resumen para prensa (PDF · ES)',
+        label_lat: 'Resumen para prensa (PDF · ES)',
         url: '/press/coniiti-2021/resumen-prensa-es.pdf',
       },
       {
         label_es: 'Press summary (PDF · EN)',
         label_en: 'Press summary (PDF · EN)',
+        label_lat: 'Press summary (PDF · EN)',
         url: '/press/coniiti-2021/press-summary-en.pdf',
       },
     ],
@@ -206,6 +216,7 @@ export const pressMentions: PressMention[] = [
     date: '2021-10-05',
     date_es: '5 Oct 2021',
     date_en: 'Oct 5, 2021',
+    date_lat: '5 Oct 2021',
     lang: 'es',
     outlet: 'ITSOEH',
     title: 'El ITSOEH reconoce a Christian Elías Cruz González por la presentación de su artículo en el VII CONIITI de la Universidad Católica de Colombia',
@@ -215,6 +226,7 @@ export const pressMentions: PressMention[] = [
     date: '2021-12-13',
     date_es: '13 Dic 2021',
     date_en: 'Dec 13, 2021',
+    date_lat: '13 Dec 2021',
     lang: 'es',
     outlet: 'ITSOEH',
     title: 'El ITSOEH felicita a Christian Elías Cruz González por la incorporación de su artículo a la base de datos IEEE Xplore',
@@ -224,6 +236,7 @@ export const pressMentions: PressMention[] = [
     date: '2022-03-01',
     date_es: '1 Mar 2022',
     date_en: 'Mar 1, 2022',
+    date_lat: '1 Mar 2022',
     lang: 'es',
     outlet: 'Horizontes ANUIES',
     title: 'Estudiante del ITSOEH publica artículo en la plataforma científica más importante del mundo «IEEE Xplore»',
@@ -233,6 +246,7 @@ export const pressMentions: PressMention[] = [
     date: '2022-01-07',
     date_es: '7 Ene 2022',
     date_en: 'Jan 7, 2022',
+    date_lat: '7 Ian 2022',
     lang: 'es',
     outlet: 'Hidalgo en Línea',
     title: 'Estudiante del ITSOEH publica artículo en «IEEE Xplore», la plataforma científica más importante del mundo',
@@ -242,6 +256,7 @@ export const pressMentions: PressMention[] = [
     date: '2022-01-17',
     date_es: '17 Ene 2022',
     date_en: 'Jan 17, 2022',
+    date_lat: '17 Ian 2022',
     lang: 'es',
     outlet: 'TecNM',
     title: 'Christian Elías Cruz González publica artículo sobre seguridad en sistemas de mensajería descentralizada',

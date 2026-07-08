@@ -19,6 +19,6 @@ Y sí, es posible que no siempre necesitemos entender la profundidad de un recur
 
 Sin embargo, cuando profundizamos en un tema en concreto, volver a crear cada uno de los métodos y funciones que utilizamos en el día a día, permitirá que entendamos la importancia que tiene (y las implicaciones) de cada uno de ellos.
 
-Por ese motivo, hay ocasiones en las que vale la pena intentar [reinventar React](https://mattgreer.dev/articles/react-internals-part-one-basic-rendering/), un [intérprete de un nuevo lenguaje de programación](https://github.com/keyz/the-super-tiny-interpreter), o un [Git propio](https://kushagra.dev/blog/build-git-learn-git/), por poner algunos ejemplos.
+Por ese motivo, hay ocasiones en las que vale la pena intentar [reinventar React](https://www.mattgreer.dev/blog/react-internals-part-one-basic-rendering/), un [intérprete de un nuevo lenguaje de programación](https://github.com/keyz/the-super-tiny-interpreter), o un [Git propio](https://kushagra.dev/blog/build-git-learn-git/), por poner algunos ejemplos.
 
 ¿No suena apasionante?

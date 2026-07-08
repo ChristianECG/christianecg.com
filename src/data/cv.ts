@@ -57,7 +57,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
     },
     header: {
       name: 'Christian Elías Cruz González',
-      role: 'Senior Fullstack Engineer',
+      role: 'Senior Fullstack Engineer — SaaS & Integrations',
       location: 'México · CDMX / Hidalgo',
       contact: [
         'christianecg.com',
@@ -117,8 +117,8 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
           {
             title: 'TuAgenda.digital',
             url: 'tuagenda.digital',
-            description: 'SaaS de automatización de citas actualmente en operación, con 5 clientes activos en los primeros 3 meses y facturación recurrente vía Stripe: booking white-label, portal de cliente sin login, recordatorios por email/SMS y agente de IA en WhatsApp con Claude API en producción — atendiendo reservas 24/7 y reduciendo la carga operativa manual en ~80%.',
-            tags: 'Next.js 15 · Supabase · Stripe · Twilio · Claude API · OpenAI · Vercel Edge',
+            description: 'SaaS de automatización de citas actualmente en operación, con 5 clientes activos en los primeros 3 meses y facturación recurrente vía Stripe: booking white-label, portal de cliente sin login, recordatorios por email/SMS y agente de IA en WhatsApp con OpenAI en producción — atendiendo reservas 24/7 y reduciendo la carga operativa manual en ~80%.',
+            tags: 'Next.js 15 · Supabase · Stripe · Twilio · OpenAI · Vercel Edge',
           },
           {
             title: 'Squawk',
@@ -259,8 +259,8 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
           {
             title: 'TuAgenda.digital',
             url: 'tuagenda.digital',
-            description: 'Appointment automation SaaS currently in operation, with 5 active clients in the first 3 months and recurring revenue via Stripe: white-label booking, login-free client portal, email/SMS reminders, and an AI agent on WhatsApp with Claude API in production — handling reservations 24/7 and reducing manual operational load by ~80%.',
-            tags: 'Next.js 15 · Supabase · Stripe · Twilio · Claude API · OpenAI · Vercel Edge',
+            description: 'Appointment automation SaaS currently in operation, with 5 active clients in the first 3 months and recurring revenue via Stripe: white-label booking, login-free client portal, email/SMS reminders, and an AI agent on WhatsApp with OpenAI in production — handling reservations 24/7 and reducing manual operational load by ~80%.',
+            tags: 'Next.js 15 · Supabase · Stripe · Twilio · OpenAI · Vercel Edge',
           },
           {
             title: 'Squawk',
@@ -401,13 +401,13 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
           {
             title: 'TuAgenda.digital',
             url: 'tuagenda.digital',
-            description: 'SaaS automationis temporum nunc in operatione, cum quinque clientibus activis in primis tribus mensibus et vectigali recurrente per Stripe: inscriptio sub nomine alieno, portale clientis sine ingressu, admonitiones per electronicam epistulam et SMS, agensque AI in WhatsApp cum Claude API in productione — curationem vacationum XXIV/VII agens et onus manuale operationale circa 80% minuens.',
-            tags: 'Next.js 15 · Supabase · Stripe · Twilio · Claude API · OpenAI · Vercel Edge',
+            description: 'SaaS automationis temporum nunc in operatione, cum quinque clientibus activis in primis tribus mensibus et vectigali recurrente per Stripe: inscriptio sub nomine alieno, portale clientis sine ingressu, admonitiones per electronicam epistulam et SMS, agensque AI in WhatsApp cum OpenAI in productione — curationem vacationum XXIV/VII agens et onus manuale operationale circa 80% minuens.',
+            tags: 'Next.js 15 · Supabase · Stripe · Twilio · OpenAI · Vercel Edge',
           },
           {
             title: 'Squawk',
             url: 'squawk.creu.cat',
-            description: 'Tabula navigationis aereae globalis in tempore reali: data ADS-B per OpenSky Network, operarius Node.js cum SQLite (modus WAL), mappa densitatis per deck.gl + MapLibre, VI tabulae vivae per ECharts et monitus squawkorum urgentium (7700/7600/7500) per fluxum SSE quovis quinquennio secundo.',
+            description: 'Tabula navigationis aereae globalis in tempore reali: data ADS-B per OpenSky Network, operarius Node.js cum SQLite (modus WAL), mappa densitatis per deck.gl + MapLibre, VI tabulae vivae per ECharts et monitus squawkorum urgentium (7700/7600/7500) per fluxum SSE quinto quoque secundo.',
             tags: 'Next.js 15 · TypeScript · deck.gl · MapLibre · ECharts · SQLite · SSE',
           },
           {
@@ -434,7 +434,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
         title: 'Peritiae',
         categories: [
           { label: 'Frontend et Mobile', items: 'React, Next.js, TypeScript, JavaScript (ES2021+), React Native, HTML5, CSS3, systemata designationis' },
-          { label: 'Backend et Infrastructura', items: 'Node.js, Python, FastAPI, Django, PHP, PostgreSQL, MySQL, Supabase, Vercel, Docker, VPS (Linux), GitHub Actions (CI/CD), REST APIs, Stripe, Twilio' },
+          { label: 'Backend et Infrastructura', items: 'Node.js, Python, FastAPI, Django, PHP, PostgreSQL, MySQL, Supabase (PostgreSQL + tempus reale), Vercel (Edge Functions, serverless), Docker, VPS (Linux, self-hosted), GitHub Actions (CI/CD), REST APIs, Stripe, Twilio' },
           { label: 'AI / Integratio LLM', items: 'Claude API, OpenAI API, processus agentium, agentes LLM in productione, ars prompti, evolutio augmentata AI' },
           { label: 'Qualitas et Instrumenta', items: 'ESLint (plugina propria), Jest, React Testing Library, Git, recensiones codicis, Claude Code, GitHub Copilot' },
           { label: 'Data in Tempore Reali', items: 'TanStack Query, WebSockets, REST APIs, ECharts, D3.js, optimizatio reddendi' },
@@ -461,7 +461,6 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
         items: [
           { language: 'Hispanica', level: 'Nativa / C2' },
           { language: 'Anglica', level: 'Upper-Intermediate / B2 · EF SET' },
-          { language: 'Latina', level: 'Satis — dum paginas construo' },
         ],
       },
       activity: {

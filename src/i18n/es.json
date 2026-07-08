@@ -1,7 +1,7 @@
 {
   "layout.skip_to_content": "Saltar al contenido",
   "layout.back_to_top": "Volver arriba",
-  "meta.description": "Ingeniero de Software Senior — 5 años construyendo Ubidots, plataforma IoT con 150K usuarios. React, apps móviles y sistemas en tiempo real. Remoto desde 2021.",
+  "meta.description": "Ingeniero de Software Senior — 4 años construyendo Ubidots, plataforma IoT con más de 150K usuarios. React, apps móviles y sistemas en tiempo real. Remoto desde 2021. Autor publicado en IEEE.",
 
   "nav.aria": "Navegación principal",
   "footer.aria": "Enlaces del pie de página",
@@ -36,7 +36,7 @@
   "hero.cta_contact": "Contacto",
 
   "about.eyebrow": "Sobre mí",
-  "about.heading": "Cinco años optimizando el frontend de una plataforma con 150K usuarios. Ahora construyo herramientas para developers.",
+  "about.heading": "Cuatro años optimizando el frontend de una plataforma con 150K usuarios. Ahora construyo herramientas para developers.",
   "about.bio_1": "En Ubidots había un widget de ECharts que tardaba 30 segundos en renderizar. Nadie abrió un bug. Los usuarios solo cerraban la pestaña. Lo encontré en una sesión de DevTools a las 11 de la noche.",
   "about.bio_2": "Trabajé como Senior Engineer en Ubidots, una plataforma IoT con más de 150K usuarios y millones de eventos en tiempo real. Fuera del código, soy speaker, mentor y autor publicado en IEEE Xplore.",
   "about.fact_label_users": "usuarios activos diarios · mi código sigue en producción",

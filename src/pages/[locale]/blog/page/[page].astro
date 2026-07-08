@@ -52,8 +52,8 @@ function pageUrl(p: number) {
 ---
 
 <Layout
-  title={`Blog — Página ${currentPage} — Christian Elías Cruz González`}
-  description="Artículos sobre desarrollo web, frontend, tecnología y comunidad."
+  title={`Blog — ${t('blog.page_label').replace('%d', String(currentPage)).replace('%d', String(totalPages))} — Christian Elías Cruz González`}
+  description={`${t('blog.desc')} ${t('blog.page_label').replace('%d', String(currentPage)).replace('%d', String(totalPages))}.`}
   ogImage="https://christianecg.com/og/blog.png"
   locale={locale}
 >

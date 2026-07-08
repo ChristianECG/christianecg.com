@@ -12,7 +12,7 @@ const { lang } = Astro.params as { lang: 'es' | 'en' };
 
 const content = {
   es: {
-    meta: { title: 'Resumen para prensa — CONIITI 2021 · Christian Elías Cruz González', lang: 'es' },
+    meta: { title: 'Resumen para prensa — CONIITI 2021 · Christian Elías Cruz González', lang: 'es', description: 'Resumen para medios del paper "Security Issues of a Decentralized BlockChain-Based Messaging System", presentado en CONIITI 2021 y publicado en IEEE Xplore.' },
     label_press: 'Resumen para medios de comunicación',
     label_ieee: 'Publicado en IEEE Xplore · Octubre 2021',
     title: 'Seguridad en sistemas de mensajería descentralizada basados en blockchain',
@@ -56,7 +56,7 @@ const content = {
     footer: 'Este documento es un resumen ejecutivo para medios de comunicación. No reemplaza ni reproduce el artículo científico original publicado en IEEE Xplore, cuya consulta se recomienda para información técnica detallada.',
   },
   en: {
-    meta: { title: 'Press Summary — CONIITI 2021 · Christian Elías Cruz González', lang: 'en' },
+    meta: { title: 'Press Summary — CONIITI 2021 · Christian Elías Cruz González', lang: 'en', description: 'Press summary of the paper "Security Issues of a Decentralized BlockChain-Based Messaging System", presented at CONIITI 2021 and published in IEEE Xplore.' },
     label_press: 'Press Summary',
     label_ieee: 'Published in IEEE Xplore · October 2021',
     title: 'Security in Decentralized Blockchain-Based Messaging Systems',
@@ -111,6 +111,13 @@ const c = content[lang];
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
   <title>{c.meta.title}</title>
+  <meta name="description" content={c.meta.description} />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content={c.meta.title} />
+  <meta property="og:description" content={c.meta.description} />
+  <meta property="og:url" content={`https://christianecg.com${Astro.url.pathname}`} />
+  <meta property="og:image" content="https://christianecg.com/og/press.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 

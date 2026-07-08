@@ -3,10 +3,10 @@
     {
       "slug": "tuagenda",
       "title": "TuAgenda.digital",
-      "description_es": "SaaS de automatización de citas en operación, con 5 clientes activos en los primeros 3 meses y facturación recurrente vía Stripe: booking white-label, portal de cliente sin login, recordatorios automáticos por email y SMS, y agente de IA para WhatsApp con Claude API en producción — atendiendo reservas 24/7 y reduciendo la carga operativa manual en ~80%.",
-      "description_en": "Appointment automation SaaS in operation, with 5 active clients in the first 3 months and recurring revenue via Stripe: white-label booking pages, zero-login client portal, automated email and SMS reminders, and an AI scheduling agent for WhatsApp with Claude API in production — handling reservations 24/7 and reducing manual operational load by ~80%.",
-      "description_lat": "SaaS automationis citationum in operatione, cum quinque clientibus activis in primis tribus mensibus et vectigali recurrente per Stripe: inscriptio sub nomine alieno, portale clientis sine ingressu, admonitiones automaticae per electronicam epistulam et SMS, agensque AI in WhatsApp cum Claude API in productione — curationem vacationum XXIV/VII agens et onus manuale circa 80% minuens.",
-      "tags": ["Claude API", "Next.js", "Supabase", "Stripe", "Twilio"],
+      "description_es": "SaaS de automatización de citas en operación, con 5 clientes activos en los primeros 3 meses y facturación recurrente vía Stripe: booking white-label, portal de cliente sin login, recordatorios automáticos por email y SMS, y agente de IA para WhatsApp con OpenAI en producción — atendiendo reservas 24/7 y reduciendo la carga operativa manual en ~80%.",
+      "description_en": "Appointment automation SaaS in operation, with 5 active clients in the first 3 months and recurring revenue via Stripe: white-label booking pages, zero-login client portal, automated email and SMS reminders, and an AI scheduling agent for WhatsApp with OpenAI in production — handling reservations 24/7 and reducing manual operational load by ~80%.",
+      "description_lat": "SaaS automationis citationum in operatione, cum quinque clientibus activis in primis tribus mensibus et vectigali recurrente per Stripe: inscriptio sub nomine alieno, portale clientis sine ingressu, admonitiones automaticae per electronicam epistulam et SMS, agensque AI in WhatsApp cum OpenAI in productione — curationem vacationum XXIV/VII agens et onus manuale circa 80% minuens.",
+      "tags": ["OpenAI", "Next.js", "Supabase", "Stripe", "Twilio"],
       "status": "live",
       "url": "https://tuagenda.digital",
       "caseStudy": "/projects/tuagenda"
@@ -16,7 +16,7 @@
       "title": "Squawk",
       "description_es": "Dashboard de aviación global en tiempo real: datos ADS-B de la red OpenSky, worker Node.js con SQLite en modo WAL, mapa de densidad con deck.gl + MapLibre, 6 gráficas en vivo con ECharts y alertas de squawks de emergencia (7700/7600/7500) vía streaming SSE cada 5s.",
       "description_en": "Real-time global aviation dashboard: ADS-B transponder data via OpenSky Network, Node.js worker with SQLite WAL mode, density heatmap via deck.gl + MapLibre, 6 live ECharts charts, and emergency squawk alerts (7700/7600/7500) over SSE streaming every 5s.",
-      "description_lat": "Tabula navigationis aereae globalis in tempore reali: data ADS-B per OpenSky Network, operarius Node.js cum SQLite (modus WAL), mappa densitatis per deck.gl + MapLibre, VI tabulae vivae per ECharts et monitus squawkorum urgentium (7700/7600/7500) per fluxum SSE quovis quinquennio secundo.",
+      "description_lat": "Tabula navigationis aereae globalis in tempore reali: data ADS-B per OpenSky Network, operarius Node.js cum SQLite (modus WAL), mappa densitatis per deck.gl + MapLibre, VI tabulae vivae per ECharts et monitus squawkorum urgentium (7700/7600/7500) per fluxum SSE quinto quoque secundo.",
       "tags": ["deck.gl", "MapLibre", "ECharts", "SSE", "Next.js"],
       "status": "live",
       "url": "https://squawk.creu.cat",

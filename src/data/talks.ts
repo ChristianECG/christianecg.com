@@ -198,9 +198,9 @@ export const talks: Talk[] = [
   },
 ];
 
-export const typeLabel: Record<string, { es: string; en: string }> = {
-  keynote: { es: 'Keynote', en: 'Keynote' },
-  talk:    { es: 'Charla',  en: 'Talk' },
-  mentor:  { es: 'Mentoría', en: 'Mentorship' },
-  media:   { es: 'Medios',  en: 'Media' },
+export const typeLabel: Record<string, { es: string; en: string; lat: string }> = {
+  keynote: { es: 'Keynote', en: 'Keynote', lat: 'Oratio principalis' },
+  talk:    { es: 'Charla',  en: 'Talk', lat: 'Sermo' },
+  mentor:  { es: 'Mentoría', en: 'Mentorship', lat: 'Monitoria' },
+  media:   { es: 'Medios',  en: 'Media', lat: 'Media' },
 };

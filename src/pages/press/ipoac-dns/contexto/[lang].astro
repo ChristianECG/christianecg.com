@@ -12,7 +12,7 @@ const { lang } = Astro.params as { lang: 'es' | 'en' };
 
 const content = {
   es: {
-    meta: { title: 'Contexto y citas — DNS over Avian Carriers · Christian Elías Cruz González', lang: 'es' },
+    meta: { title: 'Contexto y citas — DNS over Avian Carriers · Christian Elías Cruz González', lang: 'es', description: 'Contexto histórico y citas para medios sobre DNS over Avian Carriers (DoAC) y la tradición de los RFC del 1 de abril del IETF.' },
     label_press: 'Contexto y citas para medios de comunicación',
     label_doc: 'DNS over Avian Carriers (DoAC) · draft-cruzgonzalez-ipoac-dns · IETF',
     title: 'Contexto y citas',
@@ -77,7 +77,7 @@ const content = {
     ],
   },
   en: {
-    meta: { title: 'Context and quotes — DNS over Avian Carriers · Christian Elías Cruz González', lang: 'en' },
+    meta: { title: 'Context and quotes — DNS over Avian Carriers · Christian Elías Cruz González', lang: 'en', description: 'Historical context and quotes for media on DNS over Avian Carriers (DoAC) and the IETF April Fools RFC tradition.' },
     label_press: 'Context and quotes for members of the press',
     label_doc: 'DNS over Avian Carriers (DoAC) · draft-cruzgonzalez-ipoac-dns · IETF',
     title: 'Context and quotes',
@@ -153,6 +153,13 @@ const c = content[lang];
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
   <title>{c.meta.title}</title>
+  <meta name="description" content={c.meta.description} />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content={c.meta.title} />
+  <meta property="og:description" content={c.meta.description} />
+  <meta property="og:url" content={`https://christianecg.com${Astro.url.pathname}`} />
+  <meta property="og:image" content="https://christianecg.com/og/press.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
