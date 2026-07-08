@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sfw pnpm build)",
+      "Bash(sfw pnpm dev)",
+      "Bash(sfw pnpm preview)",
+      "Bash(sfw pnpm typecheck)",
+      "Bash(sfw pnpm a11y)",
+      "Bash(sfw pnpm cv:pdf)",
+      "Bash(pnpm build)",
+      "mcp__claude-in-chrome__tabs_context_mcp"
+    ]
+  }
+}
