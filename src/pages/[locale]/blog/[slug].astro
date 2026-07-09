@@ -7,55 +7,79 @@ import '../../../styles/global.css';
 import { LOCALES, useTranslations } from '../../../i18n';
 import type { Locale } from '../../../i18n';
 import { readingTime } from '../../../utils/readingTime';
+import { getAllArticles } from '../../../utils/blogData';
+import type { Article } from '../../../utils/blogData';
 
 export async function getStaticPaths() {
   const entries = await getCollection('blog');
-  return LOCALES.flatMap((locale) =>
-    entries.map((entry) => ({
+  // Octa articles are mirrored locally (full HTML from the RSS feed) with
+  // rel=canonical pointing back to octa.page. English content, all locales.
+  const octaArticles = (await getAllArticles()).filter((a) => a.content);
+  return LOCALES.flatMap((locale) => [
+    ...entries.map((entry) => ({
       params: { locale, slug: entry.id },
       props: { entry, locale },
-    }))
-  );
+    })),
+    ...octaArticles.map((article) => ({
+      params: { locale, slug: article.id },
+      props: { article, locale },
+    })),
+  ]);
 }
 
-const { locale, entry } = Astro.props as { locale: Locale; entry: any };
+const { locale, entry, article } = Astro.props as { locale: Locale; entry?: any; article?: Article };
 
-// Non-es locales: redirect to the Spanish post with ?from= param
-if (locale !== 'es') {
+// Non-es locales: redirect local posts to the Spanish version with ?from= param.
+// Octa mirrors exist in every locale, so they never redirect.
+if (!article && locale !== 'es') {
   return Astro.redirect(`/es/blog/${entry.id}?from=${locale}`, 302);
 }
 
 const t = useTranslations(locale);
-const { Content } = await render(entry);
-const mins = readingTime(entry.body ?? '');
+const Content = entry ? (await render(entry)).Content : null;
+
+const title = article?.title ?? entry?.data.title;
+const excerpt = article?.excerpt ?? entry?.data.excerpt;
+const date = article?.date ?? entry?.data.date;
+const mins = readingTime(article ? article.content!.replace(/<[^>]+>/g, ' ') : entry?.body ?? '');
+const ogImage = `https://christianecg.com/og/${article?.id ?? entry.id}.png`;
+
+const monthsFull: Record<string, string[]> = {
+  es:  ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+  en:  ['January','February','March','April','May','June','July','August','September','October','November','December'],
+  lat: ['Ianuarius','Februarius','Martius','Aprilis','Maius','Iunius','Iulius','Augustus','September','October','November','December'],
+};
 
 function formatDateFull(dateStr: string) {
   const [year, month, day] = dateStr.split('-');
-  const months = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-  return `${Number(day)} de ${months[Number(month) - 1]} de ${year}`;
+  const m = (monthsFull[locale] ?? monthsFull.es)[Number(month) - 1];
+  if (locale === 'en') return `${m} ${Number(day)}, ${year}`;
+  if (locale === 'lat') return `${Number(day)} ${m} ${year}`;
+  return `${Number(day)} de ${m} de ${year}`;
 }
 
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
-  headline: entry.data.title,
-  description: entry.data.excerpt,
-  datePublished: entry.data.date,
-  dateModified: entry.data.date,
-  url: `https://christianecg.com/es/blog/${entry.id}`,
-  image: `https://christianecg.com/og/${entry.id}.png`,
+  headline: title,
+  description: excerpt,
+  datePublished: date,
+  dateModified: date,
+  url: `https://christianecg.com/${locale}/blog/${article?.id ?? entry?.id}`,
+  image: ogImage,
   author: { '@type': 'Person', name: 'Christian Elías Cruz González', url: 'https://christianecg.com' },
   publisher: { '@type': 'Organization', name: 'christianecg.com', url: 'https://christianecg.com' },
 };
 ---
 
 <Layout
-  title={`${entry.data.title} — Christian Elías Cruz González`}
-  description={entry.data.excerpt}
+  title={`${title} — Christian Elías Cruz González`}
+  description={excerpt}
   ogType="article"
-  ogImage={`https://christianecg.com/og/${entry.id}.png`}
+  ogImage={ogImage}
   jsonLd={articleSchema}
   locale={locale}
+  canonical={article?.canonical}
 >
   <div class="progress-bar" id="reading-progress" aria-hidden="true"></div>
   <Nav locale={locale} />
@@ -70,28 +94,33 @@ const articleSchema = {
 
       <article class="article-wrapper">
         <header class="article-header">
-          <a href="/es/blog" class="back-link">
+          <a href={`/${locale}/blog`} class="back-link">
             <span class="back-arrow">←</span>
             {t('blog.back_to_list')}
           </a>
 
           <div class="article-meta">
-            <time class="article-date" datetime={entry.data.date}>
-              {formatDateFull(entry.data.date)}
+            <time class="article-date" datetime={date}>
+              {formatDateFull(date)}
             </time>
-            <span class="article-reading-time">{mins} min de lectura</span>
+            <span class="article-reading-time">{t('blog.reading_time').replace('%d', String(mins))}</span>
           </div>
 
-          <h1 class="article-title">{entry.data.title}</h1>
-          <p class="article-excerpt">{entry.data.excerpt}</p>
+          <h1 class="article-title">{title}</h1>
+          <p class="article-excerpt">{excerpt}</p>
+          {article && (
+            <p class="article-origin">
+              {t('blog.octa_origin')} <a href={article.canonical} target="_blank" rel="noopener">octa.page ↗</a>
+            </p>
+          )}
         </header>
 
-        <div class="article-content prose">
-          <Content />
-        </div>
+        {article
+          ? <div class="article-content prose" set:html={article.content} />
+          : <div class="article-content prose"><Content /></div>}
 
         <footer class="article-footer">
-          <a href="/es/blog" class="back-link-bottom">
+          <a href={`/${locale}/blog`} class="back-link-bottom">
             <span>←</span>
             {t('blog.back_link')}
           </a>
@@ -145,6 +174,9 @@ const articleSchema = {
 
   .article-title { font-size: clamp(1.6rem, 4vw, 2.5rem); font-weight: 800; color: var(--text); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1rem; }
   .article-excerpt { font-size: 1rem; color: var(--text-2); line-height: 1.7; }
+  .article-origin { font-size: 0.8rem; color: var(--text-3); margin-top: 1rem; }
+  .article-origin a { color: var(--accent-light); text-decoration: none; }
+  .article-origin a:hover { color: var(--accent); }
 
   .prose { font-size: 1rem; line-height: 1.8; color: var(--text); }
   .prose :global(h2) { font-size: 1.25rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
@@ -161,6 +193,20 @@ const articleSchema = {
   .prose :global(em) { color: var(--text-2); font-style: italic; }
   .prose :global(strong) { color: var(--text); font-weight: 700; }
   .prose :global(hr) { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+
+  .prose :global(table) { display: block; overflow-x: auto; border-collapse: collapse; margin: 0 0 1.5rem; font-size: 0.85rem; }
+  .prose :global(th), .prose :global(td) { border: 1px solid var(--border); padding: 0.5rem 0.75rem; text-align: left; line-height: 1.5; vertical-align: top; }
+  .prose :global(th) { background: var(--surface-2); font-weight: 700; color: var(--text); white-space: nowrap; }
+  .prose :global(tbody tr:nth-child(even)) { background: var(--surface); }
+
+  /* Mermaid: source <pre> hidden once rendered; shown again on print */
+  .prose :global(.mermaid-src) { display: none; }
+  .prose :global(.mermaid-wrap) { margin: 0 0 1.5rem; padding: 1.25rem; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; overflow-x: auto; display: flex; justify-content: center; }
+  .prose :global(.mermaid-wrap svg) { max-width: 100%; height: auto; }
+  @media print {
+    .prose :global(.mermaid-wrap) { display: none !important; }
+    .prose :global(.mermaid-src) { display: block !important; }
+  }
 
   .article-footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); }
   .back-link-bottom { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--text-2); text-decoration: none; font-weight: 600; transition: color 0.15s; }
@@ -218,7 +264,7 @@ const articleSchema = {
 
   // Copy buttons on code blocks
   document.querySelectorAll('.prose pre').forEach((pre) => {
-    if (pre.querySelector('.copy-btn')) return;
+    if (pre.querySelector('.copy-btn') || pre.querySelector('code.language-mermaid')) return;
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
     btn.setAttribute('aria-label', 'Copiar código');
@@ -237,4 +283,51 @@ const articleSchema = {
   }
 
   document.addEventListener('astro:page-load', initArticle);
+</script>
+
+<!-- Mermaid — loaded only when the article has diagrams (octa mirrors) -->
+<script>
+  async function renderMermaid() {
+    const pres = [...document.querySelectorAll<HTMLElement>('.prose pre')].filter(
+      (pre) => pre.querySelector('code.language-mermaid') && !pre.classList.contains('mermaid-src')
+    );
+    if (pres.length === 0) return;
+
+    const mermaid = (await import('mermaid')).default;
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'base',
+      themeVariables: {
+        primaryColor:        '#191E2D',
+        primaryTextColor:    '#E8EDF5',
+        primaryBorderColor:  'rgba(130, 170, 255, 0.35)',
+        lineColor:           'rgba(126, 142, 171, 0.6)',
+        mainBkg:             '#191E2D',
+        secondaryColor:      '#111520',
+        tertiaryColor:       '#111520',
+        edgeLabelBackground: '#0B0D12',
+        clusterBkg:          '#111520',
+        fontFamily:          "'SF Mono', 'Fira Code', 'Fira Mono', monospace",
+        fontSize:            '13px',
+      },
+    });
+
+    let i = 0;
+    for (const pre of pres) {
+      const code = pre.textContent ?? '';
+      const wrap = document.createElement('div');
+      wrap.className = 'mermaid-wrap';
+      pre.classList.add('mermaid-src');
+      pre.after(wrap);
+      try {
+        const { svg } = await mermaid.render(`mermaid-${Date.now()}-${i++}`, code);
+        wrap.innerHTML = svg;
+      } catch {
+        // Invalid diagram: fall back to showing the source block
+        wrap.remove();
+        pre.classList.remove('mermaid-src');
+      }
+    }
+  }
+  document.addEventListener('astro:page-load', renderMermaid);
 </script>

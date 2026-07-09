@@ -13,6 +13,7 @@ interface Props {
   ogImage?: string;
   jsonLd?: Record<string, unknown>;
   locale?: Locale;
+  canonical?: string;
 }
 
 const {
@@ -22,6 +23,7 @@ const {
   ogImage = 'https://christianecg.com/og/default.png',
   jsonLd,
   locale: localeProp,
+  canonical,
 } = Astro.props;
 
 const locale: Locale = localeProp ?? getLocaleFromUrl(Astro.url);
@@ -30,7 +32,7 @@ const metaDescription = description || t('meta.description');
 
 const base = 'https://christianecg.com';
 const slug = Astro.url.pathname.replace(/^\/(es|en|lat)/, '');
-const canonicalURL = new URL(Astro.url.pathname, base).href;
+const canonicalURL = canonical ?? new URL(Astro.url.pathname, base).href;
 const hrefEs  = new URL(`/es${slug}`,  base).href;
 const hrefEn  = new URL(`/en${slug}`,  base).href;
 

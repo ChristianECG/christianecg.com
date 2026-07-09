@@ -81,7 +81,7 @@ function pageUrl(p: number) {
             <div class="year-articles">
               {byYear[year].map((article, i) => (
                 <a
-                  href={article.url}
+                  href={article.external ? article.url : article.url.replace(/^\/es\//, `/${locale}/`)}
                   class="article-row"
                   style={`--i: ${i}`}
                   target={article.external ? '_blank' : undefined}
@@ -91,9 +91,6 @@ function pageUrl(p: number) {
                   <div class="article-body">
                     <div class="article-title-row">
                       <h2 class="article-title">{article.title}</h2>
-                      {!article.external && (
-                        <span class="article-archive">archivo</span>
-                      )}
                     </div>
                     {article.excerpt && <p class="article-excerpt">{article.excerpt}</p>}
                     {article.tags.length > 0 && (

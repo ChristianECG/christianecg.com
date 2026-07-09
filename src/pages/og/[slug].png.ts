@@ -1,23 +1,32 @@
 import type { APIContext } from 'astro';
 import { getCollection } from 'astro:content';
 import { C, h, png, glow } from './_og';
+import { getAllArticles } from '../../utils/blogData';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map((post) => ({
-    params: { slug: post.id },
-    props: { title: post.data.title, date: post.data.date },
-  }));
+  // Octa mirrors (full content) get their own OG image too
+  const octaArticles = (await getAllArticles()).filter((a) => a.content);
+  return [
+    ...posts.map((post) => ({
+      params: { slug: post.id },
+      props: { title: post.data.title, date: post.data.date, kicker: 'Artículo' },
+    })),
+    ...octaArticles.map((a) => ({
+      params: { slug: a.id },
+      props: { title: a.title, date: a.date, kicker: 'Octa' },
+    })),
+  ];
 }
 
 // Concept — "Article card": kicker + large headline (white for legibility),
 // date, and a gradient hairline; author and domain anchored at the bottom.
 export async function GET({ props }: APIContext) {
-  const { title, date } = props as { title: string; date: string };
+  const { title, date, kicker } = props as { title: string; date: string; kicker: string };
 
   const fontSize = title.length <= 40 ? 70 : title.length <= 65 ? 56 : title.length <= 85 ? 46 : 38;
   const formattedDate = date
-    ? new Date(date).toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' })
+    ? new Date(date).toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })
     : '';
 
   return png(
@@ -45,7 +54,7 @@ export async function GET({ props }: APIContext) {
             h(
               'div',
               { fontSize: '14px', fontWeight: 800, color: C.accent, letterSpacing: '0.16em', textTransform: 'uppercase' },
-              'Artículo'
+              kicker
             ),
           ]),
           formattedDate

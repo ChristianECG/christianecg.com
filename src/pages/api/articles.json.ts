@@ -13,6 +13,7 @@ export async function GET() {
       source: a.source,
       url: abs(a.url),
       external: a.external,
+      canonical: a.canonical,
     }))
   );
 }
