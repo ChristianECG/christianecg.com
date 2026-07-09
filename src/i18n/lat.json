@@ -1,7 +1,7 @@
 {
   "layout.skip_to_content": "Ad contentum salta",
   "layout.back_to_top": "Ad summum redi",
-  "meta.description": "Faber Programmatus Senior — quattuor annos Ubidots construens, suggestum IoT cum CL+ milibus utentium. React, applicationes mobiles et systemata in tempore reali. E longinquo ab MMXXI. Auctor in IEEE editus.",
+  "meta.description": "Faber Programmatus Senior et interretialis constructor in Hidalgo, Mexico — quattuor annos Ubidots construens, suggestum IoT cum CL+ milibus utentium. React, applicationes mobiles et systemata in tempore reali. E longinquo ex Mixquiahuala ab MMXXI.",
 
   "nav.aria": "Navigatio principalis",
   "footer.aria": "Nexus pedis paginae",
@@ -18,6 +18,7 @@
   "nav.manifiesto": "Manifestum",
 
   "footer.tagline": "Faber Programmatus Senior",
+  "footer.location": "Interretialis constructor in Mixquiahuala de Juárez, Hidalgo, Mexico",
   "footer.pages_label": "De me",
   "footer.publications_label": "Publicationes",
   "footer.contact_label": "Contactus",

@@ -1,7 +1,7 @@
 {
   "layout.skip_to_content": "Saltar al contenido",
   "layout.back_to_top": "Volver arriba",
-  "meta.description": "Ingeniero de Software Senior — 4 años construyendo Ubidots, plataforma IoT con más de 150K usuarios. React, apps móviles y sistemas en tiempo real. Remoto desde 2021. Autor publicado en IEEE.",
+  "meta.description": "Ingeniero de Software Senior y desarrollador web en Hidalgo, México — 4 años construyendo Ubidots, plataforma IoT con más de 150K usuarios. React, apps móviles y sistemas en tiempo real. Remoto desde Mixquiahuala desde 2021.",
 
   "nav.aria": "Navegación principal",
   "footer.aria": "Enlaces del pie de página",
@@ -18,6 +18,7 @@
   "nav.timeline": "Trayectoria",
 
   "footer.tagline": "Ingeniero de Software Senior",
+  "footer.location": "Desarrollador web en Mixquiahuala de Juárez, Hidalgo, México",
   "footer.pages_label": "Sobre mí",
   "footer.publications_label": "Publicaciones",
   "footer.contact_label": "Contacto",

@@ -29,6 +29,33 @@ const personSchema = {
   url: 'https://christianecg.com',
   jobTitle: 'Senior Software Engineer',
   email: 'contacto@christianecg.com',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Mixquiahuala de Juárez',
+    addressRegion: 'Hidalgo',
+    addressCountry: 'MX',
+  },
+  workLocation: {
+    '@type': 'Place',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Mixquiahuala de Juárez',
+      addressRegion: 'Hidalgo',
+      addressCountry: 'MX',
+    },
+  },
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: 'Instituto Tecnológico Superior del Occidente del Estado de Hidalgo (ITSOEH)',
+  },
+  knowsAbout: [
+    'Desarrollo web',
+    'React',
+    'TypeScript',
+    'Aplicaciones móviles',
+    'IoT',
+    'Sistemas en tiempo real',
+  ],
   sameAs: [
     'https://www.linkedin.com/in/christianeliascg/',
     'https://github.com/ChristianECG',
