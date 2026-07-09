@@ -1,5 +1,5 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
 import Layout from '../../../layouts/Layout.astro';
 import Nav from '../../../components/Nav.astro';
 import Footer from '../../../components/Footer.astro';
@@ -7,11 +7,11 @@ import '../../../styles/global.css';
 import { LOCALES, useTranslations } from '../../../i18n';
 import type { Locale } from '../../../i18n';
 import { readingTime } from '../../../utils/readingTime';
-import { getAllArticles } from '../../../utils/blogData';
+import { getAllArticles, getBlogEntries } from '../../../utils/blogData';
 import type { Article } from '../../../utils/blogData';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('blog');
+  const entries = await getBlogEntries();
   // Octa articles are mirrored locally (full HTML from the RSS feed) with
   // rel=canonical pointing back to octa.page. English content, all locales.
   const octaArticles = (await getAllArticles()).filter((a) => a.content);

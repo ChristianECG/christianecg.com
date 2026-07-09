@@ -1,4 +1,4 @@
-import { getCollection } from 'astro:content';
+import { getBlogEntries } from '../utils/blogData';
 import type { APIContext } from 'astro';
 
 interface FeedItem {
@@ -55,7 +55,7 @@ async function fetchOctaItems(): Promise<FeedItem[]> {
 }
 
 export async function GET(_context: APIContext) {
-  const localPosts = await getCollection('blog');
+  const localPosts = await getBlogEntries();
 
   const localItems: FeedItem[] = localPosts
     .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())

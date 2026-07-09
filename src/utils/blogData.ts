@@ -2,6 +2,12 @@ import { getCollection } from 'astro:content';
 
 export const ITEMS_PER_PAGE = 12;
 
+// Single gate for local posts: drafts stay in git but out of every build output
+// (pages, RSS, JSON feed, API, OG images).
+export async function getBlogEntries() {
+  return (await getCollection('blog')).filter((entry) => !entry.data.draft);
+}
+
 export type Article = {
   id: string; title: string; date: string; excerpt: string;
   tags: string[]; source: string; url: string; external: boolean; idx: number;
@@ -17,7 +23,7 @@ function decodeEntities(str: string) {
 }
 
 export async function getAllArticles(): Promise<Article[]> {
-  const allEntries = await getCollection('blog');
+  const allEntries = await getBlogEntries();
   const localArticles: Article[] = allEntries.map((entry) => ({
     id: entry.id,
     title: entry.data.title,

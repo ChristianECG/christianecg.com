@@ -8,6 +8,7 @@ const blog = defineCollection({
     date: z.string(),
     excerpt: z.string(),
     source: z.enum(['Blog', 'Octa']),
+    draft: z.boolean().optional(),
   }),
 });
 

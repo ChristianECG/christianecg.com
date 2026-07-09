@@ -1,5 +1,5 @@
 import rss from '@astrojs/rss';
-import { getCollection } from 'astro:content';
+import { getBlogEntries } from '../utils/blogData';
 import type { APIContext } from 'astro';
 
 interface FeedItem {
@@ -40,7 +40,7 @@ async function fetchOctaItems(): Promise<FeedItem[]> {
 }
 
 export async function GET(context: APIContext) {
-  const localPosts = await getCollection('blog');
+  const localPosts = await getBlogEntries();
   const octaItems = await fetchOctaItems();
 
   const localItems: FeedItem[] = localPosts

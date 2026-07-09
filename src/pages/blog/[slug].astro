@@ -1,9 +1,9 @@
 ---
 // Redirect /blog/[slug] → /es/blog/[slug] for backwards-compat
-import { getCollection } from 'astro:content';
+import { getBlogEntries } from '../../utils/blogData';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('blog');
+  const entries = await getBlogEntries();
   return entries.map((entry) => ({ params: { slug: entry.id } }));
 }
 

@@ -1,10 +1,10 @@
 import type { APIContext } from 'astro';
-import { getCollection } from 'astro:content';
+
 import { C, h, png, glow } from './_og';
-import { getAllArticles } from '../../utils/blogData';
+import { getAllArticles, getBlogEntries } from '../../utils/blogData';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = await getBlogEntries();
   // Octa mirrors (full content) get their own OG image too
   const octaArticles = (await getAllArticles()).filter((a) => a.content);
   return [
