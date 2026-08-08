@@ -55,7 +55,7 @@ const sourceComment = `<!--
 
     - Konami code (up up down down left right left right B A) reloads
       this page in Latin.
-    - dig TXT christianecg.com — there's a runnable command in there.
+    - dig TXT cv.christianecg.com — there's a runnable command in there.
     - /es/cv.{txt,md,json,diff,log,man,yaml} — same CV, seven formats,
       one source of truth.
 
@@ -177,6 +177,13 @@ const sourceComment = `<!--
               setTimeout(() => el.classList.remove('is-leaving'), 500);
             });
           });
+        }
+
+        // Global Privacy Control — an honest acknowledgment, not a banner.
+        // Re-run per page load since the footer isn't transition:persist.
+        const gpcEl = document.getElementById('gpc-aside');
+        if (gpcEl && (navigator as any).globalPrivacyControl) {
+          gpcEl.textContent = `Global Privacy Control received — this site doesn't sell or share your data anyway.`;
         }
       }
 

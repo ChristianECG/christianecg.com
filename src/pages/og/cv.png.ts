@@ -25,6 +25,13 @@ export async function GET() {
       [
         glow({ width: '700px', height: '700px', bottom: '-320px', left: '-200px' }),
 
+        // Only visible if someone zooms into the shared preview image.
+        h(
+          'div',
+          { position: 'absolute', bottom: '18px', right: '22px', fontSize: '10px', fontWeight: 700, color: C.text3, letterSpacing: '0.04em' },
+          'psst — dig TXT cv.christianecg.com'
+        ),
+
         // Document card
         h(
           'div',

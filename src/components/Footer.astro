@@ -59,7 +59,10 @@ const year = new Date().getFullYear();
 
   <div class="footer-bottom">
     <div class="container footer-bottom-inner">
-      <p>© {year} Christian Elías Cruz González. {t('footer.copyright_suffix')}</p>
+      <div class="footer-copyright">
+        <p>© {year} Christian Elías Cruz González. {t('footer.copyright_suffix')}</p>
+        <p id="gpc-aside" class="gpc-aside"></p>
+      </div>
       <div class="footer-feeds">
         <a href="/rss.xml" title="RSS Feed">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -167,6 +170,14 @@ const year = new Date().getFullYear();
     font-size: 0.78rem;
     color: var(--text-2);
   }
+
+  .footer-copyright { display: flex; flex-direction: column; gap: 0.3rem; }
+
+  /* Empty by default — only filled if the visitor's browser/extension sends
+     Global Privacy Control, via Layout.astro's initPage(). :empty collapses
+     it to zero height so an unfilled line reserves no vertical space. */
+  .footer-bottom p.gpc-aside { color: var(--text-3); font-size: 0.72rem; }
+  .gpc-aside:empty { display: none; }
 
   .footer-feeds {
     display: flex;
