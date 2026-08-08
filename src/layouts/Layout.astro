@@ -15,6 +15,7 @@ interface Props {
   jsonLd?: Record<string, unknown>;
   locale?: Locale;
   canonical?: string;
+  printReady?: boolean;
 }
 
 const {
@@ -25,6 +26,7 @@ const {
   jsonLd,
   locale: localeProp,
   canonical,
+  printReady = false,
 } = Astro.props;
 
 const locale: Locale = localeProp ?? getLocaleFromUrl(Astro.url);
@@ -39,6 +41,14 @@ const hrefEn  = new URL(`/en${slug}`,  base).href;
 
 const ogLocale = locale === 'en' ? 'en_US' : 'es_MX';
 const ogLocaleAlt = locale === 'en' ? 'es_MX' : 'en_US';
+
+// same mapping as src/pages/[locale]/cv.astro — kept inline, it's 3 lines
+const cvPdfs = {
+  en: '/Christian_Elias_Cruz_Gonzalez_eng.pdf',
+  lat: '/Christian_Elias_Cruz_Gonzalez_lat.pdf',
+  es: '/Christian_Elias_Cruz_Gonzalez_esp.pdf',
+};
+const cvPdf = cvPdfs[locale] ?? cvPdfs.es;
 
 // ponytail: static build, no request-time clock — flips only if a build
 // happens to land on April 1st (see the deploy.yml cron that forces one).
@@ -104,11 +114,15 @@ const sourceComment = `<!--
     <ClientRouter />
     <slot name="head" />
   </head>
-  <body>
+  <body class:list={{ 'print-ready': printReady }}>
     <Fragment set:html={sourceComment} />
     <div class="noise-overlay" aria-hidden="true" transition:persist></div>
     <div class="cursor-glow" id="cursor-glow" aria-hidden="true" transition:persist></div>
     <a href="#main-content" class="skip-link">{t('layout.skip_to_content')}</a>
+    <div class="print-note">
+      This site isn't designed for print. Read it online: <a href={`https://christianecg.com${Astro.url.pathname}`}>https://christianecg.com{Astro.url.pathname}</a>
+      Or the CV — as a page: <a href={`https://christianecg.com/${locale}/cv`}>https://christianecg.com/{locale}/cv</a>, as PDF: <a href={`https://christianecg.com${cvPdf}`}>https://christianecg.com{cvPdf}</a>, as plain text: <a href={`https://christianecg.com/${locale}/cv.txt`}>https://christianecg.com/{locale}/cv.txt</a>
+    </div>
     <slot />
     <button class="back-to-top" id="back-to-top" aria-label={t('layout.back_to_top')}>↑</button>
     <script define:vars={{ locale }}>
@@ -330,5 +344,27 @@ const sourceComment = `<!--
     border-color: var(--border-hover);
     color: var(--accent-light);
     box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(91, 140, 245, 0.15);
+  }
+
+  /* Most pages have no print styling at all — cheaper to swap in a plain
+     message than to make every layout print-safe. Pages that DO handle
+     print themselves (e.g. blog articles) opt out via the printReady prop. */
+  .print-note {
+    display: none;
+  }
+  @media print {
+    body:not(.print-ready) .print-note {
+      display: block;
+      color: #000;
+      font: 14px/1.6 monospace;
+      padding: 2rem;
+    }
+    body:not(.print-ready) .print-note a {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+    :global(body:not(.print-ready) > *:not(.print-note)) {
+      display: none !important;
+    }
   }
 </style>

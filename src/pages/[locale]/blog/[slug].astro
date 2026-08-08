@@ -80,6 +80,7 @@ const articleSchema = {
   jsonLd={articleSchema}
   locale={locale}
   canonical={article?.canonical}
+  printReady
 >
   <div class="progress-bar" id="reading-progress" aria-hidden="true"></div>
   <Nav locale={locale} />
@@ -206,6 +207,9 @@ const articleSchema = {
   @media print {
     .prose :global(.mermaid-wrap) { display: none !important; }
     .prose :global(.mermaid-src) { display: block !important; }
+    /* --text/--text-2/--text-3 are tuned for the dark theme's near-black
+       background — on white paper they print as faint gray. */
+    * { color: #000 !important; }
   }
 
   .article-footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); }
