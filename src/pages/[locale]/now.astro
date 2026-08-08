@@ -15,7 +15,7 @@ const t = useTranslations(locale);
 
 const en  = locale === 'en';
 const lat = locale === 'lat';
-const updated = '2026-06-20';
+const updated = '2026-08-08';
 ---
 
 <Layout
@@ -111,11 +111,11 @@ const updated = '2026-06-20';
             </ul>
             <p style="margin-top: 1.25rem;">
               {en ? (
-                <>Also iterating on this site: updated CV in three languages (EN/ES/LAT), added a press page with community reactions, and cleaning up project metadata.</>
+                <>Also iterating on this site: the CV now ships in seven formats besides the PDF — RFC-style plain text, JSON Resume, a <code>git log -p</code>-style diff, structured logs, a real man page, and a YAML manifest — all generated from the same source data. Added a DNS TXT record as an easter egg (<code>dig TXT christianecg.com</code>) and automated <code>humans.txt</code> to regenerate on every build.</>
               ) : lat ? (
-                <>Etiam hanc paginam emendans: curriculum vitae in tribus linguis (EN/ES/LAT) renovavi, paginam de recensionibus communitatis addidi, et metadata operum mundavi.</>
+                <>Etiam hanc paginam emendans: curriculum vitae nunc in septem formis praeter PDF praebetur — textus planus more RFC, JSON Resume, discrimen more <code>git log -p</code>, acta structurata, pagina manualis vera, et manifestum YAML — omnia ex eodem fonte generata. Signum DNS TXT ut occultum ludicrum addidi (<code>dig TXT christianecg.com</code>) et <code>humans.txt</code> automatice in quoque aedificio renovari feci.</>
               ) : (
-                <>También iterando sobre este sitio: actualicé el CV en tres idiomas (EN/ES/LAT), agregué una página de reacciones de la comunidad y limpié metadatos de proyectos.</>
+                <>También iterando sobre este sitio: el CV ahora se sirve en siete formatos además del PDF — texto plano estilo RFC, JSON Resume, un diff estilo <code>git log -p</code>, logs estructurados, una man page real, y un manifiesto YAML — todos generados desde el mismo dato fuente. Agregué un registro DNS TXT como easter egg (<code>dig TXT christianecg.com</code>) y automaticé <code>humans.txt</code> para que se regenere en cada build.</>
               )}
             </p>
           </div>
@@ -154,6 +154,11 @@ const updated = '2026-06-20';
                 {en ? 'New CSS features: container queries, @layer, anchor positioning'
                   : lat ? 'Novae facultates CSS: interrogationes receptaculi, @layer, positio anchorae'
                   : 'Nuevas características de CSS: container queries, @layer, anchor positioning'}
+              </li>
+              <li>
+                {en ? 'Real DNS semantics (TXT records, propagation) and troff/groff, after turning the CV into a handful of curious-but-functional formats'
+                  : lat ? 'Semantica vera DNS (signa TXT, propagatio) et troff/groff, postquam curriculum vitae in aliquot formas curiosas sed functionales verti'
+                  : 'Semántica real de DNS (TXT records, propagación) y troff/groff, después de convertir el CV en varios formatos curiosos pero funcionales'}
               </li>
             </ul>
           </div>

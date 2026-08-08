@@ -2,6 +2,7 @@
 import { ClientRouter } from 'astro:transitions';
 import { useTranslations, getLocaleFromUrl } from '../i18n';
 import type { Locale } from '../i18n';
+import { buildSha, buildTime } from '../utils/buildInfo';
 // Preload the two above-the-fold fonts (hero name + body) to cut FOUT and LCP.
 import bricolage700 from '@fontsource/bricolage-grotesque/files/bricolage-grotesque-latin-700-normal.woff2?url';
 import inter400 from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
@@ -38,6 +39,29 @@ const hrefEn  = new URL(`/en${slug}`,  base).href;
 
 const ogLocale = locale === 'en' ? 'en_US' : 'es_MX';
 const ogLocaleAlt = locale === 'en' ? 'es_MX' : 'en_US';
+
+// view-source easter egg — different crowd than the console.log below
+// (Ctrl+U vs F12), so it gets its own note instead of duplicating it.
+const commitUrl = `https://github.com/ChristianECG/christianecg.com/commit/${buildSha}`;
+const sourceComment = `<!--
+        __
+     .-'  '-.
+    /  o   o  \\
+    \\    <    /   IPoAC-compliant, obviously.
+     '-.___.-'
+
+  Hi. You're reading the source, not the console — different crowd,
+  same welcome. A few other things that might interest you:
+
+    - Konami code (up up down down left right left right B A) reloads
+      this page in Latin.
+    - dig TXT christianecg.com — there's a runnable command in there.
+    - /es/cv.{txt,md,json,diff,log,man,yaml} — same CV, seven formats,
+      one source of truth.
+
+  Built from commit ${buildSha} at ${buildTime}
+  ${commitUrl}
+-->`;
 ---
 
 <!doctype html>
@@ -76,6 +100,7 @@ const ogLocaleAlt = locale === 'en' ? 'es_MX' : 'en_US';
     <slot name="head" />
   </head>
   <body>
+    <Fragment set:html={sourceComment} />
     <div class="noise-overlay" aria-hidden="true" transition:persist></div>
     <div class="cursor-glow" id="cursor-glow" aria-hidden="true" transition:persist></div>
     <a href="#main-content" class="skip-link">{t('layout.skip_to_content')}</a>
