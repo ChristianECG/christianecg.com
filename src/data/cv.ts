@@ -85,7 +85,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
               'Acorté el ciclo de release de 50 a 20 min (-60%), reduciendo friction de entrega para un equipo de más de 20 desarrolladores.',
               'Establecí estándares de calidad, ESLint plugin interno y guías de code review adoptadas por todo el equipo; mentoreé a 2 ingenieros junior mediante pair programming y revisiones estructuradas.',
             ],
-            stack: 'React, TypeScript, ECharts, TanStack Query, WebSockets, Node.js, Python (Django), ESLint (plugin interno), Jest, GitHub Actions.',
+            stack: 'React, TypeScript, ECharts, TanStack Query, WebSockets, Node.js, ESLint (plugin interno), Jest, GitHub Actions.',
           },
           {
             title: 'Mid-Level Software Engineer',
@@ -96,7 +96,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
               'Construí y mantuve la app móvil (iOS + Android) en React Native, entregando nuevas funcionalidades de plataforma directamente a los usuarios finales.',
               'Participé en el diseño e implementación de componentes clave del sistema de dashboards IoT en tiempo real.',
             ],
-            stack: 'React, TypeScript, React Native, TanStack Query, Stripe, WebSockets, Node.js, Python (Django), Jest.',
+            stack: 'React, TypeScript, React Native, TanStack Query, Stripe, WebSockets, Node.js, Jest.',
           },
           {
             title: 'Software Developer',
@@ -150,7 +150,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
         title: 'Habilidades',
         categories: [
           { label: 'Frontend & Mobile', items: 'React, Next.js, TypeScript, JavaScript (ES2021+), React Native, HTML5, CSS3, design systems' },
-          { label: 'Backend & Infraestructura', items: 'Node.js, Python, FastAPI, Django, PHP, PostgreSQL, MySQL, Supabase (PostgreSQL + real-time), Vercel (Edge Functions, serverless), Docker, VPS (Linux, self-hosted), GitHub Actions (CI/CD), REST APIs, Stripe, Twilio' },
+          { label: 'Backend & Infraestructura', items: 'Node.js, PHP, PostgreSQL, MySQL, Supabase (PostgreSQL + real-time), Vercel (Edge Functions, serverless), Docker, VPS (Linux, self-hosted), GitHub Actions (CI/CD), REST APIs, Stripe, Twilio' },
           { label: 'AI / LLM Integration', items: 'Claude API, OpenAI API, agentic workflows, LLM agents en producción, prompt engineering, AI-augmented development' },
           { label: 'Calidad & Tooling', items: 'ESLint (plugins custom), Jest, React Testing Library, Git, code reviews, Claude Code, GitHub Copilot' },
           { label: 'Datos en Tiempo Real', items: 'TanStack Query, WebSockets, REST APIs, ECharts, D3.js, rendering optimization' },
@@ -227,7 +227,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
               'Cut release cycle from 50 to 20 min (-60%), reducing delivery friction for a team of 20+ developers.',
               'Established quality standards, an internal ESLint plugin, and code review guidelines adopted by the whole team; mentored 2 junior engineers through pair programming and structured reviews.',
             ],
-            stack: 'React, TypeScript, ECharts, TanStack Query, WebSockets, Node.js, Python (Django), ESLint (custom plugin), Jest, GitHub Actions.',
+            stack: 'React, TypeScript, ECharts, TanStack Query, WebSockets, Node.js, ESLint (custom plugin), Jest, GitHub Actions.',
           },
           {
             title: 'Mid-Level Software Engineer',
@@ -238,7 +238,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
               'Built and maintained the mobile app (iOS + Android) in React Native, shipping new platform features directly to end users.',
               'Contributed to the design and implementation of key components of the real-time IoT dashboard system.',
             ],
-            stack: 'React, TypeScript, React Native, TanStack Query, Stripe, WebSockets, Node.js, Python (Django), Jest.',
+            stack: 'React, TypeScript, React Native, TanStack Query, Stripe, WebSockets, Node.js, Jest.',
           },
           {
             title: 'Software Developer',
@@ -292,7 +292,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
         title: 'Skills',
         categories: [
           { label: 'Frontend & Mobile', items: 'React, Next.js, TypeScript, JavaScript (ES2021+), React Native, HTML5, CSS3, design systems' },
-          { label: 'Backend & Infrastructure', items: 'Node.js, Python, FastAPI, Django, PHP, PostgreSQL, MySQL, Supabase (PostgreSQL + real-time), Vercel (Edge Functions, serverless), Docker, VPS (Linux, self-hosted), GitHub Actions (CI/CD), REST APIs, Stripe, Twilio' },
+          { label: 'Backend & Infrastructure', items: 'Node.js, PHP, PostgreSQL, MySQL, Supabase (PostgreSQL + real-time), Vercel (Edge Functions, serverless), Docker, VPS (Linux, self-hosted), GitHub Actions (CI/CD), REST APIs, Stripe, Twilio' },
           { label: 'AI / LLM Integration', items: 'Claude API, OpenAI API, agentic workflows, LLM agents in production, prompt engineering, AI-augmented development' },
           { label: 'Quality & Tooling', items: 'ESLint (custom plugins), Jest, React Testing Library, Git, code reviews, Claude Code, GitHub Copilot' },
           { label: 'Real-Time Data', items: 'TanStack Query, WebSockets, REST APIs, ECharts, D3.js, rendering optimization' },
@@ -369,7 +369,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
               'Cyclum editionis a 50 ad 20 min (-60%) contraxi, frictionem tradendi pro grege XX+ fabricatorum minuens.',
               'Normas qualitatis, pluginum ESLint internum et modos recensionis constitui; duos fabricatores iuniores per programmationem pari et recensiones structuratas mentoravi.',
             ],
-            stack: 'React, TypeScript, ECharts, TanStack Query, WebSockets, Node.js, Python (Django), ESLint (pluginum internum), Jest, GitHub Actions.',
+            stack: 'React, TypeScript, ECharts, TanStack Query, WebSockets, Node.js, ESLint (pluginum internum), Jest, GitHub Actions.',
           },
           {
             title: 'Faber Programmatus Medius',
@@ -380,7 +380,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
               'Applicationem mobilem (iOS et Android) in React Native construxi et sustinui, novas functiones suggestus utentibus tradidi.',
               'In consilio et exsecutione componentium principalium systematis dascifolii IoT in tempore reali participavi.',
             ],
-            stack: 'React, TypeScript, React Native, TanStack Query, Stripe, WebSockets, Node.js, Python (Django), Jest.',
+            stack: 'React, TypeScript, React Native, TanStack Query, Stripe, WebSockets, Node.js, Jest.',
           },
           {
             title: 'Fabricator Programmatum',
@@ -434,7 +434,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
         title: 'Peritiae',
         categories: [
           { label: 'Frontend et Mobile', items: 'React, Next.js, TypeScript, JavaScript (ES2021+), React Native, HTML5, CSS3, systemata designationis' },
-          { label: 'Backend et Infrastructura', items: 'Node.js, Python, FastAPI, Django, PHP, PostgreSQL, MySQL, Supabase (PostgreSQL + tempus reale), Vercel (Edge Functions, serverless), Docker, VPS (Linux, self-hosted), GitHub Actions (CI/CD), REST APIs, Stripe, Twilio' },
+          { label: 'Backend et Infrastructura', items: 'Node.js, PHP, PostgreSQL, MySQL, Supabase (PostgreSQL + tempus reale), Vercel (Edge Functions, serverless), Docker, VPS (Linux, self-hosted), GitHub Actions (CI/CD), REST APIs, Stripe, Twilio' },
           { label: 'AI / Integratio LLM', items: 'Claude API, OpenAI API, processus agentium, agentes LLM in productione, ars prompti, evolutio augmentata AI' },
           { label: 'Qualitas et Instrumenta', items: 'ESLint (plugina propria), Jest, React Testing Library, Git, recensiones codicis, Claude Code, GitHub Copilot' },
           { label: 'Data in Tempore Reali', items: 'TanStack Query, WebSockets, REST APIs, ECharts, D3.js, optimizatio reddendi' },
