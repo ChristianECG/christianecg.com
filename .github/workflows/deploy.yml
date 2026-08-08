@@ -6,6 +6,11 @@ on:
   workflow_dispatch:
   repository_dispatch:
     types: [octa-deployed]
+  schedule:
+    # Force a build on April 1st so /.well-known/status flips for the day,
+    # and again on the 2nd so it reverts even without a normal push.
+    - cron: '0 0 1 4 *'
+    - cron: '0 0 2 4 *'
 
 permissions:
   contents: read
