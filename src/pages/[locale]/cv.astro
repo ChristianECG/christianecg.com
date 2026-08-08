@@ -61,6 +61,15 @@ const description = locale === 'en'
             ? <><a href={cvUrl} download>Download it here</a>.</>
             : <><a href={cvUrl} download>Descárgalo aquí</a>.</>}
         </p>
+        <div class="cv-alt-formats">
+          <a href={`/${locale}/cv.txt`}>.txt</a>
+          <a href={`/${locale}/cv.md`}>.md</a>
+          <a href={`/${locale}/cv.json`}>.json</a>
+          <a href={`/${locale}/cv.diff`}>.diff</a>
+          <a href={`/${locale}/cv.log`}>.log</a>
+          <a href={`/${locale}/cv.1`} title={`curl -s https://christianecg.com/${locale}/cv.1 -o /tmp/cv.1 && man /tmp/cv.1`}>.1</a>
+          <a href={`/${locale}/cv.yaml`}>.yaml</a>
+        </div>
       </div>
 
     </div>
@@ -87,6 +96,16 @@ const description = locale === 'en'
     line-height: 1;
     margin-top: 0.5rem;
   }
+
+  .cv-alt-formats {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+  }
+  .cv-alt-formats a { color: var(--text-2); text-decoration: none; }
+  .cv-alt-formats a:hover { color: var(--accent-light); text-decoration: underline; }
 
   .cv-download {
     display: inline-flex;
@@ -128,5 +147,6 @@ const description = locale === 'en'
     .cv-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
     .cv-frame { height: 60vh; }
     .cv-fallback { display: block; }
+    .cv-alt-formats { flex-wrap: wrap; }
   }
 </style>
