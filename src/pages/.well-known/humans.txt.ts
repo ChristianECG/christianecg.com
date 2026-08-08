@@ -1,4 +1,4 @@
-import { humansTxt } from '../utils/humansTxt';
+import { humansTxt } from '../../utils/humansTxt';
 
 export function GET() {
   return new Response(humansTxt(), {

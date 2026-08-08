@@ -106,7 +106,7 @@ const sourceComment = `<!--
     <a href="#main-content" class="skip-link">{t('layout.skip_to_content')}</a>
     <slot />
     <button class="back-to-top" id="back-to-top" aria-label={t('layout.back_to_top')}>↑</button>
-    <script>
+    <script define:vars={{ locale }}>
       // Console easter egg
       (function () {
         const accent = '#5B8CF5';
@@ -123,7 +123,19 @@ const sourceComment = `<!--
         console.log('%cFrontend · Mobile · IoT', `color:${dim};font-size:0.75rem`);
         console.log(' ');
         console.log('%c↑ ↑ ↓ ↓ ← → ← → B A', `color:${muted};font-size:0.7rem;letter-spacing:0.05em`);
-        console.log('%c(hay un secreto aquí)', `color:${dim};font-size:0.65rem;font-style:italic`);
+        console.log('%c(hay un secreto aquí — o prueba whoami() / cv())', `color:${dim};font-size:0.65rem;font-style:italic`);
+
+        window.whoami = function () {
+          console.log('%cChristian Elías Cruz González', `color:${accent};font-weight:700;font-size:1rem`);
+          console.log('Senior Software Engineer — Frontend · Mobile · IoT');
+          console.log('contacto@christianecg.com · https://christianecg.com');
+        };
+        window.cv = function () {
+          fetch(`/${locale}/cv.txt`)
+            .then((r) => r.text())
+            .then((t) => console.log(t))
+            .catch(() => console.log(`cv() failed — try /${locale}/cv.txt directly`));
+        };
       })();
     </script>
     <script>
