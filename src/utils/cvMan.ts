@@ -20,7 +20,7 @@ export function cvToManPage(data: CVData, date: string, locale: string): string 
   out.push('.\\" This is real troff (man(7) macros), not plain text shaped like it.');
   out.push('.\\" Render it locally (works on both BSD/macOS and GNU man — a bare');
   out.push('.\\" "-l -" stdin flag is GNU-only and fails on macOS\'s man):');
-  out.push(`.\\"   curl -s https://christianecg.com/${locale}/cv.1 -o /tmp/cv.1 && man /tmp/cv.1`);
+  out.push(`.\\"   curl -s https://christianecg.com/${locale}/cv.man -o /tmp/cv.man && man /tmp/cv.man`);
   out.push('.\\" Generated at build time from src/data/cv.ts — do not edit by hand.');
   out.push(`.TH CV 1 "${date}" "christianecg.com" "User Commands"`);
 
