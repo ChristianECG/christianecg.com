@@ -2,6 +2,7 @@
 // satori → PNG render step. Files starting with "_" are not routes.
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
+import sharp from 'sharp';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -68,6 +69,21 @@ export function color(hex: string, alpha: number): string {
 
 export async function png(tree: Node): Promise<Response> {
   const svg = await satori(tree as never, { width: 1200, height: 630, fonts });
-  const data = new Resvg(svg).render().asPng();
+  const raw = new Resvg(svg).render().asPng();
+
+  // Easter egg: EXIF only visible via exiftool / "get info" on the shared image.
+  const data = await sharp(raw)
+    .withMetadata({
+      exif: {
+        IFD0: {
+          Artist: 'Christian Elías Cruz González',
+          Copyright: 'christianecg.com',
+          ImageDescription: 'If you read image metadata, hi. dig TXT cv.christianecg.com',
+        },
+      },
+    })
+    .png()
+    .toBuffer();
+
   return new Response(new Uint8Array(data), { headers: { 'Content-Type': 'image/png' } });
 }

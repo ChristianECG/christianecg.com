@@ -1,7 +1,4 @@
-import satori from 'satori';
-import { Resvg } from '@resvg/resvg-js';
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import { png, type Node } from './_og';
 import { pressKits, pressMentions } from '../../data/press';
 
 export async function GET() {
@@ -12,12 +9,7 @@ export async function GET() {
     0
   );
 
-  const fontData = readFileSync(
-    join(process.cwd(), 'node_modules/@fontsource/bricolage-grotesque/files/bricolage-grotesque-latin-800-normal.woff')
-  );
-
-  const svg = await satori(
-    {
+  const tree: Node = {
       type: 'div',
       props: {
         style: {
@@ -318,15 +310,7 @@ export async function GET() {
           },
         ],
       },
-    },
-    {
-      width: 1200,
-      height: 630,
-      fonts: [{ name: 'Bricolage Grotesque', data: fontData, weight: 800, style: 'normal' }],
-    }
-  );
+    };
 
-  const resvg = new Resvg(svg);
-  const png = resvg.render().asPng();
-  return new Response(new Uint8Array(png), { headers: { 'Content-Type': 'image/png' } });
+  return png(tree);
 }
