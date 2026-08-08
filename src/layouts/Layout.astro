@@ -40,6 +40,11 @@ const hrefEn  = new URL(`/en${slug}`,  base).href;
 const ogLocale = locale === 'en' ? 'en_US' : 'es_MX';
 const ogLocaleAlt = locale === 'en' ? 'es_MX' : 'en_US';
 
+// ponytail: static build, no request-time clock — flips only if a build
+// happens to land on April 1st (see the deploy.yml cron that forces one).
+const buildDate = new Date(buildTime);
+const isAprilFools = buildDate.getUTCMonth() === 3 && buildDate.getUTCDate() === 1;
+
 // view-source easter egg — different crowd than the console.log below
 // (Ctrl+U vs F12), so it gets its own note instead of duplicating it.
 const commitUrl = `https://github.com/ChristianECG/christianecg.com/commit/${buildSha}`;
@@ -89,7 +94,7 @@ const sourceComment = `<!--
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={metaDescription} />
     <meta name="twitter:image" content={ogImage} />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type={isAprilFools ? 'image/svg+xml' : 'image/png'} href={isAprilFools ? '/favicon-pigeon.svg' : '/favicon.png'} />
     <link rel="alternate" type="application/rss+xml" title="Christian Elías — Blog" href="/rss.xml" />
     <link rel="alternate" type="application/feed+json" title="Christian Elías — Blog (JSON)" href="/feed.json" />
     <link rel="search" type="application/opensearchdescription+xml" title="christianecg.com" href="/opensearch.xml" />

@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "postbuild": "node scripts/sitemap-easter-egg.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "cv:pdf": "node scripts/generate-cv-pdf.mjs",
