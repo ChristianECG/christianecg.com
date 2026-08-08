@@ -27,6 +27,7 @@ pnpm a11y       # axe accessibility audit (scripts/a11y-check.mjs, also runs pre
 - `src/content/` — Astro content collections (blog, bio, papers, projects case studies), config in `src/content.config.ts`.
 - `src/pages/` — root routes are the Spanish defaults; `src/pages/[locale]/` mirrors them per locale. `src/pages/api/` serves the public JSON API; `src/pages/og/` generates OG images (Satori + resvg).
 - `src/i18n/` — UI strings per locale.
+- **The blog is not just `src/content/blog/`.** `src/utils/blogData.ts` fetches `https://octa.page/rss.xml` at build time and merges those articles with the local ones (by date). Items with a full `content:encoded` body are mirrored locally at `/es/blog/{slug}` with `rel=canonical` back to octa.page; items without one show as an external link. Don't judge blog freshness/activity from the local `.md` file count alone.
 
 ## Conventions
 
