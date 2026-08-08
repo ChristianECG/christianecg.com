@@ -3,12 +3,19 @@
 import { build, preview } from 'astro';
 import { chromium } from 'playwright';
 import { AxeBuilder } from '@axe-core/playwright';
+import { execFile } from 'child_process';
+import { promisify } from 'util';
 
 const PAGES = ['/', '/blog/', '/cv/', '/timeline/', '/now/', '/manifiesto/', '/colophon/', '/press/', '/talks/', '/404', '/en/', '/api/'];
 
 await build({ logLevel: 'error' });
 const server = await preview({ logLevel: 'error' });
 const base = `http://localhost:${server.port}`;
+// CV page embeds the generated PDFs; without them the iframe shows a 404 error
+// page whose own landmarks trip the axe check. execFileSync would block this
+// process's event loop, which is also serving the preview server the child
+// needs to reach — must run non-blocking.
+await promisify(execFile)('node', ['scripts/generate-cv-pdf.mjs'], { env: { ...process.env, CV_PDF_BASE_URL: base } });
 
 const browser = await chromium.launch();
 const context = await browser.newContext();

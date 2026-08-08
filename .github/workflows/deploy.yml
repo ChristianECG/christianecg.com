@@ -30,6 +30,13 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Generate CV PDFs
+        run: |
+          pnpm preview &
+          until curl -sf http://localhost:4323 > /dev/null; do sleep 1; done
+          pnpm cv:pdf
+          kill %1
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist/

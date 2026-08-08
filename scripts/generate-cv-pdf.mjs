@@ -1,24 +1,28 @@
 import { chromium } from 'playwright';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
+import { mkdirSync } from 'fs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const publicDir = resolve(__dirname, '../public');
+// ponytail: PDFs are build output now (not committed), so they land in dist/, not public/
+const outDir = resolve(__dirname, '../dist');
+const baseUrl = process.env.CV_PDF_BASE_URL ?? 'http://localhost:4323';
+mkdirSync(outDir, { recursive: true });
 
 const configs = [
   {
-    url: 'http://localhost:4323/cv-print/es',
-    output: resolve(publicDir, 'Christian_Elias_Cruz_Gonzalez_esp.pdf'),
+    url: `${baseUrl}/cv-print/es`,
+    output: resolve(outDir, 'Christian_Elias_Cruz_Gonzalez_esp.pdf'),
     lang: 'es',
   },
   {
-    url: 'http://localhost:4323/cv-print/en',
-    output: resolve(publicDir, 'Christian_Elias_Cruz_Gonzalez_eng.pdf'),
+    url: `${baseUrl}/cv-print/en`,
+    output: resolve(outDir, 'Christian_Elias_Cruz_Gonzalez_eng.pdf'),
     lang: 'en',
   },
   {
-    url: 'http://localhost:4323/cv-print/lat',
-    output: resolve(publicDir, 'Christian_Elias_Cruz_Gonzalez_lat.pdf'),
+    url: `${baseUrl}/cv-print/lat`,
+    output: resolve(outDir, 'Christian_Elias_Cruz_Gonzalez_lat.pdf'),
     lang: 'lat',
   }
 ];

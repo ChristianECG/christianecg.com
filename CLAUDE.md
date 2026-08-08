@@ -11,7 +11,7 @@ pnpm install
 pnpm dev        # dev server → http://localhost:4323
 pnpm build      # production build → dist/
 pnpm preview
-pnpm cv:pdf     # regenerate CV PDFs (scripts/generate-cv-pdf.mjs)
+pnpm cv:pdf     # regenerate CV PDFs locally (scripts/generate-cv-pdf.mjs; needs `pnpm build && pnpm preview` running)
 pnpm a11y       # axe accessibility audit (scripts/a11y-check.mjs, also runs pre-commit)
 ```
 
@@ -32,6 +32,6 @@ pnpm a11y       # axe accessibility audit (scripts/a11y-check.mjs, also runs pre
 
 - **Trilingual content: `es`, `en`, and `lat` (Latin).** Every data entry carries `_es` / `_en` / `_lat` fields (or per-locale objects in `cv.ts`). When adding or editing content, fill all three; Latin is a first-class locale here, not a joke to skip.
 - **Timeline upkeep:** any new milestone (talk, paper, job, project launch, press) added to its own data file must also be added to `src/data/timeline.ts`.
-- CV changes in `cv.ts` require regenerating the PDFs with `pnpm cv:pdf`.
+- CV PDFs are generated at deploy time (see `.github/workflows/deploy.yml`), not committed to `public/`.
 - Accessibility is enforced: a pre-commit hook runs the axe audit; keep new pages passing.
 - Deployment is automatic: push to `main` builds and publishes via GitHub Actions.
