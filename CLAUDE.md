@@ -33,6 +33,7 @@ pnpm a11y       # axe accessibility audit (scripts/a11y-check.mjs, also runs pre
 
 - **Trilingual content: `es`, `en`, and `lat` (Latin).** Every data entry carries `_es` / `_en` / `_lat` fields (or per-locale objects in `cv.ts`). When adding or editing content, fill all three; Latin is a first-class locale here, not a joke to skip.
 - **Timeline upkeep:** any new milestone (talk, paper, job, project launch, press) added to its own data file must also be added to `src/data/timeline.ts`.
+- **Work experience lives in two places, not one.** `src/data/cv.ts` (condensed, CV/PDF/API) and `src/components/Experience.astro` (a separate hardcoded `jobs` array with longer narrative bullets for the homepage) are not synced automatically and don't even list the same jobs — `Experience.astro` includes the GDSC Lead role, which `cv.ts` doesn't. When a job changes (new role, new company, updated bullets), update both, deliberately rewriting the bullets for each one's tone rather than copy-pasting.
 - CV PDFs are generated at deploy time (see `.github/workflows/deploy.yml`), not committed to `public/`.
 - Accessibility is enforced: a pre-commit hook runs the axe audit; keep new pages passing.
 - Deployment is automatic: push to `main` builds and publishes via GitHub Actions.

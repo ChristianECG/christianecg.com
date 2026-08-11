@@ -76,6 +76,15 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
         title: 'Experiencia',
         jobs: [
           {
+            title: 'Senior Software Engineer (Principal Associate)',
+            period: 'Ago 2026 – Presente',
+            company: 'Capital One Technology Labs México · Ciudad de México (Híbrido)',
+            bullets: [
+              'Incorporación al equipo fundacional de Full Stack Engineers de Capital One en México, con enfoque en Java y ramp-up activo sobre el stack de la plataforma.',
+            ],
+            stack: 'Java, React, Node.js, AWS (en ramp-up).',
+          },
+          {
             title: 'Senior Software Engineer',
             period: 'Feb 2024 – May 2026',
             company: 'Ubidots · Medellín, Colombia (Remoto)',
@@ -218,6 +227,15 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
         title: 'Experience',
         jobs: [
           {
+            title: 'Senior Software Engineer (Principal Associate)',
+            period: 'Aug 2026 – Present',
+            company: 'Capital One Technology Labs Mexico · Mexico City (Hybrid)',
+            bullets: [
+              "Joined Capital One's founding Full Stack Engineering team in Mexico, focused on Java with an active ramp-up onto the platform stack.",
+            ],
+            stack: 'Java, React, Node.js, AWS (ramp-up).',
+          },
+          {
             title: 'Senior Software Engineer',
             period: 'Feb 2024 – May 2026',
             company: 'Ubidots · Medellín, Colombia (Remote)',
@@ -359,6 +377,15 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
       experience: {
         title: 'Experientia',
         jobs: [
+          {
+            title: 'Faber Programmatus Senior (Principal Associate)',
+            period: 'Aug. MMXXVI – Praesens',
+            company: 'Capital One Technology Labs Mexicum · Urbs Mexicana (Mixtum)',
+            bullets: [
+              'Gregi fundatori Fabricatorum Programmatum Full Stack Capital One in Mexico se iunxit, in Java focatus cum ramp-up activo in suggestu.',
+            ],
+            stack: 'Java, React, Node.js, AWS (ramp-up).',
+          },
           {
             title: 'Faber Programmatus Senior',
             period: 'Feb. MMXXIV – Mai. MMXXVI',

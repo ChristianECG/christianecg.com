@@ -15,8 +15,12 @@ const MONTHS_LAT: Record<string, number> = { ian: 1, feb: 2, mar: 3, apr: 4, mai
 
 // ponytail: cv.ts only ever uses "Mon YYYY" or bare "YYYY" per side of the
 // range, separated by "-" or "–" — a full date-parsing library is overkill.
+const PRESENT = new Set(['presente', 'present', 'praesens']);
+
 function parseOne(token: string, lang: 'es' | 'en' | 'lat'): Date {
-  const parts = token.trim().split(/\s+/);
+  const trimmed = token.trim();
+  if (PRESENT.has(trimmed.toLowerCase())) return new Date();
+  const parts = trimmed.split(/\s+/);
   const [monthTok, yearTok] = parts.length === 1 ? [null, parts[0]] : parts;
   const months = lang === 'lat' ? MONTHS_LAT : MONTHS_EN;
   const month = monthTok ? (months[monthTok.replace('.', '').slice(0, 3).toLowerCase()] ?? 1) : 1;
