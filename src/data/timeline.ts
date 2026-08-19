@@ -282,9 +282,9 @@ export const milestones: Milestone[] = [
     title_es: 'Se une a Capital One',
     title_en: 'Joins Capital One',
     title_lat: 'Capital One ingreditur',
-    detail_es: 'Senior Software Engineer (Principal Associate) en Capital One Technology Labs México — equipo fundacional Full Stack en Ciudad de México.',
-    detail_en: 'Senior Software Engineer (Principal Associate) at Capital One Technology Labs Mexico — founding Full Stack team in Mexico City.',
-    detail_lat: 'Faber Programmatus Senior (Principal Associate) apud Capital One Technology Labs Mexicum — grex fundator Full Stack in Urbe Mexicana.',
+    detail_es: 'Senior Software Engineer (Principal Associate) en Capital One — equipo fundacional Full Stack en Ciudad de México.',
+    detail_en: 'Senior Software Engineer (Principal Associate) at Capital One — founding Full Stack team in Mexico City.',
+    detail_lat: 'Faber Programmatus Senior (Principal Associate) apud Capital One — grex fundator Full Stack in Urbe Mexicana.',
     featured: true,
   },
   {

@@ -11,42 +11,45 @@ const t = useTranslations(locale);
 
 <section id="contact">
   <div class="container">
-    <div class="contact-inner">
-      <div class="contact-left reveal" style="--reveal-x: -24px; --reveal-y: 0px">
-        <span class="section-eyebrow">{t('contact.eyebrow')}</span>
-        <h2 class="contact-heading">{t('contact.heading')}</h2>
-        <p class="contact-sub">{t('contact.sub')}</p>
-      </div>
+    <div class="contact-panel">
+      <div class="contact-inner">
+        <div class="contact-left reveal" style="--reveal-x: -24px; --reveal-y: 0px">
+          <span class="section-eyebrow">{t('contact.eyebrow')}</span>
+          <h2 class="contact-heading">{t('contact.heading')}</h2>
+          <p class="contact-sub">{t('contact.sub')}</p>
+          <p class="contact-status"><span></span>{t('contact.status')}</p>
+        </div>
 
-      <div class="contact-links reveal" style="--reveal-x: 24px; --reveal-y: 0px; --delay: 0.12s">
-        <a href="mailto:contacto@christianecg.com" class="contact-link">
-          <span class="cl-label">Email</span>
-          <span class="cl-value">contacto@christianecg.com</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
-        <a href="https://www.linkedin.com/in/christianeliascg/" target="_blank" rel="me noopener" class="contact-link">
-          <span class="cl-label">LinkedIn</span>
-          <span class="cl-value">christianeliascg</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
-        <a href="https://github.com/ChristianECG" target="_blank" rel="me noopener" class="contact-link">
-          <span class="cl-label">GitHub</span>
-          <span class="cl-value">ChristianECG</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
-        <a href={`/${locale}/cv`} class="contact-link">
-          <span class="cl-label">CV</span>
-          <span class="cl-value">{t('contact.cv_label')}</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
+        <div class="contact-links reveal" style="--reveal-x: 24px; --reveal-y: 0px; --delay: 0.12s">
+          <a href="mailto:contacto@christianecg.com" class="contact-link">
+            <span class="cl-label">Email</span>
+            <span class="cl-value">contacto@christianecg.com</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/christianeliascg/" target="_blank" rel="me noopener" class="contact-link">
+            <span class="cl-label">LinkedIn</span>
+            <span class="cl-value">christianeliascg</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <a href="https://github.com/ChristianECG" target="_blank" rel="me noopener" class="contact-link">
+            <span class="cl-label">GitHub</span>
+            <span class="cl-value">ChristianECG</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <a href={`/${locale}/cv`} class="contact-link">
+            <span class="cl-label">CV</span>
+            <span class="cl-value">{t('contact.cv_label')}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -58,7 +61,45 @@ const t = useTranslations(locale);
     grid-template-columns: 1fr 1fr;
     gap: 6rem;
     align-items: start;
-    padding: 5rem 0;
+    padding: 4rem 3rem;
+  }
+
+  .contact-panel {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: radial-gradient(circle at 0% 0%, rgba(91, 140, 245, 0.11), transparent 48%), var(--surface);
+  }
+  .contact-panel::after {
+    content: '';
+    position: absolute;
+    right: -100px;
+    bottom: -150px;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(70, 224, 190, 0.12);
+    pointer-events: none;
+  }
+
+  .contact-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    font-size: 0.72rem;
+    color: var(--accent-light);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .contact-status span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent-2);
+    box-shadow: 0 0 0 4px var(--accent-2-dim);
+    flex-shrink: 0;
   }
 
   .contact-heading {
@@ -122,6 +163,6 @@ const t = useTranslations(locale);
   .contact-link:hover svg { transform: translateX(3px); color: var(--accent); }
 
   @media (max-width: 768px) {
-    .contact-inner { grid-template-columns: 1fr; gap: 3rem; padding: 3rem 0; }
+    .contact-inner { grid-template-columns: 1fr; gap: 3rem; padding: 2.5rem 1.25rem; }
   }
 </style>

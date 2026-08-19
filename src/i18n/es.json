@@ -1,7 +1,7 @@
 {
   "layout.skip_to_content": "Saltar al contenido",
   "layout.back_to_top": "Volver arriba",
-  "meta.description": "Ingeniero de Software Senior y desarrollador web en Hidalgo, México — 4 años construyendo Ubidots, plataforma IoT con más de 150K usuarios. React, apps móviles y sistemas en tiempo real. Remoto desde Mixquiahuala desde 2021.",
+  "meta.description": "Ingeniero de Software Senior en Capital One. Antes pasé 4 años construyendo Ubidots, plataforma IoT con más de 150K usuarios. React, Java, apps móviles y sistemas en tiempo real. Modalidad híbrida en Ciudad de México.",
 
   "nav.aria": "Navegación principal",
   "footer.aria": "Enlaces del pie de página",
@@ -26,9 +26,9 @@
   "footer.copyright_suffix": "Hecho en Hidalgo.",
 
   "hero.role": "Ingeniero de Software Senior",
-  "hero.tagline_1": "Ingeniero senior. Hidalgo, México.",
-  "hero.tagline_2": "Remoto full-time desde 2021.",
-  "hero.location": "Ciudad de México · Remoto",
+  "hero.tagline_1": "Ingeniero senior en Capital One.",
+  "hero.tagline_2": "Modalidad híbrida en Ciudad de México.",
+  "hero.location": "Ciudad de México · Híbrido",
   "hero.cred_ieee": "1 paper publicado",
   "hero.cred_keynote": "3 congresos internacionales",
   "hero.cred_tv_label": "Televisión",
@@ -37,7 +37,7 @@
   "hero.cta_contact": "Contacto",
 
   "about.eyebrow": "Sobre mí",
-  "about.heading": "Cuatro años optimizando el frontend de una plataforma con 150K usuarios. Ahora construyo herramientas para developers.",
+  "about.heading": "Cuatro años optimizando el frontend de una plataforma con 150K usuarios. Ahora formo parte del equipo fundacional de Capital One.",
   "about.bio_1": "En Ubidots había un widget de ECharts que tardaba 30 segundos en renderizar. Nadie abrió un bug. Los usuarios solo cerraban la pestaña. Lo encontré en una sesión de DevTools a las 11 de la noche.",
   "about.bio_2": "Trabajé como Senior Engineer en Ubidots, una plataforma IoT con más de 150K usuarios y millones de eventos en tiempo real. Fuera del código, soy speaker, mentor y autor publicado en IEEE Xplore.",
   "about.fact_label_users": "usuarios activos diarios · mi código sigue en producción",
@@ -79,14 +79,20 @@
 
   "extras.community_eyebrow": "Comunidad",
   "extras.community_heading": "Más allá del código",
+  "extras.dossier_eyebrow": "Dossier",
+  "extras.dossier_heading": "Trabajo público, dentro y fuera del código",
+  "extras.dossier_intro": "Una selección de las cosas que construyo, publico y comparto cuando el trabajo técnico sale del repositorio.",
+  "extras.community_intro": "Charlas, mentoría y comunidad: espacios donde el conocimiento se vuelve colaboración.",
   "extras.pubs_eyebrow": "Publicaciones",
   "extras.pubs_heading": "Investigación",
+  "extras.pubs_intro": "Investigación publicada y trabajo técnico documentado con el mismo cuidado que un producto.",
   "extras.read_on": "Leer en %s",
   "extras.view_pdf": "Ver PDF",
 
   "contact.eyebrow": "Contacto",
   "contact.heading": "¿Trabajamos juntos?",
-  "contact.sub": "Busco posición full-time remota. También doy charlas técnicas para comunidades, sin costo.",
+  "contact.sub": "Actualmente trabajo en modalidad híbrida en Capital One. También doy charlas técnicas para comunidades, sin costo.",
+  "contact.status": "Capital One · Híbrido · Ciudad de México",
   "contact.cv_label": "Ver currículum",
 
   "cv.eyebrow": "Currículum",
@@ -95,6 +101,10 @@
   "blog.eyebrow": "Escritura",
   "blog.count_label": "artículos",
   "blog.desc": "Artículos sobre frontend, tecnología y el oficio de construir software. Escritos a lo largo de los años en mi blog personal y en Octa.",
+  "blog.recent_label": "Notas recientes",
+  "blog.recent_desc": "Arquitectura, sistemas y herramientas construidas desde la práctica.",
+  "blog.archive_label": "Archivo",
+  "blog.archive_desc": "Artículos anteriores sobre tecnología, aprendizaje y desarrollo de software.",
   "blog.latest": "Último artículo",
   "blog.back_to_list": "Todos los artículos",
   "blog.back_link": "Volver al blog",

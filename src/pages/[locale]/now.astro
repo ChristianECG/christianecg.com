@@ -15,7 +15,7 @@ const t = useTranslations(locale);
 
 const en  = locale === 'en';
 const lat = locale === 'lat';
-const updated = '2026-08-08';
+const updated = '2026-08-18';
 ---
 
 <Layout
@@ -49,11 +49,11 @@ const updated = '2026-08-08';
           <div class="now-content">
             <p>
               {en ? (
-                <>I'm open to new opportunities as a <strong>Senior Software Engineer</strong>. My focus is on products with real technical complexity: data dashboards, SaaS platforms, real-time systems. If you're building something like that, <a href="mailto:contacto@christianecg.com">reach out</a>.</>
+                <>I'm currently a <strong>Senior Software Engineer at Capital One</strong>, working in a hybrid setup in Mexico City. My focus is on products with real technical complexity: data dashboards, SaaS platforms, and real-time systems.</>
               ) : lat ? (
-                <>Novis occasionibus ut <strong>Faber Programmatus Senior</strong> apertus sum. Propositum meum sunt opera cum vera complexitate technica: tabulae datarum, suggestus SaaS, systemata in tempore reali. Si tale aliquid construis, <a href="mailto:contacto@christianecg.com">scribe mihi</a>.</>
+                <>Nunc <strong>Faber Programmatus Senior apud Capital One</strong> sum, in urbe Mexicana modo hybrido laborans. Propositum meum sunt opera cum vera complexitate technica: tabulae datarum, suggestus SaaS et systemata in tempore reali.</>
               ) : (
-                <>Estoy abierto a nuevas oportunidades como <strong>Ingeniero de Software Senior</strong>. Mi foco está en productos con complejidad técnica real: dashboards de datos, plataformas SaaS, sistemas de tiempo real. Si estás construyendo algo así, <a href="mailto:contacto@christianecg.com">escríbeme</a>.</>
+                <>Actualmente soy <strong>Ingeniero de Software Senior en Capital One</strong> y trabajo en modalidad híbrida en Ciudad de México. Mi foco está en productos con complejidad técnica real: dashboards de datos, plataformas SaaS y sistemas de tiempo real.</>
               )}
             </p>
           </div>
@@ -64,11 +64,11 @@ const updated = '2026-08-08';
           <div class="now-content">
             <p>
               {en ? (
-                <>Building <a href="https://avelor.es" target="_blank" rel="noopener">Avelor</a>, a suite of CLI tools for local development. Four utilities in progress:</>
+                <>Building <a href="https://avelor.es" target="_blank" rel="noopener">Avelor</a>, an ecosystem of 17 CLI tools for local development, published on npm under @avelor. Current highlights:</>
               ) : lat ? (
-                <>Construo <a href="https://avelor.es" target="_blank" rel="noopener">Avelor</a>, conlectionem instrumentorum CLI pro evolutione locali. Quattuor utilitates in progressu:</>
+                <>Construo <a href="https://avelor.es" target="_blank" rel="noopener">Avelor</a>, ecosystema XVII instrumentorum CLI pro evolutione locali, in npm sub @avelor editorum. Praecipua nunc:</>
               ) : (
-                <>Construyendo <a href="https://avelor.es" target="_blank" rel="noopener">Avelor</a>, una suite de herramientas CLI para el desarrollo local. Cuatro utilidades en progreso:</>
+                <>Construyendo <a href="https://avelor.es" target="_blank" rel="noopener">Avelor</a>, un ecosistema de 17 herramientas CLI para desarrollo local, publicadas en npm bajo @avelor. Algunas destacadas:</>
               )}
             </p>
             <ul>
@@ -83,29 +83,29 @@ const updated = '2026-08-08';
               </li>
               <li>
                 {en ? (
-                  <><strong>mock</strong> — intercept any URL (fetch, XHR, Node.js) without touching your code</>
+                  <><strong>floo</strong> — SSH deployment agent with a GitHub Action and Homebrew tap</>
                 ) : lat ? (
-                  <><strong>mock</strong> — quamlibet URL (fetch, XHR, Node.js) intercipe sine tactu codicis tui</>
+                  <><strong>floo</strong> — agens dispositionis per SSH cum actione GitHub et Homebrew tap</>
                 ) : (
-                  <><strong>mock</strong> — intercepta cualquier URL (fetch, XHR, Node.js) sin tocar el código</>
+                  <><strong>floo</strong> — agente de deployment por SSH con GitHub Action y Homebrew tap</>
                 )}
               </li>
               <li>
                 {en ? (
-                  <><strong>stale</strong> — finds aged TODO/FIXME markers via <code>git blame</code>, breaks CI when technical debt sits too long</>
+                  <><strong>bifrost</strong> — self-hosted WebSocket tunnel relay</>
                 ) : lat ? (
-                  <><strong>stale</strong> — notas TODO/FIXME veteras per <code>git blame</code> invenit, CI frangit quando debitum technicum nimis diu manet</>
+                  <><strong>bifrost</strong> — relay cuniculorum WebSocket proprio hospitio gestum</>
                 ) : (
-                  <><strong>stale</strong> — detecta TODOs y FIXMEs viejos usando <code>git blame</code>, rompe CI cuando la deuda técnica se acumula</>
+                  <><strong>bifrost</strong> — relay de túneles WebSocket autoalojado</>
                 )}
               </li>
               <li>
                 {en ? (
-                  <><strong>whos</strong> — what process is holding that port</>
+                  <><strong>mira</strong> — uptime monitor with an automatically generated static status page</>
                 ) : lat ? (
-                  <><strong>whos</strong> — quis processus portum illum tenet</>
+                  <><strong>mira</strong> — monitor temporis operationis cum pagina statuum statica automatice genita</>
                 ) : (
-                  <><strong>whos</strong> — qué proceso está ocupando ese puerto</>
+                  <><strong>mira</strong> — monitor de uptime con página de estado estática generada automáticamente</>
                 )}
               </li>
             </ul>

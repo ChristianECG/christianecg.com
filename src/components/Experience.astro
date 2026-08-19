@@ -19,13 +19,13 @@ const jobs = [
     period: "Ago 2026 — Presente",
     current: true,
     bullets_es: [
-      "Incorporación al equipo fundacional de Full Stack Engineers de Capital One Technology Labs México, con enfoque en Java y ramp-up activo sobre el stack de la plataforma.",
+      "Incorporación al equipo fundacional de Full Stack Engineers de Capital One, con enfoque en Java y ramp-up activo sobre el stack de la plataforma.",
     ],
     bullets_en: [
-      "Joined Capital One Technology Labs Mexico's founding Full Stack Engineering team, focused on Java with an active ramp-up onto the platform stack.",
+      "Joined Capital One's founding Full Stack Engineering team, focused on Java with an active ramp-up onto the platform stack.",
     ],
     bullets_lat: [
-      "Gregi fundatori Fabricatorum Programmatum Full Stack Capital One Technology Labs Mexicum se iunxit, in Java focatus cum ramp-up activo in suggestu.",
+      "Gregi fundatori Fabricatorum Programmatum Full Stack Capital One se iunxit, in Java focatus cum ramp-up activo in suggestu.",
     ],
   },
   {
@@ -143,7 +143,7 @@ const jobs = [
 
     <div class="jobs">
       {jobs.map((job, i) => (
-        <div class="job spotlight reveal" style={`--delay: ${i * 0.07}s`}>
+        <div class:list={['job', 'spotlight', 'reveal', { 'job--current': job.current }]} style={`--delay: ${i * 0.07}s`}>
           <div class="job-left">
             <span class="job-period">{job.period}</span>
             <a href={job.url} target="_blank" rel="noopener" class="job-company">
@@ -194,6 +194,22 @@ const jobs = [
     transition: background 0.25s, box-shadow 0.25s;
     border-radius: 4px;
   }
+  .job--current {
+    position: relative;
+  }
+  .job--current::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2.25rem;
+    bottom: 2.25rem;
+    width: 2px;
+    border-radius: 2px;
+    background: var(--accent);
+    opacity: 0.8;
+  }
+  .job--current .job-period { color: var(--accent-light); font-weight: 700; }
+  .job--current .job-company { color: var(--text); font-weight: 600; }
   .job:last-child { border-bottom: 1px solid var(--border); }
   .job:hover {
     background: rgba(91, 140, 245, 0.028);

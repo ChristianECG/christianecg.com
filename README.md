@@ -7,7 +7,6 @@ Built with [Astro](https://astro.build) and deployed to GitHub Pages.
 ## Stack
 
 - **Astro** — static site generator
-- **Pagefind** — client-side search
 - **Satori + resvg-js** — automatic OG image generation per blog post
 - **Bricolage Grotesque** — typography via Fontsource
 
@@ -18,7 +17,6 @@ Built with [Astro](https://astro.build) and deployed to GitHub Pages.
 | `/` | Portfolio (about, experience, projects, talks) |
 | `/blog` | Article listing |
 | `/blog/[slug]` | Individual article |
-| `/search` | Full-text search |
 | `/cv` | Curriculum vitae |
 | `/now` | What I'm currently working on |
 | `/rss.xml` | RSS feed |
@@ -27,10 +25,10 @@ Built with [Astro](https://astro.build) and deployed to GitHub Pages.
 ## Development
 
 ```sh
-yarn install
-yarn dev       # http://localhost:4323
-yarn build     # production build → dist/
-yarn preview   # preview the build locally
+pnpm install
+pnpm dev       # http://localhost:4323
+pnpm build     # production build → dist/
+pnpm preview   # preview the build locally
 ```
 
 ## Deployment

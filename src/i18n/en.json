@@ -1,7 +1,7 @@
 {
   "layout.skip_to_content": "Skip to content",
   "layout.back_to_top": "Back to top",
-  "meta.description": "Senior Software Engineer and web developer based in Hidalgo, Mexico. 4 years at Ubidots, an IoT platform with 150K+ users. React, mobile apps, real-time systems. Remote from Mixquiahuala since 2021.",
+  "meta.description": "Senior Software Engineer at Capital One. Previously spent 4 years building Ubidots, an IoT platform with 150K+ users. React, Java, mobile apps, and real-time systems. Hybrid in Mexico City.",
 
   "nav.aria": "Primary navigation",
   "footer.aria": "Footer links",
@@ -26,9 +26,9 @@
   "footer.copyright_suffix": "Made in Hidalgo.",
 
   "hero.role": "Senior Software Engineer",
-  "hero.tagline_1": "Senior engineer. Hidalgo, Mexico.",
-  "hero.tagline_2": "Remote full-time since 2021.",
-  "hero.location": "Mexico City · Remote",
+  "hero.tagline_1": "Senior engineer at Capital One.",
+  "hero.tagline_2": "Hybrid in Mexico City.",
+  "hero.location": "Mexico City · Hybrid",
   "hero.cred_ieee": "1 published paper",
   "hero.cred_keynote": "3 international conferences",
   "hero.cred_tv_label": "Television",
@@ -37,7 +37,7 @@
   "hero.cta_contact": "Contact",
 
   "about.eyebrow": "About me",
-  "about.heading": "Four years optimizing the frontend of a 150K-user platform. Now building developer tools.",
+  "about.heading": "Four years optimizing the frontend of a 150K-user platform. Now part of the founding engineering team at Capital One.",
   "about.bio_1": "At Ubidots, there was an ECharts widget that took up to 30 seconds to render. Nobody filed a bug report — users just closed the tab. I found it in a DevTools session at 11pm.",
   "about.bio_2": "I worked as a Senior Engineer at Ubidots, an IoT platform with 150K+ users and millions of real-time events. Outside of code, I'm a speaker, mentor, and published author at IEEE Xplore.",
   "about.fact_label_users": "daily active users · my code still runs in production",
@@ -79,14 +79,20 @@
 
   "extras.community_eyebrow": "Community",
   "extras.community_heading": "Beyond the code",
+  "extras.dossier_eyebrow": "Dossier",
+  "extras.dossier_heading": "Public work, inside and outside the code",
+  "extras.dossier_intro": "A selection of the things I build, publish, and share when technical work leaves the repository.",
+  "extras.community_intro": "Talks, mentorship, and community: spaces where knowledge becomes collaboration.",
   "extras.pubs_eyebrow": "Publications",
   "extras.pubs_heading": "Research",
+  "extras.pubs_intro": "Published research and technical work documented with the same care as a product.",
   "extras.read_on": "Read on %s",
   "extras.view_pdf": "View PDF",
 
   "contact.eyebrow": "Contact",
   "contact.heading": "Let's work together.",
-  "contact.sub": "Looking for full-time remote positions. Open to community tech talks at no cost.",
+  "contact.sub": "Currently working in a hybrid role at Capital One. Open to technical talks for communities at no cost.",
+  "contact.status": "Capital One · Hybrid · Mexico City",
   "contact.cv_label": "View résumé",
 
   "cv.eyebrow": "Resume",
@@ -95,6 +101,10 @@
   "blog.eyebrow": "Writing",
   "blog.count_label": "articles",
   "blog.desc": "Articles on frontend, technology, and the craft of building software. Written over the years on my personal blog and Octa.",
+  "blog.recent_label": "Recent notes",
+  "blog.recent_desc": "Architecture, systems, and tools built from practice.",
+  "blog.archive_label": "Archive",
+  "blog.archive_desc": "Earlier writing on technology, learning, and software development.",
   "blog.latest": "Latest",
   "blog.back_to_list": "All articles",
   "blog.back_link": "Back to blog",

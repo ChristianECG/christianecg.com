@@ -1,7 +1,7 @@
 {
   "layout.skip_to_content": "Ad contentum salta",
   "layout.back_to_top": "Ad summum redi",
-  "meta.description": "Faber Programmatus Senior et interretialis constructor in Hidalgo, Mexico — quattuor annos Ubidots construens, suggestum IoT cum CL+ milibus utentium. React, applicationes mobiles et systemata in tempore reali. E longinquo ex Mixquiahuala ab MMXXI.",
+  "meta.description": "Faber Programmatus Senior apud Capital One. Ante quattuor annos Ubidots aedificavi, suggestum IoT cum CL+ milibus utentium. React, Java, applicationes mobiles et systemata in tempore reali. In modo hybrido in Urbe Mexici.",
 
   "nav.aria": "Navigatio principalis",
   "footer.aria": "Nexus pedis paginae",
@@ -26,9 +26,9 @@
   "footer.copyright_suffix": "In Hidalgo factum.",
 
   "hero.role": "Faber Programmatus Senior",
-  "hero.tagline_1": "Faber senior. Hidalgo, Mexicum.",
-  "hero.tagline_2": "Procul plenum tempus ab anno MMXXI.",
-  "hero.location": "Urbs Mexici · Procul",
+  "hero.tagline_1": "Faber senior apud Capital One.",
+  "hero.tagline_2": "In modo hybrido in Urbe Mexici.",
+  "hero.location": "Urbs Mexici · Hybridum",
   "hero.cred_ieee": "1 dissertatio edita",
   "hero.cred_keynote": "3 congressus internationales",
   "hero.cred_tv_label": "Televisio",
@@ -37,7 +37,7 @@
   "hero.cta_contact": "Contactus",
 
   "about.eyebrow": "De me",
-  "about.heading": "Per quattuor annos frontem suggestus CL milium utentium perfeci. Nunc instrumenta fabricatorum construo.",
+  "about.heading": "Per quattuor annos frontem suggestus CL milium utentium perfeci. Nunc in grege conditorio Capital One laboro.",
   "about.bio_1": "Apud Ubidots, machina ECharts erat quae triginta secundis reddebatur. Nemo defectum nuntiavit — utentes solum tabulam clauserunt. Inveni eam in sessione DevTools hora undecima noctis.",
   "about.bio_2": "Laboravi ut Faber Senior apud Ubidots, suggestum IoT cum CL+ milibus utentium et millionibus eventuum in tempore reali. Extra codicem, orator, monitor et auctor editus in IEEE Xplore sum.",
   "about.fact_label_users": "utentes cotidiani · codex meus adhuc in usu",
@@ -79,14 +79,20 @@
 
   "extras.community_eyebrow": "Communitas",
   "extras.community_heading": "Ultra codicem",
+  "extras.dossier_eyebrow": "Dossier",
+  "extras.dossier_heading": "Opera publica intra et extra codicem",
+  "extras.dossier_intro": "Selectio rerum quas construo, publico et communico cum opus technicum repositorium excedit.",
+  "extras.community_intro": "Sermones, monitio et communitas: loca ubi scientia collaboratio fit.",
   "extras.pubs_eyebrow": "Publicationes",
   "extras.pubs_heading": "Investigatio",
+  "extras.pubs_intro": "Investigatio edita et opus technicum eadem cura qua productum descriptum.",
   "extras.read_on": "Lege apud %s",
   "extras.view_pdf": "Vide PDF",
 
   "contact.eyebrow": "Contactus",
   "contact.heading": "Laboramus coniuncti?",
-  "contact.sub": "Munus plenum remotum quaero. Etiam allocutiones technicas pro communitatibus do, sine pretio.",
+  "contact.sub": "Nunc in munere hybrido apud Capital One laboro. Etiam allocutiones technicas pro communitatibus do, sine pretio.",
+  "contact.status": "Capital One · Hybridum · Urbs Mexici",
   "contact.cv_label": "Vide curriculum",
 
   "cv.eyebrow": "Curriculum Vitae",
@@ -95,6 +101,10 @@
   "blog.eyebrow": "Scripta",
   "blog.count_label": "articuli",
   "blog.desc": "Articuli de arte programmandi. Per annos scripti.",
+  "blog.recent_label": "Notae recentes",
+  "blog.recent_desc": "Architectura, systemata et instrumenta ex usu aedificata.",
+  "blog.archive_label": "Archivum",
+  "blog.archive_desc": "Scripta priora de technologia, doctrina et programmatione.",
   "blog.latest": "Novissimus articulus",
   "blog.back_to_list": "Omnes articuli",
   "blog.back_link": "Revertere ad commentarios",

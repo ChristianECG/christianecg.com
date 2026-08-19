@@ -15,59 +15,77 @@ const papers = (await getCollection('papers')).sort((a, b) => a.data.order - b.d
 
 <section id="extras">
   <div class="container">
+    <div class="dossier-header reveal">
+      <div>
+        <span class="section-eyebrow">{t('extras.dossier_eyebrow')}</span>
+        <h2 class="dossier-heading">{t('extras.dossier_heading')}</h2>
+      </div>
+      <p class="dossier-intro">{t('extras.dossier_intro')}</p>
+    </div>
+
     <div class="extras-grid">
-
-      <div class="extras-col">
-        <span class="section-eyebrow reveal" style="--reveal-x: -18px; --reveal-y: 0px">
-          {t('extras.community_eyebrow')}
-        </span>
-        <h2 class="section-title extras-title reveal" style="--reveal-x: -18px; --reveal-y: 0px; --delay: 0.06s">
-          {t('extras.community_heading')}
-        </h2>
-
-        <div class="community-list">
-          <div class="cl-item spotlight reveal">
-            <span class="cl-role">Speaker</span>
-            <p class="cl-desc">
-              {lang === 'en'
-                ? 'Talks at Frontend, AI and Open Source events.'
-                : lang === 'lat'
-                ? 'Sermones in eventibus Frontend, AI et Fontis Aperti.'
-                : 'Charlas en eventos de Frontend, IA y Open Source.'}
-            </p>
-          </div>
-          <div class="cl-item spotlight reveal" style="--delay: 0.07s">
-            <span class="cl-role">
-              {lang === 'lat' ? 'Monitor' : 'Mentor'}
-            </span>
-            <p class="cl-desc">
-              {lang === 'en'
-                ? "I support developers' growth in tech communities — online and in person, from 1:1 sessions to group settings at events."
-                : lang === 'lat'
-                ? 'Fabricatorum progressum in communitatibus technicis comitor — in rete et in persona, a sessionibus singulis ad coetus in eventibus.'
-                : 'Acompaño el crecimiento de desarrolladores en comunidades tech — en línea y en persona, desde sesiones 1:1 hasta grupos en eventos.'}
-            </p>
-          </div>
-          <div class="cl-item spotlight reveal" style="--delay: 0.14s">
-            <span class="cl-role">Google DSC Lead <span class="cl-year">'20–'21</span></span>
-            <p class="cl-desc">
-              {lang === 'en'
-                ? '60+ members, ~20 technical events organized.'
-                : lang === 'lat'
-                ? 'LX+ sodales, XX eventus technici instituti.'
-                : '+60 miembros, ~20 eventos técnicos organizados.'}
-            </p>
+      <article class="dossier-panel dossier-panel--community">
+        <div class="dossier-panel-header reveal" style="--reveal-x: -18px; --reveal-y: 0px">
+          <span class="dossier-index">01</span>
+          <div>
+            <span class="section-eyebrow">{t('extras.community_eyebrow')}</span>
+            <h3 class="dossier-panel-heading">{t('extras.community_heading')}</h3>
           </div>
         </div>
-      </div>
+        <p class="dossier-panel-intro reveal" style="--reveal-x: -18px; --reveal-y: 0px; --delay: 0.06s">{t('extras.community_intro')}</p>
 
-      <div class="extras-col">
-        <span class="section-eyebrow reveal" style="--reveal-x: 18px; --reveal-y: 0px">
-          {t('extras.pubs_eyebrow')}
-        </span>
-        <h2 class="section-title extras-title reveal" style="--reveal-x: 18px; --reveal-y: 0px; --delay: 0.06s">
-          {t('extras.pubs_heading')}
-        </h2>
+        <div class="community-list">
+          <div class="cl-item dossier-entry spotlight reveal">
+            <span class="dossier-entry-index">A</span>
+            <div>
+              <span class="cl-role">Speaker</span>
+              <p class="cl-desc">
+                {lang === 'en'
+                  ? 'Talks at Frontend, AI and Open Source events.'
+                  : lang === 'lat'
+                  ? 'Sermones in eventibus Frontend, AI et Fontis Aperti.'
+                  : 'Charlas en eventos de Frontend, IA y Open Source.'}
+              </p>
+            </div>
+          </div>
+          <div class="cl-item dossier-entry spotlight reveal" style="--delay: 0.07s">
+            <span class="dossier-entry-index">B</span>
+            <div>
+              <span class="cl-role">{lang === 'lat' ? 'Monitor' : 'Mentor'}</span>
+              <p class="cl-desc">
+                {lang === 'en'
+                  ? "I support developers' growth in tech communities — online and in person, from 1:1 sessions to group settings at events."
+                  : lang === 'lat'
+                  ? 'Fabricatorum progressum in communitatibus technicis comitor — in rete et in persona, a sessionibus singulis ad coetus in eventibus.'
+                  : 'Acompaño el crecimiento de desarrolladores en comunidades tech — en línea y en persona, desde sesiones 1:1 hasta grupos en eventos.'}
+              </p>
+            </div>
+          </div>
+          <div class="cl-item dossier-entry spotlight reveal" style="--delay: 0.14s">
+            <span class="dossier-entry-index">C</span>
+            <div>
+              <span class="cl-role">Google DSC Lead <span class="cl-year">'20–'21</span></span>
+              <p class="cl-desc">
+                {lang === 'en'
+                  ? '60+ members, ~20 technical events organized.'
+                  : lang === 'lat'
+                  ? 'LX+ sodales, XX eventus technici instituti.'
+                  : '+60 miembros, ~20 eventos técnicos organizados.'}
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="dossier-panel dossier-panel--publications">
+        <div class="dossier-panel-header reveal" style="--reveal-x: 18px; --reveal-y: 0px">
+          <span class="dossier-index">02</span>
+          <div>
+            <span class="section-eyebrow">{t('extras.pubs_eyebrow')}</span>
+            <h3 class="dossier-panel-heading">{t('extras.pubs_heading')}</h3>
+          </div>
+        </div>
+        <p class="dossier-panel-intro reveal" style="--reveal-x: 18px; --reveal-y: 0px; --delay: 0.06s">{t('extras.pubs_intro')}</p>
 
         <div class="pub-list">
           {papers.map((paper, i) => (
@@ -104,44 +122,51 @@ const papers = (await getCollection('papers')).sort((a, b) => a.data.order - b.d
             </div>
           ))}
         </div>
-      </div>
-
+      </article>
     </div>
   </div>
 </section>
 
 <style>
-  .extras-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; }
-  .extras-title { font-size: clamp(1.4rem, 2.5vw, 1.9rem) !important; margin-bottom: 2rem !important; }
-
-  .community-list { display: flex; flex-direction: column; border-top: 1px solid var(--border); }
-
-  .cl-item {
-    padding: 1.5rem 0 1.5rem 0.6rem;
-    border-bottom: 1px solid var(--border);
+  .dossier-header {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
-    --delay: 0s;
-    transition-delay: var(--delay);
-    transition: background 0.25s, box-shadow 0.25s;
-    border-radius: 4px;
+    align-items: flex-start;
+    gap: 1rem;
+    max-width: 760px;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
   }
-  .cl-item:hover { background: rgba(91, 140, 245, 0.025); box-shadow: inset 3px 0 0 var(--accent); }
+  .dossier-heading { max-width: 700px; font-size: clamp(2rem, 4vw, 3.1rem); font-weight: 800; color: var(--text); line-height: 1.08; letter-spacing: -0.03em; }
+  .dossier-intro { max-width: 560px; font-size: 0.92rem; color: var(--text-2); line-height: 1.75; }
 
+  .extras-grid { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 1.25rem; margin-top: 1.25rem; }
+  .dossier-panel { position: relative; overflow: hidden; padding: 2rem; border: 1px solid var(--border); border-radius: 8px; background: linear-gradient(145deg, rgba(25, 30, 45, 0.62), rgba(17, 21, 32, 0.92)); }
+  .dossier-panel::before { content: ''; position: absolute; inset: 0 0 auto; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); opacity: 0.75; }
+  .dossier-panel--publications::before { background: linear-gradient(90deg, var(--accent-2), var(--accent)); }
+  .dossier-panel-header { display: flex; align-items: flex-start; gap: 1rem; }
+  .dossier-index { font-family: var(--font-heading); font-size: 2.4rem; line-height: 0.9; font-weight: 800; color: var(--accent); letter-spacing: -0.06em; opacity: 0.8; }
+  .dossier-panel-heading { font-size: clamp(1.45rem, 2.5vw, 1.9rem); font-weight: 800; color: var(--text); line-height: 1.08; letter-spacing: -0.02em; }
+  .dossier-panel-intro { margin: 1.4rem 0 1.5rem; max-width: 34rem; font-size: 0.86rem; color: var(--text-2); line-height: 1.7; }
+
+  .community-list { display: flex; flex-direction: column; border-top: 1px solid var(--border); }
+  .cl-item { padding: 1.25rem 0.5rem 1.25rem 0.75rem; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1.5rem 1fr; gap: 0.75rem; --delay: 0s; transition-delay: var(--delay); transition: background 0.25s, box-shadow 0.25s; border-radius: 4px; }
+  .cl-item:hover { background: rgba(91, 140, 245, 0.025); box-shadow: inset 3px 0 0 var(--accent); }
+  .dossier-entry-index { font-family: var(--font-heading); font-size: 0.75rem; font-weight: 800; color: var(--accent-2); padding-top: 0.1rem; }
   .cl-role { font-size: 0.9rem; font-weight: 700; color: var(--text); font-family: var(--font-heading); letter-spacing: -0.01em; }
   .cl-year { font-weight: 400; color: var(--text-3); font-family: var(--font-body); font-size: 0.8rem; }
-  .cl-desc { font-size: 0.85rem; color: var(--text-2); line-height: 1.6; }
+  .cl-desc { font-size: 0.85rem; color: var(--text-2); line-height: 1.6; margin-top: 0.35rem; }
 
-  .pub-list { display: flex; flex-direction: column; gap: 1rem; }
+  .pub-list { display: flex; flex-direction: column; gap: 0.75rem; }
 
   .pub {
     display: flex;
     flex-direction: column;
     gap: 0.9rem;
-    padding: 1.5rem;
-    border: 1px solid var(--border);
-    border-radius: 4px;
+    padding: 1.25rem;
+    border: 1px solid rgba(100, 140, 220, 0.12);
+    border-radius: 5px;
+    background: rgba(11, 13, 18, 0.34);
     --delay: 0s;
     transition-delay: var(--delay);
     transition: border-color 0.25s, box-shadow 0.25s, transform 0.08s linear;
@@ -170,7 +195,13 @@ const papers = (await getCollection('papers')).sort((a, b) => a.data.order - b.d
   .pub-download svg { transition: transform 0.2s; }
   .pub-download:hover svg { transform: translateY(2px); }
 
-  @media (max-width: 900px) { .extras-grid { grid-template-columns: 1fr; gap: 3.5rem; } }
+  @media (max-width: 900px) {
+    .extras-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+  }
+  @media (max-width: 520px) {
+    .dossier-panel { padding: 1.35rem; }
+    .dossier-heading { font-size: 2rem; }
+  }
 </style>
 
 <script>

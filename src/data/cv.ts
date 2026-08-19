@@ -78,7 +78,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
           {
             title: 'Senior Software Engineer (Principal Associate)',
             period: 'Ago 2026 – Presente',
-            company: 'Capital One Technology Labs México · Ciudad de México (Híbrido)',
+            company: 'Capital One · Ciudad de México (Híbrido)',
             bullets: [
               'Incorporación al equipo fundacional de Full Stack Engineers de Capital One en México, con enfoque en Java y ramp-up activo sobre el stack de la plataforma.',
             ],
@@ -229,7 +229,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
           {
             title: 'Senior Software Engineer (Principal Associate)',
             period: 'Aug 2026 – Present',
-            company: 'Capital One Technology Labs Mexico · Mexico City (Hybrid)',
+            company: 'Capital One · Mexico City (Hybrid)',
             bullets: [
               "Joined Capital One's founding Full Stack Engineering team in Mexico, focused on Java with an active ramp-up onto the platform stack.",
             ],
@@ -380,7 +380,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
           {
             title: 'Faber Programmatus Senior (Principal Associate)',
             period: 'Aug. MMXXVI – Praesens',
-            company: 'Capital One Technology Labs Mexicum · Urbs Mexicana (Mixtum)',
+            company: 'Capital One · Urbs Mexicana (Mixtum)',
             bullets: [
               'Gregi fundatori Fabricatorum Programmatum Full Stack Capital One in Mexico se iunxit, in Java focatus cum ramp-up activo in suggestu.',
             ],
