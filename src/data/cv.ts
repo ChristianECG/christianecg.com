@@ -138,7 +138,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
           {
             title: 'Avelor',
             url: 'pkg.avelor.es',
-            description: 'Ecosistema de 17 herramientas CLI publicadas en npm bajo @avelor. Destacan: mesh (proxy local con HTTPS y fault injection), floo (deployment agent SSH con GitHub Action y Homebrew tap), bifrost (WebSocket tunnel autoalojado) y mira (uptime monitor con página de estado estática). Cada herramienta elimina una dependencia de tercero en producción.',
+            description: 'Ecosistema de 13 herramientas CLI publicadas en npm bajo @avelor. Destacan: mesh (proxy local con HTTPS y fault injection), floo (deployment agent SSH con GitHub Action y Homebrew tap), bifrost (WebSocket tunnel autoalojado) y mira (uptime monitor con página de estado estática). Cada herramienta elimina una dependencia de tercero en producción.',
             tags: 'Node.js · CLI · npm · WebSocket · SSH · self-hosted',
           },
           {
@@ -289,7 +289,7 @@ export const cvData: Record<'es' | 'en' | 'lat', CVData> = {
           {
             title: 'Avelor',
             url: 'pkg.avelor.es',
-            description: 'Ecosystem of 17 CLI tools published on npm under @avelor. Highlights: mesh (local dev proxy with HTTPS and fault injection), floo (SSH deployment agent with GitHub Action and Homebrew tap), bifrost (self-hosted WebSocket tunnel relay), and mira (uptime monitor with auto-generated static status page). Each tool eliminates a third-party dependency in production.',
+            description: 'Ecosystem of 13 CLI tools published on npm under @avelor. Highlights: mesh (local dev proxy with HTTPS and fault injection), floo (SSH deployment agent with GitHub Action and Homebrew tap), bifrost (self-hosted WebSocket tunnel relay), and mira (uptime monitor with auto-generated static status page). Each tool eliminates a third-party dependency in production.',
             tags: 'Node.js · CLI · npm · WebSocket · SSH · self-hosted',
           },
           {
